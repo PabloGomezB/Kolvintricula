@@ -63,4 +63,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Lanzar servidor sin WSL2
 - Situate dentro de la carpeta del proyecto y en cmd ejecuta: ```php -S 0.0.0.0:8080 -t public```. Ahora el servidor se encuentra en [http://localhost:8080](http://localhost:8080)
+
 [Fuente](https://r00t4bl3.com/post/how-to-run-laravel-in-windows-10-using-wsl-2-and-ubuntu-20-04)
