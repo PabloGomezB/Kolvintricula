@@ -60,3 +60,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Lanzar servidor sin WSL2
+- Situate dentro de la carpeta del proyecto y en cmd ejecuta: ```php -S 0.0.0.0:8080 -t public```
