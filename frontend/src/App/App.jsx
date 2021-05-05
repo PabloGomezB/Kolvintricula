@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import NoDisponible from "./Componentes/NoDisponible";
-import Matricula from "./Matricula";
+import Enrolment from "./Enrolment";
 const App = () => {
   let json = {
-    matricula: true,
+    enrolment: true,
   };
 
   return (
@@ -27,16 +27,16 @@ const App = () => {
                 renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/dam">
-            {json.matricula ? <Matricula /> : <NoDisponible />}
+            {json.enrolment ? <Enrolment /> : <NoDisponible />}
           </Route>
           <Route path="/daw">
-            {json.matricula ? <Matricula /> : <NoDisponible />}
+            {json.enrolment ? <Enrolment /> : <NoDisponible />}
           </Route>
           <Route path="/asix">
-            {json.matricula ? <Matricula /> : <NoDisponible />}
+            {json.enrolment ? <Enrolment /> : <NoDisponible />}
           </Route>
           <Route path="/smx">
-            {json.matricula ? <Matricula /> : <NoDisponible />}
+            {json.enrolment ? <Enrolment /> : <NoDisponible />}
           </Route>
         </Switch>
       </div>
