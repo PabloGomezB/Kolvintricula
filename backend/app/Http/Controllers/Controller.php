@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    
+
     public function index(){
 
         $info = DB::select('select * from prueba');
