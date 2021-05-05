@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\DB;
 class KolvintriculaController extends Controller
 {
     //
-    public function index(){
+    // public function index(){
         
-        $info = DB::select('select * from cursos');
+        // $db_info = DB::select('select name, email from users');
+        // $users = array();
+        // foreach ($users as $user) {
+        //     echo $user->name;
+        // }
+        // // print_r($users);
 
-        return view('index',[
-            'databaseInfo' => $info
-        ]);
-    }
+        // return view('admin.index',[
+        //     'databaseInfo' => 'database info lmao'
+        // ]);
+    // }
 }

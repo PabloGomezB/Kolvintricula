@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KolvintriculaController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +20,16 @@ Route::get('/', function () {
 });
 
 
-Route::get('/index/admin', [KolvintriculaController::class, 'index'])
+// Route::get('/admin/index', [KolvintriculaController::class, 'index'])
+// ->middleware(['auth'])->name('admin.index');
+Route::get('/admin/index', function () {
+    return view('admin.index');
+})->middleware(['auth'])->name('admin.index');
+
+Route::resource('admin/users', UserController::class)
 ->middleware(['auth']);
+
+
 
 
 Route::get('/dashboard', function () {
