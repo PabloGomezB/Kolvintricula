@@ -1,43 +1,47 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Disponible from "./Componentes/Disponible";
+import NoDisponible from "./Componentes/NoDisponible";
 const App = () => {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            <li>
-              <Link to="/users">Users</Link>
-            </li>
-          </ul>
-        </nav>
+    let json = {
+        matricula: false
+    };
 
-        {/* A <Switch> looks through its children <Route>s and
+    return (
+        <Router>
+            <div>
+                <button>
+                    <Link to="/dam">DAM</Link>
+                </button>
+                <button>
+                    <Link to="/daw">DAW</Link>
+                </button>
+                <button>
+                    <Link to="/asix">ASIX</Link>
+                </button>
+                <button>
+                    <Link to="/smx">SMX</Link>
+                </button>
+
+                {/* A <Switch> looks through its children <Route>s and
                 renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+                <Switch>
+                    <Route path="/dam">
+                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>DAM</h1>
+                    </Route>
+                    <Route path="/daw">
+                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>DAW</h1>
+                    </Route>
+                    <Route path="/asix">
+                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>ASIX</h1>
+                    </Route>
+                    <Route path="/smx">
+                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>SMX</h1>
+                    </Route>
+                </Switch>
+            </div>
+        </Router>
+    );
 };
-const Home = () => <h2>Home</h2>;
-const About = () => <h2>About</h2>;
-
-const Users = () => <h2>Users</h2>;
 
 export default App;
