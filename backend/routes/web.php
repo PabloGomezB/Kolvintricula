@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\KolvintriculaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +32,8 @@ Route::get('/admin/index', function () {
 Route::resource('admin/users', UserController::class)
 ->middleware(['auth']);
 
-
+Route::resource('admin/courses', CourseController::class)
+->middleware(['auth']);
 
 
 Route::get('/dashboard', function () {
@@ -39,3 +43,6 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 // Route::get('/', Controller::class, 'index');
+
+// Hack para poder hacer LOGOUT desde links
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
