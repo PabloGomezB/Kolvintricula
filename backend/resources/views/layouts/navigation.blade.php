@@ -16,10 +16,9 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
-                <!-- Perfil -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
-                        {{ __('Mi perfil') }}
+                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                        {{ __('Cursos') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -77,7 +76,11 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
-
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                {{ __('Cursos') }}
+            </x-responsive-nav-link>
+        </div>
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="flex items-center px-4">
