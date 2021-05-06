@@ -30,6 +30,7 @@ class CourseController extends Controller
     {
         return view('admin.course.create', ['course' => new Course]);
     }
+    
 
     /**
      * Store a newly created resource in storage.

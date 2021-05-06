@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 
 class KolvintriculaController extends Controller
 {
-    //
     // public function index(){
         
         // $db_info = DB::select('select name, email from users');
