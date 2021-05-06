@@ -1,4 +1,5 @@
-<h1>Soy la template de KolvintriculaController (admin/index.blade.php)</h1>
+<strike><h1>Soy la template de KolvintriculaController (admin/index.blade.php)</h1></strike>
+<h1>Soy solamente una template generada desde routes/web.php</h1>
 <h2>Esta será la vista de ADMINISTRADOR</h2>
 
 {{-- <h2>{{ $databaseInfo[0]->col1 }}</h2>
