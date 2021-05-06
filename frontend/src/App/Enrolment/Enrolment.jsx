@@ -95,7 +95,7 @@ const Enrolment = () => {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values }) => (
+        {({ values, setFieldValue }) => (
           <Form>
             <>
               <div>
@@ -138,120 +138,124 @@ const Enrolment = () => {
                   <ErrorMessage name="student.date_birth"></ErrorMessage>
                 </div>
               </div>
-              <div>
-                <FieldArray
-                  name="custodians"
-                  render={(arrayHelpers) => (
-                    // moment().diff(values.student.date_birth, "years") < 18 &&
-                    <div>
-                      <h3>Datos de la/s persona/s responsable/s</h3>
-                      {values.custodians && values.custodians.length > 0 ? (
-                        values.custodians.map((custodiansItem, index) => (
-                          <div key={index}>
-                            <div>
-                              <div
-                                role="group"
-                                aria-labelledby="my-radio-group"
-                              >
-                                <label>
-                                  <Field
-                                    type="radio"
-                                    name={`custodians[${index}].custodian`}
-                                    value="padre"
-                                  />
-                                  Padre
-                                </label>
-                                <label>
-                                  <Field
-                                    type="radio"
-                                    name={`custodians[${index}].custodian`}
-                                    value="madre"
-                                  />
-                                  Madre
-                                </label>
-                                <label>
-                                  <Field
-                                    type="radio"
-                                    name={`custodians[${index}].custodian`}
-                                    value="tutor"
-                                  />
-                                  Tutor/a legal
-                                </label>
+              {moment().diff(values.student.date_birth, "years") < 18 ? (
+                <div>
+                  <FieldArray
+                    name="custodians"
+                    render={(arrayHelpers) => (
+                      <div>
+                        <h3>Datos de la/s persona/s responsable/s</h3>
+                        {values.custodians &&
+                          values.custodians.length > 0 &&
+                          values.custodians.map((custodiansItem, index) => (
+                            <div key={index}>
+                              <div>
+                                <div
+                                  role="group"
+                                  aria-labelledby="my-radio-group"
+                                >
+                                  <label>
+                                    <Field
+                                      type="radio"
+                                      name={`custodians[${index}].custodian`}
+                                      value="padre"
+                                    />
+                                    Padre
+                                  </label>
+                                  <label>
+                                    <Field
+                                      type="radio"
+                                      name={`custodians[${index}].custodian`}
+                                      value="madre"
+                                    />
+                                    Madre
+                                  </label>
+                                  <label>
+                                    <Field
+                                      type="radio"
+                                      name={`custodians[${index}].custodian`}
+                                      value="tutor"
+                                    />
+                                    Tutor/a legal
+                                  </label>
+                                </div>
+                                <ErrorMessage
+                                  name={`custodians[${index}].custodian`}
+                                ></ErrorMessage>
                               </div>
-                              <ErrorMessage
-                                name={`custodians[${index}].custodian`}
-                              ></ErrorMessage>
-                            </div>
-                            <div>
-                              <label
-                                htmlFor={`custodians[${index}].name_lastname`}
+                              <div>
+                                <label
+                                  htmlFor={`custodians[${index}].name_lastname`}
+                                >
+                                  Nombre y apellidos:
+                                </label>
+                                <Field
+                                  name={`custodians[${index}].name_lastname`}
+                                  type="text"
+                                ></Field>
+                                <ErrorMessage
+                                  name={`custodians[${index}].name_lastname`}
+                                ></ErrorMessage>
+                              </div>
+                              <div>
+                                <label htmlFor={`custodians[${index}].nif`}>
+                                  NIF:
+                                </label>
+                                <Field
+                                  name={`custodians[${index}].nif`}
+                                  type="text"
+                                ></Field>
+                                <ErrorMessage
+                                  name={`custodians[${index}].nif`}
+                                ></ErrorMessage>
+                              </div>
+                              <div>
+                                <label htmlFor={`custodians[${index}].mobile`}>
+                                  Telefono movil:
+                                </label>
+                                <Field
+                                  name={`custodians[${index}].mobile`}
+                                  type="number"
+                                ></Field>
+                                <ErrorMessage
+                                  name={`custodians[${index}].mobile`}
+                                ></ErrorMessage>
+                              </div>
+                              <div>
+                                <label htmlFor={`custodians[${index}].email`}>
+                                  Email:
+                                </label>
+                                <Field
+                                  name={`custodians[${index}].email`}
+                                  type="text"
+                                ></Field>
+                                <ErrorMessage
+                                  name={`custodians[${index}].email`}
+                                ></ErrorMessage>
+                              </div>
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
                               >
-                                Nombre y apellidos:
-                              </label>
-                              <Field
-                                name={`custodians[${index}].name_lastname`}
-                                type="text"
-                              ></Field>
-                              <ErrorMessage
-                                name={`custodians[${index}].name_lastname`}
-                              ></ErrorMessage>
+                                -
+                              </button>
                             </div>
-                            <div>
-                              <label htmlFor={`custodians[${index}].nif`}>
-                                NIF:
-                              </label>
-                              <Field
-                                name={`custodians[${index}].nif`}
-                                type="text"
-                              ></Field>
-                              <ErrorMessage
-                                name={`custodians[${index}].nif`}
-                              ></ErrorMessage>
-                            </div>
-                            <div>
-                              <label htmlFor={`custodians[${index}].mobile`}>
-                                Telefono movil:
-                              </label>
-                              <Field
-                                name={`custodians[${index}].mobile`}
-                                type="number"
-                              ></Field>
-                              <ErrorMessage
-                                name={`custodians[${index}].mobile`}
-                              ></ErrorMessage>
-                            </div>
-                            <div>
-                              <label htmlFor={`custodians[${index}].email`}>
-                                Email:
-                              </label>
-                              <Field
-                                name={`custodians[${index}].email`}
-                                type="text"
-                              ></Field>
-                              <ErrorMessage
-                                name={`custodians[${index}].email`}
-                              ></ErrorMessage>
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                            >
-                              -
-                            </button>
-                          </div>
-                        ))
-                      ) : (
+                          ))}
                         <button
                           type="button"
                           onClick={() => arrayHelpers.push(new Custodian())}
                         >
                           Añadir un responsable
                         </button>
-                      )}
-                    </div>
-                  )}
-                />
-              </div>
+                      </div>
+                    )}
+                  />
+                </div>
+              ) : (
+                {}
+                //No puedo eliminar array
+                // setFieldValue("custodians", [], false)
+              )}
               <div>
                 <h3>Datos academicos</h3>
                 <div>
