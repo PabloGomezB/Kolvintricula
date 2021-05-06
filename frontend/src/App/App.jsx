@@ -7,9 +7,7 @@ import data from "./course_list_sample";
 const ListItem = ({ courseValue }) => {
   return (
     <li>
-      <button>
-        <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
-      </button>
+      <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
     </li>
   );
 };
@@ -37,7 +35,7 @@ const App = () => {
 
         <Switch>
           {courseArray.map((course) => (
-            <Route path={`/${course.name}`}>
+            <Route path={`/${course.name}`} key={course.id}>
               {course.state === "HABILITADO" ? <Enrolment /> : <NoDisponible />}
             </Route>
           ))}
