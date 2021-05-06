@@ -1,43 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Matricula from "./Matricula/Matricula";
 import NoDisponible from "./Componentes/NoDisponible";
-import Enrolment from "./Enrolment";
+import data from "./course_list_sample";
+
+const ListItem = ({ courseValue }) => {
+  return (
+    <li>
+      <button>
+        <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
+      </button>
+    </li>
+  );
+};
+
+const CourseList = ({ courses }) => {
+  const listItems = courses.map((course) => (
+    <ListItem key={course.id} courseValue={course} />
+  ));
+
+  return <ul>{listItems}</ul>;
+};
+
 const App = () => {
-  let json = {
-    enrolment: true,
-  };
+  const [courseArray, setCourseArray] = useState([]);
+
+  useEffect(() => {
+    console.log(data);
+    setCourseArray(data);
+  }, []);
 
   return (
     <Router>
       <div>
-        <button>
-          <Link to="/dam">DAM</Link>
-        </button>
-        <button>
-          <Link to="/daw">DAW</Link>
-        </button>
-        <button>
-          <Link to="/asix">ASIX</Link>
-        </button>
-        <button>
-          <Link to="/smx">SMX</Link>
-        </button>
+        <CourseList courses={courseArray}></CourseList>
 
-        {/* A <Switch> looks through its children <Route>s and
-                renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/dam">
-            {json.enrolment ? <Enrolment /> : <NoDisponible />}
-          </Route>
-          <Route path="/daw">
-            {json.enrolment ? <Enrolment /> : <NoDisponible />}
-          </Route>
-          <Route path="/asix">
-            {json.enrolment ? <Enrolment /> : <NoDisponible />}
-          </Route>
-          <Route path="/smx">
-            {json.enrolment ? <Enrolment /> : <NoDisponible />}
-          </Route>
+          {courseArray.map((course) => (
+            <Route path={`/${course.name}`}>
+              {course.state === "HABILITADO" ? <Matricula /> : <NoDisponible />}
+            </Route>
+          ))}
         </Switch>
       </div>
     </Router>
