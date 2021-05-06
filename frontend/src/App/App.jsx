@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
-import Header from "./Componentes/Header";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 import axios from "axios";
 
 const ListItem = ({ courseValue }) => {
@@ -63,15 +64,15 @@ const EnrolmentList = () => {
 const App = () => {
   return (
     <Router>
+      <Header />
       <div>
-        <Header />
-
         <Link to="/matriculas">Lista de matriculas</Link>
 
         <Route path="/matriculas">
           <EnrolmentList />
         </Route>
       </div>
+      <Footer />
     </Router>
   );
 };
