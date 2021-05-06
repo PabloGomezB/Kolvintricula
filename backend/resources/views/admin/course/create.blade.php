@@ -1,5 +1,5 @@
 @extends('admin.course.layout')
-  
+
 @section('content')
 
 <h2>Crear nuevo curso</h2>
