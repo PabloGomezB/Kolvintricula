@@ -6,7 +6,7 @@ const Header = () => {
         <header>
             <div className="container logo-nav-container">
                 <a href="#" className="logo">Kolvintrícula</a>
-                <span class="menu">Ver/ocultar menú</span>
+                <span className="menu">Ver/ocultar menú</span>
                 <nav>
                     <ul>
                         <li><a href="#">Inicio</a></li>
