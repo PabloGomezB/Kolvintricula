@@ -1,47 +1,50 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Disponible from "./Componentes/Disponible";
 import NoDisponible from "./Componentes/NoDisponible";
+import data from "./course_list_sample";
+
+const ListItem = ({ courseValue }) => {
+  return (
+    <li>
+      <button>
+        <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
+      </button>
+    </li>
+  );
+};
+
+const CourseList = ({ courses }) => {
+  const listItems = courses.map((course) => (
+    <ListItem key={course.id} courseValue={course} />
+  ));
+
+  return <ul>{listItems}</ul>;
+};
+
 const App = () => {
-    let json = {
-        matricula: false
-    };
+  const [courseArray, setCourseArray] = useState([]);
 
-    return (
-        <Router>
-            <div>
-                <button>
-                    <Link to="/dam">DAM</Link>
-                </button>
-                <button>
-                    <Link to="/daw">DAW</Link>
-                </button>
-                <button>
-                    <Link to="/asix">ASIX</Link>
-                </button>
-                <button>
-                    <Link to="/smx">SMX</Link>
-                </button>
+  useEffect(() => {
+    console.log(data);
+    setCourseArray(data);
+  }, []);
 
-                {/* A <Switch> looks through its children <Route>s and
-                renders the first one that matches the current URL. */}
-                <Switch>
-                    <Route path="/dam">
-                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>DAM</h1>
-                    </Route>
-                    <Route path="/daw">
-                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>DAW</h1>
-                    </Route>
-                    <Route path="/asix">
-                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>ASIX</h1>
-                    </Route>
-                    <Route path="/smx">
-                        {json.matricula ? <Disponible/> : <NoDisponible/>} <h1>SMX</h1>
-                    </Route>
-                </Switch>
-            </div>
-        </Router>
-    );
+  return (
+    <Router>
+      <div>
+        <CourseList courses={courseArray}></CourseList>
+
+        <Switch>
+          {courseArray.map((course) => (
+            <Route path={`/${course.name}`}>
+              {course.state === "HABILITADO" ? <Disponible/> : <NoDisponible/>}
+            </Route>
+          ))}
+        </Switch>
+      </div>
+    </Router>
+  );
 };
 
 export default App;
