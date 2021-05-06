@@ -16,6 +16,12 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <!-- Perfil -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
+                        {{ __('Mi perfil') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,6 +40,10 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('profile')">
+                            {{ __('Mi perfil') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -84,6 +94,9 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('profile')">
+                    {{ __('Mi perfil') }}
+                </x-responsive-nav-link>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

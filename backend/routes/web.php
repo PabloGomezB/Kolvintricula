@@ -23,9 +23,6 @@ Route::get('/', function () {
 // Route::get('/admin/index', [KolvintriculaController::class, 'index'])
 // ->middleware(['auth'])->name('admin.index');
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
