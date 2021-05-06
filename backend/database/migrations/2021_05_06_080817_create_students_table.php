@@ -13,7 +13,7 @@ class CreateStudentsTable extends Migration {
     public function up() {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string('nif',  9);
+            $table->string('nif',  9)->unique();
             $table->string('last_name1',  255);
             $table->string('last_name2',  255);
             $table->date('date_birth');
