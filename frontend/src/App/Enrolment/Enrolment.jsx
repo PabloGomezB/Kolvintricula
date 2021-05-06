@@ -1,7 +1,17 @@
 import React from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
+
+class Custodian {
+  constructor() {
+    this.custodian = "";
+    this.name_lastname = "";
+    this.nif = "";
+    this.mobile = "";
+    this.email = "";
+  }
+}
 
 const Enrolment = () => {
   const initialValues = {
@@ -14,13 +24,14 @@ const Enrolment = () => {
       email: "",
       date_birth: new Date().toISOString().substr(0, 10),
     },
-    custodian: {
-      custodian: "",
-      name_lastname: "",
-      nif: "",
-      mobile: "",
-      email: "",
-    },
+    // custodian: {
+    //   custodian: "",
+    //   name_lastname: "",
+    //   nif: "",
+    //   mobile: "",
+    //   email: "",
+    // },
+    custodians: [],
     academic_data: { course: "" },
   };
 
@@ -45,17 +56,26 @@ const Enrolment = () => {
       email: Yup.string().email("Email no válido.").required("Requerido"),
       date_birth: Yup.date().required("Requerido"),
     }),
-    custodian: Yup.object().shape({
-      custodian: Yup.string()
-        .matches(/(p|m|t)/, "Elige una opción válida.")
-        .required("Requerido"),
-      name_lastname: Yup.string()
-        .required("Requerido")
-        .max(50, "Máximo 50 carácteres."),
-      nif: Yup.string().required("Requerido"),
-      mobile: Yup.number().required("Requerido"),
-      email: Yup.string().email("Email no válido").required("Requerido"),
-    }),
+    custodians: Yup.array().of(
+      Yup.object().shape({
+        custodian: Yup.string()
+          .matches(/(p|m|t)/, "Elige una opción válida.")
+          .required("Requerido"),
+        name_lastname: Yup.string()
+          .required("Requerido")
+          .max(50, "Máximo 50 carácteres."),
+        nif: Yup.string().required("Requerido"),
+        mobile: Yup.number()
+          .integer("Debe de ser numerico")
+          .required("Requerido")
+          .test("len", "Ha de ser de 9 digitos", (val) => {
+            if (val !== undefined) {
+              return val.toString().length === 9;
+            }
+          }),
+        email: Yup.string().email("Email no válido").required("Requerido"),
+      })
+    ),
     academic_data: Yup.object().shape({
       course: Yup.number().equals([1, 2]).required("Requerido"),
     }),
@@ -118,64 +138,120 @@ const Enrolment = () => {
                   <ErrorMessage name="student.date_birth"></ErrorMessage>
                 </div>
               </div>
-              {/* Esto no renderiza el nuevo validationSchema */}
-
-              {moment().diff(values.student.date_birth, "years") < 18 && (
-                <div>
-                  <h3>Datos de la/s persona/s responsable/s</h3>
-                  <div>
-                    <div role="group" aria-labelledby="my-radio-group">
-                      <label>
-                        <Field
-                          type="radio"
-                          name="custodian.custodian"
-                          value="padre"
-                        />
-                        Padre
-                      </label>
-                      <label>
-                        <Field
-                          type="radio"
-                          name="custodian.custodian"
-                          value="madre"
-                        />
-                        Madre
-                      </label>
-                      <label>
-                        <Field
-                          type="radio"
-                          name="custodian.custodian"
-                          value="tutor"
-                        />
-                        Tutor/a legal
-                      </label>
+              <div>
+                <FieldArray
+                  name="custodians"
+                  render={(arrayHelpers) => (
+                    // moment().diff(values.student.date_birth, "years") < 18 &&
+                    <div>
+                      <h3>Datos de la/s persona/s responsable/s</h3>
+                      {values.custodians && values.custodians.length > 0 ? (
+                        values.custodians.map((custodiansItem, index) => (
+                          <div key={index}>
+                            <div>
+                              <div
+                                role="group"
+                                aria-labelledby="my-radio-group"
+                              >
+                                <label>
+                                  <Field
+                                    type="radio"
+                                    name={`custodians[${index}].custodian`}
+                                    value="padre"
+                                  />
+                                  Padre
+                                </label>
+                                <label>
+                                  <Field
+                                    type="radio"
+                                    name={`custodians[${index}].custodian`}
+                                    value="madre"
+                                  />
+                                  Madre
+                                </label>
+                                <label>
+                                  <Field
+                                    type="radio"
+                                    name={`custodians[${index}].custodian`}
+                                    value="tutor"
+                                  />
+                                  Tutor/a legal
+                                </label>
+                              </div>
+                              <ErrorMessage
+                                name={`custodians[${index}].custodian`}
+                              ></ErrorMessage>
+                            </div>
+                            <div>
+                              <label
+                                htmlFor={`custodians[${index}].name_lastname`}
+                              >
+                                Nombre y apellidos:
+                              </label>
+                              <Field
+                                name={`custodians[${index}].name_lastname`}
+                                type="text"
+                              ></Field>
+                              <ErrorMessage
+                                name={`custodians[${index}].name_lastname`}
+                              ></ErrorMessage>
+                            </div>
+                            <div>
+                              <label htmlFor={`custodians[${index}].nif`}>
+                                NIF:
+                              </label>
+                              <Field
+                                name={`custodians[${index}].nif`}
+                                type="text"
+                              ></Field>
+                              <ErrorMessage
+                                name={`custodians[${index}].nif`}
+                              ></ErrorMessage>
+                            </div>
+                            <div>
+                              <label htmlFor={`custodians[${index}].mobile`}>
+                                Telefono movil:
+                              </label>
+                              <Field
+                                name={`custodians[${index}].mobile`}
+                                type="number"
+                              ></Field>
+                              <ErrorMessage
+                                name={`custodians[${index}].mobile`}
+                              ></ErrorMessage>
+                            </div>
+                            <div>
+                              <label htmlFor={`custodians[${index}].email`}>
+                                Email:
+                              </label>
+                              <Field
+                                name={`custodians[${index}].email`}
+                                type="text"
+                              ></Field>
+                              <ErrorMessage
+                                name={`custodians[${index}].email`}
+                              ></ErrorMessage>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                            >
+                              -
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => arrayHelpers.push(new Custodian())}
+                        >
+                          Añadir un responsable
+                        </button>
+                      )}
                     </div>
-                    <ErrorMessage name="custodian.custodian"></ErrorMessage>
-                  </div>
-                  <div>
-                    <label htmlFor="custodian.name_lastname">
-                      Nombre y apellidos:
-                    </label>
-                    <Field name="custodian.name_lastname" type="text"></Field>
-                    <ErrorMessage name="custodian.name_lastname"></ErrorMessage>
-                  </div>
-                  <div>
-                    <label htmlFor="custodian.nif">NIF:</label>
-                    <Field name="custodian.nif" type="text"></Field>
-                    <ErrorMessage name="custodian.nif"></ErrorMessage>
-                  </div>
-                  <div>
-                    <label htmlFor="custodian.mobile">Telefono movil:</label>
-                    <Field name="custodian.mobile" type="text"></Field>
-                    <ErrorMessage name="custodian.mobile"></ErrorMessage>
-                  </div>
-                  <div>
-                    <label htmlFor="custodian.email">Email:</label>
-                    <Field name="custodian.email" type="text"></Field>
-                    <ErrorMessage name="custodian.email"></ErrorMessage>
-                  </div>
-                </div>
-              )}
+                  )}
+                />
+              </div>
               <div>
                 <h3>Datos academicos</h3>
                 <div>
