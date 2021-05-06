@@ -17,7 +17,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $data['dataCourses'] = Course::paginate(2);
+        $data['dataCourses'] = Course::paginate(4);
         return view('admin.course.index', $data);
 
         // $dataCourses = Course::all();

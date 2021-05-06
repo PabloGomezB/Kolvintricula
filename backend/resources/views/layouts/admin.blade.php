@@ -11,6 +11,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script> --}}
 </head>
 <body>
+
 <h1>
     <a href="{{ route('admin') }}">Index</a>
 </h1>

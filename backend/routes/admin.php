@@ -24,6 +24,5 @@ Route::get('/dashboard', function () {
 
 /* Params: [ruta,template] */
 Route::view('profile', 'admin.user.profile')->name('profile');
-Route::put('profile', [ProfileController::class , 'update'])->name('profile.update');
 
-// Route::resource('courses2', CourseController::class);
+Route::put('profile', [ProfileController::class , 'update'])->name('profile.update');
