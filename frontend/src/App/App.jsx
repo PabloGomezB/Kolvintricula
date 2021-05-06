@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Disponible from "./Componentes/Disponible";
+import Matricula from "./Matricula/Matricula";
 import NoDisponible from "./Componentes/NoDisponible";
 import data from "./course_list_sample";
 
@@ -38,7 +38,7 @@ const App = () => {
         <Switch>
           {courseArray.map((course) => (
             <Route path={`/${course.name}`}>
-              {course.state === "HABILITADO" ? <Disponible/> : <NoDisponible/>}
+              {course.state === "HABILITADO" ? <Matricula/> : <NoDisponible/>}
             </Route>
           ))}
         </Switch>
