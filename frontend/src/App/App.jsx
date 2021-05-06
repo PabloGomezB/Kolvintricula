@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Matricula from "./Matricula/Matricula";
+import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
 import data from "./course_list_sample";
 import Header from "./Componentes/Header";
@@ -8,9 +8,7 @@ import Header from "./Componentes/Header";
 const ListItem = ({ courseValue }) => {
   return (
     <li>
-      <button>
-        <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
-      </button>
+      <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
     </li>
   );
 };
@@ -39,8 +37,8 @@ const App = () => {
 
         <Switch>
           {courseArray.map((course) => (
-            <Route path={`/${course.name}`}>
-              {course.state === "HABILITADO" ? <Matricula/> : <NoDisponible/>}
+            <Route path={`/${course.name}`} key={course.id}>
+              {course.state === "HABILITADO" ? <Enrolment /> : <NoDisponible />}
             </Route>
           ))}
         </Switch>
