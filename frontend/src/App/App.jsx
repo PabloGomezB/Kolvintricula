@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
 import data from "./course_list_sample";
+import Header from "./Componentes/Header";
 
 const ListItem = ({ courseValue }) => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
   return (
     <Router>
       <div>
+        <Header/>
         <CourseList courses={courseArray}></CourseList>
 
         <Switch>
