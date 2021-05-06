@@ -1,8 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CursosController;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\KolvintriculaController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,3 +25,26 @@ Route::get('/', function () {
 Route::get('/cursos',[CursosController::class, 'index']);
 Route::get('/cursos/{id}',[CursosController::class, 'show']);
 
+// Route::get('/admin/index', [KolvintriculaController::class, 'index'])
+// ->middleware(['auth'])->name('admin.index');
+Route::get('/admin/index', function () {
+    return view('admin.index');
+})->middleware(['auth'])->name('admin.index');
+
+Route::resource('admin/users', UserController::class)
+->middleware(['auth']);
+
+Route::resource('admin/courses', CourseController::class)
+->middleware(['auth']);
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+// Route::get('/', Controller::class, 'index');
+
+// Hack para poder hacer LOGOUT desde links
+Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
