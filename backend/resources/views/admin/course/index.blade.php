@@ -1,4 +1,4 @@
-@extends('admin.course.layout')
+@extends('layouts.admin')
   
 @section('content')
 
