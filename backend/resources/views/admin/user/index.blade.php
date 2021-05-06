@@ -1,4 +1,4 @@
-@extends('admin.user.layout')
+@extends('layouts.admin')
   
 @section('content')
     <div class="row" style="margin-top: 5rem;">

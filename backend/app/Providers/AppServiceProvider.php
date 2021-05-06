@@ -29,6 +29,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         // Esto soluciona un bug visual con el paginado
-        Paginator::useBootstrap();
+        // Paginator::useBootstrap();
     }
 }

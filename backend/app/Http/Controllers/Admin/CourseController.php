@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
 
+
 class CourseController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -30,6 +33,7 @@ class CourseController extends Controller
     {
         return view('admin.course.create', ['course' => new Course]);
     }
+    
 
     /**
      * Store a newly created resource in storage.

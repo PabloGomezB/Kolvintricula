@@ -1,9 +1,10 @@
-@extends('admin.course.layout')
-  
+@extends('layouts.admin')
+
 @section('content')
 
 <h2>Crear nuevo curso</h2>
 
+{{-- <x-validation-errors /> --}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>

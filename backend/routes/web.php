@@ -1,11 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\KolvintriculaController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CourseController;
+// use App\Http\Controllers\KolvintriculaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -25,20 +22,7 @@ Route::get('/', function () {
 
 // Route::get('/admin/index', [KolvintriculaController::class, 'index'])
 // ->middleware(['auth'])->name('admin.index');
-Route::get('/admin/index', function () {
-    return view('admin.index');
-})->middleware(['auth'])->name('admin.index');
 
-Route::resource('admin/users', UserController::class)
-->middleware(['auth']);
-
-Route::resource('admin/courses', CourseController::class)
-->middleware(['auth']);
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
