@@ -1,5 +1,5 @@
 @if ($errors->any())
-    <div class="alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 mb-4">
+    <div id="error_alert" class="alert flex flex-row items-center bg-red-200 p-5 rounded border-b-2 border-red-300 mb-4">
         <div class="alert-icon flex items-center bg-red-100 border-2 border-red-500 justify-center h-10 w-10 flex-shrink-0 rounded-full">
 				<span class="text-red-500">
 					<svg fill="currentColor"
@@ -22,4 +22,9 @@
             </div>
         </div>
     </div>
+    <script>
+        setTimeout(function() {
+            $('#error_alert').fadeOut('500');
+        }, 3000);
+    </script>
 @endif

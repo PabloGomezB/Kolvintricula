@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Course;
 
-
 class CourseController extends Controller
 {
 
@@ -31,7 +30,6 @@ class CourseController extends Controller
         return view('admin.course.create', ['course' => new Course]);
     }
     
-
     /**
      * Store a newly created resource in storage.
      *
@@ -51,7 +49,7 @@ class CourseController extends Controller
         Course::create($dataForm);
      
         return redirect()->route('courses.index')
-            ->with('success','Course created successfully.');
+            ->with('message','El curso '.$request->description.' se ha creado correctamente');
     }
 
     /**
@@ -96,7 +94,7 @@ class CourseController extends Controller
         Course::where('id', '=', $id)->update($dataForm);
 
         return redirect()->route('courses.index')
-                ->with('success','Course updated successfully.');
+            ->with('message','El curso '.$request->description.' se ha actualizado correctamente');
     }
 
     /**
@@ -109,6 +107,6 @@ class CourseController extends Controller
     {
         Course::destroy($id);
         return redirect()->route('courses.index')
-                ->with('success','Course destroyed successfully.');
+            ->with('message','El curso con id '.$id.' se ha eliminado correctamente');
     }
 }

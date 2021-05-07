@@ -1,4 +1,4 @@
-:root{
+:root {
     --custom-blue: #00aeef;
     --custom-black: #231f20;
 }
@@ -22,35 +22,39 @@ tr:nth-child(even) {
     left: 140%;
     top: 20%;
     border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent; 
-    border-right: 10px solid var(--custom-blue);; 
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid var(--custom-blue);
+    ;
 }
 
-.clickable-row:hover{
+.clickable-row:hover {
     cursor: pointer;
 }
 
-th:hover{
+th:hover {
     cursor: pointer;
 }
 
 
-.set-border-bottom-hover:hover{
+.set-border-bottom-hover:hover {
     border-bottom: 3px solid var(--custom-blue);
     margin-bottom: -3px;
 }
 
-#table_filter{
+#table_filter {
     margin-bottom: 15px;
 }
-#table_filter>label{
+
+#table_filter>label {
     font-size: 0;
 }
-#table_filter>label:before { 
+
+#table_filter>label:before {
     content: "Buscar: ";
     font-size: 1rem;
 }
-#table_filter>label>input{
+
+#table_filter>label>input {
     margin-left: 10px;
 }
 
@@ -79,4 +83,19 @@ th:hover{
 .down {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
+}
+
+/* LOGIN / REGISTRO */
+.container-eye-form-password {
+    position: absolute;
+    left: 86%;
+    top: 50%;
+}
+
+.eye-form-password {
+    background-color: #e4e4e4;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 9px 20px;
+    border: 1px solid #c5c5c5;
 }
