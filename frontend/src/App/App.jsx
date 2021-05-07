@@ -72,7 +72,7 @@ const App = () => {
           <EnrolmentList />
         </Route>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 };
