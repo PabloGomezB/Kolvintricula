@@ -22,9 +22,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/cursos',[CursosController::class, 'index']);
-Route::get('/cursos/{id}',[CursosController::class, 'show']);
-
 // Route::get('/admin/index', [KolvintriculaController::class, 'index'])
 // ->middleware(['auth'])->name('admin.index');
 Route::get('/admin/index', function () {
