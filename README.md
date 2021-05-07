@@ -73,3 +73,5 @@ Mienbros: Ángel Miguel
 -   Run php artisan migrate
 -   Run php artisan db:seed to run seeders, if any.
 -   Run php artisan serve
+    php artisan make:seeder StudentSeeder
+    php artisan db:seed --class=StudentsSeeder
