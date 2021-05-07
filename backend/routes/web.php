@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\KolvintriculaController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
@@ -16,16 +15,10 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-// Route::get('/admin/index', [KolvintriculaController::class, 'index'])
-// ->middleware(['auth'])->name('admin.index');
-
-
 require __DIR__.'/auth.php';
-
-// Route::get('/', Controller::class, 'index');
 
 // Hack para poder hacer LOGOUT desde links
 Route::get('/logout', [AuthenticatedSessionController::class, 'destroy']);
