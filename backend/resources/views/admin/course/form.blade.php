@@ -18,7 +18,7 @@
     </div>
     <div class="grid grid-rows-2 gap-6">
         <div>
-            <x-label for="description" :value="__('Nombre del curso')" />
+            <x-label for="description" :value="__('Nombre completo del curso')" />
             <x-input id="description" type="text" name="description" value="{{ $course->description }}" placeholder="Desarrollo de Aplicaciones Web" class="block mt-1 w-full" autofocus/>
         </div>
         <div>
