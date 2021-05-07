@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import './App.css';
+import Button from '@material-ui/core/Button';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,14 +13,15 @@ import NoDisponible from "./Componentes/NoDisponible";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import axios from "axios";
+import { Container } from "@material-ui/core";
 
 const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
   return (
-    <li>
-      <Link to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
-    </li>
+    <Button variant="contained" id="courseButton">
+      <Link className="courseName" to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
+    </Button>
   );
 };
 
@@ -27,7 +30,7 @@ const CourseList = ({ courses }) => {
     <ListItem key={course.id} courseValue={course} />
   ));
 
-  return <ul>{listItems}</ul>;
+  return listItems;
 };
 
 const EnrolmentList = () => {
@@ -49,7 +52,9 @@ const EnrolmentList = () => {
 
   return (
     <div>
-      <CourseList courses={courseArray}></CourseList>
+      <Container maxWidth="sm">
+        <CourseList courses={courseArray}></CourseList>
+      </Container>
       <Switch>
         {courseArray.map((course) => (
           <Route path={`${match.path}/${course.name}`} key={course.id}>
@@ -66,8 +71,6 @@ const App = () => {
     <Router>
       <Header />
       <div>
-        <Link to="/matriculas">Lista de matriculas</Link>
-
         <Route path="/matriculas">
           <EnrolmentList />
         </Route>
