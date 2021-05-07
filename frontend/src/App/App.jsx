@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useRouteMatch,
+} from "react-router-dom";
 import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
-import data from "./course_list_sample";
-import Header from "./Componentes/Header";
+import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
+import axios from "axios";
 
 const ListItem = ({ courseValue }) => {
+  let match = useRouteMatch();
+
   return (
     <li>
-      <Link to={`/${courseValue.name}`}>{courseValue.name}</Link>
+      <Link to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
     </li>
   );
 };
@@ -21,28 +30,49 @@ const CourseList = ({ courses }) => {
   return <ul>{listItems}</ul>;
 };
 
-const App = () => {
+const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
-
+  let match = useRouteMatch();
   useEffect(() => {
-    console.log(data);
-    setCourseArray(data);
+    axios
+      .get(
+        "http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses"
+      )
+      .then((response) => {
+        console.log("Course", response.data);
+        setCourseArray(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   return (
-    <Router>
-      <div>
-        <Header/>
-        <CourseList courses={courseArray}></CourseList>
+    <div>
+      <CourseList courses={courseArray}></CourseList>
+      <Switch>
+        {courseArray.map((course) => (
+          <Route path={`${match.path}/${course.name}`} key={course.id}>
+            {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
+          </Route>
+        ))}
+      </Switch>
+    </div>
+  );
+};
 
-        <Switch>
-          {courseArray.map((course) => (
-            <Route path={`/${course.name}`} key={course.id}>
-              {course.state === "HABILITADO" ? <Enrolment /> : <NoDisponible />}
-            </Route>
-          ))}
-        </Switch>
+const App = () => {
+  return (
+    <Router>
+      <Header />
+      <div>
+        <Link to="/matriculas">Lista de matriculas</Link>
+
+        <Route path="/matriculas">
+          <EnrolmentList />
+        </Route>
       </div>
+      <Footer />
     </Router>
   );
 };
