@@ -46,7 +46,7 @@ Este proyecto utilizamos las sigienes tecnologías
 
 ## Code of Conduct
 
-Todo el proyecto sigue las buenas practicas acordadas por todos los mienbros del equipo.
+Todo el proyecto sigue las buenas practicas acordadas por todos los miembros del equipo.
 
 ## Security Vulnerabilities & Cookies
 
@@ -56,7 +56,7 @@ Todos los campos han sido securizados. El uso de cookies es para uso exclusivo d
 
 Todos los derechos pertenecen Kolvin Corp.
 Director: Jordi Callupe.
-Mienbros: Vin Diesel, Iriana; Ángel Miguel
+Mienbros: Ángel Miguel
 
 ## Lanzar servidor sin WSL2
 
