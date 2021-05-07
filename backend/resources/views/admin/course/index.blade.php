@@ -2,6 +2,8 @@
 <link href="https://cdn.datatables.net/1.10.24/css/dataTables.foundation.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
 
+{{-- <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <x-app-layout>
     @include('admin.course.header')
 
@@ -18,18 +20,23 @@
                                             <tr>
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID
+                                                    <i class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="2" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Tipo
+                                                    <i class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="3" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Nombre
+                                                    <i class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Descripción
+                                                    <i class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="5" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Estado
+                                                    <i class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="6" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Opciones
@@ -81,6 +88,7 @@
     });
     let table = $('#table')
     .DataTable({
+        order: [],
         paging: false,
         info: false,
     })

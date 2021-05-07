@@ -17,11 +17,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $data['dataCourses'] = Course::paginate(4);
+        $data['dataCourses'] = Course::orderBy('updated_at', 'desc')->paginate(10);
         return view('admin.course.index', $data);
-
-        // $dataCourses = Course::all();
-        // return view('admin.course.index', compact('dataCourses'));
     }
 
     /**
@@ -55,14 +52,6 @@ class CourseController extends Controller
      
         return redirect()->route('courses.index')
             ->with('success','Course created successfully.');
-
-
-        // Segunda forma de introducirlo (no testeado)
-        // Course::insert($dataForm);
-
-        // Ver datos en pantalla
-        // $dataForm = request()->all();
-        // return response()->json($dataForm);
     }
 
     /**
