@@ -3,7 +3,6 @@
 <link href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
 
 {{-- <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <x-app-layout>
     @include('admin.course.header')
 
@@ -11,6 +10,8 @@
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white p-6 border-b border-gray-200">
+                    <x-validation-errors />
+                    <x-success-message />
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -20,7 +21,7 @@
                                             <tr>
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID
-                                                    <i class="fa fa-fw fa-sort"></i>
+                                                    <i style="" class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="2" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Tipo
