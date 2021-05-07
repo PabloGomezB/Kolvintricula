@@ -1,4 +1,5 @@
 import React from "react";
+
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
@@ -253,8 +254,6 @@ const Enrolment = () => {
                 </div>
               ) : (
                 {}
-                //No puedo eliminar array
-                // setFieldValue("custodians", [], false)
               )}
               <div>
                 <h3>Datos academicos</h3>
