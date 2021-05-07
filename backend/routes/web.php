@@ -19,7 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 // Route::get('/admin/index', [KolvintriculaController::class, 'index'])
 // ->middleware(['auth'])->name('admin.index');
 
