@@ -1,0 +1,49 @@
+:root{
+    --custom-blue: #00aeef;
+    --custom-black: #231f20;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.content-head-separator {
+    background-color: var(--custom-blue);
+    width: 4px;
+    position: absolute;
+    left: 150%;
+    bottom: -25%;
+    height: 150%;
+}
+
+.arrow-left {
+    position: absolute;
+    left: 140%;
+    top: 20%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent; 
+    border-right: 10px solid var(--custom-blue);; 
+}
+
+.clickable-row:hover{
+    cursor: pointer;
+}
+
+.set-border-bottom-hover:hover{
+    border-bottom: 3px solid var(--custom-blue);
+    margin-bottom: -3px;
+}
+
+#table_filter{
+    margin-bottom: 15px;
+}
+#table_filter>label{
+    font-size: 0;
+}
+#table_filter>label:before { 
+    content: "Buscar: ";
+    font-size: 1rem;
+}
+#table_filter>label>input{
+    margin-left: 10px;
+}
