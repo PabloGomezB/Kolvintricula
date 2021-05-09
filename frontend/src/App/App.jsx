@@ -9,7 +9,7 @@ import {
 import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
 import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+// import Footer from "./Footer/Footer";
 import axios from "axios";
 
 const ListItem = ({ courseValue }) => {
