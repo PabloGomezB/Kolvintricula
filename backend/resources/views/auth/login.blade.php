@@ -1,8 +1,11 @@
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                <img src="{{ asset('img/logo2.png') }}" alt="logo" class="block w-auto fill-current" style="height:100px">
             </a>
         </x-slot>
 
@@ -12,7 +15,7 @@
         <!-- Validation Errors -->
         <x-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form id="form_login_register" method="POST" action="{{ route('login') }}">
             @csrf
 
             <!-- Email Address -->
@@ -23,34 +26,41 @@
             </div>
 
             <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
+            <x-custom-input-password :confirmPassword="false"/>
 
             <!-- Remember Me -->
-            <div class="block mt-4">
+            <div class="flex items-center justify-between block mt-10">
                 <label for="remember_me" class="inline-flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                    <span class="ml-2 text-sm text-gray-600">{{ __('Recordarme') }}</span>
                 </label>
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('¿No tienes cuenta?') }}
+                </a>
             </div>
-
-            <div class="flex items-center justify-end mt-4">
+            
+            <div class="flex items-center justify-end mt-5">
+                <img id="loading_gif" src="{{ asset('img/loading.gif') }}" alt="logo" class="mr-auto block w-auto fill-current" style="height:30px;visibility:hidden">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
+                        {{ __('He olvidado mi contraseña') }}
                     </a>
                 @endif
 
-                <x-button class="ml-3">
+                <x-button id="btn_submit_login_register" class="ml-3">
                     {{ __('Log in') }}
                 </x-button>
             </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
+<script>
+    $(document).ready(function() {
+        document.getElementById("btn_submit_login_register").addEventListener("click", function(){
+            let form = document.getElementById("form_login_register");
+            if (form.checkValidity()){
+                document.getElementById("loading_gif").style.visibility='visible';
+            }
+        });
+    });
+</script>

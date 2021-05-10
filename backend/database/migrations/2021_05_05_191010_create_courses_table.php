@@ -16,8 +16,7 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->increments('id');
             $table->enum('type', ['ESO', 'BACHILLERATO', 'CFGM', 'CFGS']);
-            $table->string('name',  255);
-
+            $table->string('name')->unique();
             $table->string('description', 1000);
             $table->enum('state', ['DESHABILITADO', 'BORRADOR', 'PREMATRICULA', 'MATRICULA']);
             $table->timestamps();

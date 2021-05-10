@@ -5,7 +5,7 @@
                 <h2 class="font-semibold text-2xl text-gray-800 leading-tight relative">
                     {{ __('Cursos') }}
                     <span class="content-head-separator"></span>
-                    <span class="arrow-left"></span>
+                    {{-- <span class="arrow-left"></span> --}}
                 </h2>
             </a>
             <div class="ml-20 pt-0.5">
