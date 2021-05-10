@@ -4,6 +4,7 @@ import { FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
 import FormikControl from "./components/FormikControl.jsx";
+import { set } from "lodash";
 
 class Custodian {
   constructor() {
@@ -201,23 +202,23 @@ const Enrolment = () => {
     academic_data: {
       course: 1,
       moduluf: [
-        { mp1: "" },
-        { mp2: "" },
-        { mp3: "" },
-        { mp4: "" },
-        // { mp5: "" }, //
-        // { mp6: "" }, //
-        { mp7: "" },
-        // { mp8: "" }, //
-        // { mp9: "" }, //
-        { mp10: "" },
-        // { mp11: "" }, //
-        { mp12: "" },
-        { mp13: "" },
-        // { mp14: "" }, //
-        // { mp15: "" }, //
-        // { mp16: "" }, //
-        // { mp17: "" }, //
+        // { mp1: [] },
+        // { mp2: [] },
+        // { mp3: [] },
+        // { mp4: [] },
+        // { mp5: [] }, //
+        // { mp6: [] }, //
+        // { mp7: [] },
+        // { mp8: [] }, //
+        // { mp9: [] }, //
+        // { mp10: [] },
+        // { mp11: [] }, //
+        // { mp12: [] },
+        // { mp13: [] },
+        // { mp14: [] }, //
+        // { mp15: [] }, //
+        // { mp16: [] }, //
+        // { mp17: [] }, //
       ],
     },
   };
@@ -268,7 +269,7 @@ const Enrolment = () => {
 
   const onSubmit = (values, { setSubmitting }) => {
     alert(JSON.stringify(values, null, 2));
-
+    console.log("submit", values);
     setSubmitting(false);
   };
 
@@ -342,13 +343,14 @@ const Enrolment = () => {
                             custodians.map((custodiansItem, index) => (
                               <div key={index}>
                                 <FormikControl
-                                  control="radio"
+                                  control="select"
                                   label=""
                                   name={`custodians[${index}].custodian`}
                                   options={[
-                                    { key: "Padre", value: "padre" },
-                                    { key: "Madre", value: "madre" },
-                                    { key: "Tutor/a legal", value: "tutor" },
+                                    { label: "None", value: null },
+                                    { label: "Padre", value: "padre" },
+                                    { label: "Madre", value: "madre" },
+                                    { label: "Tutor/a legal", value: "tutor" },
                                   ]}
                                 />
 
@@ -407,12 +409,12 @@ const Enrolment = () => {
                   <div>
                     <div>
                       <FormikControl
-                        control="radio"
+                        control="select"
                         label=""
                         name="academic_data.course"
                         options={[
-                          { key: "1er Curso", value: 1 },
-                          { key: "2ndo Curso", value: 2 },
+                          { label: "1er Curso", value: 1 },
+                          { label: "2ndo Curso", value: 2 },
                         ]}
                       />
                     </div>
@@ -426,8 +428,8 @@ const Enrolment = () => {
                                 value: uf.name,
                               })
                             );
-                            console.log("values", values);
-                            console.log("ufs", modul.modul_key, options);
+                            // console.log("values", values);
+                            // console.log("ufs", modul.modul_key, options);
                             return (
                               <div key={modul.modul_key}>
                                 <FormikControl
@@ -464,7 +466,7 @@ const Enrolment = () => {
                   </div>
                 </FieldArray>
               </div>
-              <button type="submit" disabled={!isValid || isSubmitting}>
+              <button type="submit" disabled={isSubmitting}>
                 Enviar
               </button>
             </div>
