@@ -18,8 +18,20 @@ import { Container } from "@material-ui/core";
 const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
+  // function hideCourses(e) {
+  //   e.preventDefault();
+  //   let courses = document.getElementById("cursos");
+  //   courses.style.display = "none";
+  // }
+
+  const hideCourses = () => {
+    console.log('funciona');
+    let courses = document.getElementById("courses");
+    courses.style.display = "none";
+  }
+
   return (
-    <Button variant="contained" id="courseButton">
+    <Button variant="contained" id="courseButton" onClick={hideCourses}>
       <Link className="courseName" to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
     </Button>
   );
@@ -52,13 +64,13 @@ const EnrolmentList = () => {
 
   return (
     <div>
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" id="courses">
         <CourseList courses={courseArray}></CourseList>
       </Container>
       <Switch>
         {courseArray.map((course) => (
           <Route path={`${match.path}/${course.name}`} key={course.id}>
-            {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
+            {course.state === "MATRICULA" ? (<Enrolment />) : <NoDisponible />}
           </Route>
         ))}
       </Switch>

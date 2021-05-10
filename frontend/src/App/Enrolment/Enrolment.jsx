@@ -2,6 +2,7 @@ import React from "react";
 import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
+import { Link, } from "react-router-dom";
 
 class Custodian {
   constructor() {
@@ -285,6 +286,7 @@ const Enrolment = () => {
           </Form>
         )}
       </Formik>
+      <Link to="/matriculas">Volver</Link>
     </div>
   );
 };
