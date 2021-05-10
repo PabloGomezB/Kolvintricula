@@ -8,7 +8,7 @@
                     <a href="{{ route('admin') }}">
                         {{-- <x-application-logo class="block h-10 w-auto fill-current text-gray-600" /> --}}
                         <img src="{{ asset('img/logo.png') }}" alt="logo" class="block h-10 w-auto fill-current">
-                    </a>                   
+                    </a>
                 </div>
 
                 <!-- Navigation Links -->
@@ -20,6 +20,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
                         {{ __('Cursos') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')">
+                        {{ __('Alumnos') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -48,8 +53,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                            <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log out') }}
                             </x-dropdown-link>
@@ -105,8 +109,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                    <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log out') }}
                     </x-responsive-nav-link>
