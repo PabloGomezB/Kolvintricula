@@ -2,7 +2,7 @@
 <div class="grid grid-cols-2 gap-6">
     <div class="grid grid-rows-2 gap-6">
         <div>
-            <x-label for="name" :value="__('Nombre del modulo')" />
+            <x-label class="required" for="name" :value="__('Nombre del modulo')" />
             <x-input id="text" type="text" name="name" placeholder="MP1" value="{{ $module->name }}" class="block mt-1 w-full" autofocus/>
         </div>
         <div>
@@ -21,7 +21,7 @@
     </div>
     <div class="grid grid-rows-2 gap-6">
         <div>
-            <x-label for="description" :value="__('Nombre completo del modulo')" />
+            <x-label class="required" for="description" :value="__('Nombre completo del modulo')" />
             <x-input id="description" type="text" name="description" value="{{ $module->description }}" placeholder="Sistemes informatics" class="block mt-1 w-full" autofocus/>
         </div>        
     </div>
