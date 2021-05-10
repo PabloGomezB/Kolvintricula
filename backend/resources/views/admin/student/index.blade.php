@@ -3,7 +3,7 @@
 <link href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
 
 <x-app-layout>
-    @include('admin.course.header')
+    @include('admin.student.header')
 
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
@@ -19,17 +19,35 @@
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID
                                                 </th>
-                                                <th scope="col" data-priority="2" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Tipo
+                                                <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    DNI
                                                 </th>
                                                 <th scope="col" data-priority="3" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Nombre
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Descripción
+                                                    Primer Apellido
+                                                </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Segundo Apellido
                                                 </th>
                                                 <th scope="col" data-priority="5" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Estado
+                                                    Fecha de cumpleaños
+                                                </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Teléfono 
+                                                </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Foto 
+                                                </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Fotografía del alumno 
+                                                </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Email personal del alumno
+                                                </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Email como aluno del Institut Pedralbes
                                                 </th>
                                                 <th scope="col" data-priority="6" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Opciones
@@ -37,16 +55,22 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($dataCourses as $course)
-                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('courses.show',$course->id) }}'">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->id }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->type }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->name }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->description }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->state }}</td>
+                                            @foreach ($dataStudents as $student)
+                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('students.show',$student->id) }}'">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->id }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->nif }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->name }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->last_name1 }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->last_name2 }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->date_birth }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->mobile_number }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->photo_path }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->enrolment_status }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->email_personal }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->email_pedralbes }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                                    <form class="" action="{{ route('courses.destroy',$course->id) }}" method="POST">      
-                                                        <a href="{{ route('courses.edit',$course->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>   
+                                                    <form class="" action="{{ route('students.destroy',$student->id) }}" method="POST">      
+                                                        <a href="{{ route('students.edit',$student->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>   
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
@@ -58,7 +82,7 @@
                                     </table>
                                 </div>
                                 <div class="mt-4">
-                                    {!! $dataCourses->links() !!}
+                                    {!! $dataStudents->links() !!}
                                 </div>
                             </div>
                         </div>
