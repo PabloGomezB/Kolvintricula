@@ -18,12 +18,6 @@ import { Container } from "@material-ui/core";
 const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
-  // function hideCourses(e) {
-  //   e.preventDefault();
-  //   let courses = document.getElementById("cursos");
-  //   courses.style.display = "none";
-  // }
-
   const hideCourses = () => {
     console.log('funciona');
     let courses = document.getElementById("courses");
@@ -48,6 +42,7 @@ const CourseList = ({ courses }) => {
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   let match = useRouteMatch();
+
   useEffect(() => {
     axios
       .get(
@@ -64,9 +59,12 @@ const EnrolmentList = () => {
 
   return (
     <div>
+      {console.log("Antes del container"+document.getElementById("courses"))}
       <Container maxWidth="sm" id="courses">
+        {console.log("Dentro del container"+document.getElementById("courses"))}
         <CourseList courses={courseArray}></CourseList>
       </Container>
+      {console.log("Fuera del container"+document.getElementById("courses"))}
       <Switch>
         {courseArray.map((course) => (
           <Route path={`${match.path}/${course.name}`} key={course.id}>
