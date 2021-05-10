@@ -5,17 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Custodian extends Model
+class Enrolment extends Model
 {
     use HasFactory;
+    
+    // protected $casts = [
+    //     'json_course_module_uf' => 'array'
+    // ];
 
     protected $fillable = [
         'id_student',
-        'responsible',
-        'nif',
-        'name',
-        'last_name1',
-        'last_name2',
-        'mobile_number'
+        'json_course_module_uf'
     ];
 }
