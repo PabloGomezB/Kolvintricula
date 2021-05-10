@@ -86,13 +86,26 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Control para poder hacer update manteniendo el requisito UNIQUE
+        $courseToUpdate = DB::table('courses')->where('id', $id)->get();
+        $newName = request()->only('name');
+
+        // Si el nombre del curso actual es distinto del que quiere introducir se verifica que no exista ya
+        // En caso contrario se omite la comprobación porque sino dará error ya que se verifica contra su propio nombre y no deja hacer update
+        if ($courseToUpdate[0]->name != $newName['name']){
+            $request->validate([
+                'name' => 'unique:courses',
+            ]);
+        }
+
+        // Se verifican los campos restantes y se continúa con la lógica normal
         $request->validate([
             'type' => 'required',
-            'name' => 'required|unique:courses',
+            'name' => 'required',
             'description' => 'required',
             'state' => 'required',
         ]);
-    
+
         $dataForm = request()->except(['_token','_method']);
         Course::where('id', '=', $id)->update($dataForm);
 
