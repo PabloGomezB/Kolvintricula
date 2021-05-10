@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Models\Custodian;
+use App\Models\Enrolment;
 use Illuminate\Http\Request;
 
-class CustodianController extends Controller
+class EnrolmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class CustodianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Custodian  $custodian
+     * @param  \App\Models\Enrolment  $enrolment
      * @return \Illuminate\Http\Response
      */
-    public function show(Custodian $custodian)
+    public function show(Enrolment $enrolment)
     {
         //
     }
@@ -52,10 +53,10 @@ class CustodianController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Custodian  $custodian
+     * @param  \App\Models\Enrolment  $enrolment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Custodian $custodian)
+    public function edit(Enrolment $enrolment)
     {
         //
     }
@@ -64,10 +65,10 @@ class CustodianController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Custodian  $custodian
+     * @param  \App\Models\Enrolment  $enrolment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Custodian $custodian)
+    public function update(Request $request, Enrolment $enrolment)
     {
         //
     }
@@ -75,10 +76,10 @@ class CustodianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Custodian  $custodian
+     * @param  \App\Models\Enrolment  $enrolment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Custodian $custodian)
+    public function destroy(Enrolment $enrolment)
     {
         //
     }

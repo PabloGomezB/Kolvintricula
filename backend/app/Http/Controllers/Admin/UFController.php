@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
-use App\Models\Enrolment;
+use App\Models\UF;
 use Illuminate\Http\Request;
 
-class EnrolmentController extends Controller
+class UFController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +42,10 @@ class EnrolmentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Enrolment  $enrolment
+     * @param  \App\Models\UF  $uF
      * @return \Illuminate\Http\Response
      */
-    public function show(Enrolment $enrolment)
+    public function show(UF $uF)
     {
         //
     }
@@ -52,10 +53,10 @@ class EnrolmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Enrolment  $enrolment
+     * @param  \App\Models\UF  $uF
      * @return \Illuminate\Http\Response
      */
-    public function edit(Enrolment $enrolment)
+    public function edit(UF $uF)
     {
         //
     }
@@ -64,10 +65,10 @@ class EnrolmentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Enrolment  $enrolment
+     * @param  \App\Models\UF  $uF
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Enrolment $enrolment)
+    public function update(Request $request, UF $uF)
     {
         //
     }
@@ -75,10 +76,10 @@ class EnrolmentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Enrolment  $enrolment
+     * @param  \App\Models\UF  $uF
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Enrolment $enrolment)
+    public function destroy(UF $uF)
     {
         //
     }
