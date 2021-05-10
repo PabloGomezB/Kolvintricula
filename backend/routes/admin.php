@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\ModuleController;
 
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -17,6 +18,7 @@ Route::resource('users', UserController::class);
 
 // Crea automáticamente las rutas a las funciones predefinidas en CourseController
 Route::resource('courses', CourseController::class);
+Route::resource('modules', ModuleController::class);
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
