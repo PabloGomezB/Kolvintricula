@@ -1,6 +1,6 @@
 <div id="show_hide_password" class="mt-4">
     <div class="relative">
-        <x-label for="password" :value="__('Contraseña')" />
+        <x-label class="required" for="password" :value="__('Contraseña')" />
         <x-input id="password" class="block mt-1 w-full"
                         type="password"
                         name="password"
@@ -11,7 +11,7 @@
     </div>
     @if ($confirmPassword == true)
     <div class="relative mt-4">
-        <x-label for="password_confirmation" :value="__('Confirmar contraseña')" />
+        <x-label class="required" for="password_confirmation" :value="__('Confirmar contraseña')" />
 
         <x-input id="password_confirmation" class="block mt-1 w-full"
                         type="password"

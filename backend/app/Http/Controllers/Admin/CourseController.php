@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Echo_;
 
 class CourseController extends Controller
 {
@@ -40,16 +42,17 @@ class CourseController extends Controller
     {
         $request->validate([
             'type' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:courses',
             'description' => 'required',
             'state' => 'required',
         ]);
     
         $dataForm = request()->except('_token');
+
         Course::create($dataForm);
-     
         return redirect()->route('courses.index')
             ->with('message','El curso '.$request->description.' se ha creado correctamente');
+
     }
 
     /**
@@ -85,7 +88,7 @@ class CourseController extends Controller
     {
         $request->validate([
             'type' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:courses',
             'description' => 'required',
             'state' => 'required',
         ]);
@@ -109,4 +112,5 @@ class CourseController extends Controller
         return redirect()->route('courses.index')
             ->with('message','El curso con id '.$id.' se ha eliminado correctamente');
     }
+
 }
