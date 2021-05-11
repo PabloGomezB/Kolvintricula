@@ -1,22 +1,36 @@
 import React from 'react';
-import './Header.css';
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-const Header = () => {
-    return (
-        <header>
-            <div className="container logo-nav-container">
-                <a href="#" className="logo">Kolvintrícula</a>
-                <span className="menu">Ver/ocultar menú</span>
-                <nav>
-                    <ul>
-                        <li><a href="#">Inicio</a></li>
-                        <li><a href="#">Acerca de</a></li>
-                        <li><a href="#">Servicios</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-    )
-};
-export default Header;
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
+  },
+  appBar: {
+    backgroundColor: '#333',
+  },
+}));
+
+export default function Header() {
+  const classes = useStyles();
+
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" className={classes.appBar}>
+        <Toolbar>
+          <Container maxWidth="md">
+            <Typography variant="h6" className={classes.title}>
+              Kolvintricula
+            </Typography>
+          </Container>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+}

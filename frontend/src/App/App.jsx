@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import './App.css';
+import Button from '@material-ui/core/Button';
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,14 +13,21 @@ import NoDisponible from "./Componentes/NoDisponible";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import axios from "axios";
+import { Container } from "@material-ui/core";
 
 const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
+  const hideCourses = () => {
+    console.log('funciona');
+    let courses = document.getElementById("courses");
+    courses.style.display = "none";
+  }
+
   return (
-    <li>
-      <Link to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
-    </li>
+    <Button variant="contained" id="courseButton" onClick={hideCourses}>
+      <Link className="courseName" to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
+    </Button>
   );
 };
 
@@ -27,12 +36,13 @@ const CourseList = ({ courses }) => {
     <ListItem key={course.id} courseValue={course} />
   ));
 
-  return <ul>{listItems}</ul>;
+  return listItems;
 };
 
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   let match = useRouteMatch();
+
   useEffect(() => {
     axios
       .get(
@@ -49,11 +59,16 @@ const EnrolmentList = () => {
 
   return (
     <div>
-      <CourseList courses={courseArray}></CourseList>
+      {console.log("Antes del container"+document.getElementById("courses"))}
+      <Container maxWidth="sm" id="courses">
+        {console.log("Dentro del container"+document.getElementById("courses"))}
+        <CourseList courses={courseArray}></CourseList>
+      </Container>
+      {console.log("Fuera del container"+document.getElementById("courses"))}
       <Switch>
         {courseArray.map((course) => (
           <Route path={`${match.path}/${course.name}`} key={course.id}>
-            {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
+            {course.state === "MATRICULA" ? (<Enrolment />) : <NoDisponible />}
           </Route>
         ))}
       </Switch>
@@ -66,8 +81,6 @@ const App = () => {
     <Router>
       <Header />
       <div>
-        <Link to="/matriculas">Lista de matriculas</Link>
-
         <Route path="/matriculas">
           <EnrolmentList />
         </Route>
