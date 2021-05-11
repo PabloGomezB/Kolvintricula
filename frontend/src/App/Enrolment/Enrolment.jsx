@@ -38,18 +38,11 @@ const Enrolment = () => {
 
   const validationSchema = Yup.object({
     student: Yup.object().shape({
-      name: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido"),
-      last_name1: Yup.string()
-        .max(15, "Máximo 15 carácteres.")
-        .required("Requerido"),
-      last_name2: Yup.string()
-        .max(15, "Máximo 15 carácteres.")
-        .required("Requerido"),
+      name: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido").matches(/^[aA-zZ\s]+$/, "Solo letras"),
+      last_name1: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido").matches(/^[aA-zZ\s]+$/, "Solo letras"),
+      last_name2: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido").matches(/^[aA-zZ\s]+$/, "Solo letras"),
       nif: Yup.string().required("Requerido"),
-      mobile_number: Yup.number()
-        .integer("Debe de ser numerico")
-        .required("Requerido")
-        .test("len", "Ha de ser de 9 digitos", (val) => {
+      mobile_number: Yup.number().integer("Debe de ser numerico").required("Requerido").test("len", "Ha de ser de 9 digitos", (val) => {
           if (val !== undefined) {
             return val.toString().length === 9;
           }

@@ -1,7 +1,6 @@
 import React from "react";
-import { Link, Route, Router, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Button from '@material-ui/core/Button';
-import App from "../App";
 
 const EnrolmentList = () => {
     return (
