@@ -98,3 +98,9 @@ th:hover {
     padding: 9px 20px;
     border: 1px solid #c5c5c5;
 }
+
+.required:after {
+    content:" *";
+    font-size: large;
+    color: red;
+}

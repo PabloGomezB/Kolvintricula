@@ -5,6 +5,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Echo_;
 
 class CourseController extends Controller
 {
@@ -40,16 +42,17 @@ class CourseController extends Controller
     {
         $request->validate([
             'type' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:courses',
             'description' => 'required',
             'state' => 'required',
         ]);
     
         $dataForm = request()->except('_token');
+
         Course::create($dataForm);
-     
         return redirect()->route('courses.index')
             ->with('message','El curso '.$request->description.' se ha creado correctamente');
+
     }
 
     /**
@@ -83,13 +86,26 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Control para poder hacer update manteniendo el requisito UNIQUE
+        $courseToUpdate = DB::table('courses')->where('id', $id)->get();
+        $newName = request()->only('name');
+
+        // Si el nombre del curso actual es distinto del que quiere introducir se verifica que no exista ya
+        // En caso contrario se omite la comprobación porque sino dará error ya que se verifica contra su propio nombre y no deja hacer update
+        if ($courseToUpdate[0]->name != $newName['name']){
+            $request->validate([
+                'name' => 'unique:courses',
+            ]);
+        }
+
+        // Se verifican los campos restantes y se continúa con la lógica normal
         $request->validate([
             'type' => 'required',
             'name' => 'required',
             'description' => 'required',
             'state' => 'required',
         ]);
-    
+
         $dataForm = request()->except(['_token','_method']);
         Course::where('id', '=', $id)->update($dataForm);
 
@@ -109,4 +125,5 @@ class CourseController extends Controller
         return redirect()->route('courses.index')
             ->with('message','El curso con id '.$id.' se ha eliminado correctamente');
     }
+
 }

@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -17,14 +18,14 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Nombre')" />
+                <x-label class="required" for="name" :value="__('Nombre')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
             <!-- Email Address -->
             <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <x-label class="required" for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
