@@ -11,7 +11,7 @@ import {
 import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
 import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+// import Footer from "./Footer/Footer";
 import axios from "axios";
 import { Container } from "@material-ui/core";
 
@@ -85,7 +85,7 @@ const App = () => {
           <EnrolmentList />
         </Route>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 };
