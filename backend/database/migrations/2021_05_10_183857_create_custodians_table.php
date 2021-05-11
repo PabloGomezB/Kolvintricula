@@ -22,6 +22,7 @@ class CreateCustodiansTable extends Migration
             $table->string('last_name1', 255);
             $table->string('last_name2', 255);
             $table->integer('mobile_number');
+            $table->string('email');
             $table->foreign('id_student')->references('id')->on('students');
             $table->timestamps();
         });
