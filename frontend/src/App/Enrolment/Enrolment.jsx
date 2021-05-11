@@ -1,18 +1,192 @@
 import React from "react";
-import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
+
+import { FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
+import FormikControl from "./components/FormikControl.jsx";
+import { set } from "lodash";
+import {
+  Button,
+  FormControlLabel,
+  FormGroup,
+  Typography,
+} from "@material-ui/core";
+import CheckboxField from "./components/CheckboxField.jsx";
 
 class Custodian {
   constructor() {
     this.custodian = "";
     this.name_lastname = "";
     this.nif = "";
-    this.mobile = "";
+    this.mobile_number = "";
     this.email = "";
   }
 }
+
+const cursmoduluf = [
+  {
+    curs: 1,
+    moduls: [
+      {
+        modul_key: "mp1",
+        name: "MP1. Implementacio de sistemes operatius",
+        ufs: [
+          { uf_key: "mp1uf1", name: "UF1" },
+          { uf_key: "mp1uf2", name: "UF2" },
+          { uf_key: "mp1uf3", name: "UF3" },
+        ],
+      },
+      {
+        modul_key: "mp2",
+        name: "MP2. Gestió de sitemes operatius",
+        ufs: [
+          { uf_key: "mp2uf1", name: "UF1" },
+          { uf_key: "mp2uf2", name: "UF2" },
+          { uf_key: "mp2uf3", name: "UF3" },
+        ],
+      },
+      {
+        modul_key: "mp3",
+        name: "MP3. Programació bàsica",
+        ufs: [
+          { uf_key: "mp3uf1", name: "UF1" },
+          { uf_key: "mp3uf2", name: "UF2" },
+          { uf_key: "mp3uf3", name: "UF3" },
+        ],
+      },
+      {
+        modul_key: "mp4",
+        name: "MP4. Llenguatge de marques i sistemes de gestió d’informació",
+        ufs: [
+          { uf_key: "mp4uf1", name: "UF1" },
+          { uf_key: "mp4uf2", name: "UF2" },
+          { uf_key: "mp4uf3", name: "UF3" },
+        ],
+      },
+      {
+        modul_key: "mp7",
+        name: "MP7. Planificació i administració de xarxes",
+        ufs: [
+          { uf_key: "mp7uf1", name: "UF1" },
+          { uf_key: "mp7uf2", name: "UF2" },
+          { uf_key: "mp7uf3", name: "UF3" },
+        ],
+      },
+      {
+        modul_key: "mp10",
+        name: "MP10. Administració de sistemes gestors de bases de dades",
+        ufs: [{ uf_key: "mp7uf1", name: "UF1" }],
+      },
+      {
+        modul_key: "mp12",
+        name: "MP12. Formació i orientació laboral",
+        ufs: [
+          { uf_key: "mp12uf1", name: "UF1" },
+          { uf_key: "mp12uf2", name: "UF2" },
+        ],
+      },
+      {
+        modul_key: "mp13",
+        name: "MP13. Empresa i iniciativa emprenedora",
+        ufs: [{ uf_key: "mp13uf1", name: "UF1" }],
+      },
+    ],
+  },
+  {
+    curs: 2,
+    moduls: [
+      {
+        modul_key: "mp1",
+        name: "MP1. Implementacio de sistemes operatius",
+        ufs: [{ uf_key: "mp1uf4", name: "UF4" }],
+      },
+      {
+        modul_key: "mp2",
+        name: "MP2. Gestió de sitemes operatius",
+        ufs: [{ uf_key: "mp2uf3", name: "UF3" }],
+      },
+      {
+        modul_key: "mp5",
+        name: "MP5. Fonaments de maquinari",
+        ufs: [
+          { uf_key: "mp5uf1", name: "UF1" },
+          { uf_key: "mp5uf2", name: "UF2" },
+          { uf_key: "mp5uf3", name: "UF3" },
+        ],
+      },
+      {
+        modul_key: "mp6",
+        name: "MP6. Administració de sistemes operatius",
+        ufs: [
+          { uf_key: "mp6uf1", name: "UF1" },
+          { uf_key: "mp6uf2", name: "UF2" },
+        ],
+      },
+      {
+        modul_key: "mp8",
+        name: "MP8. Servei de xarxa i Internet",
+        ufs: [
+          { uf_key: "mp8uf1", name: "UF1" },
+          { uf_key: "mp8uf2", name: "UF2" },
+          { uf_key: "mp8uf3", name: "UF3" },
+          { uf_key: "mp8uf4", name: "UF4" },
+        ],
+      },
+      {
+        modul_key: "mp9",
+        name: "MP9. Implantació d’aplicacions web",
+        ufs: [
+          { uf_key: "mp9uf1", name: "UF1" },
+          { uf_key: "mp9uf2", name: "UF2" },
+        ],
+      },
+      {
+        modul_key: "mp10",
+        name: "MP10. Administració de sistemes gestors de bases de dades",
+        ufs: [{ uf_key: "mp10uf2", name: "UF2" }],
+      },
+      {
+        modul_key: "mp11",
+        name: "MP11. Seguretat i alta disponibilitat",
+        ufs: [
+          { uf_key: "mp11uf1", name: "UF1" },
+          { uf_key: "mp11uf2", name: "UF2" },
+          { uf_key: "mp11uf3", name: "UF3" },
+          { uf_key: "mp11uf4", name: "UF4" },
+        ],
+      },
+      {
+        modul_key: "mp14",
+        name: "MP14. Projecte d’administració de sistemes informàtics en xarxa",
+        ufs: [{ uf_key: "mp14uf1", name: "UF1" }],
+      },
+      {
+        modul_key: "mp15",
+        name: "MP15. Formació en centres de treball (FCT)",
+        ufs: [{ uf_key: "mp15fct", name: "Formació en centres de treball" }],
+      },
+      {
+        modul_key: "mp16",
+        name: "MP16. Ciberseguretat i Hacking ètic",
+        ufs: [
+          { uf_key: "mp16uf1", name: "UF1" },
+          { uf_key: "mp16uf2", name: "UF2" },
+        ],
+      },
+      {
+        modul_key: "mp17",
+        name: "MP17. Seguretat en sistemes, xarxes i serveis",
+        ufs: [
+          { uf_key: "mp17uf1", name: "UF1" },
+          { uf_key: "mp17uf2", name: "UF2" },
+          { uf_key: "mp17uf3", name: "UF3" },
+          { uf_key: "mp17uf4", name: "UF4" },
+        ],
+      },
+    ],
+  },
+];
 
 const Enrolment = () => {
   const initialValues = {
@@ -23,7 +197,7 @@ const Enrolment = () => {
       nif: "",
       mobile_number: "",
       email: "",
-      date_birth: new Date().toISOString().substr(0, 10),
+      date_birth: "",
     },
     // custodian: {
     //   custodian: "",
@@ -33,22 +207,55 @@ const Enrolment = () => {
     //   email: "",
     // },
     custodians: [],
-    academic_data: { course: "" },
+    academic_data: {
+      course: 1,
+      moduluf: [
+        // { mp1: [] },
+        // { mp2: [] },
+        // { mp3: [] },
+        // { mp4: [] },
+        // { mp5: [] }, //
+        // { mp6: [] }, //
+        // { mp7: [] },
+        // { mp8: [] }, //
+        // { mp9: [] }, //
+        // { mp10: [] },
+        // { mp11: [] }, //
+        // { mp12: [] },
+        // { mp13: [] },
+        // { mp14: [] }, //
+        // { mp15: [] }, //
+        // { mp16: [] }, //
+        // { mp17: [] }, //
+      ],
+    },
   };
 
   const validationSchema = Yup.object({
     student: Yup.object().shape({
-      name: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido").matches(/^[aA-zZ\s]+$/, "Solo letras"),
-      last_name1: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido").matches(/^[aA-zZ\s]+$/, "Solo letras"),
-      last_name2: Yup.string().max(15, "Máximo 15 carácteres.").required("Requerido").matches(/^[aA-zZ\s]+$/, "Solo letras"),
+      name: Yup.string()
+        .max(15, "Máximo 15 carácteres.")
+        .required("Requerido")
+        .matches(/^[aA-zZ\s]+$/, "Solo letras"),
+      last_name1: Yup.string()
+        .max(15, "Máximo 15 carácteres.")
+        .required("Requerido")
+        .matches(/^[aA-zZ\s]+$/, "Solo letras"),
+      last_name2: Yup.string()
+        .max(15, "Máximo 15 carácteres.")
+        .required("Requerido")
+        .matches(/^[aA-zZ\s]+$/, "Solo letras"),
       nif: Yup.string().required("Requerido"),
-      mobile_number: Yup.number().integer("Debe de ser numerico").required("Requerido").test("len", "Ha de ser de 9 digitos", (val) => {
+      mobile_number: Yup.number()
+        .integer("Debe de ser numerico")
+        .required("Requerido")
+        .test("len", "Ha de ser de 9 digitos", (val) => {
           if (val !== undefined) {
             return val.toString().length === 9;
           }
         }),
       email: Yup.string().email("Email no válido.").required("Requerido"),
-      date_birth: Yup.date().required("Requerido"),
+      date_birth: Yup.date().required("Requerido").nullable(),
     }),
     custodians: Yup.array().of(
       Yup.object().shape({
@@ -59,14 +266,13 @@ const Enrolment = () => {
           .required("Requerido")
           .max(50, "Máximo 50 carácteres."),
         nif: Yup.string().required("Requerido"),
-        mobile: Yup.number()
-          .integer("Debe de ser numerico")
-          .required("Requerido")
-          .test("len", "Ha de ser de 9 digitos", (val) => {
+        mobile_number: Yup.number()
+          .test("len2", "Ha de ser de 9 digitos", (val) => {
             if (val !== undefined) {
               return val.toString().length === 9;
             }
-          }),
+          })
+          .required("Requerido"),
         email: Yup.string().email("Email no válido").required("Requerido"),
       })
     ),
@@ -77,205 +283,197 @@ const Enrolment = () => {
 
   const onSubmit = (values, { setSubmitting }) => {
     alert(JSON.stringify(values, null, 2));
-
+    console.log("submit", values);
     setSubmitting(false);
   };
 
   return (
     <div>
-      <h1>Matrícula</h1>
+      <Typography variant="h1" gutterBottom>
+        Matrícula
+      </Typography>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values, setFieldValue }) => (
+        {({ values, isValid, isSubmitting, setFieldValue }) => (
           <Form>
-            <>
+            <div>
               <div>
-                <h3>Datos del alumno</h3>
-                <div>
-                  <label htmlFor="student.name">Primer nombre:</label>
-                  <Field name="student.name" type="text"></Field>
-                  <ErrorMessage name="student.name"></ErrorMessage>
-                </div>
-                <div>
-                  <label htmlFor="student.last_name1">Primer apellido:</label>
-                  <Field name="student.last_name1" type="text"></Field>
-                  <ErrorMessage name="student.last_name1"></ErrorMessage>
-                </div>
-                <div>
-                  <label htmlFor="student.last_name2">Segundo apellido:</label>
-                  <Field name="student.last_name2" type="text"></Field>
-                  <ErrorMessage name="student.last_name2"></ErrorMessage>
-                </div>
-                <div>
-                  <label htmlFor="student.nif">NIF:</label>
-                  <Field name="student.nif" type="text"></Field>
-                  <ErrorMessage name="student.nif"></ErrorMessage>
-                </div>
-                <div>
-                  <label htmlFor="student.email">Email:</label>
-                  <Field name="student.email" type="email"></Field>
-                  <ErrorMessage name="student.email"></ErrorMessage>
-                </div>
-                <div>
-                  <label htmlFor="student.mobile_number">Movil:</label>
-                  <Field name="student.mobile_number" type="number"></Field>
-                  <ErrorMessage name="student.mobile_number"></ErrorMessage>
-                </div>
-                <div>
-                  <label htmlFor="student.date_birth">
-                    Fecha de nacimiento:
-                  </label>
-                  <Field name="student.date_birth" type="date"></Field>
-                  <ErrorMessage name="student.date_birth"></ErrorMessage>
-                </div>
+                <Typography variant="h3" gutterBottom>
+                  Datos del alumno
+                </Typography>
+                <FormikControl
+                  control="input"
+                  type="text"
+                  label="Primer nombre: "
+                  name="student.name"
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  label="Primer apellido: "
+                  name="student.last_name1"
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  label="Segundo apellido: "
+                  name="student.last_name2"
+                />
+                <FormikControl
+                  control="input"
+                  type="text"
+                  label="NIF: "
+                  name="student.nif"
+                />
+                <FormikControl
+                  control="input"
+                  type="email"
+                  label="Email: "
+                  name="student.email"
+                />
+                <FormikControl
+                  control="input"
+                  type="number"
+                  label="Movil: "
+                  name="student.mobile_number"
+                />
+                <FormikControl
+                  control="date"
+                  label="Fecha de nacimiento: "
+                  name="student.date_birth"
+                />
               </div>
-              {moment().diff(values.student.date_birth, "years") < 18 ? (
+              {moment().diff(values.student.date_birth, "years") < 18 && (
                 <div>
-                  <FieldArray
-                    name="custodians"
-                    render={(arrayHelpers) => (
-                      <div>
-                        <h3>Datos de la/s persona/s responsable/s</h3>
-                        {values.custodians &&
-                          values.custodians.length > 0 &&
-                          values.custodians.map((custodiansItem, index) => (
-                            <div key={index}>
-                              <div>
-                                <div
-                                  role="group"
-                                  aria-labelledby="my-radio-group"
-                                >
-                                  <label>
-                                    <Field
-                                      type="radio"
-                                      name={`custodians[${index}].custodian`}
-                                      value="padre"
-                                    />
-                                    Padre
-                                  </label>
-                                  <label>
-                                    <Field
-                                      type="radio"
-                                      name={`custodians[${index}].custodian`}
-                                      value="madre"
-                                    />
-                                    Madre
-                                  </label>
-                                  <label>
-                                    <Field
-                                      type="radio"
-                                      name={`custodians[${index}].custodian`}
-                                      value="tutor"
-                                    />
-                                    Tutor/a legal
-                                  </label>
-                                </div>
-                                <ErrorMessage
+                  <Typography variant="h3" gutterBottom>
+                    Datos de la/s persona/s responsable/s
+                  </Typography>
+                  <FieldArray name="custodians">
+                    {(fieldArrayProps) => {
+                      const { push, remove, form } = fieldArrayProps;
+                      const { values } = form;
+                      const { custodians } = values;
+                      return (
+                        <div>
+                          {custodians &&
+                            custodians.length > 0 &&
+                            custodians.map((custodiansItem, index) => (
+                              <div key={index}>
+                                <FormikControl
+                                  control="select"
+                                  label=""
                                   name={`custodians[${index}].custodian`}
-                                ></ErrorMessage>
-                              </div>
-                              <div>
-                                <label
-                                  htmlFor={`custodians[${index}].name_lastname`}
-                                >
-                                  Nombre y apellidos:
-                                </label>
-                                <Field
-                                  name={`custodians[${index}].name_lastname`}
+                                  options={[
+                                    { label: "None", value: null },
+                                    { label: "Padre", value: "padre" },
+                                    { label: "Madre", value: "madre" },
+                                    { label: "Tutor/a legal", value: "tutor" },
+                                  ]}
+                                />
+
+                                <FormikControl
+                                  control="input"
                                   type="text"
-                                ></Field>
-                                <ErrorMessage
+                                  label="Nombre y apellidos: "
                                   name={`custodians[${index}].name_lastname`}
-                                ></ErrorMessage>
-                              </div>
-                              <div>
-                                <label htmlFor={`custodians[${index}].nif`}>
-                                  NIF:
-                                </label>
-                                <Field
-                                  name={`custodians[${index}].nif`}
+                                />
+
+                                <FormikControl
+                                  control="input"
                                   type="text"
-                                ></Field>
-                                <ErrorMessage
+                                  label="NIF: "
                                   name={`custodians[${index}].nif`}
-                                ></ErrorMessage>
-                              </div>
-                              <div>
-                                <label htmlFor={`custodians[${index}].mobile`}>
-                                  Telefono movil:
-                                </label>
-                                <Field
-                                  name={`custodians[${index}].mobile`}
+                                />
+
+                                <FormikControl
+                                  control="input"
                                   type="number"
-                                ></Field>
-                                <ErrorMessage
-                                  name={`custodians[${index}].mobile`}
-                                ></ErrorMessage>
-                              </div>
-                              <div>
-                                <label htmlFor={`custodians[${index}].email`}>
-                                  Email:
-                                </label>
-                                <Field
-                                  name={`custodians[${index}].email`}
+                                  label="Telefono movil: "
+                                  name={`custodians[${index}].mobile_number`}
+                                />
+
+                                <FormikControl
+                                  control="input"
                                   type="text"
-                                ></Field>
-                                <ErrorMessage
+                                  label="Email: "
                                   name={`custodians[${index}].email`}
-                                ></ErrorMessage>
+                                />
+                                <button
+                                  type="button"
+                                  onClick={() => remove(index)} // remove a friend from the list
+                                >
+                                  -
+                                </button>
                               </div>
-                              <button
-                                type="button"
-                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
-                              >
-                                -
-                              </button>
-                            </div>
-                          ))}
-                        <button
-                          type="button"
-                          onClick={() => arrayHelpers.push(new Custodian())}
-                        >
-                          Añadir un responsable
-                        </button>
-                      </div>
-                    )}
-                  />
+                            ))}
+                          {custodians.length < 2 && (
+                            <button
+                              type="button"
+                              onClick={() => push(new Custodian())}
+                            >
+                              Añadir un responsable
+                            </button>
+                          )}
+                        </div>
+                      );
+                    }}
+                  </FieldArray>
                 </div>
-              ) : (
-                {}
-                //No puedo eliminar array
-                // setFieldValue("custodians", [], false)
               )}
               <div>
-                <h3>Datos academicos</h3>
-                <div>
-                  <div role="group" aria-labelledby="my-radio-group">
-                    <label>
-                      <Field
-                        type="radio"
+                <Typography variant="h3" gutterBottom>
+                  Datos academicos
+                </Typography>
+                <FieldArray name="academic_data.moduluf">
+                  <div>
+                    <div>
+                      <FormikControl
+                        control="select"
+                        label=""
                         name="academic_data.course"
-                        value="1"
+                        options={[
+                          { label: "1er Curso", value: 1 },
+                          { label: "2ndo Curso", value: 2 },
+                        ]}
                       />
-                      1er Curso
-                    </label>
-                    <label>
-                      <Field
-                        type="radio"
-                        name="academic_data.course"
-                        value="2"
-                      />
-                      2ndo Curso
-                    </label>
+                    </div>
+
+                    {values.academic_data.course === 1 ||
+                    values.academic_data.course === 2
+                      ? cursmoduluf[values.academic_data.course - 1].moduls.map(
+                          (modul, index) => {
+                            return (
+                              <div key={modul.modul_key}>
+                                <Typography variant="body1" gutterBottom>
+                                  {modul.name}
+                                </Typography>
+                                {modul.ufs.map((uf) => {
+                                  return (
+                                    <FormGroup row="3" key={uf.uf_key}>
+                                      <FormikControl
+                                        control="checkbox"
+                                        name={`academic_data.moduluf[${index}].${modul.modul_key}.${uf.uf_key}`}
+                                        label={uf.name}
+                                      />
+                                    </FormGroup>
+                                  );
+                                })}
+                              </div>
+                            );
+                          }
+                        )
+                      : null}
                   </div>
-                  <ErrorMessage name="academic_data.course"></ErrorMessage>
-                </div>
+                </FieldArray>
               </div>
-              <button type="submit">Enviar</button>
-            </>
+
+              <Button variant="contained" type="submit" disabled={isSubmitting}>
+                Enviar
+              </Button>
+            </div>
           </Form>
         )}
       </Formik>
