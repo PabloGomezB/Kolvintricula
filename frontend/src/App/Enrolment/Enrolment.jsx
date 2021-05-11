@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import moment from "moment";
 import FormikControl from "./components/FormikControl.jsx";
 import { set } from "lodash";
+import { FormControlLabel, FormGroup, Typography } from "@material-ui/core";
+import CheckboxField from "./components/CheckboxField.jsx";
 
 class Custodian {
   constructor() {
@@ -275,7 +277,9 @@ const Enrolment = () => {
 
   return (
     <div>
-      <h1>Matrícula</h1>
+      <Typography variant="h1" gutterBottom>
+        Matrícula
+      </Typography>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -285,7 +289,9 @@ const Enrolment = () => {
           <Form>
             <div>
               <div>
-                <h3>Datos del alumno</h3>
+                <Typography variant="h3" gutterBottom>
+                  Datos del alumno
+                </Typography>
                 <FormikControl
                   control="input"
                   type="text"
@@ -330,7 +336,9 @@ const Enrolment = () => {
               </div>
               {moment().diff(values.student.date_birth, "years") < 18 && (
                 <div>
-                  <h3>Datos de la/s persona/s responsable/s</h3>
+                  <Typography variant="h3" gutterBottom>
+                    Datos de la/s persona/s responsable/s
+                  </Typography>
                   <FieldArray name="custodians">
                     {(fieldArrayProps) => {
                       const { push, remove, form } = fieldArrayProps;
@@ -404,7 +412,9 @@ const Enrolment = () => {
                 </div>
               )}
               <div>
-                <h3>Datos academicos</h3>
+                <Typography variant="h3" gutterBottom>
+                  Datos academicos
+                </Typography>
                 <FieldArray name="academic_data.moduluf">
                   <div>
                     <div>
@@ -418,51 +428,32 @@ const Enrolment = () => {
                         ]}
                       />
                     </div>
-                    {values.academic_data.course === 1
+
+                    {values.academic_data.course === 1 ||
+                    values.academic_data.course === 2
                       ? cursmoduluf[values.academic_data.course - 1].moduls.map(
                           (modul, index) => {
-                            let options = [];
-                            modul.ufs.map((uf) =>
-                              options.push({
-                                key: uf.uf_key,
-                                value: uf.name,
-                              })
-                            );
-                            // console.log("values", values);
-                            // console.log("ufs", modul.modul_key, options);
                             return (
                               <div key={modul.modul_key}>
-                                <FormikControl
-                                  control="checkbox"
-                                  label={modul.name}
-                                  name={`academic_data.moduluf[${index}].${modul.modul_key}`}
-                                  options={options}
-                                />
+                                <Typography variant="body1" gutterBottom>
+                                  {modul.name}
+                                </Typography>
+                                {modul.ufs.map((uf) => {
+                                  return (
+                                    <FormGroup row="3" key={uf.uf_key}>
+                                      <FormikControl
+                                        control="checkbox"
+                                        name={`academic_data.moduluf[${index}].${modul.modul_key}.${uf.uf_key}`}
+                                        label={uf.name}
+                                      />
+                                    </FormGroup>
+                                  );
+                                })}
                               </div>
                             );
                           }
                         )
-                      : cursmoduluf[values.academic_data.course - 1].moduls.map(
-                          (modul, index) => {
-                            let options = [];
-                            modul.ufs.map((uf) => {
-                              return options.push({
-                                key: uf.uf_key,
-                                value: uf.name,
-                              });
-                            });
-                            return (
-                              <div key={modul.modul_key}>
-                                <FormikControl
-                                  control="checkbox"
-                                  label={modul.name}
-                                  name={`academic_data.moduluf[${index}].${modul.modul_key}`}
-                                  options={options}
-                                />
-                              </div>
-                            );
-                          }
-                        )}
+                      : null}
                   </div>
                 </FieldArray>
               </div>

@@ -3,7 +3,7 @@ import Input from "./Input";
 import Textarea from "./Textarea";
 import SelectField from "./SelectField";
 import RadioButtons from "./RadioButtons";
-import CheckboxGroup from "./CheckboxGroup";
+import CheckboxField from "./CheckboxField";
 import DatePicker from "./DatePicker.jsx";
 // import ChakraInput from "./ChakraInput";
 
@@ -19,7 +19,7 @@ const FormikControl = (props) => {
     case "radio":
       return <RadioButtons {...rest} />;
     case "checkbox":
-      return <CheckboxGroup {...rest} />;
+      return <CheckboxField {...rest} />;
     case "date":
       return <DatePicker {...rest} />;
     // case "chakraInput":

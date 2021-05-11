@@ -33,6 +33,7 @@ const CourseList = ({ courses }) => {
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   let match = useRouteMatch();
+
   useEffect(() => {
     axios
       .get(
