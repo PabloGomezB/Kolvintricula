@@ -32,8 +32,9 @@
                     </div> --}}
                 </div>
             </div>
+            <br>
             <h1>Modulos que incluye:</h1>
-
+            <br>
             <table id="table" class="table-auto min-w-full divide-y divide-gray-200" width="100%">
                 <thead class="bg-gray-50">
                     <tr>
@@ -53,8 +54,10 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
                     <?php $modules = DB::table('modules')->where('id_course','=',$course->id)->get();  ?>         
-                    @if ($modules->count() == 0)                    
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Actualmente este curso no tiene ningún modulo asignado.</td>                    
+                    @if ($modules->count() == 0)        
+                        <tr>            
+                            <td colspan='4' class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 ">Actualmente este curso no tiene ningún modulo asignado.</td>                    
+                        </tr>
                     @endif                                    
                     @foreach ($modules as $module)
                     <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('modules.show',$module->id) }}'>
@@ -76,8 +79,15 @@
         </div>
     </div>
 </x-app-layout>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
 $(".clickable-row").click(function() {
         window.location = $(this).data("href");
     });
+    let table = $('#table')
+    .DataTable({
+        order: [],
+        paging: false,
+        info: false,
+    })
 </script>

@@ -76,11 +76,14 @@ class UFController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\UF  $uF
+     * @param  int $id
+     * @param  int $id_module
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UF $uF)
+    public function destroy($id,$id_module)
     {
-        //
+        UF::destroy($id);
+        return redirect()->route('modules.show.' . $id_module)
+                ->with('success','UF con id: '.$id.' eliminado correctamente.');
     }
 }
