@@ -5,7 +5,12 @@ import * as Yup from "yup";
 import moment from "moment";
 import FormikControl from "./components/FormikControl.jsx";
 import { set } from "lodash";
-import { FormControlLabel, FormGroup, Typography } from "@material-ui/core";
+import {
+  Button,
+  FormControlLabel,
+  FormGroup,
+  Typography,
+} from "@material-ui/core";
 import CheckboxField from "./components/CheckboxField.jsx";
 
 class Custodian {
@@ -457,9 +462,10 @@ const Enrolment = () => {
                   </div>
                 </FieldArray>
               </div>
-              <button type="submit" disabled={isSubmitting}>
+
+              <Button variant="contained" type="submit" disabled={isSubmitting}>
                 Enviar
-              </button>
+              </Button>
             </div>
           </Form>
         )}
