@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import './App.css';
-import Button from '@material-ui/core/Button';
+import "./App.css";
+import Button from "@material-ui/core/Button";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,15 +18,11 @@ import { Container } from "@material-ui/core";
 const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
-  const hideCourses = () => {
-    console.log('funciona');
-    let courses = document.getElementById("courses");
-    courses.style.display = "none";
-  }
-
   return (
-    <Button variant="contained" id="courseButton" onClick={hideCourses}>
-      <Link className="courseName" to={`${match.url}/${courseValue.name}`}>{courseValue.name}</Link>
+    <Button variant="contained" id="courseButton">
+      <Link className="courseName" to={`${match.url}/${courseValue.name}`}>
+        {courseValue.name}
+      </Link>
     </Button>
   );
 };
@@ -59,16 +55,13 @@ const EnrolmentList = () => {
 
   return (
     <div>
-      {console.log("Antes del container"+document.getElementById("courses"))}
       <Container maxWidth="sm" id="courses">
-        {console.log("Dentro del container"+document.getElementById("courses"))}
         <CourseList courses={courseArray}></CourseList>
       </Container>
-      {console.log("Fuera del container"+document.getElementById("courses"))}
       <Switch>
         {courseArray.map((course) => (
           <Route path={`${match.path}/${course.name}`} key={course.id}>
-            {course.state === "MATRICULA" ? (<Enrolment />) : <NoDisponible />}
+            {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
           </Route>
         ))}
       </Switch>
