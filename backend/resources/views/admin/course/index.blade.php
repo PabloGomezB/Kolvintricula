@@ -46,7 +46,7 @@
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dataCourses as $course)
-                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('courses.show',$course->id) }}'">
+                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('courses.show',$course->id) }}'>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->id }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->type }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->name }}</td>

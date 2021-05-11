@@ -76,3 +76,8 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+$(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+</script>
