@@ -47,8 +47,5 @@
             <x-label for="email_pedra" :value="__('Correo electrónico del centro para del alumno')" />
             <x-input id="email_perdra" type="text" name="email_pers" placeholder="a21XXX@inspedralbes.cat" value="{{ $student->email_pedralbes }}" class="block mt-1 w-full" autofocus />
         </div>
-
-
     </div>
-
 </div>

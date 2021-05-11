@@ -9,8 +9,7 @@
                 </h2>
             </a>
             <div class="ml-20 pt-0.5">
-                <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  
-                    href="{{ route('students.create') }}">
+                <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" href="{{ route('students.create') }}">
                     Añadir nuevo estudiante
                 </a>
             </div>
