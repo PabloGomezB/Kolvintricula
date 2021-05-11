@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Models\Course;
+use App\Models\Module;
 
 use App\Http\Controllers\API\ApiController;
 /*
@@ -23,6 +24,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('courses', [ApiController::class, function(){
     return Course::all(['id', 'type', 'name', 'description', 'state']);
+}]);
+
+Route::get('courses/{id}',[ApiController::class, function($id){
+    return Module::where('id_course','=',$id)->get(['id','name', 'description']);
 }]);
 
 Route::post('add', [ApiController::class, 'saveEnrolment']);
