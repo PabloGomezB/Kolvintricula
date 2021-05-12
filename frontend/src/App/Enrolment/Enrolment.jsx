@@ -208,7 +208,7 @@ const Enrolment = () => {
     // },
     custodians: [],
     academic_data: {
-      course: 1,
+      course: "",
       moduluf: [
         // { mp1: [] },
         // { mp2: [] },
@@ -297,7 +297,14 @@ const Enrolment = () => {
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
-        {({ values, isValid, isSubmitting, setFieldValue }) => (
+        {({
+          values,
+          isValid,
+          isSubmitting,
+          setFieldValue,
+          errors,
+          touched,
+        }) => (
           <Form>
             <div>
               <div>
@@ -450,17 +457,20 @@ const Enrolment = () => {
                                 <Typography variant="body1" gutterBottom>
                                   {modul.name}
                                 </Typography>
-                                {modul.ufs.map((uf) => {
-                                  return (
-                                    <FormGroup row="3" key={uf.uf_key}>
-                                      <FormikControl
-                                        control="checkbox"
-                                        name={`academic_data.moduluf[${index}].${modul.modul_key}.${uf.uf_key}`}
-                                        label={uf.name}
-                                      />
-                                    </FormGroup>
-                                  );
-                                })}
+
+                                <FormGroup>
+                                  {modul.ufs.map((uf) => {
+                                    return (
+                                      <React.Fragment key={uf.uf_key}>
+                                        <FormikControl
+                                          control="checkbox"
+                                          name={`academic_data.moduluf[${index}].${modul.modul_key}.${uf.uf_key}`}
+                                          label={uf.name}
+                                        />
+                                      </React.Fragment>
+                                    );
+                                  })}
+                                </FormGroup>
                               </div>
                             );
                           }
@@ -469,15 +479,20 @@ const Enrolment = () => {
                   </div>
                 </FieldArray>
               </div>
-
               <Button variant="contained" type="submit" disabled={isSubmitting}>
                 Enviar
               </Button>
             </div>
+            <Link to="/matriculas">Volver</Link>
+            VALUES:
+            <pre>{JSON.stringify(values, null, 2)}</pre>
+            ERRORS:
+            <pre>{JSON.stringify(errors, null, 2)}</pre>
+            TOUCHED:
+            <pre>{JSON.stringify(touched, null, 2)}</pre>
           </Form>
         )}
       </Formik>
-      <Link to="/matriculas">Volver</Link>
     </div>
   );
 };
