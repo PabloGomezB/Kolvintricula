@@ -11,7 +11,7 @@ import {
 import Enrolment from "./Enrolment";
 import NoDisponible from "./Componentes/NoDisponible";
 import Header from "./Header/Header";
-// import Footer from "./Footer/Footer";
+import Footer from "./Footer/Footer";
 import axios from "axios";
 import { Container } from "@material-ui/core";
 
@@ -59,18 +59,15 @@ const EnrolmentList = () => {
 
   return (
     <div>
-      {console.log("Antes del container"+document.getElementById("courses"))}
-      <Container maxWidth="sm" id="courses">
-        {console.log("Dentro del container"+document.getElementById("courses"))}
-        <CourseList courses={courseArray}></CourseList>
-      </Container>
-      {console.log("Fuera del container"+document.getElementById("courses"))}
       <Switch>
         {courseArray.map((course) => (
           <Route path={`${match.path}/${course.name}`} key={course.id}>
             {course.state === "MATRICULA" ? (<Enrolment />) : <NoDisponible />}
           </Route>
         ))}
+        <Container maxWidth="sm" id="courses">
+          <CourseList courses={courseArray}></CourseList>
+        </Container>
       </Switch>
     </div>
   );
@@ -85,7 +82,7 @@ const App = () => {
           <EnrolmentList />
         </Route>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 };
