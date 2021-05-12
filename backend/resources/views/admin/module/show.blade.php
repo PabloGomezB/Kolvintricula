@@ -77,7 +77,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->year }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->hours }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <form class="" action="{{ route('ufs.destroy',$uf->id,$uf->id_module) }}" method="POST">      
+                            <form class="" action="{{ route('ufs.destroy',$uf->id) }}" method="POST">      
                                 <a href="{{ route('ufs.edit',$uf->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>   
                                 @csrf
                                 @method('DELETE')
