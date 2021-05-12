@@ -1,18 +1,10 @@
 import React from "react";
-
 import { FieldArray, Form, Formik } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import FormikControl from "./components/FormikControl.jsx";
-import { set } from "lodash";
-import {
-  Button,
-  FormControlLabel,
-  FormGroup,
-  Typography,
-} from "@material-ui/core";
-import CheckboxField from "./components/CheckboxField.jsx";
+import FormikControl from "../FormFields/FormikControl";
+import { Button, FormGroup, Typography } from "@material-ui/core";
 
 class Custodian {
   constructor() {
@@ -230,7 +222,6 @@ const Enrolment = () => {
       ],
     },
   };
-
   const validationSchema = Yup.object({
     student: Yup.object().shape({
       name: Yup.string()
@@ -261,12 +252,17 @@ const Enrolment = () => {
       Yup.object().shape({
         custodian: Yup.string()
           .matches(/(p|m|t)/, "Elige una opción válida.")
-          .required("Requerido"),
+          .required("Requerido")
+          .nullable(),
         name_lastname: Yup.string()
           .required("Requerido")
           .max(50, "Máximo 50 carácteres."),
         nif: Yup.string().required("Requerido"),
         mobile_number: Yup.number()
+          .typeError("Escribe tipo numero")
+
+          .required("Requerido")
+          .integer("Debe de ser numerico")
           .test("len2", "Ha de ser de 9 digitos", (val) => {
             if (val !== undefined) {
               return val.toString().length === 9;
@@ -277,10 +273,12 @@ const Enrolment = () => {
       })
     ),
     academic_data: Yup.object().shape({
-      course: Yup.number().equals([1, 2]).required("Requerido"),
+      course: Yup.number()
+        .typeError("Elige una opción válida")
+        .equals([1, 2])
+        .required("Requerido"),
     }),
   });
-
   const onSubmit = (values, { setSubmitting }) => {
     alert(JSON.stringify(values, null, 2));
     console.log("submit", values);
@@ -289,6 +287,8 @@ const Enrolment = () => {
 
   return (
     <div>
+      <Link to="/matriculas">Volver</Link>
+
       <Typography variant="h1" gutterBottom>
         Matrícula
       </Typography>
@@ -374,7 +374,7 @@ const Enrolment = () => {
                                   label=""
                                   name={`custodians[${index}].custodian`}
                                   options={[
-                                    { label: "None", value: null },
+                                    { label: "Elige una opción", value: null },
                                     { label: "Padre", value: "padre" },
                                     { label: "Madre", value: "madre" },
                                     { label: "Tutor/a legal", value: "tutor" },
@@ -442,6 +442,7 @@ const Enrolment = () => {
                         label=""
                         name="academic_data.course"
                         options={[
+                          { label: "Elige una opcion", value: null },
                           { label: "1er Curso", value: 1 },
                           { label: "2ndo Curso", value: 2 },
                         ]}
@@ -483,13 +484,15 @@ const Enrolment = () => {
                 Enviar
               </Button>
             </div>
-            <Link to="/matriculas">Volver</Link>
-            VALUES:
-            <pre>{JSON.stringify(values, null, 2)}</pre>
-            ERRORS:
-            <pre>{JSON.stringify(errors, null, 2)}</pre>
-            TOUCHED:
-            <pre>{JSON.stringify(touched, null, 2)}</pre>
+            {/* <br></br> */}
+            {/* <div>
+              VALUES:
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+              ERRORS:
+              <pre>{JSON.stringify(errors, null, 2)}</pre>
+              TOUCHED:
+              <pre>{JSON.stringify(touched, null, 2)}</pre>
+            </div> */}
           </Form>
         )}
       </Formik>
