@@ -1,90 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import Button from "@material-ui/core/Button";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-} from "react-router-dom";
-import Enrolment from "./Enrolment";
-import NoDisponible from "./Componentes/NoDisponible";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import axios from "axios";
-import { Container, TextField } from "@material-ui/core";
-
-const ListItem = ({ courseValue }) => {
-  let match = useRouteMatch();
-
-  return (
-    <Button variant="contained" id="courseButton">
-      <Link className="courseName" to={`${match.url}/${courseValue.name}`}>
-        {courseValue.name}
-      </Link>
-    </Button>
-  );
-};
-
-const CourseList = ({ courses }) => {
-  const listItems = courses.map((course) => (
-    <ListItem key={course.id} courseValue={course} />
-  ));
-
-  return listItems;
-};
-
-const EnrolmentList = () => {
-  const [courseArray, setCourseArray] = useState([]);
-  let match = useRouteMatch();
-
-  useEffect(() => {
-    axios
-      .get(
-        "http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses"
-      )
-      .then((response) => {
-        console.log("Course", response.data);
-        setCourseArray(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-  return (
-    <div>
-      <Switch>
-        {courseArray.map((course) => (
-          <Route path={`${match.path}/${course.name}`} key={course.id}>
-            {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
-          </Route>
-        ))}
-        <Container maxWidth="md" id="courses">
-          <div style={{display:'flex'}}>
-          <CourseList courses={courseArray}></CourseList>
-          <form noValidate autoComplete="off">
-            <TextField id="outlined-basic" label="DNI / EMAIL" variant="outlined" />
-          </form>
-          </div>
-        </Container>
-      </Switch>
-    </div>
-  );
-};
+import React from "react";
+import Menu from "./Menu";
+import MaterialLayout from "./Layout/MaterialLayout";
 
 const App = () => {
   return (
-    <Router>
-      <Header />
-      <div>
-        <Route path="/matriculas">
-          <EnrolmentList />
-        </Route>
-      </div>
-      <Footer />
-    </Router>
+    <MaterialLayout>
+      <Menu />
+    </MaterialLayout>
   );
 };
 
