@@ -13,7 +13,7 @@ import NoDisponible from "./Componentes/NoDisponible";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import axios from "axios";
-import { Container } from "@material-ui/core";
+import { Container, TextField } from "@material-ui/core";
 
 const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
@@ -61,8 +61,13 @@ const EnrolmentList = () => {
             {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
           </Route>
         ))}
-        <Container maxWidth="sm" id="courses">
+        <Container maxWidth="md" id="courses">
+          <div style={{display:'flex'}}>
           <CourseList courses={courseArray}></CourseList>
+          <form noValidate autoComplete="off">
+            <TextField id="outlined-basic" label="DNI / EMAIL" variant="outlined" />
+          </form>
+          </div>
         </Container>
       </Switch>
     </div>
