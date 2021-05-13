@@ -2,8 +2,10 @@ import { FormGroup, Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
+import { useStyle } from "../../Layout/styles";
 
 export const AcademicData = ({ cursmoduluf, values }) => {
+  const classes = useStyle();
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -13,11 +15,11 @@ export const AcademicData = ({ cursmoduluf, values }) => {
         <div>
           <div>
             <FormikControl
+              className={classes.formOptionInput}
               control="select"
-              label=""
+              label="Curso académico"
               name="academic_data.course"
               options={[
-                { label: "Elige una opcion", value: null },
                 { label: "1er Curso", value: 1 },
                 { label: "2ndo Curso", value: 2 },
               ]}

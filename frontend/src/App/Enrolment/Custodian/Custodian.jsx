@@ -2,17 +2,21 @@ import { Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
+import { useStyle } from "../../Layout/styles";
 
 class CustodianO {
   constructor() {
-    this.custodian = "";
-    this.name_lastname = "";
+    this.type = "";
     this.nif = "";
+    this.name = "";
+    this.last_name1 = "";
+    this.last_name2 = "";
     this.mobile_number = "";
     this.email = "";
   }
 }
 export const Custodian = () => {
+  const classes = useStyle();
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -30,38 +34,46 @@ export const Custodian = () => {
                 custodians.map((custodiansItem, index) => (
                   <div key={index}>
                     <FormikControl
+                      className={classes.formOptionInput}
                       control="select"
-                      label=""
-                      name={`custodians[${index}].custodian`}
+                      label="Persona responsable"
+                      name={`custodians[${index}].type`}
                       options={[
-                        { label: "Elige una opción", value: null },
-                        { label: "Padre", value: "padre" },
-                        { label: "Madre", value: "madre" },
-                        { label: "Tutor/a legal", value: "tutor" },
+                        { label: "Padre", value: "PADRE" },
+                        { label: "Madre", value: "MADRE" },
+                        { label: "Tutor/a legal", value: "TUTOR" },
                       ]}
                     />
-
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Nombre y apellidos: "
-                      name={`custodians[${index}].name_lastname`}
-                    />
-
                     <FormikControl
                       control="input"
                       type="text"
                       label="NIF: "
                       name={`custodians[${index}].nif`}
                     />
-
+                    <FormikControl
+                      control="input"
+                      type="text"
+                      label="Nombre: "
+                      name={`custodians[${index}].name`}
+                    />
+                    <FormikControl
+                      control="input"
+                      type="text"
+                      label="Primer apellido: "
+                      name={`custodians[${index}].last_name1`}
+                    />
+                    <FormikControl
+                      control="input"
+                      type="text"
+                      label="Segundo apellido: "
+                      name={`custodians[${index}].last_name2`}
+                    />
                     <FormikControl
                       control="input"
                       type="number"
                       label="Telefono movil: "
                       name={`custodians[${index}].mobile_number`}
                     />
-
                     <FormikControl
                       control="input"
                       type="text"

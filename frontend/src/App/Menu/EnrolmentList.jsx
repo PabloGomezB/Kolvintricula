@@ -32,7 +32,7 @@ const EnrolmentList = () => {
   }, []);
 
   // Obtener datos existentes del estudiante y mostrar alertas
-  function searchStudent() {
+  const searchStudent = () => {
     let nifToSearch = document.getElementById("nif_field").value;
     axios
       .get(
@@ -71,7 +71,7 @@ const EnrolmentList = () => {
         <CourseList courses={courseArray}></CourseList>
         <Container>
           <TextField id="nif_field" label="NIF" variant="outlined"/>
-          <Button id="nif_button" onClick={()=>{ searchStudent() }} variant="outlined" color="primary">Cargar datos</Button>
+          <Button id="nif_button" onClick={searchStudent} variant="outlined" color="primary">Cargar datos</Button>
           {showAlert
             ? <Snackbar
                 anchorOrigin={{

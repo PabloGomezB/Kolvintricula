@@ -79,6 +79,10 @@ const useStyle = makeStyles(() => ({
     borderRadius: "3px",
     padding: "5px",
     textDecoration: "none"
+  },
+  formOptionInput: {
+    // display: 'flex',
+    width: "20%",
   }
 }));
 
