@@ -63,7 +63,7 @@ const EnrolmentList = () => {
           {course.state === "MATRICULA" ? <Enrolment studentData={studentData}/> : <NoDisponible />}
         </Route>
       ))}
-      <Container maxWidth="sm" id="courses">
+      <Container maxWidth="sm">
         <CourseList courses={courseArray}></CourseList>
         <Container>
           <TextField id="nif_field" label="NIF" variant="outlined"/>

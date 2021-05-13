@@ -24,7 +24,7 @@ const useStyle = makeStyles(() => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      width: 1000,
       marginLeft: "auto",
       marginRight: "auto",
     },
@@ -41,6 +41,45 @@ const useStyle = makeStyles(() => ({
       padding: theme.spacing(3),
     },
   },
+  main: {
+    flexGrow: 1
+  },
+  title: {
+    flexGrow: 1
+  },
+  appBar: {
+    backgroundColor: '#333'
+  },
+  toolBar: {
+    height: '350px',
+    width: '1500px'
+  },
+  typography: {
+    width: '250px',
+    height: '200px',
+    marginTop: '-100px',
+    marginRight: '50px'
+  },
+  div: {
+    display: 'flex'
+  },
+  p: {
+    borderLeft: '5px solid white',
+    marginRight: '10px'
+  },
+  a: {
+    textDecoration: 'none',
+    color: 'white'
+  },
+  pp: {
+    color: "#fff",
+    fontSize: "12px",
+    background: "#006dcc",
+    textShadow: "0 1px 1px rgb(255 255 255 / 75%)",
+    borderRadius: "3px",
+    padding: "5px",
+    textDecoration: "none"
+  }
 }));
 
 export { theme, useStyle };

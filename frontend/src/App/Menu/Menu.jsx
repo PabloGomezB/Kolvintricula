@@ -5,7 +5,7 @@ import EnrolmentList from "./EnrolmentList";
 export const Menu = () => {
   return (
     <Router>
-      <Route path="/matriculas">
+      <Route path="/">
         <EnrolmentList />
       </Route>
     </Router>
