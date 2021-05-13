@@ -22,22 +22,27 @@ const validationSchema = Yup.object({
           return val.toString().length === 9;
         }
       }),
-    email: Yup.string().email("Email no válido.").required("Requerido"),
+    email_personal: Yup.string().email("Email no válido.").required("Requerido"),
     date_birth: Yup.date().required("Requerido").nullable(),
   }),
   custodians: Yup.array().of(
     Yup.object().shape({
-      custodian: Yup.string()
-        .matches(/(p|m|t)/, "Elige una opción válida.")
+      type: Yup.string()
+        .matches(/(P|M|T)/, "Elige una opción válida.")
         .required("Requerido")
         .nullable(),
-      name_lastname: Yup.string()
+      nif: Yup.string().required("Requerido"),
+      name: Yup.string()
+      .required("Requerido")
+      .max(50, "Máximo 50 carácteres."),
+      last_name1: Yup.string()
+      .required("Requerido")
+      .max(50, "Máximo 50 carácteres."),
+      last_name2: Yup.string()
         .required("Requerido")
         .max(50, "Máximo 50 carácteres."),
-      nif: Yup.string().required("Requerido"),
       mobile_number: Yup.number()
         .typeError("Escribe tipo numero")
-
         .required("Requerido")
         .integer("Debe de ser numerico")
         .test("len2", "Ha de ser de 9 digitos", (val) => {

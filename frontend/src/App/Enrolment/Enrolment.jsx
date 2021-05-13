@@ -9,9 +9,41 @@ import AcademicData from "./AcademicData";
 import { Button, Typography } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
+import axios from "axios";
 
-const Enrolment = () => {
+const Enrolment = (props) => {
+
+  let studentData  = {
+    student: {
+    },
+    custodians: [],
+    academic_data: {
+      course: "",
+      moduluf: [
+      ],
+    },
+  }
+
+  // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
+  // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
+  if(props.studentData !== 0) studentData.student = props.studentData[0];
+
   const onSubmit = (values, { setSubmitting }) => {
+
+    axios.post(
+        // `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,{
+        `http://127.0.0.1:8000/api/enrolments/add`,{
+          values
+        }
+      )
+      .then((response) => {
+        console.log("response:",response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("vaya...para que ha habido algun error")
+      });
+
     alert(JSON.stringify(values, null, 2));
     console.log("submit", values);
     setSubmitting(false);
@@ -19,13 +51,13 @@ const Enrolment = () => {
 
   return (
     <div>
-      <Link to="/matriculas">Volver</Link>
+      <Link to="/">Volver</Link>
 
       <Typography variant="h3" gutterBottom>
         Matrícula
       </Typography>
       <Formik
-        initialValues={formInitialValues}
+        initialValues={studentData}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >

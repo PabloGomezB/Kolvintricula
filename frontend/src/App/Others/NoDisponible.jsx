@@ -1,18 +1,11 @@
 import React from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
 
 const NoDisponible = () => {
-  const history = useHistory();
-  const goBack = () => {
-    history.goBack();
-  };
   return (
     <React.Fragment>
-      <h1>No disponible</h1>
-      <Button color="primary" onClick={goBack}>
-        Volver
-      </Button>
+      <h1>No Disponible</h1>
+      <Link to="/">Volver</Link>
     </React.Fragment>
   );
 };
