@@ -47,14 +47,14 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dataCourses as $course)
                                             <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('courses.show',$course->id) }}'">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->id }}</td>
+                                                <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->id }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->type }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->name }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->description }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->state }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                                    <form class="" action="{{ route('courses.destroy',$course->id) }}" method="POST">      
-                                                        <a href="{{ route('courses.edit',$course->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>   
+                                                    <form class="" action="{{ route('courses.destroy',$course->id) }}" method="POST">
+                                                        <a href="{{ route('courses.edit',$course->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
@@ -66,7 +66,7 @@
                                     </table>
                                 </div>
                                 <div class="mt-4">
-                                    {!! $dataCourses->links() !!}
+                                    {!! $dataCustodiams->links() !!}
                                 </div>
                             </div>
                         </div>
@@ -88,9 +88,9 @@
         window.location = $(this).data("href");
     });
     let table = $('#table')
-    .DataTable({
-        order: [],
-        paging: false,
-        info: false,
-    })
+        .DataTable({
+            order: [],
+            paging: false,
+            info: false,
+        })
 </script>

@@ -1,20 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Student;
 
-class StudentController extends Controller
- {
+class StudentController extends Controller {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-     {
+    public function index() {
         $data['dataStudents'] = Student::paginate(4);
         return view('admin.student.index', $data);
     }
@@ -24,8 +23,7 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-     {
+    public function create() {
         return view('admin.student.create', ['student' => new Student]);
     }
 
@@ -35,28 +33,26 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $request->validate([
-            'nif'=> 'required',
-            'name'=> 'required',
-            'last_name1'=> 'required',
-            'last_name2'=> 'required',
-            'date_birth'=> 'required',
-            'mobile_number'=> 'required',
-            'photo_path'=> 'required',
-            'enrolment_status'=> 'required',
-            'email_personal'=> 'required',
-            'email_pedralbes'
+            'nif' => 'required',
+            'name' => 'required',
+            'last_name1' => 'required',
+            'last_name2' => 'required',
+            'date_birth' => 'required',
+            'mobile_number' => 'required',
+            'photo_path' => 'required',
+            'enrolment_status' => 'required',
+            'email_personal' => 'required',
+            'email_pedralbes' => 'required',
         ]);
         $dataForm = request()->except('_token');
         Student::create($dataForm);
-     
-        return redirect()->route('students.index')
-            ->with('success','Student created successfully.');
 
+        return redirect()->route('students.index')
+            ->with('success', 'Student created successfully.');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -85,26 +81,24 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) 
-    {
+    public function update(Request $request, $id) {
         $request->validate([
-            'nif'=> 'required',
-            'name'=> 'required',
-            'last_name1'=> 'required',
-            'last_name2'=> 'required',
-            'date_birth'=> 'required',
-            'mobile_number'=> 'required',
-            'photo_path'=> 'required',
-            'enrolment_status'=> 'required',
-            'email_personal'=> 'required',
-            'email_pedralbes'
+            'nif' => 'required',
+            'name' => 'required',
+            'last_name1' => 'required',
+            'last_name2' => 'required',
+            'date_birth' => 'required',
+            'mobile_number' => 'required',
+            'photo_path' => 'required',
+            'enrolment_status' => 'required',
+            'email_personal' => 'required',
+            'email_pedralbes' => 'required',
         ]);
-        $dataForm = request()->except(['_token','_method']);
+        $dataForm = request()->except(['_token', '_method']);
         Student::where('id', '=', $id)->update($dataForm);
 
         return redirect()->route('students.index')
-                ->with('success','Student updated successfully.');
-        
+            ->with('success', 'Student updated successfully.');
     }
 
     /**
@@ -116,6 +110,6 @@ class StudentController extends Controller
     public function destroy($id) {
         Student::destroy($id);
         return redirect()->route('students.index')
-                ->with('success','Student destroyed successfully.');
+            ->with('success', 'Student destroyed successfully.');
     }
 }
