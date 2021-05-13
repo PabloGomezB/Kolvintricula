@@ -85,24 +85,4 @@ const EnrolmentList = () => {
   );
 };
 
-// const searchStudent = () => {
-//   let nifToSearch = document.getElementById("nif_field").value;
-//   console.log(nifToSearch)
-//   axios
-//     .get(
-//       `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/student/${nifToSearch}`
-//     )
-//     .then((response) => {
-//       if (response.data.length === 0){
-//         console.log("NO HAY REGISTROS");
-//       }
-//       else{
-//         console.log("User encontrado:", response.data[0].name);
-//       }
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//   });
-// }
-
 export default EnrolmentList;
