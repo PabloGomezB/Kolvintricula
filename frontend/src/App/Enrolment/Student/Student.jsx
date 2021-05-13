@@ -36,7 +36,7 @@ export const Student = () => {
         control="input"
         type="email"
         label="Email: "
-        name="student.email"
+        name="student.email_personal"
       />
       <FormikControl
         control="input"

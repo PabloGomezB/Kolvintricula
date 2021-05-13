@@ -12,6 +12,7 @@ const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   const [datosEncontrados, setDatosEncontrados] = useState(0); // PABLO
   const [checked, setChecked] = useState(0); // PABLO
+  const [studentData, setStudentData] = useState(0);
 
   let match = useRouteMatch();
 
@@ -45,6 +46,7 @@ const EnrolmentList = () => {
         else{
           setDatosEncontrados(true);
           console.log("datosUser:",response.data)
+          setStudentData(response.data);
         }
       })
       .catch((error) => {
@@ -58,7 +60,7 @@ const EnrolmentList = () => {
     <Switch>
       {courseArray.map((course) => (
         <Route path={`${match.path}/${course.name}`} key={course.id}>
-          {course.state === "MATRICULA" ? <Enrolment /> : <NoDisponible />}
+          {course.state === "MATRICULA" ? <Enrolment studentData={studentData}/> : <NoDisponible />}
         </Route>
       ))}
       <Container maxWidth="sm" id="courses">

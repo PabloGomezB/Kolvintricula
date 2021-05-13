@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
           return val.toString().length === 9;
         }
       }),
-    email: Yup.string().email("Email no válido.").required("Requerido"),
+    email_personal: Yup.string().email("Email no válido.").required("Requerido"),
     date_birth: Yup.date().required("Requerido").nullable(),
   }),
   custodians: Yup.array().of(

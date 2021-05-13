@@ -10,7 +10,20 @@ import { Button, Typography } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
 
-const Enrolment = () => {
+const Enrolment = (props) => {
+
+  let studentData  = {
+    student: {
+    },
+    custodians: [],
+    academic_data: {
+      course: "",
+      moduluf: [
+      ],
+    },
+  }
+  studentData.student = props.studentData[0];
+
   const onSubmit = (values, { setSubmitting }) => {
     alert(JSON.stringify(values, null, 2));
     console.log("submit", values);
@@ -25,7 +38,7 @@ const Enrolment = () => {
         Matrícula
       </Typography>
       <Formik
-        initialValues={formInitialValues}
+        initialValues={studentData}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
