@@ -5,9 +5,11 @@ const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
   return (
-    <Button component={ Link } to={`${match.url}${courseValue.name}`} variant="outlined" style={{margin: '10px'}}>
-      {courseValue.name}
-    </Button>
+    <ul>
+      <Button component={ Link } to={`${match.url}${courseValue.name}`} variant="outlined" style={{marginBottom: '10px', borderRadius: '10px', textAlign: 'center', marginLeft: '-25px'}}>
+        {courseValue.name}
+      </Button>
+    </ul>
   );
 };
 

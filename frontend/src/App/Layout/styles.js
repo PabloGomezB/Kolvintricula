@@ -20,11 +20,13 @@ theme = responsiveFontSizes(theme);
 
 const useStyle = makeStyles(() => ({
   root: {
-    width: "auto",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
+    //width: "auto",
+    // marginTop: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
+    // marginLeft: theme.spacing(2),
+    // marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 1000,
+      width: 500,
       marginLeft: "auto",
       marginRight: "auto",
     },
@@ -32,13 +34,15 @@ const useStyle = makeStyles(() => ({
     color: theme.palette.text.primary,
   },
   paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
+    // marginRight: theme.spacing(3),
+    // marginTop: theme.spacing(3),
+    // marginBottom: theme.spacing(3),
+    textAlign: "center",
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       padding: theme.spacing(3),
+      //paddingLeft: 150,
     },
   },
   main: {
