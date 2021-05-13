@@ -12,7 +12,7 @@ const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   const [datosEncontrados, setDatosEncontrados] = useState(0); // PABLO
   const [checked, setChecked] = useState(0); // PABLO
-  const [studentData, setStudentData] = useState(0);
+  const [studentData, setStudentData] = useState(0); // PABLO
 
   let match = useRouteMatch();
 
@@ -67,34 +67,15 @@ const EnrolmentList = () => {
       <Container maxWidth="sm">
         <CourseList courses={courseArray}></CourseList>
         <Container>
-          <TextField id="nif_field" label="NIF" variant="outlined" />
-          <Button
-            id="nif_button"
-            onClick={() => {
-              searchStudent();
-            }}
-            variant="outlined"
-            color="primary"
-          >
-            Cargar datos
-          </Button>
-
-          {/* PABLO */}
-          {checked ? (
-            <>
-              {" "}
-              {datosEncontrados ? (
-                <Alert variant="filled" severity="success">
-                  Usuario encontrado!
-                </Alert>
-              ) : (
-                <Alert variant="filled" severity="error">
-                  No hay datos!
-                </Alert>
-              )}
-            </>
-          ) : null}
-          {/* END PABLO */}
+          <TextField id="nif_field" label="NIF" variant="outlined"/>
+          <Button id="nif_button" onClick={()=>{ searchStudent() }} variant="outlined" color="primary">Cargar datos</Button>
+          {checked
+            ? <> {datosEncontrados
+                ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
+                :<Alert variant="filled" severity="error">No hay datos!</Alert>}
+              </>
+            : null
+          }
         </Container>
       </Container>
     </Switch>
