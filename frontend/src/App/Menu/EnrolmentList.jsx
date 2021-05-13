@@ -1,4 +1,4 @@
-import { Button, Container, TextField } from "@material-ui/core";
+import { Button, Container, Snackbar, TextField } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
@@ -10,12 +10,13 @@ import { Alert } from "@material-ui/lab";
 
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
-  const [datosEncontrados, setDatosEncontrados] = useState(0); // PABLO
-  const [checked, setChecked] = useState(0); // PABLO
-  const [studentData, setStudentData] = useState(0); // PABLO
+  const [studentData, setStudentData] = useState(0);
+  const [datosEncontrados, setDatosEncontrados] = useState(0);
+  const [showAlert, setShowAlert] = useState(0);
 
   let match = useRouteMatch();
 
+  // Obtener cursos para crear botones y rutas
   useEffect(() => {
     axios
       .get(
@@ -30,7 +31,7 @@ const EnrolmentList = () => {
       });
   }, []);
 
-  // PABLO
+  // Obtener datos existentes del estudiante y mostrar alertas
   function searchStudent() {
     let nifToSearch = document.getElementById("nif_field").value;
     axios
@@ -38,12 +39,11 @@ const EnrolmentList = () => {
         `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/student/${nifToSearch}`
       )
       .then((response) => {
-        setChecked(true);
+        setShowAlert(true);
         if (response.data.length === 0) {
           setDatosEncontrados(false);
         } else {
           setDatosEncontrados(true);
-          console.log("datosUser:", response.data);
           setStudentData(response.data);
         }
       })
@@ -51,7 +51,10 @@ const EnrolmentList = () => {
         console.log(error);
       });
   }
-  // END PABLO
+
+  const closeAlert = (event, reason) => {
+    setShowAlert(false);
+  };
 
   return (
     <Switch>
@@ -69,11 +72,18 @@ const EnrolmentList = () => {
         <Container>
           <TextField id="nif_field" label="NIF" variant="outlined"/>
           <Button id="nif_button" onClick={()=>{ searchStudent() }} variant="outlined" color="primary">Cargar datos</Button>
-          {checked
-            ? <> {datosEncontrados
-                ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
-                :<Alert variant="filled" severity="error">No hay datos!</Alert>}
-              </>
+          {showAlert
+            ? <Snackbar
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center'
+                }}
+                open={showAlert} autoHideDuration={3000} onClose={closeAlert}>
+                {datosEncontrados
+                  ? <Alert onClose={closeAlert} variant="filled" severity="success">Se han cargado tus datos!</Alert>
+                  : <Alert onClose={closeAlert} variant="filled" severity="error">No tienes matrículas previas</Alert>
+                }
+              </Snackbar>
             : null
           }
         </Container>
