@@ -57,7 +57,7 @@ const EnrolmentList = () => {
   return (
     <Switch>
       {courseArray.map((course) => (
-        <Route path={`${match.path}/${course.name}`} key={course.id}>
+        <Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? <Enrolment studentData={studentData}/> : <NoDisponible />}
         </Route>
       ))}
