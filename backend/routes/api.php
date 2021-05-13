@@ -30,6 +30,7 @@ Route::get('courses', [ApiController::class, function(){
 
 Route::get('courses/{id}',[ApiController::class, function($id){
     return Module::where('id_course','=',$id)->get(['id','name', 'description']);
+}]);
 
 Route::get('student/{nif}', [ApiController::class, function($nif){
     return Student::where('nif', $nif)->get();
