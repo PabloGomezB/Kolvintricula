@@ -44,6 +44,7 @@ const EnrolmentList = () => {
         }
         else{
           setDatosEncontrados(true);
+          console.log("datosUser:",response.data)
         }
       })
       .catch((error) => {
@@ -67,14 +68,13 @@ const EnrolmentList = () => {
           <Button id="nif_button" onClick={()=>{ searchStudent() }} variant="outlined" color="primary">Cargar datos</Button>
 
           {/* PABLO */}
-          <Container>
             {checked
-            ? <Container> {datosEncontrados
-              ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
-              :<Alert variant="filled" severity="error">No hay datos!</Alert>} </Container>
-            : ""
+              ? <> {datosEncontrados
+                  ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
+                  :<Alert variant="filled" severity="error">No hay datos!</Alert>}
+                </>
+              : null
             }
-          </Container>
           {/* END PABLO */}
 
         </Container>
