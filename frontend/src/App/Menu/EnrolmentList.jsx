@@ -6,7 +6,7 @@ import Enrolment from "../Enrolment";
 import NoDisponible from "../Others/NoDisponible";
 import CourseList from "./CourseList";
 
-import { Alert } from '@material-ui/lab';
+import { Alert } from "@material-ui/lab";
 
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
@@ -30,9 +30,8 @@ const EnrolmentList = () => {
       });
   }, []);
 
-
   // PABLO
-  function searchStudent(){
+  function searchStudent() {
     let nifToSearch = document.getElementById("nif_field").value;
     axios
       .get(
@@ -40,45 +39,62 @@ const EnrolmentList = () => {
       )
       .then((response) => {
         setChecked(true);
-        if (response.data.length === 0){
+        if (response.data.length === 0) {
           setDatosEncontrados(false);
-        }
-        else{
+        } else {
           setDatosEncontrados(true);
-          console.log("datosUser:",response.data)
+          console.log("datosUser:", response.data);
           setStudentData(response.data);
         }
       })
       .catch((error) => {
         console.log(error);
-    });
-  };
+      });
+  }
   // END PABLO
-
 
   return (
     <Switch>
       {courseArray.map((course) => (
-        <Route path={`${match.path}/${course.name}`} key={course.id}>
-          {course.state === "MATRICULA" ? <Enrolment studentData={studentData}/> : <NoDisponible />}
+        <Route path={`${match.path}${course.name}`} key={course.id}>
+          {course.state === "MATRICULA" ? (
+            <Enrolment studentData={studentData} />
+          ) : (
+            <NoDisponible />
+          )}
         </Route>
       ))}
       <Container maxWidth="sm">
         <CourseList courses={courseArray}></CourseList>
         <Container>
-          <TextField id="nif_field" label="NIF" variant="outlined"/>
-          <Button id="nif_button" onClick={()=>{ searchStudent() }} variant="outlined" color="primary">Cargar datos</Button>
+          <TextField id="nif_field" label="NIF" variant="outlined" />
+          <Button
+            id="nif_button"
+            onClick={() => {
+              searchStudent();
+            }}
+            variant="outlined"
+            color="primary"
+          >
+            Cargar datos
+          </Button>
 
           {/* PABLO */}
-            {checked
-              ? <> {datosEncontrados
-                  ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
-                  :<Alert variant="filled" severity="error">No hay datos!</Alert>}
-                </>
-              : null
-            }
+          {checked ? (
+            <>
+              {" "}
+              {datosEncontrados ? (
+                <Alert variant="filled" severity="success">
+                  Usuario encontrado!
+                </Alert>
+              ) : (
+                <Alert variant="filled" severity="error">
+                  No hay datos!
+                </Alert>
+              )}
+            </>
+          ) : null}
           {/* END PABLO */}
-
         </Container>
       </Container>
     </Switch>
