@@ -15,14 +15,14 @@ Route::get('', function () {
     return view('admin.index');
 })->name('admin');
 
+
 // Crea automáticamente las rutas a las funciones predefinidas en UserController
 Route::resource('users', UserController::class);
-
-// Crea automáticamente las rutas a las funciones predefinidas en CourseController
 Route::resource('courses', CourseController::class);
 Route::resource('modules', ModuleController::class);
 Route::resource('students', StudentController::class);
 Route::resource('ufs', UFController::class);
+// Route::post('/admin/ufs/create?id={id}','UFController@create');
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
