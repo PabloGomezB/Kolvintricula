@@ -22,7 +22,10 @@ const Enrolment = (props) => {
       ],
     },
   }
-  studentData.student = props.studentData[0];
+
+  // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
+  // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
+  if(props.studentData !== 0) studentData.student = props.studentData[0];
 
   const onSubmit = (values, { setSubmitting }) => {
     alert(JSON.stringify(values, null, 2));
