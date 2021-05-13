@@ -19,10 +19,10 @@ class CreateStudentsTable extends Migration {
             $table->string('last_name2', 255);
             $table->date('date_birth');
             $table->integer('mobile_number');
-            $table->string('photo_path', 255);
+            $table->string('photo_path', 255)->nullable();
             $table->enum('enrolment_status', ['MATRICULADO', 'BORRADOR', 'PREMATRICULADO', 'RECHAZADO']);
             $table->string('email_personal')->unique();
-            $table->string('email_pedralbes')->unique();
+            $table->string('email_pedralbes')->unique()->nullable();
             $table->timestamps();
         });
     }

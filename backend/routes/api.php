@@ -36,4 +36,4 @@ Route::get('student/{nif}', [ApiController::class, function($nif){
     return Student::where('nif', $nif)->get();
 }]);
 
-Route::post('add', [ApiController::class, 'saveEnrolment']);
+Route::post('enrolments/add', [ApiController::class, 'addEnrolment']);

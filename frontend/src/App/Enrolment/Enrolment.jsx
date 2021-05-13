@@ -9,6 +9,7 @@ import AcademicData from "./AcademicData";
 import { Button, Typography } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
+import axios from "axios";
 
 const Enrolment = (props) => {
 
@@ -28,6 +29,21 @@ const Enrolment = (props) => {
   if(props.studentData !== 0) studentData.student = props.studentData[0];
 
   const onSubmit = (values, { setSubmitting }) => {
+
+    axios.post(
+        // `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,{
+        `http://127.0.0.1:8000/api/enrolments/add`,{
+          values
+        }
+      )
+      .then((response) => {
+        console.log("response:",response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("vaya...para que ha habido algun error")
+      });
+
     alert(JSON.stringify(values, null, 2));
     console.log("submit", values);
     setSubmitting(false);
