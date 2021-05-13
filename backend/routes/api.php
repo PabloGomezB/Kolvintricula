@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Student;
 
 use App\Http\Controllers\API\ApiController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,6 +30,9 @@ Route::get('courses', [ApiController::class, function(){
 
 Route::get('courses/{id}',[ApiController::class, function($id){
     return Module::where('id_course','=',$id)->get(['id','name', 'description']);
+
+Route::get('student/{nif}', [ApiController::class, function($nif){
+    return Student::where('nif', $nif)->get();
 }]);
 
 Route::post('add', [ApiController::class, 'saveEnrolment']);
