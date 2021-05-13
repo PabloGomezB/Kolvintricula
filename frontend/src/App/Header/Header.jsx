@@ -1,27 +1,15 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-  },
-  appBar: {
-    backgroundColor: '#333',
-  },
-}));
+import { useStyle } from "../Layout/styles";
 
 export default function Header() {
-  const classes = useStyles();
+  const classes = useStyle();
 
   return (
-    <div className={classes.root}>
+    <div className={classes.main}>
       <AppBar position="static" className={classes.appBar}>
         <Toolbar>
           <Container maxWidth="md">

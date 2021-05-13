@@ -5,10 +5,8 @@ const ListItem = ({ courseValue }) => {
   let match = useRouteMatch();
 
   return (
-    <Button variant="contained" id="courseButton">
-      <Link className="courseName" to={`${match.url}/${courseValue.name}`}>
-        {courseValue.name}
-      </Link>
+    <Button component={ Link } to={`${match.url}${courseValue.name}`} variant="outlined" style={{margin: '10px'}}>
+      {courseValue.name}
     </Button>
   );
 };

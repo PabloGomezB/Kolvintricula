@@ -19,7 +19,7 @@ const Enrolment = () => {
 
   return (
     <div>
-      <Link to="/matriculas">Volver</Link>
+      <Link to="/">Volver</Link>
 
       <Typography variant="h3" gutterBottom>
         Matrícula
