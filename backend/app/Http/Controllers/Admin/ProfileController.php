@@ -34,6 +34,6 @@ class ProfileController extends Controller
         // Save to database
         $user->save();
 
-        return redirect()->route('profile')->with('message', 'Profile saved successfully');
+        return redirect()->route('profile')->with('message', 'El perfil se ha guardado correctamente');
     }
 }

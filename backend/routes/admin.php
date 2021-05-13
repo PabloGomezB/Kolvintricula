@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
+use App\Http\Controllers\Admin\ModuleController;
+use App\Http\Controllers\Admin\StudentController;
 
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -17,6 +19,9 @@ Route::resource('users', UserController::class);
 
 // Crea automáticamente las rutas a las funciones predefinidas en CourseController
 Route::resource('courses', CourseController::class);
+Route::resource('modules', ModuleController::class);
+
+Route::resource('students', StudentController::class);
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -25,4 +30,4 @@ Route::get('/dashboard', function () {
 /* Params: [ruta,template] */
 Route::view('profile', 'admin.user.profile')->name('profile');
 
-Route::put('profile', [ProfileController::class , 'update'])->name('profile.update');
+Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
