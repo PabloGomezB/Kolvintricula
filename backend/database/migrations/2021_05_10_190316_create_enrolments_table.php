@@ -17,7 +17,7 @@ class CreateEnrolmentsTable extends Migration
             $table->increments('id');
             $table->integer('id_student')->unsigned();
             $table->longText('json_course_module_uf');
-            $table->foreign('id_student')->references('id')->on('students');
+            $table->foreign('id_student')->references('id')->on('students')->onDelete('cascade');
             $table->timestamps();
         });
     }

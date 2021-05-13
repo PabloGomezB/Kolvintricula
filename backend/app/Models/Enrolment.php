@@ -9,9 +9,9 @@ class Enrolment extends Model
 {
     use HasFactory;
     
-    // protected $casts = [
-    //     'json_course_module_uf' => 'array'
-    // ];
+    protected $casts = [
+        'json_course_module_uf' => 'array'
+    ];
 
     protected $fillable = [
         'id_student',
