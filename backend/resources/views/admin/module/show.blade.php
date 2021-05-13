@@ -4,7 +4,7 @@
  ?>
 <x-app-layout>
     @include('admin.module.header')
-
+    
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <h1>Información del modulo:</h1>
@@ -39,7 +39,7 @@
             <br>
             <h1>UFS que incluye el modulo:</h1>
             <br>
-            <table id="table" class="table-auto min-w-full divide-y divide-gray-200" width="100%">
+            <table id="table" class="table-auto min-w-full divide-y divide-gray-200" width="100%">                
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
@@ -70,7 +70,7 @@
                         </tr>
                     @endif                                    
                     @foreach ($ufs as $uf)
-                    <tr class="hover:bg-blue-100 clickable-row">
+                    <tr class="hover:bg-blue-100 ">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->id }}</td>               
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->description }}</td>
