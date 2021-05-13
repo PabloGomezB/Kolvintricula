@@ -12,7 +12,7 @@ const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   const [datosEncontrados, setDatosEncontrados] = useState(0); // PABLO
   const [checked, setChecked] = useState(0); // PABLO
-  const [studentData, setStudentData] = useState(0);
+  const [studentData, setStudentData] = useState(0); // PABLO
 
   let match = useRouteMatch();
 
@@ -29,7 +29,6 @@ const EnrolmentList = () => {
         console.log(error);
       });
   }, []);
-
 
   // PABLO
   function searchStudent(){
@@ -55,7 +54,6 @@ const EnrolmentList = () => {
   };
   // END PABLO
 
-
   return (
     <Switch>
       {courseArray.map((course) => (
@@ -68,41 +66,17 @@ const EnrolmentList = () => {
         <Container>
           <TextField id="nif_field" label="NIF" variant="outlined"/>
           <Button id="nif_button" onClick={()=>{ searchStudent() }} variant="outlined" color="primary">Cargar datos</Button>
-
-          {/* PABLO */}
-            {checked
-              ? <> {datosEncontrados
-                  ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
-                  :<Alert variant="filled" severity="error">No hay datos!</Alert>}
-                </>
-              : null
-            }
-          {/* END PABLO */}
-
+          {checked
+            ? <> {datosEncontrados
+                ? <Alert variant="filled" severity="success">Usuario encontrado!</Alert>
+                :<Alert variant="filled" severity="error">No hay datos!</Alert>}
+              </>
+            : null
+          }
         </Container>
       </Container>
     </Switch>
   );
 };
-
-// const searchStudent = () => {
-//   let nifToSearch = document.getElementById("nif_field").value;
-//   console.log(nifToSearch)
-//   axios
-//     .get(
-//       `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/student/${nifToSearch}`
-//     )
-//     .then((response) => {
-//       if (response.data.length === 0){
-//         console.log("NO HAY REGISTROS");
-//       }
-//       else{
-//         console.log("User encontrado:", response.data[0].name);
-//       }
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//   });
-// }
 
 export default EnrolmentList;
