@@ -49,7 +49,7 @@ class ModuleController extends Controller
         Module::create($dataForm);
 
         return redirect()->route('modules.index')
-            ->with('success',$request->name.': '.$request->descrition .' Modulo creado correctamente.'); 
+            ->with('success',$request->name.': '.$request->description .' Modulo creado correctamente.'); 
     }
 
     /**
