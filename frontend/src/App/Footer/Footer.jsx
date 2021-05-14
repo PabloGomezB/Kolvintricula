@@ -4,10 +4,13 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import CookieConsent from "react-cookie-consent";
 import { useStyle } from "../Layout/styles";
-import Iframe from 'react-iframe'
+import Iframe from 'react-iframe';
+// import { useCookies } from "react-cookie";
 
 export default function Footer() {
   const classes = useStyle();
+  let aceptar = false;
+  //const [cookies, setCookie] = useCookies(["cookie"]);
 
   return (
       <AppBar position="static" className={classes.appBar}>
@@ -64,10 +67,13 @@ export default function Footer() {
               <p>© 2021 Kolvintrícula</p>
             </Typography> */}
           </Toolbar>
+          
           <CookieConsent
-            debug={true}
+            cookieValue={true}
             location="bottom"
-            buttonText="Entiendo"
+            buttonText="De acuerdo"
+            cookieName="KolvintriculaCookie"
+            hideOnAccept={true}
             style={{ background: "black" }}
             buttonStyle={{ color: "#fff", fontSize: "12px", background: "#006dcc", textShadow: "0 1px 1px rgb(255 255 255 / 75%)", borderRadius: "3px" }}
           >
