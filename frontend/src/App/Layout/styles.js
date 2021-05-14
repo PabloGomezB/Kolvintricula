@@ -19,32 +19,43 @@ let theme = createMuiTheme({
 theme = responsiveFontSizes(theme);
 
 const useStyle = makeStyles(() => ({
-  // root: {
-  //   width: "auto",
-  //   marginTop: theme.spacing(2),
-  //   marginBottom: theme.spacing(2),
-  //   marginLeft: theme.spacing(2),
-  //   marginRight: theme.spacing(2),
-  //   [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-  //     width: 500,
-  //     marginLeft: "auto",
-  //     marginRight: "auto",
-  //   },
-  //   backgroundColor: theme.palette.background.default,
-  //   color: theme.palette.text.primary,
-  // },
-  // paper: {
-  //   marginRight: theme.spacing(3),
-  //   marginTop: theme.spacing(3),
-  //   marginBottom: theme.spacing(3),
-  //   textAlign: "center",
-  //   [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-  //     marginTop: theme.spacing(6),
-  //     marginBottom: theme.spacing(6),
-  //     padding: theme.spacing(3),
-  //     paddingLeft: 150,
-  //   },
-  // },
+  root: {
+    width: "auto",
+    margin: theme.spacing(2),
+
+    // [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+    //   width: 500,
+    //   marginLeft: "auto",
+    //   marginRight: "auto",
+    // },
+    // backgroundColor: theme.palette.background.default,
+    // color: theme.palette.text.primary,
+  },
+  paper: {
+    margin: theme.spacing(3),
+
+    // textAlign: "center",
+    padding: theme.spacing(3),
+    width: "auto",
+    marginLeft: "auto",
+    marginRight: "auto",
+
+    [theme.breakpoints.up("md")]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      width: theme.breakpoints.values.md,
+      // padding: theme.spacing(3),
+    },
+  },
+  footerAppbar: {
+    flexDirection: "row",
+  },
+  footerToolbar: {
+    [theme.breakpoints.up("sm")]: {
+      alignItems: "flex-start",
+    },
+  },
+
   // main: {
   //   flexGrow: 1
   // },
