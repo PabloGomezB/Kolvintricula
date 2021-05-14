@@ -5,8 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Custodian extends Model
-{
+class Custodian extends Model {
     use HasFactory;
 
     protected $fillable = [
@@ -16,6 +15,7 @@ class Custodian extends Model
         'name',
         'last_name1',
         'last_name2',
-        'mobile_number'
+        'mobile_number',
+        'email'
     ];
 }
