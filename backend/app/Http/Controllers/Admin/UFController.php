@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\ModuleController;
 use App\Models\UF;
+use App\Models\Module;
 use Illuminate\Http\Request;
 
 class UFController extends Controller
@@ -52,8 +54,8 @@ class UFController extends Controller
         $dataForm = request()->except('_token');
         UF::create($dataForm);
 
-        return redirect()->back()
-            ->with('success',$request->name. ': ' . $request->description. ' UF creada correctamente.');
+        return redirect('admin/modules/'.$request->id_module)
+            ->with('message',$request->name. ': ' . $request->description. ' UF creada correctamente.');
     }
 
     /**
@@ -98,7 +100,7 @@ class UFController extends Controller
         UF::create($dataForm);
 
         return redirect()->back()
-            ->with('success',$request->name. ': ' . $request->description. ' UF actualizada correctamente.');
+            ->with('message',$request->name. ': ' . $request->description. ' UF actualizada correctamente.');
     }
 
     /**
@@ -111,6 +113,6 @@ class UFController extends Controller
     {
         UF::destroy($id);
         return redirect()->back()
-                ->with('success','UF con id: '.$id.' eliminado correctamente.');
+                ->with('message','UF con id: '.$id.' eliminado correctamente.');
     }
 }
