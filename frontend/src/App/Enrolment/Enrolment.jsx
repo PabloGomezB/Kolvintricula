@@ -31,8 +31,7 @@ const Enrolment = (props) => {
   const onSubmit = (values, { setSubmitting }) => {
 
     axios.post(
-        // `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,{
-        `http://127.0.0.1:8000/api/enrolments/add`,{
+        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,{
           values
         }
       )
