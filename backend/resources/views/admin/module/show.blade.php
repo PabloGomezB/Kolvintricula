@@ -5,11 +5,13 @@
 <x-app-layout>
     @include('admin.module.header')
     
-    <div class="py-12">
+    <div class="py-12">        
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
+            <x-validation-errors />
+            <x-success-message />
             <h1>Información del modulo:</h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="bg-white p-6 border-b border-gray-200">
+                <div class="bg-white p-6 border-b border-gray-200">                    
                     <strong>Información:</strong>
                     <div class="p-1">
                         <strong>ID:</strong>
@@ -70,7 +72,7 @@
                         </tr>
                     @endif                                    
                     @foreach ($ufs as $uf)
-                    <tr class="hover:bg-blue-100 ">
+                    <tr class="clickable-row hover:bg-blue-100 ">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->id }}</td>               
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->description }}</td>
