@@ -5,6 +5,7 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Enrolment from "../Enrolment";
 import NoDisponible from "../Others/NoDisponible";
 import CourseList from "./CourseList";
+import Grid from '@material-ui/core/Grid';
 
 import { Alert } from "@material-ui/lab";
 
@@ -67,8 +68,10 @@ const EnrolmentList = () => {
           )}
         </Route>
       ))}
-      <Container maxWidth="sm">
-        <CourseList courses={courseArray}></CourseList>
+      <Container maxWidth="sm" style={{ flexGrow: 1 }}>
+        <Grid container spacing={3}>
+          <CourseList courses={courseArray}></CourseList>
+        </Grid>
         <Container>
           <TextField id="nif_field" label="NIF" variant="outlined"/>
           <Button id="nif_button" onClick={searchStudent} variant="outlined" color="primary">Cargar datos</Button>
