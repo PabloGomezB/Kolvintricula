@@ -1,7 +1,6 @@
 import React from "react";
 import { at } from "lodash";
-import { Field, ErrorMessage, useField } from "formik";
-import TextError from "./TextError";
+import { useField } from "formik";
 import { TextField } from "@material-ui/core";
 
 function Input(props) {
@@ -16,12 +15,6 @@ function Input(props) {
     }
   }
   return (
-    // <div className="form-control">
-    //   <label htmlFor={name}>{label}</label>
-    //   <Field id={name} name={name} {...rest} />
-    //   <ErrorMessage component={TextError} name={name} />
-    // </div>
-
     <TextField
       type="text"
       error={meta.touched && meta.error && true}

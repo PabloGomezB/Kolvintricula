@@ -11,25 +11,15 @@ let theme = createMuiTheme({
       main: "#231F20",
     },
     secondary: {
-      main: "#01A299",
+      main: "#00AEEF",
     },
   },
 });
-
 theme = responsiveFontSizes(theme);
-
 const useStyle = makeStyles(() => ({
   root: {
     width: "auto",
     margin: theme.spacing(2),
-
-    // [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-    //   width: 500,
-    //   marginLeft: "auto",
-    //   marginRight: "auto",
-    // },
-    // backgroundColor: theme.palette.background.default,
-    // color: theme.palette.text.primary,
   },
   paper: {
     margin: theme.spacing(3),
@@ -44,17 +34,25 @@ const useStyle = makeStyles(() => ({
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(6),
       width: theme.breakpoints.values.md,
-      // padding: theme.spacing(3),
     },
   },
-  footerAppbar: {
-    flexDirection: "row",
+  paper2: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
   },
-  footerToolbar: {
-    [theme.breakpoints.up("sm")]: {
-      alignItems: "flex-start",
-    },
+  footerContainer: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
+  // footerDiv: {
+  //   margin: theme.spacing(2),
+  // },
+  // footerToolbar: {
+  //   [theme.breakpoints.up("sm")]: {
+  //     alignItems: "flex-start",
+  //   },
+  // },
 
   // main: {
   //   flexGrow: 1

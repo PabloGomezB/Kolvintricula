@@ -50,7 +50,7 @@ const Enrolment = (props) => {
     <div>
       <Link to="/">Volver</Link>
 
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="h3" gutterBottom align="center">
         Matrícula
       </Typography>
       <Formik
@@ -69,9 +69,10 @@ const Enrolment = (props) => {
           <Form>
             <div>
               <Student />
-              {moment().diff(values.student.date_birth, "years") < 18 && (
-                <Custodian />
-              )}
+              {values.student.date_birth &&
+                moment().diff(values.student.date_birth, "years") < 18 && (
+                  <Custodian />
+                )}
               <AcademicData cursmoduluf={cursmoduluf} values={values} />
 
               <Button variant="contained" type="submit" disabled={isSubmitting}>

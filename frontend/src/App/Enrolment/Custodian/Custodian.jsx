@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
@@ -44,54 +44,70 @@ export const Custodian = () => {
                         { label: "Tutor/a legal", value: "TUTOR" },
                       ]}
                     />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="NIF: "
-                      name={`custodians[${index}].nif`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Nombre: "
-                      name={`custodians[${index}].name`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Primer apellido: "
-                      name={`custodians[${index}].last_name1`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Segundo apellido: "
-                      name={`custodians[${index}].last_name2`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="number"
-                      label="Telefono movil: "
-                      name={`custodians[${index}].mobile_number`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Email: "
-                      name={`custodians[${index}].email`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => remove(index)} // remove a friend from the list
-                    >
+                    <Grid container spacing={3}>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="NIF: "
+                          name={`custodians[${index}].nif`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Nombre: "
+                          name={`custodians[${index}].name`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Primer apellido: "
+                          name={`custodians[${index}].last_name1`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Segundo apellido: "
+                          name={`custodians[${index}].last_name2`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="number"
+                          label="Telefono movil: "
+                          name={`custodians[${index}].mobile_number`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Email: "
+                          name={`custodians[${index}].email`}
+                        />
+                      </Grid>
+                      <Grid item xs={6}></Grid>
+                    </Grid>
+
+                    <Button variant="contained" onClick={() => remove(index)}>
                       -
-                    </button>
+                    </Button>
                   </div>
                 ))}
               {custodians.length < 2 && (
-                <button type="button" onClick={() => push(new CustodianO())}>
+                <Button
+                  variant="contained"
+                  onClick={() => push(new CustodianO())}
+                >
                   Añadir un responsable
-                </button>
+                </Button>
               )}
             </div>
           );

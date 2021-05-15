@@ -10,10 +10,10 @@ export default function Header() {
 
   return (
     // <div className={classes.main}>
-    <AppBar position="static" className={classes.appBar}>
+    <AppBar position="static">
       <Toolbar>
         <Container>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" component="h1">
             Kolvintricula
           </Typography>
         </Container>
