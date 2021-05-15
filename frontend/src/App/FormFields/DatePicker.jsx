@@ -6,6 +6,7 @@ import {
   KeyboardDatePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import es from "date-fns/locale/es";
 
 function DatePicker(props) {
   const [field, meta, helper] = useField(props);
@@ -37,19 +38,19 @@ function DatePicker(props) {
   }
 
   return (
-    <Grid container>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <KeyboardDatePicker
-          {...field}
-          {...props}
-          value={selectedDate}
-          onChange={_onChange}
-          error={isError}
-          invalidDateMessage={isError && error}
-          helperText={isError && error}
-        />
-      </MuiPickersUtilsProvider>
-    </Grid>
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={es}>
+      <KeyboardDatePicker
+        {...field}
+        {...props}
+        value={selectedDate}
+        onChange={_onChange}
+        error={isError}
+        invalidDateMessage={isError && error}
+        helperText={isError && error}
+        format="d MMMM yyyy"
+        disableFuture
+      />
+    </MuiPickersUtilsProvider>
   );
 }
 
