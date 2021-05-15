@@ -9,6 +9,8 @@ import { Grid, Paper } from "@material-ui/core";
 
 export default function Footer() {
   const classes = useStyle();
+  let aceptar = false;
+  //const [cookies, setCookie] = useCookies(["cookie"]);
 
   return (
     <AppBar position="static" component="footer">
