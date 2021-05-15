@@ -104,3 +104,10 @@ th:hover {
     font-size: large;
     color: red;
 }
+.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+.customSelect{
+    border: 
+}
