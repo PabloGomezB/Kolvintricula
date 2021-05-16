@@ -69,12 +69,13 @@ const EnrolmentList = () => {
         </Route>
       ))}
       <Container maxWidth="sm" style={{ flexGrow: 1 }}>
-        <Grid container spacing={3}>
+        <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Lista de cursos</h1>
+        <Grid container style={{ textAlign: 'center' }}>
           <CourseList courses={courseArray}></CourseList>
         </Grid>
-        <Container>
-          <TextField id="nif_field" label="NIF" variant="outlined"/>
-          <Button id="nif_button" onClick={searchStudent} variant="outlined" color="primary">Cargar datos</Button>
+        <Container style={{ textAlign: 'center', display: 'grid', width: '420px'}}>
+          <TextField id="nif_field" label="NIF" variant="outlined" style={{ marginBottom: '20px' }}/>
+          <Button id="nif_button" onClick={searchStudent} variant="outlined" color="primary" style={{ borderRadius: '10px', backgroundColor: '#f2f2f2', padding: '10px' }}>Cargar datos</Button>
           {showAlert
             ? <Snackbar
                 anchorOrigin={{
