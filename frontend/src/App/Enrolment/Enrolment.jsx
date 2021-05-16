@@ -22,8 +22,39 @@ const steps = ["Datos del alumno", "Datos del responsable", "Datos académicos"]
 
 const Enrolment = (props) => {
   const [activeStep, setActiveStep] = useState(0);
+  const [skipped, setSkipped] = React.useState(new Set());
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
+
+  let studentData = {
+    student: {
+      name: "",
+      last_name1: "",
+      last_name2: "",
+      date_birth: "",
+      email_personal: "",
+      nif: "",
+      mobile_number: "",
+    },
+    custodians: [
+      {
+        type: "",
+        nif: "",
+        name: "",
+        last_name1: "",
+        last_name2: "",
+        mobile_number: "",
+        email: "",
+      },
+    ],
+    academic_data: {
+      course: "",
+      moduluf: [],
+    },
+  };
+  // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
+  // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
+  if (props.studentData !== 0) studentData.student = props.studentData[0];
 
   function _renderStepContent(step, values) {
     switch (step) {
@@ -38,67 +69,104 @@ const Enrolment = (props) => {
     }
   }
 
-  let studentData = {
-    student: {
-      name: "",
-    },
-    custodians: [],
-    academic_data: {
-      course: "",
-      moduluf: [],
-    },
+  const isAdult = (date) => {
+    return moment().diff(date, "years") >= 18;
   };
-  // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
-  // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
-  if (props.studentData !== 0) studentData.student = props.studentData[0];
+
+  const isStepOptional = (step) => {
+    return step === 1;
+  };
+
+  const isStepSkipped = (step) => {
+    return skipped.has(step);
+  };
 
   function _sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  const handleNext = (values, actions) => {
+    if (isLastStep) {
+      _submitForm(values, actions);
+    } else {
+      if (activeStep === 0 && isAdult(values.student.date_birth)) {
+        setActiveStep((previousActiveStep) => previousActiveStep + 1);
+      }
+
+      let newSkipped = skipped;
+      if (isStepSkipped(activeStep)) {
+        newSkipped = new Set(newSkipped.values());
+        newSkipped.delete(activeStep);
+      }
+
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setSkipped(newSkipped);
+
+      actions.setTouched({});
+      actions.setSubmitting(false);
+    }
+  };
+
+  const handleSkip = () => {
+    if (!isStepOptional(activeStep)) {
+      // You probably want to guard against something like this,
+      // it should never occur unless someone's actively trying to break something.
+      throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+      const newSkipped = new Set(prevSkipped.values());
+      newSkipped.add(activeStep);
+      return newSkipped;
+    });
+  };
+
+  function _handleBack() {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
 
   async function _submitForm(values, actions) {
     await _sleep(1000);
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
-
     // setActiveStep(activeStep + 1);
     console.log("submit", values);
   }
-
-  function _handleSubmit(values, actions) {
-    if (isLastStep) {
-      _submitForm(values, actions);
-    } else {
-      setActiveStep(activeStep + 1);
-      actions.setTouched({});
-      actions.setSubmitting(false);
-    }
-  }
-
-  function _handleBack() {
-    setActiveStep(activeStep - 1);
-  }
-
-  const onSubmit = (values, { setSubmitting }) => {
-    axios
-      .post(
-        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
-        {
-          values,
-        }
-      )
-      .then((response) => {
-        console.log("response:", response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("vaya...para que ha habido algun error");
-      });
-
-    alert(JSON.stringify(values, null, 2));
-    console.log("submit", values);
-    setSubmitting(false);
-  };
+  // function _handleSubmit(values, actions) {
+  //   if (isLastStep) {
+  //     _submitForm(values, actions);
+  //   } else {
+  //     if (
+  //       activeStep === 0 &&
+  //       moment().diff(values.student.date_birth, "years") >= 18
+  //     ) {
+  //       setActiveStep((previousActiveStep) => previousActiveStep + 1);
+  //     }
+  //     setActiveStep((previousActiveStep) => previousActiveStep + 1);
+  //     actions.setTouched({});
+  //     actions.setSubmitting(false);
+  //   }
+  // }
+  // const onSubmit = (values, { setSubmitting }) => {
+  //   axios
+  //     .post(
+  //       `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
+  //       {
+  //         values,
+  //       }
+  //     )
+  //     .then((response) => {
+  //       console.log("response:", response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       alert("vaya...para que ha habido algun error");
+  //     });
+  //   alert(JSON.stringify(values, null, 2));
+  //   console.log("submit", values);
+  //   setSubmitting(false);
+  // };
 
   return (
     <div>
@@ -108,16 +176,29 @@ const Enrolment = (props) => {
         Matrícula
       </Typography>
       <Stepper activeStep={activeStep}>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
+        {steps.map((label, index) => {
+          const stepProps = {};
+          const labelProps = {};
+          if (isStepOptional(index)) {
+            labelProps.optional = (
+              <Typography variant="caption">Optional</Typography>
+            );
+          }
+          if (isStepSkipped(index)) {
+            stepProps.completed = false;
+          }
+          return (
+            <Step key={label} {...stepProps}>
+              <StepLabel {...labelProps}>{label}</StepLabel>
+            </Step>
+          );
+        })}
       </Stepper>
       <Formik
         initialValues={studentData}
         validationSchema={currentValidationSchema}
-        onSubmit={_handleSubmit}
+        // onSubmit={_handleSubmit}
+        onSubmit={handleNext}
       >
         {({
           values,
@@ -131,6 +212,15 @@ const Enrolment = (props) => {
             {_renderStepContent(activeStep, values)}
             <div>
               {activeStep !== 0 && <Button onClick={_handleBack}>Back</Button>}
+              {isStepOptional(activeStep) && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSkip}
+                >
+                  Skip
+                </Button>
+              )}
               <div>
                 <Button
                   disabled={isSubmitting}
@@ -143,19 +233,6 @@ const Enrolment = (props) => {
                 {isSubmitting && <CircularProgress size={24} />}
               </div>
             </div>
-            {/* <Student />
-
-            {values.student.date_birth &&
-              moment().diff(values.student.date_birth, "years") < 18 && (
-                <Custodian />
-              )}
-            <AcademicData cursmoduluf={cursmoduluf} values={values} /> */}
-
-            {/* <Button variant="contained" type="submit" disabled={isSubmitting}>
-              Enviar
-            </Button> */}
-            <br />
-
             <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>

@@ -51,6 +51,7 @@ export const Custodian = () => {
                           type="text"
                           label="NIF: "
                           name={`custodians[${index}].nif`}
+                          fullWidth
                         />
                       </Grid>
                       <Grid item xs={6}>
@@ -59,6 +60,7 @@ export const Custodian = () => {
                           type="text"
                           label="Nombre: "
                           name={`custodians[${index}].name`}
+                          fullWidth
                         />
                       </Grid>
                       <Grid item xs={6}>
@@ -67,6 +69,7 @@ export const Custodian = () => {
                           type="text"
                           label="Primer apellido: "
                           name={`custodians[${index}].last_name1`}
+                          fullWidth
                         />
                       </Grid>
                       <Grid item xs={6}>
@@ -75,6 +78,7 @@ export const Custodian = () => {
                           type="text"
                           label="Segundo apellido: "
                           name={`custodians[${index}].last_name2`}
+                          fullWidth
                         />
                       </Grid>
                       <Grid item xs={6}>
@@ -83,6 +87,7 @@ export const Custodian = () => {
                           type="number"
                           label="Telefono movil: "
                           name={`custodians[${index}].mobile_number`}
+                          fullWidth
                         />
                       </Grid>
                       <Grid item xs={6}>
@@ -91,6 +96,7 @@ export const Custodian = () => {
                           type="text"
                           label="Email: "
                           name={`custodians[${index}].email`}
+                          fullWidth
                         />
                       </Grid>
                       <Grid item xs={6}></Grid>

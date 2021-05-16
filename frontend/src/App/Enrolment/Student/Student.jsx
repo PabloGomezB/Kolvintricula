@@ -16,6 +16,7 @@ export const Student = () => {
             type="text"
             label="Primer nombre: "
             name="student.name"
+            fullWidth
           />
         </Grid>
 
@@ -25,6 +26,7 @@ export const Student = () => {
             type="text"
             label="Primer apellido: "
             name="student.last_name1"
+            fullWidth
           />
         </Grid>
         <Grid item xs={6}>
@@ -33,6 +35,7 @@ export const Student = () => {
             type="text"
             label="Segundo apellido: "
             name="student.last_name2"
+            fullWidth
           />
         </Grid>
         <Grid item xs={6}>
@@ -41,6 +44,7 @@ export const Student = () => {
             type="text"
             label="NIF: "
             name="student.nif"
+            fullWidth
           />
         </Grid>
         <Grid item xs={6}>
@@ -49,6 +53,7 @@ export const Student = () => {
             type="email"
             label="Email: "
             name="student.email_personal"
+            fullWidth
           />
         </Grid>
         <Grid item xs={6}>
@@ -57,6 +62,7 @@ export const Student = () => {
             type="number"
             label="Movil: "
             name="student.mobile_number"
+            fullWidth
           />
         </Grid>
         <Grid item xs={6}>
@@ -64,6 +70,7 @@ export const Student = () => {
             control="date"
             label="Fecha de nacimiento: "
             name="student.date_birth"
+            fullWidth
           />
         </Grid>
       </Grid>
