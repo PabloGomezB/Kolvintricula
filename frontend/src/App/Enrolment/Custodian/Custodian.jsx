@@ -33,18 +33,28 @@ export const Custodian = () => {
                 custodians.length > 0 &&
                 custodians.map((custodiansItem, index) => (
                   <div key={index}>
-                    <FormikControl
-                      className={classes.formOptionInput}
-                      control="select"
-                      label="Persona responsable"
-                      name={`custodians[${index}].type`}
-                      options={[
-                        { label: "Padre", value: "PADRE" },
-                        { label: "Madre", value: "MADRE" },
-                        { label: "Tutor/a legal", value: "TUTOR" },
-                      ]}
-                    />
                     <Grid container spacing={3}>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="select"
+                          fullWidth
+                          label="Persona responsable"
+                          name={`custodians[${index}].type`}
+                          options={[
+                            { label: "Padre", value: "PADRE" },
+                            { label: "Madre", value: "MADRE" },
+                            { label: "Tutor/a legal", value: "TUTOR" },
+                          ]}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Button
+                          variant="contained"
+                          onClick={() => remove(index)}
+                        >
+                          -
+                        </Button>
+                      </Grid>
                       <Grid item xs={6}>
                         <FormikControl
                           control="input"
@@ -101,10 +111,6 @@ export const Custodian = () => {
                       </Grid>
                       <Grid item xs={6}></Grid>
                     </Grid>
-
-                    <Button variant="contained" onClick={() => remove(index)}>
-                      -
-                    </Button>
                   </div>
                 ))}
               {custodians.length < 2 && (

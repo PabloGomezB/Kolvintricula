@@ -93,10 +93,7 @@ const useStyle = makeStyles(() => ({
   //   padding: "5px",
   //   textDecoration: "none"
   // },
-  formOptionInput: {
-    // display: 'flex',
-    width: "20%",
-  },
+  // display: 'flex',
 }));
 
 export { theme, useStyle };

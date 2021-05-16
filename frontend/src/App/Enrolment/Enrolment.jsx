@@ -17,6 +17,7 @@ import {
 import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
 import axios from "axios";
+import { mapValues } from "lodash";
 
 const steps = ["Datos del alumno", "Datos del responsable", "Datos académicos"];
 
@@ -89,41 +90,49 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
-      if (activeStep === 0 && isAdult(values.student.date_birth)) {
-        setActiveStep((previousActiveStep) => previousActiveStep + 1);
-      }
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
       let newSkipped = skipped;
       if (isStepSkipped(activeStep)) {
         newSkipped = new Set(newSkipped.values());
         newSkipped.delete(activeStep);
       }
-
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setSkipped(newSkipped);
 
+      if (activeStep === 0 && isAdult(values.student.date_birth)) {
+        setActiveStep((previousActiveStep) => previousActiveStep + 1);
+        setSkipped((prevSkipped) => {
+          const newSkipped = new Set(prevSkipped.values());
+          newSkipped.add(activeStep + 1);
+          return newSkipped;
+        });
+      }
       actions.setTouched({});
       actions.setSubmitting(false);
     }
   };
 
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
+  // const handleSkip = () => {
+  //   if (!isStepOptional(activeStep)) {
+  //     // You probably want to guard against something like this,
+  //     // it should never occur unless someone's actively trying to break something.
+  //     throw new Error("You can't skip a step that isn't optional.");
+  //   }
+
+  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   setSkipped((prevSkipped) => {
+  //     const newSkipped = new Set(prevSkipped.values());
+  //     newSkipped.add(activeStep);
+  //     return newSkipped;
+  //   });
+  // };
+
+  function _handleBack(values) {
+    if (activeStep === 2 && isAdult(values.student.date_birth)) {
+      setActiveStep((prevActiveStep) => prevActiveStep - 2);
+    } else {
+      setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  function _handleBack() {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   }
 
   async function _submitForm(values, actions) {
@@ -175,13 +184,13 @@ const Enrolment = (props) => {
       <Typography variant="h3" gutterBottom align="center">
         Matrícula
       </Typography>
-      <Stepper activeStep={activeStep}>
+      <Stepper activeStep={activeStep} alternativeLabel>
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
+              <Typography variant="caption">Opcional</Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -189,7 +198,9 @@ const Enrolment = (props) => {
           }
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepLabel {...labelProps} align="center">
+                {label}
+              </StepLabel>
             </Step>
           );
         })}
@@ -211,16 +222,18 @@ const Enrolment = (props) => {
           <Form>
             {_renderStepContent(activeStep, values)}
             <div>
-              {activeStep !== 0 && <Button onClick={_handleBack}>Back</Button>}
-              {isStepOptional(activeStep) && (
+              {activeStep !== 0 && (
+                <Button onClick={() => _handleBack(values)}>Atrás</Button>
+              )}
+              {/* {isStepOptional(activeStep) && (
                 <Button
                   variant="contained"
                   color="primary"
                   onClick={handleSkip}
                 >
-                  Skip
+                  Saltarse paso
                 </Button>
-              )}
+              )} */}
               <div>
                 <Button
                   disabled={isSubmitting}
