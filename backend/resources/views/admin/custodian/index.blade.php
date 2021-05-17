@@ -4,7 +4,7 @@
 
 {{-- <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
 <x-app-layout>
-    @include('admin.course.header')
+    @include('admin.custodian.header')
 
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
@@ -21,40 +21,52 @@
                                             <tr>
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID
-                                                    <i style="" class="fa fa-fw fa-sort"></i>
                                                 </th>
-                                                <th scope="col" data-priority="2" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Tipo
-                                                    <i class="fa fa-fw fa-sort"></i>
+                                                <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    ID Estudiante
+                                                </th>
+                                                <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Responsable
+                                                </th>
+                                                <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    DNI
                                                 </th>
                                                 <th scope="col" data-priority="3" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Nombre
-                                                    <i class="fa fa-fw fa-sort"></i>
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Descripción
-                                                    <i class="fa fa-fw fa-sort"></i>
+                                                    Primer Apellido
                                                 </th>
-                                                <th scope="col" data-priority="5" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Estado
-                                                    <i class="fa fa-fw fa-sort"></i>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Segundo Apellido
                                                 </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Teléfono
+                                                </th>
+
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Email del tutor/padre/madre
+                                                </th>
+
                                                 <th scope="col" data-priority="6" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Opciones
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            @foreach ($dataCourses as $course)
-                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('courses.show',$course->id) }}'">
-                                                <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->id }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->type }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->name }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->description }}</td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $course->state }}</td>
+                                            @foreach ($dataCustodians as $custodian)
+                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('custodians.show',$custodian->id) }}'">
+                                            <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->id_student }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->responsible }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->nif }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->name }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->last_name1 }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->last_name2 }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->mobile_number }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->email }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                                    <form class="" action="{{ route('courses.destroy',$course->id) }}" method="POST">
-                                                        <a href="{{ route('courses.edit',$course->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>
+                                                    <form class="" action="{{ route('custodians5.destroy',$custodian->id) }}" method="POST">
+                                                        <a href="{{ route('custodians.edit',$custodian->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Eliminar</button>
