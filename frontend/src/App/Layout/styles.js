@@ -45,6 +45,10 @@ const useStyle = makeStyles(() => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
+  btn: { margin: theme.spacing(2) },
+  alignRight: {
+    textAlign: "right",
+  },
   // footerDiv: {
   //   margin: theme.spacing(2),
   // },

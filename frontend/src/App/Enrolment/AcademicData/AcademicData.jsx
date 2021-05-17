@@ -24,6 +24,7 @@ export const AcademicData = ({ cursmoduluf, values }) => {
           <div>
             <FormikControl
               className={classes.formOptionInput}
+              fullWidth
               control="select"
               label="Curso académico"
               name="academic_data.course"

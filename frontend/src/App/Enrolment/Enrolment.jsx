@@ -18,10 +18,12 @@ import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
 import axios from "axios";
 import { mapValues } from "lodash";
+import { useStyle } from "../Layout/styles";
 
 const steps = ["Datos del alumno", "Datos del responsable", "Datos académicos"];
 
 const Enrolment = (props) => {
+  const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const currentValidationSchema = validationSchema[activeStep];
@@ -92,13 +94,6 @@ const Enrolment = (props) => {
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-      let newSkipped = skipped;
-      if (isStepSkipped(activeStep)) {
-        newSkipped = new Set(newSkipped.values());
-        newSkipped.delete(activeStep);
-      }
-      setSkipped(newSkipped);
-
       if (activeStep === 0 && isAdult(values.student.date_birth)) {
         setActiveStep((previousActiveStep) => previousActiveStep + 1);
         setSkipped((prevSkipped) => {
@@ -111,21 +106,6 @@ const Enrolment = (props) => {
       actions.setSubmitting(false);
     }
   };
-
-  // const handleSkip = () => {
-  //   if (!isStepOptional(activeStep)) {
-  //     // You probably want to guard against something like this,
-  //     // it should never occur unless someone's actively trying to break something.
-  //     throw new Error("You can't skip a step that isn't optional.");
-  //   }
-
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   setSkipped((prevSkipped) => {
-  //     const newSkipped = new Set(prevSkipped.values());
-  //     newSkipped.add(activeStep);
-  //     return newSkipped;
-  //   });
-  // };
 
   function _handleBack(values) {
     if (activeStep === 2 && isAdult(values.student.date_birth)) {
@@ -221,9 +201,15 @@ const Enrolment = (props) => {
         }) => (
           <Form>
             {_renderStepContent(activeStep, values)}
-            <div>
+            <div className={classes.alignRight}>
               {activeStep !== 0 && (
-                <Button onClick={() => _handleBack(values)}>Atrás</Button>
+                <Button
+                  variant="contained"
+                  className={classes.btn}
+                  onClick={() => _handleBack(values)}
+                >
+                  Atrás
+                </Button>
               )}
               {/* {isStepOptional(activeStep) && (
                 <Button
@@ -234,17 +220,16 @@ const Enrolment = (props) => {
                   Saltarse paso
                 </Button>
               )} */}
-              <div>
-                <Button
-                  disabled={isSubmitting}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
-                  {isLastStep ? "Enviar" : "Siguiente"}
-                </Button>
-                {isSubmitting && <CircularProgress size={24} />}
-              </div>
+              <Button
+                className={classes.btn}
+                disabled={isSubmitting}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                {isLastStep ? "Enviar" : "Siguiente"}
+              </Button>
+              {isSubmitting && <CircularProgress size={24} />}
             </div>
             <div>
               VALUES:
