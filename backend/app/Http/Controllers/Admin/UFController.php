@@ -46,7 +46,7 @@ class UFController extends Controller
         $request->validate([
             'id_module' => 'required',
             'name' => 'required',
-            'hours' => 'required',
+            'hours' => 'required|integer',
             'year' => 'required',
             'description' => 'required',
         ]);
