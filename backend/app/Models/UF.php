@@ -13,6 +13,7 @@ class UF extends Model
         'id_module',
         'name',
         'hours',
-        'year'
+        'year',
+        'description'
     ];
 }

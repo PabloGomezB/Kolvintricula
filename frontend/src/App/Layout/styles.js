@@ -11,40 +11,49 @@ let theme = createMuiTheme({
       main: "#231F20",
     },
     secondary: {
-      main: "#01A299",
+      main: "#00AEEF",
     },
   },
 });
-
 theme = responsiveFontSizes(theme);
-
 const useStyle = makeStyles(() => ({
-  // root: {
-  //   width: "auto",
-  //   marginTop: theme.spacing(2),
-  //   marginBottom: theme.spacing(2),
-  //   marginLeft: theme.spacing(2),
-  //   marginRight: theme.spacing(2),
-  //   [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-  //     width: 500,
-  //     marginLeft: "auto",
-  //     marginRight: "auto",
-  //   },
-  //   backgroundColor: theme.palette.background.default,
-  //   color: theme.palette.text.primary,
+  root: {
+    width: "auto",
+    margin: theme.spacing(2),
+  },
+  paper: {
+    margin: theme.spacing(3),
+
+    // textAlign: "center",
+    padding: theme.spacing(3),
+    width: "auto",
+    marginLeft: "auto",
+    marginRight: "auto",
+
+    [theme.breakpoints.up("md")]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      width: theme.breakpoints.values.md,
+    },
+  },
+  paper2: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+  footerContainer: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
+  // footerDiv: {
+  //   margin: theme.spacing(2),
   // },
-  // paper: {
-  //   marginRight: theme.spacing(3),
-  //   marginTop: theme.spacing(3),
-  //   marginBottom: theme.spacing(3),
-  //   textAlign: "center",
-  //   [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-  //     marginTop: theme.spacing(6),
-  //     marginBottom: theme.spacing(6),
-  //     padding: theme.spacing(3),
-  //     paddingLeft: 150,
+  // footerToolbar: {
+  //   [theme.breakpoints.up("sm")]: {
+  //     alignItems: "flex-start",
   //   },
   // },
+
   // main: {
   //   flexGrow: 1
   // },
@@ -84,10 +93,7 @@ const useStyle = makeStyles(() => ({
   //   padding: "5px",
   //   textDecoration: "none"
   // },
-  formOptionInput: {
-    // display: 'flex',
-    width: "20%",
-  },
+  // display: 'flex',
 }));
 
 export { theme, useStyle };

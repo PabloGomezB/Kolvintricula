@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
@@ -33,65 +33,93 @@ export const Custodian = () => {
                 custodians.length > 0 &&
                 custodians.map((custodiansItem, index) => (
                   <div key={index}>
-                    <FormikControl
-                      className={classes.formOptionInput}
-                      control="select"
-                      label="Persona responsable"
-                      name={`custodians[${index}].type`}
-                      options={[
-                        { label: "Padre", value: "PADRE" },
-                        { label: "Madre", value: "MADRE" },
-                        { label: "Tutor/a legal", value: "TUTOR" },
-                      ]}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="NIF: "
-                      name={`custodians[${index}].nif`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Nombre: "
-                      name={`custodians[${index}].name`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Primer apellido: "
-                      name={`custodians[${index}].last_name1`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Segundo apellido: "
-                      name={`custodians[${index}].last_name2`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="number"
-                      label="Telefono movil: "
-                      name={`custodians[${index}].mobile_number`}
-                    />
-                    <FormikControl
-                      control="input"
-                      type="text"
-                      label="Email: "
-                      name={`custodians[${index}].email`}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => remove(index)} // remove a friend from the list
-                    >
-                      -
-                    </button>
+                    <Grid container spacing={3}>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="select"
+                          fullWidth
+                          label="Persona responsable"
+                          name={`custodians[${index}].type`}
+                          options={[
+                            { label: "Padre", value: "PADRE" },
+                            { label: "Madre", value: "MADRE" },
+                            { label: "Tutor/a legal", value: "TUTOR" },
+                          ]}
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <Button
+                          variant="contained"
+                          onClick={() => remove(index)}
+                        >
+                          -
+                        </Button>
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="NIF: "
+                          name={`custodians[${index}].nif`}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Nombre: "
+                          name={`custodians[${index}].name`}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Primer apellido: "
+                          name={`custodians[${index}].last_name1`}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Segundo apellido: "
+                          name={`custodians[${index}].last_name2`}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="number"
+                          label="Telefono movil: "
+                          name={`custodians[${index}].mobile_number`}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={6}>
+                        <FormikControl
+                          control="input"
+                          type="text"
+                          label="Email: "
+                          name={`custodians[${index}].email`}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={6}></Grid>
+                    </Grid>
                   </div>
                 ))}
               {custodians.length < 2 && (
-                <button type="button" onClick={() => push(new CustodianO())}>
+                <Button
+                  variant="contained"
+                  onClick={() => push(new CustodianO())}
+                >
                   Añadir un responsable
-                </button>
+                </Button>
               )}
             </div>
           );
