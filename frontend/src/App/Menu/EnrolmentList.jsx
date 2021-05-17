@@ -85,13 +85,15 @@ const EnrolmentList = () => {
           )}
         </Route>
       ))}
-      <Container maxWidth="sm" style={{ flexGrow: 1 }}>
-        <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Lista de cursos</h1>
+      <Container maxWidth="xl" style={{ flexGrow: 1, backgroundImage: 'url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px'}}>
+        <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Nuestros cursos</h1>
         <Grid container style={{ textAlign: 'center' }}>
           <CourseList courses={courseArray}></CourseList>
         </Grid>
         <Container style={{ textAlign: 'center' }}>
-          <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{ padding: '10px', borderRadius: '10px' }}>
+          <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{ padding: '10px', borderRadius: '10px', fontWeight: 'bolder', backgroundColor: 'white' }}>
             ¿Quieres cargar tus datos?
           </Button>
           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">
