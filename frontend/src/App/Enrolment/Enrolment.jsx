@@ -8,7 +8,6 @@ import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
 
-
 import {
   Button,
   CircularProgress,
@@ -22,10 +21,18 @@ import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
 import axios from "axios";
 import { mapValues } from "lodash";
+import { useStyle } from "../Layout/styles";
+import Revision from "./Revision";
 
-const steps = ["Datos del alumno", "Datos del responsable", "Datos académicos"];
+const steps = [
+  "Datos del alumno",
+  "Datos del responsable",
+  "Datos académicos",
+  // "Revision",
+];
 
 const Enrolment = (props) => {
+  const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
   const currentValidationSchema = validationSchema[activeStep];
@@ -72,6 +79,8 @@ const Enrolment = (props) => {
         return <Custodian />;
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
+      // case 3:
+      //   return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
     }
@@ -97,31 +106,28 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
-      if(activeStep === 0 && props.studentData === 0){ // Checkear solo si el student es nuevo
+      if (activeStep === 0 && props.studentData === 0) {
+        // Checkear solo si el student es nuevo
         let studentError = false;
         let newStudentNif = values.student.nif;
         let newStudentEmail = values.student.email_personal;
 
         axios
-          .post(
-            `http://127.0.0.1:8000/api/students/find`,
-            {
-              "nif": newStudentNif,
-              "email": newStudentEmail
-            }
-          )
+          .post(`http://127.0.0.1:8000/api/students/find`, {
+            nif: newStudentNif,
+            email: newStudentEmail,
+          })
           .then((response) => {
-            if (response.data.nifFound || response.data.emailFound){
-              if (response.data.nifFound){
+            if (response.data.nifFound || response.data.emailFound) {
+              if (response.data.nifFound) {
                 setMessageError("Ya existe un alumno con este mismo NIF");
-              }
-              else{
+              } else {
                 setMessageError("Ya existe un alumno con este mismo EMAIL");
               }
               setShowAlert(true);
               studentError = true;
             }
-            if (studentError === false){
+            if (studentError === false) {
               nextStep(values, actions);
             }
             actions.setTouched({});
@@ -129,15 +135,25 @@ const Enrolment = (props) => {
           })
           .catch((error) => {
             console.log(error);
-        });
+          });
       }
-      else{
-        nextStep(values, actions);
-      }
+
+      // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+      // if (activeStep === 0 && isAdult(values.student.date_birth)) {
+      //   setActiveStep((previousActiveStep) => previousActiveStep + 1);
+      //   setSkipped((prevSkipped) => {
+      //     const newSkipped = new Set(prevSkipped.values());
+      //     newSkipped.add(activeStep + 1);
+      //     return newSkipped;
+      //   });
+      // } else {
+      //   nextStep(values, actions);
+      // }
     }
   };
 
-  function nextStep(values, actions){
+  function nextStep(values, actions) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     if (activeStep === 0 && isAdult(values.student.date_birth)) {
       setActiveStep((previousActiveStep) => previousActiveStep + 1);
@@ -216,7 +232,6 @@ const Enrolment = (props) => {
     setShowAlert(false);
   };
 
-
   return (
     <div>
       <Link to="/">Volver</Link>
@@ -260,7 +275,6 @@ const Enrolment = (props) => {
           touched,
         }) => (
           <Form>
-
             {showAlert ? (
               <Snackbar
                 anchorOrigin={{
@@ -271,41 +285,33 @@ const Enrolment = (props) => {
                 autoHideDuration={3000}
                 onClose={closeAlert}
               >
-                <Alert
-                  onClose={closeAlert}
-                  variant="filled"
-                  severity="error"
-                >
-                  { messageError }
+                <Alert onClose={closeAlert} variant="filled" severity="error">
+                  {messageError}
                 </Alert>
               </Snackbar>
             ) : null}
 
             {_renderStepContent(activeStep, values)}
-            <div>
+            <div className={classes.alignRight}>
               {activeStep !== 0 && (
-                <Button onClick={() => _handleBack(values)}>Atrás</Button>
+                <Button
+                  variant="contained"
+                  className={classes.btn}
+                  onClick={() => _handleBack(values)}
+                >
+                  Atrás
+                </Button>
               )}
-              {/* {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                >
-                  Saltarse paso
-                </Button>
-              )} */}
-              <div>
-                <Button
-                  disabled={isSubmitting}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                >
-                  {isLastStep ? "Enviar" : "Siguiente"}
-                </Button>
-                {isSubmitting && <CircularProgress size={24} />}
-              </div>
+              <Button
+                className={classes.btn}
+                disabled={isSubmitting}
+                type="submit"
+                variant="contained"
+                color="primary"
+              >
+                {isLastStep ? "Enviar" : "Siguiente"}
+              </Button>
+              {isSubmitting && <CircularProgress size={24} />}
             </div>
             <div>
               VALUES:

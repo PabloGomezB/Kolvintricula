@@ -52,7 +52,7 @@ export const Custodian = () => {
                           variant="contained"
                           onClick={() => remove(index)}
                         >
-                          -
+                          Eliminar responsable
                         </Button>
                       </Grid>
                       <Grid item xs={6}>
