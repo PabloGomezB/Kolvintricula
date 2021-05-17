@@ -6,6 +6,9 @@ import Student from "./Student";
 import Custodian from "./Custodian";
 import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
+import { Alert } from "@material-ui/lab";
+
+
 import {
   Button,
   CircularProgress,
@@ -13,6 +16,7 @@ import {
   StepLabel,
   Stepper,
   Typography,
+  Snackbar,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import formInitialValues from "./FormModel/formInitialValues";
@@ -26,6 +30,9 @@ const Enrolment = (props) => {
   const [skipped, setSkipped] = React.useState(new Set());
   const currentValidationSchema = validationSchema[activeStep];
   const isLastStep = activeStep === steps.length - 1;
+
+  const [messageError, setMessageError] = useState(0);
+  const [showAlert, setShowAlert] = useState(0);
 
   let studentData = {
     student: {
@@ -90,8 +97,8 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
-      if(activeStep === 0){
-        let error = false;
+      if(activeStep === 0 && props.studentData === 0){ // Checkear solo si el student es nuevo
+        let studentError = false;
         let newStudentNif = values.student.nif;
         let newStudentEmail = values.student.email_personal;
 
@@ -104,28 +111,18 @@ const Enrolment = (props) => {
             }
           )
           .then((response) => {
-            console.log(response.data);
-            if (response.data.nifFound){
-              alert("ESTE DNI YA EXISTE")
-              error = true;
-            }
-            if (response.data.emailFound){
-              alert("ESTE EMAIL YA EXISTE")
-              error = true;
-            }
-            if (error === false){
-              setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-              if (activeStep === 0 && isAdult(values.student.date_birth)) {
-                setActiveStep((previousActiveStep) => previousActiveStep + 1);
-                setSkipped((prevSkipped) => {
-                  const newSkipped = new Set(prevSkipped.values());
-                  newSkipped.add(activeStep + 1);
-                  return newSkipped;
-                });
+            if (response.data.nifFound || response.data.emailFound){
+              if (response.data.nifFound){
+                setMessageError("Ya existe un alumno con este mismo NIF");
               }
-              actions.setTouched({});
-              actions.setSubmitting(false);
+              else{
+                setMessageError("Ya existe un alumno con este mismo EMAIL");
+              }
+              setShowAlert(true);
+              studentError = true;
+            }
+            if (studentError === false){
+              nextStep(values, actions);
             }
             actions.setTouched({});
             actions.setSubmitting(false);
@@ -135,21 +132,24 @@ const Enrolment = (props) => {
         });
       }
       else{
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-        if (activeStep === 0 && isAdult(values.student.date_birth)) {
-          setActiveStep((previousActiveStep) => previousActiveStep + 1);
-          setSkipped((prevSkipped) => {
-            const newSkipped = new Set(prevSkipped.values());
-            newSkipped.add(activeStep + 1);
-            return newSkipped;
-          });
-        }
-        actions.setTouched({});
-        actions.setSubmitting(false);
+        nextStep(values, actions);
       }
     }
   };
+
+  function nextStep(values, actions){
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === 0 && isAdult(values.student.date_birth)) {
+      setActiveStep((previousActiveStep) => previousActiveStep + 1);
+      setSkipped((prevSkipped) => {
+        const newSkipped = new Set(prevSkipped.values());
+        newSkipped.add(activeStep + 1);
+        return newSkipped;
+      });
+    }
+    actions.setTouched({});
+    actions.setSubmitting(false);
+  }
 
   // const handleSkip = () => {
   //   if (!isStepOptional(activeStep)) {
@@ -212,6 +212,10 @@ const Enrolment = (props) => {
   //   }
   // }
 
+  const closeAlert = (event, reason) => {
+    setShowAlert(false);
+  };
+
 
   return (
     <div>
@@ -256,6 +260,27 @@ const Enrolment = (props) => {
           touched,
         }) => (
           <Form>
+
+            {showAlert ? (
+              <Snackbar
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                open={showAlert}
+                autoHideDuration={3000}
+                onClose={closeAlert}
+              >
+                <Alert
+                  onClose={closeAlert}
+                  variant="filled"
+                  severity="error"
+                >
+                  { messageError }
+                </Alert>
+              </Snackbar>
+            ) : null}
+
             {_renderStepContent(activeStep, values)}
             <div>
               {activeStep !== 0 && (

@@ -6,7 +6,6 @@ import Enrolment from "../Enrolment";
 import NoDisponible from "../Others/NoDisponible";
 import CourseList from "./CourseList";
 import Grid from "@material-ui/core/Grid";
-
 import { Alert } from "@material-ui/lab";
 
 const EnrolmentList = () => {
@@ -62,7 +61,7 @@ const EnrolmentList = () => {
       {courseArray.map((course) => (
         <Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? (
-            <Enrolment studentData={studentData} />
+            <Enrolment studentData={studentData}/>
           ) : (
             <NoDisponible />
           )}
