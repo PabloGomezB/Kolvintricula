@@ -19,8 +19,14 @@ import formInitialValues from "./FormModel/formInitialValues";
 import axios from "axios";
 import { mapValues } from "lodash";
 import { useStyle } from "../Layout/styles";
+import Revision from "./Revision";
 
-const steps = ["Datos del alumno", "Datos del responsable", "Datos académicos"];
+const steps = [
+  "Datos del alumno",
+  "Datos del responsable",
+  "Datos académicos",
+  // "Revision",
+];
 
 const Enrolment = (props) => {
   const classes = useStyle();
@@ -67,6 +73,8 @@ const Enrolment = (props) => {
         return <Custodian />;
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
+      // case 3:
+      //   return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
     }
@@ -211,15 +219,6 @@ const Enrolment = (props) => {
                   Atrás
                 </Button>
               )}
-              {/* {isStepOptional(activeStep) && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleSkip}
-                >
-                  Saltarse paso
-                </Button>
-              )} */}
               <Button
                 className={classes.btn}
                 disabled={isSubmitting}
