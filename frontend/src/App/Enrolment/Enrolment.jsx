@@ -90,25 +90,64 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      if(activeStep === 0){
+        let error = false;
+        let newStudentNif = values.student.nif;
+        let newStudentEmail = values.student.email_personal;
 
-      let newSkipped = skipped;
-      if (isStepSkipped(activeStep)) {
-        newSkipped = new Set(newSkipped.values());
-        newSkipped.delete(activeStep);
-      }
-      setSkipped(newSkipped);
+        axios
+          .post(
+            `http://127.0.0.1:8000/api/students/find`,
+            {
+              "nif": newStudentNif,
+              "email": newStudentEmail
+            }
+          )
+          .then((response) => {
+            console.log(response.data);
+            if (response.data.nifFound){
+              alert("ESTE DNI YA EXISTE")
+              error = true;
+            }
+            if (response.data.emailFound){
+              alert("ESTE EMAIL YA EXISTE")
+              error = true;
+            }
+            if (error === false){
+              setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
-      if (activeStep === 0 && isAdult(values.student.date_birth)) {
-        setActiveStep((previousActiveStep) => previousActiveStep + 1);
-        setSkipped((prevSkipped) => {
-          const newSkipped = new Set(prevSkipped.values());
-          newSkipped.add(activeStep + 1);
-          return newSkipped;
+              if (activeStep === 0 && isAdult(values.student.date_birth)) {
+                setActiveStep((previousActiveStep) => previousActiveStep + 1);
+                setSkipped((prevSkipped) => {
+                  const newSkipped = new Set(prevSkipped.values());
+                  newSkipped.add(activeStep + 1);
+                  return newSkipped;
+                });
+              }
+              actions.setTouched({});
+              actions.setSubmitting(false);
+            }
+            actions.setTouched({});
+            actions.setSubmitting(false);
+          })
+          .catch((error) => {
+            console.log(error);
         });
       }
-      actions.setTouched({});
-      actions.setSubmitting(false);
+      else{
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+        if (activeStep === 0 && isAdult(values.student.date_birth)) {
+          setActiveStep((previousActiveStep) => previousActiveStep + 1);
+          setSkipped((prevSkipped) => {
+            const newSkipped = new Set(prevSkipped.values());
+            newSkipped.add(activeStep + 1);
+            return newSkipped;
+          });
+        }
+        actions.setTouched({});
+        actions.setSubmitting(false);
+      }
     }
   };
 
@@ -141,6 +180,21 @@ const Enrolment = (props) => {
     actions.setSubmitting(false);
     // setActiveStep(activeStep + 1);
     console.log("submit", values);
+
+    // axios
+    //   .post(
+    //     `http://127.0.0.1:8000/api/enrolments/add`,
+    //     {
+    //       values,
+    //     }
+    //   )
+    //   .then((response) => {
+    //     console.log("response:", response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //     alert("vaya...parece que ha habido algun error...");
+    //   });
   }
   // function _handleSubmit(values, actions) {
   //   if (isLastStep) {
@@ -157,25 +211,7 @@ const Enrolment = (props) => {
   //     actions.setSubmitting(false);
   //   }
   // }
-  // const onSubmit = (values, { setSubmitting }) => {
-  //   axios
-  //     .post(
-  //       `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
-  //       {
-  //         values,
-  //       }
-  //     )
-  //     .then((response) => {
-  //       console.log("response:", response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert("vaya...para que ha habido algun error");
-  //     });
-  //   alert(JSON.stringify(values, null, 2));
-  //   console.log("submit", values);
-  //   setSubmitting(false);
-  // };
+
 
   return (
     <div>

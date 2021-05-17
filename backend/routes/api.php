@@ -59,3 +59,5 @@ Route::get('courses/{id}/modules',[ApiController::class, function($id){
         // select u_f_s.*, modules.* from u_f_s INNER JOIN modules on u_f_s.id_module = modules.id where u_f_s.id_module=1
     return $courseInfo;
 }]);
+
+Route::post('students/find', [ApiController::class, 'searchStudent']);

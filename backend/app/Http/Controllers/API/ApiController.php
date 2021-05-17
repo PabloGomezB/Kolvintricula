@@ -74,4 +74,34 @@ class ApiController extends Controller
 
         // return array_merge($studentData, $custodiansData, $academicData);
     }
+
+    function searchStudent(Request $request){
+
+        $array = array();
+        $data = $request->getContent();
+        $studentData = json_decode($data, true);
+
+        try { 
+            $nifDB = Student::where('nif', $studentData["nif"])->get();
+            $emailDB = Student::where('email_personal', $studentData["email"])->get();
+        } catch(\Illuminate\Database\QueryException $ex){ 
+            return $ex->getMessage(); 
+        }
+
+        if(count($nifDB) != 0){
+            $array["nifFound"]=true;
+        }
+        else{
+            $array["nifFound"]=false;
+        }
+
+        if(count($emailDB) != 0){
+            $array["emailFound"]=true;
+        }else{
+            $array["emailFound"]=false;
+        }
+
+        return json_encode($array);
+
+    }
 }
