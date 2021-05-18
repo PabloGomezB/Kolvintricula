@@ -39,25 +39,27 @@ Route::get('student/{nif}', [ApiController::class, function($nif){
 
 Route::post('enrolments/add', [ApiController::class, 'addEnrolment']);
 
-Route::get('courses/{id}/modules',[ApiController::class, function($id){
+Route::get('courses/{id}/modules',[ApiController::class, function($id){ 
 
-    // $courseInfo = DB::table('modules')->where('id_course', $id)->get();
-
-    // $courseInfo = DB::table('u_f_s')
-    //     ->join('modules', 'u_f_s.id_module', '=', 'modules.id')
-    //     ->where('u_f_s.id_module', $id)
-    //     ->select('u_f_s.*', 'modules.*')
-    //     ->get();
-
-
-    $courseInfo = DB::table('u_f_s')
+    $jsonUfs = DB::table('u_f_s')
         ->join('modules', 'u_f_s.id_module', '=', 'modules.id')
-        ->where('u_f_s.id_module', $id)
-        // ->select('u_f_s.*', 'modules.*')
-        ->get();
+        ->where('modules.id_course', $id)
+        ->get(['modules.name','modules.description','u_f_s.name','u_f_s.description','u_f_s.year','u_f_s.id_module']);
+        // ->get(['modules.name','modules.description']);
+        //select m.name, m.description, u.name, u.description, u.year from u_f_s as u INNER JOIN modules as m on u.id_module = m.id and m.id_course = 1   
+    $jsonModules = DB::table('modules')
+        ->where('modules.id_course',$id)
+        ->get(['modules.name','modules.description']);
+  
+    // array_merge($jsonModules->toArray(),$jsonUfs->toArray());
+    // "modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray())
 
-        // select u_f_s.*, modules.* from u_f_s INNER JOIN modules on u_f_s.id_module = modules.id where u_f_s.id_module=1
-    return $courseInfo;
+    $courseInfo1 = array("year" => 1 ,"modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray()));        
+    $courseInfo2 = array("year" => 2 ,"modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray()));    
+    
+    $courseFinale = array($courseInfo1,$courseInfo2);
+    $jsonFinal = json_encode($courseFinale);
+    return $jsonFinal;
 }]);
 
 Route::post('students/find', [ApiController::class, 'searchStudent']);
