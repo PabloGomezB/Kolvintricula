@@ -2,7 +2,6 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
-import { useStyle } from "../../Layout/styles";
 
 class CustodianO {
   constructor() {
@@ -34,7 +33,7 @@ export const Custodian = () => {
                 custodians.map((custodiansItem, index) => (
                   <div key={index}>
                     <Grid container spacing={3}>
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="select"
                           fullWidth
@@ -47,15 +46,18 @@ export const Custodian = () => {
                           ]}
                         />
                       </Grid>
-                      <Grid item xs={6}>
-                        <Button
-                          variant="contained"
-                          onClick={() => remove(index)}
-                        >
-                          Eliminar responsable
-                        </Button>
-                      </Grid>
-                      <Grid item xs={6}>
+                      {custodians.length !== 1 && (
+                        <Grid item xs={12} sm={6}>
+                          <Button
+                            variant="contained"
+                            onClick={() => remove(index)}
+                          >
+                            Eliminar responsable
+                          </Button>
+                        </Grid>
+                      )}
+
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="input"
                           type="text"
@@ -64,7 +66,7 @@ export const Custodian = () => {
                           fullWidth
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="input"
                           type="text"
@@ -73,7 +75,7 @@ export const Custodian = () => {
                           fullWidth
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="input"
                           type="text"
@@ -82,7 +84,7 @@ export const Custodian = () => {
                           fullWidth
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="input"
                           type="text"
@@ -91,7 +93,7 @@ export const Custodian = () => {
                           fullWidth
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="input"
                           type="number"
@@ -100,7 +102,7 @@ export const Custodian = () => {
                           fullWidth
                         />
                       </Grid>
-                      <Grid item xs={6}>
+                      <Grid item xs={12} sm={6}>
                         <FormikControl
                           control="input"
                           type="text"
