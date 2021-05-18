@@ -8,72 +8,14 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
 use App\Models\Course;
+use App\Models\Custodian;
 use App\Models\Student;
 use App\Models\Enrolment;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class ApiController extends Controller
 {
-
-    function addEnrolment(Request $request){
-
-        $enrolmentData = $request->getContent();
-        $aux = json_decode($enrolmentData, true);
-        $studentData = $aux["values"]["student"];
-
-        $newStudent = new Student;
-        $newStudent->nif = $studentData["nif"];
-        $newStudent->name = $studentData["name"];
-        $newStudent->last_name1 = $studentData["last_name1"];
-        $newStudent->last_name2 = $studentData["last_name2"];
-        $newStudent->date_birth = "2022-09-02";
-        $newStudent->mobile_number = $studentData["mobile_number"];
-        $newStudent->enrolment_status = 'MATRICULADO';
-        $newStudent->email_personal = $studentData["email_personal"];
-        // $newStudent->email_pedralbes = 'nuevo@email.com';
-        // $newStudent->photo_path = 'photo path';
-
-        // $result1 = $newStudent->save();
-        $newStudent->save();
-
-
-        $idNewStudent = Student::where('nif', $studentData["nif"])->get('id');
-        $newEnrolment = new Enrolment;
-        $academicData = $aux["values"]["academic_data"];
-
-        $newEnrolment->id_student = $idNewStudent[0]["id"];
-        $newEnrolment->json_course_module_uf = $academicData;
-
-        //$result2 = $newEnrolment->save();
-        $newEnrolment->save();
-
-        
-        // if ($result1 && $result2){
-        //     return 'OK';
-        // }
-        // else{
-        //     return 'FAIL';
-        // }
-
-
-        // $studentData = array();
-        // foreach ($enrolmentData["student"] as $value) {
-        //     array_push($studentData, $value);
-        // }
-
-        // $custodiansData = array();
-        // foreach ($enrolmentData["custodians"] as $value) {
-        //     array_push($custodiansData, $value);
-        // }
-
-        // $academicData = array();
-        // foreach ($enrolmentData["academic_data"] as $value) {
-        //     array_push($academicData, $value);
-        // }
-
-
-        // return array_merge($studentData, $custodiansData, $academicData);
-    }
 
     function searchStudent(Request $request){
 
@@ -102,5 +44,133 @@ class ApiController extends Controller
         }
 
         return json_encode($array);
+    }
+
+
+    function addEnrolment(Request $request){
+
+        $addStudentResult = array();
+        $addCustodiansResult = array();
+        $addEnrolmentResult = array();
+
+        try{
+            $data = $request->getContent();
+            $decodedData = json_decode($data, true);
+            $values = $decodedData["values"];
+
+            $studentData = $values["student"];
+            $custodiansData = $values["custodians"];
+            $academicData = $values["academic_data"];
+
+            $addStudentResult = ["addStudentResult" => $this->addStudent($studentData)];
+            $addCustodiansResult = ["addCustodiansResult" => $this->addCustodians($custodiansData, $studentData["nif"])];
+
+            return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
+
+        }
+        catch(\Illuminate\Database\QueryException | Exception $ex){ 
+            return $ex->getMessage(); 
+        }
+
+        
+        // try{
+        //     $this->addStudent($request);
+        // }
+        // catch(\Illuminate\Database\QueryException $ex){ 
+        //     return $ex->getMessage(); 
+        // }
+
+        // $enrolmentData = $request->getContent();
+        // $aux = json_decode($enrolmentData, true);
+        // $studentData = $aux["values"]["student"];
+
+
+        // $idNewStudent = Student::where('nif', $studentData["nif"])->get('id');
+        // $newEnrolment = new Enrolment;
+        // $academicData = $aux["values"]["academic_data"];
+
+        // $newEnrolment->id_student = $idNewStudent[0]["id"];
+        // $newEnrolment->json_course_module_uf = $academicData;
+
+        // $newEnrolment->save();
+
+        
+
+
+
+
+        // if ($result1 && $result2){
+        //     return 'OK';
+        // }
+        // else{
+        //     return 'FAIL';
+        // }
+
+
+        // $studentData = array();
+        // foreach ($enrolmentData["student"] as $value) {
+        //     array_push($studentData, $value);
+        // }
+
+        // $custodiansData = array();
+        // foreach ($enrolmentData["custodians"] as $value) {
+        //     array_push($custodiansData, $value);
+        // }
+
+        // $academicData = array();
+        // foreach ($enrolmentData["academic_data"] as $value) {
+        //     array_push($academicData, $value);
+        // }
+
+
+        // return array_merge($studentData, $custodiansData, $academicData);
+    }
+
+    function addStudent($studentData){
+
+        $newStudent = new Student;
+
+        try { 
+            $newStudent->nif = $studentData["nif"];
+            $newStudent->name = $studentData["name"];
+            $newStudent->last_name1 = $studentData["last_name1"];
+            $newStudent->last_name2 = $studentData["last_name2"];
+            $newStudent->date_birth = date("2022-09-02");
+            $newStudent->mobile_number = $studentData["mobile_number"];
+            $newStudent->enrolment_status = 'BORRADOR';
+            $newStudent->email_personal = $studentData["email_personal"];
+            // $newStudent->email_pedralbes = 'nuevo@email.com';
+            // $newStudent->photo_path = 'photo path';
+            $newStudent->save();
+        } catch(\Illuminate\Database\QueryException | Exception $ex){
+            return $ex->getMessage(); 
+        }
+
+        return "OK";
+    }
+
+    function addCustodians($custodiansData, $newStudentNif){
+
+        $newCustodian = new Custodian;
+        $id_student = Student::where('nif', $newStudentNif)->get('id');
+
+        foreach ($custodiansData as $custodian) {
+            try {
+                $newCustodian->id_student = $id_student;
+                $newCustodian->responsible = $custodian["type"];
+                $newCustodian->nif = $custodian["nif"];
+                $newCustodian->name = $custodian["name"];
+                $newCustodian->last_name1 = $custodian["last_name1"];
+                $newCustodian->last_name2 = $custodian["last_name2"];
+                $newCustodian->mobile_number = $custodian["mobile_number"];
+                $newCustodian->email = $custodian["email"];
+
+                $newCustodian->save();
+            } catch(\Illuminate\Database\QueryException | Exception $ex){
+                return $ex->getMessage();
+            }
+        }
+
+        return "OK";
     }
 }

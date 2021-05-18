@@ -37,8 +37,6 @@ Route::get('student/{nif}', [ApiController::class, function($nif){
     return Student::where('nif', $nif)->get();
 }]);
 
-Route::post('enrolments/add', [ApiController::class, 'addEnrolment']);
-
 Route::get('courses/{id}/modules',[ApiController::class, function($id){
 
     // $courseInfo = DB::table('modules')->where('id_course', $id)->get();
@@ -61,3 +59,6 @@ Route::get('courses/{id}/modules',[ApiController::class, function($id){
 }]);
 
 Route::post('students/find', [ApiController::class, 'searchStudent']);
+
+Route::post('students/add', [ApiController::class, 'addStudent']);
+Route::post('enrolments/add', [ApiController::class, 'addEnrolment']);

@@ -102,6 +102,25 @@ const Enrolment = (props) => {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  function updateStudent(values){
+
+  }
+
+  // function createStudent(student){
+  //   axios.post(
+  //     `http://127.0.0.1:8000/api/students/add`,
+  //     {
+  //       studentValues: student
+  //     }
+  //   )
+  //   .then((response) => {
+  //     console.log("createStudent:",response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
+  // }
+
   const handleNext = (values, actions) => {
     if (isLastStep) {
       _submitForm(values, actions);
@@ -140,7 +159,12 @@ const Enrolment = (props) => {
             console.log(error);
           });
       }
-
+      else if(activeStep === 0){
+        nextStep(values, actions);
+      }
+      else{
+        nextStep(values, actions);
+      }
       // setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
       // if (activeStep === 0 && isAdult(values.student.date_birth)) {
@@ -158,7 +182,7 @@ const Enrolment = (props) => {
 
   function nextStep(values, actions) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    if (activeStep === 0 && isAdult(values.student.date_birth)) {
+    if (isAdult(values.student.date_birth)) {
       setActiveStep((previousActiveStep) => previousActiveStep + 1);
       setSkipped((prevSkipped) => {
         const newSkipped = new Set(prevSkipped.values());
@@ -200,20 +224,19 @@ const Enrolment = (props) => {
     // setActiveStep(activeStep + 1);
     console.log("submit", values);
 
-    // axios
-    //   .post(
-    //     `http://127.0.0.1:8000/api/enrolments/add`,
-    //     {
-    //       values,
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log("response:", response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     alert("vaya...parece que ha habido algun error...");
-    //   });
+    axios.post(
+        `http://127.0.0.1:8000/api/enrolments/add`,
+        {
+          values,
+        }
+      )
+      .then((response) => {
+        console.log("response:", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert("vaya...parece que ha habido algun error...");
+    });
   }
   // function _handleSubmit(values, actions) {
   //   if (isLastStep) {

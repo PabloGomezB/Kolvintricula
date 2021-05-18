@@ -12,7 +12,7 @@ export default function CheckboxField(props) {
   const { label, ...rest } = props;
   const [field, meta, helper] = useField(props);
   const { setValue } = helper;
-  console.log("check field", field);
+  // console.log("check field", field);
   function _renderHelperText() {
     const [touched, error] = at(meta, "touched", "error");
     if (touched && error) {
