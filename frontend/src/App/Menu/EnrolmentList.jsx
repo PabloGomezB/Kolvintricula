@@ -115,7 +115,7 @@ const EnrolmentList = () => {
             </DialogActions>
           </Dialog>
           {showAlert
-            ? <Snackbar
+            ? (<Snackbar
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "center",
@@ -141,7 +141,6 @@ const EnrolmentList = () => {
             ) : null}
           </Container>
         </Container>
-      </>
     </Switch>
   );
 };
