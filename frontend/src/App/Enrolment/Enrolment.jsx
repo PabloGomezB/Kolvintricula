@@ -50,6 +50,7 @@ const Enrolment = (props) => {
       email_personal: "",
       nif: "",
       mobile_number: "",
+      photo_path: "",
     },
     custodians: [
       {
