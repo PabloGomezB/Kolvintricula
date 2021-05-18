@@ -16,52 +16,55 @@ export default function Revision({ values }) {
           Datos alumno
         </Typography>
         <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <List>
-              <ListItem>
-                <ListItemText
-                  primary="Nombre"
-                  secondary={values.student.name}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Primer apellido"
-                  secondary={values.student.last_name1}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Segundo apellido"
-                  secondary={values.student.last_name2}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Fecha de nacimiento"
-                  secondary={values.student.date_birth}
-                />
-              </ListItem>
-            </List>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText primary="Nombre" secondary={values.student.name} />
+            </ListItem>
           </Grid>
-          <Grid item xs={6}>
-            <List>
-              <ListItem>
-                <ListItemText
-                  primary="Email"
-                  secondary={values.student.email_personal}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="NIF" secondary={values.student.nif} />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Nº movil"
-                  secondary={values.student.mobile_number}
-                />
-              </ListItem>
-            </List>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText
+                primary="Primer apellido"
+                secondary={values.student.last_name1}
+              />
+            </ListItem>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText
+                primary="Segundo apellido"
+                secondary={values.student.last_name2}
+              />
+            </ListItem>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText
+                primary="Fecha de nacimiento"
+                secondary={values.student.date_birth}
+              />
+            </ListItem>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText
+                primary="Email"
+                secondary={values.student.email_personal}
+              />
+            </ListItem>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText primary="NIF" secondary={values.student.nif} />
+            </ListItem>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <ListItem>
+              <ListItemText
+                primary="Nº movil"
+                secondary={values.student.mobile_number}
+              />
+            </ListItem>
           </Grid>
         </Grid>
       </div>
@@ -74,7 +77,7 @@ export default function Revision({ values }) {
             <Grid container spacing={3}>
               {values.custodians.map((custodian, index) => {
                 return (
-                  <Grid item xs={6}>
+                  <Grid item xs={12} sm={6}>
                     <List>
                       <ListItem>
                         <ListItemText primary={`Responsable  ${index + 1}`} />
@@ -125,60 +128,6 @@ export default function Revision({ values }) {
             </Grid>
           </div>
         )}
-      {/* <div>
-        <Typography variant="h4" gutterBottom>
-          Datos académicos
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={6}>
-            <List>
-              <ListItem>
-                <ListItemText
-                  primary="Nombre"
-                  secondary={values.student.name}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Primer apellido"
-                  secondary={values.student.last_name1}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Segundo apellido"
-                  secondary={values.student.last_name2}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Fecha de nacimiento"
-                  secondary={values.student.date_birth}
-                />
-              </ListItem>
-            </List>
-          </Grid>
-          <Grid item xs={6}>
-            <List>
-              <ListItem>
-                <ListItemText
-                  primary="Email"
-                  secondary={values.student.email_personal}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="NIF" secondary={values.student.nif} />
-              </ListItem>
-              <ListItem>
-                <ListItemText
-                  primary="Nº movil"
-                  secondary={values.student.mobile_number}
-                />
-              </ListItem>
-            </List>
-          </Grid>
-        </Grid>
-      </div> */}
     </div>
   );
 }

@@ -24,12 +24,7 @@ import { mapValues } from "lodash";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
-const steps = [
-  "Datos del alumno",
-  "Datos del responsable",
-  "Datos académicos",
-  "Revision",
-];
+const steps = ["Alumno", "Responsable", "Académicos", "Revision"];
 
 const Enrolment = (props) => {
   const classes = useStyle();
@@ -51,7 +46,17 @@ const Enrolment = (props) => {
       nif: "",
       mobile_number: "",
     },
-    custodians: [],
+    custodians: [
+      {
+        type: "",
+        nif: "",
+        name: "",
+        last_name1: "",
+        last_name2: "",
+        mobile_number: "",
+        email: "",
+      },
+    ],
     academic_data: {
       course: "",
       moduluf: [],
@@ -96,6 +101,11 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
+      if (activeStep === 2) {
+        if (isAdult(values.student.date_birth)) {
+          values.custodians = [];
+        }
+      }
       if (activeStep === 0 && props.studentData === 0) {
         // Checkear solo si el student es nuevo
         let studentError = false;
@@ -145,7 +155,6 @@ const Enrolment = (props) => {
   };
 
   function nextStep(values, actions) {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     if (activeStep === 0 && isAdult(values.student.date_birth)) {
       setActiveStep((previousActiveStep) => previousActiveStep + 1);
       setSkipped((prevSkipped) => {
@@ -154,6 +163,7 @@ const Enrolment = (props) => {
         return newSkipped;
       });
     }
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     actions.setTouched({});
     actions.setSubmitting(false);
   }
@@ -182,7 +192,14 @@ const Enrolment = (props) => {
   }
 
   async function _submitForm(values, actions) {
+    if (!isAdult(values.student.date_birth) && values.custodians.length == 0) {
+      alert("Añade un responsable");
+      actions.setSubmitting(false);
+
+      return;
+    }
     await _sleep(1000);
+
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
     // setActiveStep(activeStep + 1);
@@ -225,12 +242,18 @@ const Enrolment = (props) => {
 
   return (
     <div>
-      <Link to="/">Volver</Link>
+      <Button component={Link} to="/" variant="contained">
+        Volver
+      </Button>
 
       <Typography variant="h3" gutterBottom align="center">
         Matrícula
       </Typography>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper
+        activeStep={activeStep}
+        alternativeLabel
+        style={{ padding: "24px 0px 24px 0px" }}
+      >
         {steps.map((label, index) => {
           const stepProps = {};
           const labelProps = {};
@@ -243,7 +266,7 @@ const Enrolment = (props) => {
             stepProps.completed = false;
           }
           return (
-            <Step key={label} {...stepProps}>
+            <Step key={label} {...stepProps} style={{ width: 24, padding: 0 }}>
               <StepLabel {...labelProps} align="center">
                 {label}
               </StepLabel>
