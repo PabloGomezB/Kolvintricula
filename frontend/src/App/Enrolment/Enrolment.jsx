@@ -113,10 +113,13 @@ const Enrolment = (props) => {
         let newStudentEmail = values.student.email_personal;
 
         axios
-          .post(`http://127.0.0.1:8000/api/students/find`, {
-            nif: newStudentNif,
-            email: newStudentEmail,
-          })
+          .post(
+            `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
+            {
+              nif: newStudentNif,
+              email: newStudentEmail
+            }
+          )
           .then((response) => {
             if (response.data.nifFound || response.data.emailFound) {
               if (response.data.nifFound) {
