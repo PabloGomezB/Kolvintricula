@@ -1,12 +1,4 @@
-import {
-  Checkbox,
-  FormGroup,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Typography,
-} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";

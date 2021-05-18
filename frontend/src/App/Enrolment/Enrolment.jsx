@@ -18,9 +18,7 @@ import {
   Snackbar,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
-import formInitialValues from "./FormModel/formInitialValues";
 import axios from "axios";
-import { mapValues } from "lodash";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
@@ -102,50 +100,50 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
-      if (props.studentData !== 0){
+      if (props.studentData !== 0) {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
-      if (activeStep === 2) {
-        if (isAdult(values.student.date_birth)) {
-          values.custodians = [];
+        if (activeStep === 2) {
+          if (isAdult(values.student.date_birth)) {
+            values.custodians = [];
+          }
         }
-      }
-      if (activeStep === 0 && props.studentData === 0) {
-        // Checkear solo si el student es nuevo
-        let studentError = false;
-        let newStudentNif = values.student.nif;
-        let newStudentEmail = values.student.email_personal;
+        if (activeStep === 0 && props.studentData === 0) {
+          // Checkear solo si el student es nuevo
+          let studentError = false;
+          let newStudentNif = values.student.nif;
+          let newStudentEmail = values.student.email_personal;
 
-        axios
-          .post(
-            `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
-            {
-              nif: newStudentNif,
-              email: newStudentEmail
-            }
-          )
-          .then((response) => {
-            if (response.data.nifFound || response.data.emailFound) {
-              if (response.data.nifFound) {
-                setMessageError("Ya existe un alumno con este mismo NIF");
-              } else {
-                setMessageError("Ya existe un alumno con este mismo EMAIL");
+          axios
+            .post(
+              `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
+              {
+                nif: newStudentNif,
+                email: newStudentEmail,
               }
-              setShowAlert(true);
-              studentError = true;
-            }
-            if (studentError === false) {
-              nextStep(values, actions);
-            }
-            actions.setTouched({});
-            actions.setSubmitting(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-      else{
-        nextStep(values, actions);
+            )
+            .then((response) => {
+              if (response.data.nifFound || response.data.emailFound) {
+                if (response.data.nifFound) {
+                  setMessageError("Ya existe un alumno con este mismo NIF");
+                } else {
+                  setMessageError("Ya existe un alumno con este mismo EMAIL");
+                }
+                setShowAlert(true);
+                studentError = true;
+              }
+              if (studentError === false) {
+                nextStep(values, actions);
+              }
+              actions.setTouched({});
+              actions.setSubmitting(false);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          nextStep(values, actions);
+        }
       }
     }
   };
@@ -165,21 +163,6 @@ const Enrolment = (props) => {
     actions.setSubmitting(false);
   }
 
-  // const handleSkip = () => {
-  //   if (!isStepOptional(activeStep)) {
-  //     // You probably want to guard against something like this,
-  //     // it should never occur unless someone's actively trying to break something.
-  //     throw new Error("You can't skip a step that isn't optional.");
-  //   }
-
-  //   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  //   setSkipped((prevSkipped) => {
-  //     const newSkipped = new Set(prevSkipped.values());
-  //     newSkipped.add(activeStep);
-  //     return newSkipped;
-  //   });
-  // };
-
   function _handleBack(values) {
     if (activeStep === 2 && isAdult(values.student.date_birth)) {
       setActiveStep((prevActiveStep) => prevActiveStep - 2);
@@ -189,7 +172,7 @@ const Enrolment = (props) => {
   }
 
   async function _submitForm(values, actions) {
-    if (!isAdult(values.student.date_birth) && values.custodians.length == 0) {
+    if (!isAdult(values.student.date_birth) && values.custodians.length === 0) {
       alert("Añade un responsable");
       actions.setSubmitting(false);
 
@@ -202,35 +185,18 @@ const Enrolment = (props) => {
     // setActiveStep(activeStep + 1);
     console.log("submit", values);
 
-    axios.post(
-        `http://127.0.0.1:8000/api/enrolments/add`,
-        {
-          values,
-        }
-      )
+    axios
+      .post(`http://127.0.0.1:8000/api/enrolments/add`, {
+        values,
+      })
       .then((response) => {
         console.log("response:", response.data);
       })
       .catch((error) => {
         console.log(error);
         alert("vaya...parece que ha habido algun error...");
-    });
+      });
   }
-  // function _handleSubmit(values, actions) {
-  //   if (isLastStep) {
-  //     _submitForm(values, actions);
-  //   } else {
-  //     if (
-  //       activeStep === 0 &&
-  //       moment().diff(values.student.date_birth, "years") >= 18
-  //     ) {
-  //       setActiveStep((previousActiveStep) => previousActiveStep + 1);
-  //     }
-  //     setActiveStep((previousActiveStep) => previousActiveStep + 1);
-  //     actions.setTouched({});
-  //     actions.setSubmitting(false);
-  //   }
-  // }
 
   const closeAlert = (event, reason) => {
     setShowAlert(false);
@@ -322,19 +288,18 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            <div>
+            {/* <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div>
+            </div> */}
           </Form>
         )}
       </Formik>
     </div>
   );
 };
-
 export default Enrolment;
