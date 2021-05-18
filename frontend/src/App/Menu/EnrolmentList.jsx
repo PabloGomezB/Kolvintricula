@@ -87,7 +87,7 @@ const EnrolmentList = () => {
       ))}
       <Container maxWidth="xl" style={{ flexGrow: 1, backgroundImage: 'url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px'}}>
+    backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px' }}>
         <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Nuestros cursos</h1>
         <Grid container style={{ textAlign: 'center' }}>
           <CourseList courses={courseArray}></CourseList>

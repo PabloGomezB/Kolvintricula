@@ -100,9 +100,42 @@ const Enrolment = (props) => {
     setSubmitting(false);
   };
 
+  const [file, setFile] = useState('');
+  const [imagePreviewUrl, setimagePreviewUrl] = useState('');
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    // TODO: do something with -> this.state.file
+    console.log('handle uploading-', file);
+  }
+
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      setFile(file);
+      setimagePreviewUrl(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  let $imagePreview = null;
+  if (imagePreviewUrl) {
+    $imagePreview = <img style={{ float: 'right', height: '100px', width: '100px' }} src={imagePreviewUrl} alt="Artwork" />;
+  } else {
+    $imagePreview = (
+      <div className="previewText"></div>
+    );
+  }
+
   return (
     <div>
       <Link to="/">Volver</Link>
+      <div style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover', height: '100px', width: '100px' }} className="imgPreview">{$imagePreview}</div>
 
       <Typography variant="h3" gutterBottom align="center">
         Matrícula
@@ -142,6 +175,28 @@ const Enrolment = (props) => {
                 </Button>
                 {isSubmitting && <CircularProgress size={24} />}
               </div>
+            </div>
+            <div>
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <input
+                  style={{ display: 'none' }}
+                  type="file"
+                  id="contained-button-file"
+                  onChange={(e) => handleImageChange(e)}
+                />
+                {/* <label htmlFor="contained-button-file">
+                  <button
+                    onClick={(e) => handleSubmit(e)}
+                  >
+                    Upload Image
+                  </button>
+                </label> */}
+                <label htmlFor="contained-button-file">
+                  <Button variant="contained" color="primary" component="span">
+                    Subir foto
+                  </Button>
+                </label>
+              </form>
             </div>
             {/* <Student />
 

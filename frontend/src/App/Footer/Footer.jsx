@@ -9,8 +9,6 @@ import { Grid, Paper } from "@material-ui/core";
 
 export default function Footer() {
   const classes = useStyle();
-  let aceptar = false;
-  //const [cookies, setCookie] = useCookies(["cookie"]);
 
   return (
     <AppBar position="static" component="footer">
@@ -115,8 +113,9 @@ export default function Footer() {
         {/* <p>© 2021 Kolvintrícula</p> */}
         {/* </Typography> */}
         {/* </Toolbar> */}
-        {/* <CookieConsent  
-          debug={true}
+        <CookieConsent  
+          // debug={true}
+          cookieName="KolvintriculaCookie"
           location="bottom"
           buttonText="Entiendo"
           style={{ background: "black" }}
@@ -137,7 +136,7 @@ export default function Footer() {
           >
             Política de privacidad
           </a>
-        </CookieConsent> */}
+        </CookieConsent>
       </Container>
     </AppBar>
   );
