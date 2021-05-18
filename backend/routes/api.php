@@ -45,21 +45,29 @@ Route::get('courses/{id}/modules',[ApiController::class, function($id){
         ->join('modules', 'u_f_s.id_module', '=', 'modules.id')
         ->where('modules.id_course', $id)
         ->get(['modules.name','modules.description','u_f_s.name','u_f_s.description','u_f_s.year','u_f_s.id_module']);
-        // ->get(['modules.name','modules.description']);
-        //select m.name, m.description, u.name, u.description, u.year from u_f_s as u INNER JOIN modules as m on u.id_module = m.id and m.id_course = 1   
+
     $jsonModules = DB::table('modules')
         ->where('modules.id_course',$id)
-        ->get(['modules.name','modules.description']);
-  
-    // array_merge($jsonModules->toArray(),$jsonUfs->toArray());
-    // "modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray())
-
-    $courseInfo1 = array("year" => 1 ,"modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray()));        
-    $courseInfo2 = array("year" => 2 ,"modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray()));    
+        ->get(['modules.id','modules.name','modules.description']); 
     
-    $courseFinale = array($courseInfo1,$courseInfo2);
-    $jsonFinal = json_encode($courseFinale);
-    return $jsonFinal;
+    // $jsonModules = $jsonModules->toArray();
+    // array_push($jsonModules,array("ufs"=>"asdasdasdasd"));
+    
+    $jsonModules = json_decode($jsonModules, TRUE);
+    for($i = 0; $i < sizeof($jsonModules); $i++) {
+        $jsonModules[$i]['ufs']=$jsonUfs;
+    }
+    //jsonModules=(array)$jsonModules;
+    $jsonModules[0]['ufs']=$jsonUfs;
+    //$jsonModules=(object)$jsonModules;
+
+  //  $courseInfo1 = array("year" => 1 ,"modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray()));        
+  //  $courseInfo2 = array("year" => 2 ,"modules" => array_merge($jsonModules->toArray(),$jsonUfs->toArray()));    
+    
+  //  $courseFinale = array($courseInfo1,$courseInfo2);
+  //  $jsonFinal = json_encode($courseFinale);
+
+    return $jsonModules;
 }]);
 
 Route::post('students/find', [ApiController::class, 'searchStudent']);
