@@ -28,7 +28,7 @@ const steps = [
   "Datos del alumno",
   "Datos del responsable",
   "Datos académicos",
-  // "Revision",
+  "Revision",
 ];
 
 const Enrolment = (props) => {
@@ -51,17 +51,7 @@ const Enrolment = (props) => {
       nif: "",
       mobile_number: "",
     },
-    custodians: [
-      {
-        type: "",
-        nif: "",
-        name: "",
-        last_name1: "",
-        last_name2: "",
-        mobile_number: "",
-        email: "",
-      },
-    ],
+    custodians: [],
     academic_data: {
       course: "",
       moduluf: [],
@@ -79,8 +69,8 @@ const Enrolment = (props) => {
         return <Custodian />;
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
-      // case 3:
-      //   return <Revision values={values} />;
+      case 3:
+        return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
     }
@@ -112,31 +102,32 @@ const Enrolment = (props) => {
         let newStudentNif = values.student.nif;
         let newStudentEmail = values.student.email_personal;
 
-        axios
-          .post(`http://127.0.0.1:8000/api/students/find`, {
-            nif: newStudentNif,
-            email: newStudentEmail,
-          })
-          .then((response) => {
-            if (response.data.nifFound || response.data.emailFound) {
-              if (response.data.nifFound) {
-                setMessageError("Ya existe un alumno con este mismo NIF");
-              } else {
-                setMessageError("Ya existe un alumno con este mismo EMAIL");
-              }
-              setShowAlert(true);
-              studentError = true;
-            }
-            if (studentError === false) {
-              nextStep(values, actions);
-            }
-            actions.setTouched({});
-            actions.setSubmitting(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        //   axios
+        //     .post(`http://127.0.0.1:8000/api/students/find`, {
+        //       nif: newStudentNif,
+        //       email: newStudentEmail,
+        //     })
+        //     .then((response) => {
+        //       if (response.data.nifFound || response.data.emailFound) {
+        //         if (response.data.nifFound) {
+        //           setMessageError("Ya existe un alumno con este mismo NIF");
+        //         } else {
+        //           setMessageError("Ya existe un alumno con este mismo EMAIL");
+        //         }
+        //         setShowAlert(true);
+        //         studentError = true;
+        //       }
+        //       if (studentError === false) {
+        //         nextStep(values, actions);
+        //       }
+        //       actions.setTouched({});
+        //       actions.setSubmitting(false);
+        //     })
+        //     .catch((error) => {
+        //       console.log(error);
+        //     });
       }
+      nextStep(values, actions);
 
       // setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
@@ -263,7 +254,6 @@ const Enrolment = (props) => {
       <Formik
         initialValues={studentData}
         validationSchema={currentValidationSchema}
-        // onSubmit={_handleSubmit}
         onSubmit={handleNext}
       >
         {({

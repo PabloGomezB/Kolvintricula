@@ -23,7 +23,6 @@ export const AcademicData = ({ cursmoduluf, values }) => {
         <div>
           <div>
             <FormikControl
-              className={classes.formOptionInput}
               fullWidth
               control="select"
               label="Curso académico"
@@ -41,7 +40,10 @@ export const AcademicData = ({ cursmoduluf, values }) => {
                   (modul, index) => {
                     return (
                       <ListItem key={modul.modul_key}>
-                        <ListItemText primary={modul.name} />
+                        <ListItemText
+                          primary={modul.name}
+                          className={classes.dblock}
+                        />
 
                         <ListItemSecondaryAction>
                           {modul.ufs.map((uf) => {
