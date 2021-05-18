@@ -5,7 +5,13 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Enrolment from "../Enrolment";
 import NoDisponible from "../Others/NoDisponible";
 import CourseList from "./CourseList";
-import Grid from "@material-ui/core/Grid";
+import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 import { Alert } from "@material-ui/lab";
 
 const EnrolmentList = () => {
@@ -50,10 +56,22 @@ const EnrolmentList = () => {
       .catch((error) => {
         console.log(error);
       });
-  };
+
+      setOpen(false);
+  }
 
   const closeAlert = (event, reason) => {
     setShowAlert(false);
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -67,23 +85,37 @@ const EnrolmentList = () => {
           )}
         </Route>
       ))}
-      <>
-        <Container maxWidth="sm" style={{ flexGrow: 1 }}>
-          <Grid container spacing={3}>
-            <CourseList courses={courseArray}></CourseList>
-          </Grid>
-          <Container>
-            <TextField id="nif_field" label="NIF" variant="outlined" />
-            <Button
-              id="nif_button"
-              onClick={searchStudent}
-              variant="outlined"
-              color="primary"
-            >
-              Cargar datos
-            </Button>
-            {showAlert ? (
-              <Snackbar
+      <Container maxWidth="xl" style={{ flexGrow: 1, backgroundImage: 'url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px' }}>
+        <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Nuestros cursos</h1>
+        <Grid container style={{ textAlign: 'center' }}>
+          <CourseList courses={courseArray}></CourseList>
+        </Grid>
+        <Container style={{ textAlign: 'center' }}>
+          <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{ padding: '10px', borderRadius: '10px', fontWeight: 'bolder', backgroundColor: 'white' }}>
+            ¿Quieres cargar tus datos?
+          </Button>
+          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">
+            <DialogTitle id="form-dialog-title">Introduce tu NIF</DialogTitle>
+            <DialogContent>
+              {/* <DialogContentText>
+                Carga tus datos introduciendo tu NIF
+              </DialogContentText> */}
+              <TextField autoFocus id="nif_field" label="NIF" variant="outlined" style={{ marginBottom: '20px' }}/>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancelar
+              </Button>
+              <Button onClick={searchStudent} color="primary">
+                Cargar datos
+              </Button>
+
+            </DialogActions>
+          </Dialog>
+          {showAlert
+            ? <Snackbar
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "center",
