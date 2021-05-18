@@ -104,7 +104,7 @@ const Enrolment = (props) => {
 
         axios
           .post(
-            `http://127.0.0.1:8000/api/students/find`,
+            `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
             {
               "nif": newStudentNif,
               "email": newStudentEmail
