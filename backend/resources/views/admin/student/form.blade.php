@@ -2,7 +2,8 @@
     <div class="grid grid-rows-2 gap-6">
         <div>
             <x-label for="photo_path" :value="__('Fotografía del alumno')" />
-            <x-input id="photo_path" type="text" name="photo_path" placeholder="" value="{{ $student->photo_path }}" class="block mt-1 w-full" autofocus />
+            <!-- <x-input id="photo_path" type="text" name="photo_path" placeholder="" value="{{ $student->photo_path }}" class="block mt-1 w-full" autofocus /> -->
+            <input type="file" name="photo_path" accept="image/*" />
         </div>
         <div>
             <x-label for="last_name1" :value="__('Primer apellido del alumno')" />

@@ -14,7 +14,7 @@ class StudentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data['dataStudents'] = Student::paginate(4);
+        $data['dataStudents'] = Student::paginate(5);
         return view('admin.student.index', $data);
     }
 
@@ -41,11 +41,16 @@ class StudentController extends Controller {
             'last_name2' => 'required',
             'date_birth' => 'required',
             'mobile_number' => 'required',
-            'photo_path' => 'required',
+            'photo_path' => 'required|image|max:2048',
             'enrolment_status' => 'required',
             'email_personal' => 'required',
             'email_pedralbes' => 'required',
         ]);
+        $image = $request->file('photo_path');
+
+        $new_name = rand() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('uploads'), $new_name);
+
         $dataForm = request()->except('_token');
         Student::create($dataForm);
 

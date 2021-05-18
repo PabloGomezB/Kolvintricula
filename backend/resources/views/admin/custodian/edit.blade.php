@@ -1,5 +1,5 @@
 <x-app-layout>
-    @include('admin.course.header')
+    @include('admin.custodian.header')
 
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">

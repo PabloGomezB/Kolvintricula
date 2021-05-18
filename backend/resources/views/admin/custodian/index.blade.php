@@ -65,7 +65,7 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->mobile_number }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->email }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm">
-                                                    <form class="" action="{{ route('custodians5.destroy',$custodian->id) }}" method="POST">
+                                                    <form class="" action="{{ route('custodians.destroy',$custodian->id) }}" method="POST">
                                                         <a href="{{ route('custodians.edit',$custodian->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Editar</a>
                                                         @csrf
                                                         @method('DELETE')
@@ -78,7 +78,7 @@
                                     </table>
                                 </div>
                                 <div class="mt-4">
-                                    {!! $dataCustodiams->links() !!}
+                                    {!! $dataCustodians->links() !!}
                                 </div>
                             </div>
                         </div>

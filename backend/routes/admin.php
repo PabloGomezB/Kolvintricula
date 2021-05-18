@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\CustodianController;
 
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -22,6 +23,7 @@ Route::resource('courses', CourseController::class);
 Route::resource('modules', ModuleController::class);
 
 Route::resource('students', StudentController::class);
+Route::resource('custodians', CustodianController::class);
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
