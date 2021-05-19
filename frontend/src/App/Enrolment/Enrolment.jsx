@@ -103,47 +103,47 @@ const Enrolment = (props) => {
       if (props.studentData !== 0) {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
-        if (activeStep === 2) {
-          if (isAdult(values.student.date_birth)) {
-            values.custodians = [];
-          }
+      }
+      if (activeStep === 2) {
+        if (isAdult(values.student.date_birth)) {
+          values.custodians = [];
         }
-        if (activeStep === 0 && props.studentData === 0) {
-          // Checkear solo si el student es nuevo
-          let studentError = false;
-          let newStudentNif = values.student.nif;
-          let newStudentEmail = values.student.email_personal;
+      }
+      if (activeStep === 0 && props.studentData === 0) {
+        // Checkear solo si el student es nuevo
+        let studentError = false;
+        let newStudentNif = values.student.nif;
+        let newStudentEmail = values.student.email_personal;
 
-          axios
-            .post(
-              `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
-              {
-                nif: newStudentNif,
-                email: newStudentEmail,
+        axios
+          .post(
+            `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
+            {
+              nif: newStudentNif,
+              email: newStudentEmail,
+            }
+          )
+          .then((response) => {
+            if (response.data.nifFound || response.data.emailFound) {
+              if (response.data.nifFound) {
+                setMessageError("Ya existe un alumno con este mismo NIF");
+              } else {
+                setMessageError("Ya existe un alumno con este mismo EMAIL");
               }
-            )
-            .then((response) => {
-              if (response.data.nifFound || response.data.emailFound) {
-                if (response.data.nifFound) {
-                  setMessageError("Ya existe un alumno con este mismo NIF");
-                } else {
-                  setMessageError("Ya existe un alumno con este mismo EMAIL");
-                }
-                setShowAlert(true);
-                studentError = true;
-              }
-              if (studentError === false) {
-                nextStep(values, actions);
-              }
-              actions.setTouched({});
-              actions.setSubmitting(false);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        } else {
-          nextStep(values, actions);
-        }
+              setShowAlert(true);
+              studentError = true;
+            }
+            if (studentError === false) {
+              nextStep(values, actions);
+            }
+            actions.setTouched({});
+            actions.setSubmitting(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        nextStep(values, actions);
       }
     }
   };
