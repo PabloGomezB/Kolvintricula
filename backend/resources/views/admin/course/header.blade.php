@@ -14,13 +14,5 @@
                     Añadir nuevo curso
                 </a>
             </div>
-            @if(Route::is('courses.show'))
-                <div class="ml-20 pt-0.5">
-                    <a class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"  
-                        href="{{ route('modules.create', ['id' => $course->id]) }}">
-                        Añadir nuevo Modulo
-                    </a>
-                </div>
-            @endif
         </div>
 </x-slot>

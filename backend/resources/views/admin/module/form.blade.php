@@ -12,12 +12,7 @@
                     <?php                         
                         $courses = Course::all();
                         foreach ($courses as $course) {
-                            if($course->id == $id){
-                                echo "<option selected value='$course->id'>$course->name</option>";
-                            }
-                            else{
-                                echo "<option value='$course->id'>$course->name</option>";
-                            }
+                            echo "<option value='$course->id'>$course->name</option>";
                         }
                     ?>
                 </select>

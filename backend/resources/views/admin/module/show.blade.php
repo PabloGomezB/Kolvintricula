@@ -72,7 +72,7 @@
                         </tr>
                     @endif                                    
                     @foreach ($ufs as $uf)
-                    <tr class="hover:bg-blue-100 ">
+                    <tr class="clickable-row hover:bg-blue-100 ">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->id }}</td>               
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->name }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $uf->description }}</td>
