@@ -44,16 +44,42 @@ Route::get('student/{nif}', [ApiController::class, function($nif){
 // Parametros: nif, email
 Route::post('students/find', [ApiController::class, 'searchStudent']);
 
-Route::get('courses/{id}/modules',[ApiController::class, function($id){
+Route::get('courses/{id}/modules',[ApiController::class, function($id){ 
 
-    $courseInfo = DB::table('u_f_s')
-        ->join('modules', 'u_f_s.id_module', '=', 'modules.id')
-        ->where('u_f_s.id_module', $id)
-        // ->select('u_f_s.*', 'modules.*')
-        ->get();
+    $jsonFinal = array();
 
-        // select u_f_s.*, modules.* from u_f_s INNER JOIN modules on u_f_s.id_module = modules.id where u_f_s.id_module=1
-    return $courseInfo;
+    //set the total number of courses in this loop
+    //this loop finds all the modules of the selected course in each year
+    for ($i=1; $i <= 2; $i++) { 
+
+        $jsonModules = DB::table('modules')
+            ->join('u_f_s','u_f_s.id_module','=','modules.id')
+            ->where('modules.id_course',$id)
+            ->where('u_f_s.year', $i)            
+            ->groupBy('modules.id')
+            ->get(['modules.id','modules.name','modules.description']);
+              
+
+        $jsonModules = json_decode($jsonModules, TRUE);
+
+        //this loop finds all the ufs in each module of the actual year
+        for($j = 0; $j < sizeof($jsonModules); $j++) {
+            
+            $jsonUfs = DB::table('u_f_s')
+                ->where('u_f_s.year',$i)
+                ->where('u_f_s.id_module',$jsonModules[$j]['id'])
+                ->get(['u_f_s.name','u_f_s.description','u_f_s.year','u_f_s.id_module']);
+
+            $jsonModules[$j]['ufs'] = $jsonUfs;
+        }
+
+        $courseInfo = array("year" => $i ,"modules" => $jsonModules);
+        array_push($jsonFinal,$courseInfo);
+    }
+
+    // $jsonFinal = json_encode($jsonFinal);
+
+    return $jsonFinal;
 }]);
 
 
