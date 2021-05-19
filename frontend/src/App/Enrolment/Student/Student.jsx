@@ -73,7 +73,7 @@ export const Student = () => {
         Datos del alumno
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="input"
             type="text"
@@ -83,7 +83,7 @@ export const Student = () => {
           />
         </Grid>
 
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="input"
             type="text"
@@ -92,7 +92,7 @@ export const Student = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="input"
             type="text"
@@ -101,7 +101,7 @@ export const Student = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="input"
             type="text"
@@ -110,7 +110,7 @@ export const Student = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="input"
             type="email"
@@ -119,7 +119,7 @@ export const Student = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="input"
             type="number"
@@ -128,7 +128,7 @@ export const Student = () => {
             fullWidth
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={6}>
           <FormikControl
             control="date"
             label="Fecha de nacimiento: "
