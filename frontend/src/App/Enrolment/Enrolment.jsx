@@ -76,7 +76,7 @@ const Enrolment = (props) => {
       case 3:
         return <Revision values={values} />;
       default:
-        return <div>Not Found</div>;
+        return <div>Not Found step:{step}</div>;
     }
   }
 
@@ -147,7 +147,6 @@ const Enrolment = (props) => {
         nextStep(values, actions);
       }
     }
-    console.log("HN - activeStep:",activeStep);
   };
 
   function nextStep(values, actions) {
@@ -163,6 +162,7 @@ const Enrolment = (props) => {
     // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     actions.setTouched({});
     actions.setSubmitting(false);
+    console.log("HN - activeStep:",activeStep);
   }
 
   function _handleBack(values) {
