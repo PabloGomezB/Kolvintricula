@@ -7,7 +7,12 @@ import {
 import DateFnsUtils from "@date-io/date-fns";
 import es from "date-fns/locale/es";
 
-function DatePicker(props) {
+/**
+ * Componente que crea un calendario para que elijas una fecha
+ * @param {*} props
+ * @returns
+ */
+const DatePicker = (props) => {
   const [field, meta, helper] = useField(props);
   const { touched, error } = meta;
   const { setValue } = helper;
@@ -21,7 +26,10 @@ function DatePicker(props) {
       setSelectedDate(date);
     }
   }, [value]);
-
+  /**
+   * Al detectar un cambio en el input guarda el date
+   * @param {*} date
+   */
   function _onChange(date) {
     if (date) {
       setSelectedDate(date);
@@ -51,6 +59,6 @@ function DatePicker(props) {
       />
     </MuiPickersUtilsProvider>
   );
-}
+};
 
 export default DatePicker;
