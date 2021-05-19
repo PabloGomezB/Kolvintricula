@@ -2,20 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-// use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Routing\Controller;
-
-use App\Models\Course;
 use App\Models\Custodian;
 use App\Models\Student;
-use App\Models\Enrolment;
 use Exception;
-use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isEmpty;
-
 
 class ApiController extends Controller
 {

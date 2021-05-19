@@ -68,7 +68,7 @@ const Enrolment = (props) => {
   function _renderStepContent(step, values) {
     switch (step) {
       case 0:
-        return <Student />;
+        return <Student nif={studentData.student.nif}/>;
       case 1:
         return <Custodian />;
       case 2:
@@ -76,7 +76,7 @@ const Enrolment = (props) => {
       case 3:
         return <Revision values={values} />;
       default:
-        return <div>Not Found step:{step}</div>;
+        return <div>Not Found</div>;
     }
   }
 
@@ -151,18 +151,16 @@ const Enrolment = (props) => {
 
   function nextStep(values, actions) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    if (isAdult(values.student.date_birth)) {
-      setActiveStep((previousActiveStep) => previousActiveStep + 1);
+    if (activeStep === 0 && isAdult(values.student.date_birth)) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setSkipped((prevSkipped) => {
         const newSkipped = new Set(prevSkipped.values());
         newSkipped.add(activeStep + 1);
         return newSkipped;
       });
     }
-    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     actions.setTouched({});
     actions.setSubmitting(false);
-    console.log("HN - activeStep:",activeStep);
   }
 
   function _handleBack(values) {
@@ -171,7 +169,6 @@ const Enrolment = (props) => {
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
-    console.log("HB - activeStep:",activeStep);
   }
 
   async function _submitForm(values, actions) {
@@ -185,11 +182,10 @@ const Enrolment = (props) => {
 
     alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
-    // setActiveStep(activeStep + 1);
     console.log("submit", values);
 
     axios
-      .post(`http://127.0.0.1:8000/api/enrolments/add`, {
+      .post(`http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`, {
         values,
       })
       .then((response) => {

@@ -2,7 +2,7 @@ import { Grid, Typography } from "@material-ui/core";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
 
-export const Student = () => {
+export const Student = (props) => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -39,13 +39,24 @@ export const Student = () => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormikControl
-            control="input"
-            type="text"
-            label="NIF: "
-            name="student.nif"
-            fullWidth
-          />
+          { props.nif.length === 0 ? (
+            <FormikControl
+              control="input"
+              type="text"
+              label="NIF: "
+              name="student.nif"
+              fullWidth
+            />
+          ) : (
+            <FormikControl
+              control="input"
+              type="text"
+              label="NIF: "
+              name="student.nif"
+              fullWidth
+              disabled
+            />
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormikControl
