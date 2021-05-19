@@ -62,3 +62,5 @@ Route::post('students/find', [ApiController::class, 'searchStudent']);
 
 Route::post('students/add', [ApiController::class, 'addStudent']);
 Route::post('enrolments/add', [ApiController::class, 'addEnrolment']);
+
+Route::post('students/photo/{nif}', [ApiController::class, uploadPhoto($nif)]);

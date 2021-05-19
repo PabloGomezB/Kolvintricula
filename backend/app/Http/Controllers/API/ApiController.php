@@ -192,4 +192,13 @@ class ApiController extends Controller
         }
         return "NO_CUSTODIANS";
     }
+
+    function uploadPhoto($nif, Request $request){
+
+        try {
+            return $nif;
+        } catch(\Illuminate\Database\QueryException | Exception $ex){
+            return $ex->getMessage();
+        }
+    }
 }
