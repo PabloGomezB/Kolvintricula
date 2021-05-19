@@ -28,7 +28,12 @@ class ModuleController extends Controller
      */
     public function create()
     {
-        return view('admin.module.create',['module' => new Module]);
+        if(!isset($_GET['id'])){
+            return redirect()->back();
+        }
+
+        $id = $_GET['id'];             
+        return view('admin.module.create',['module' => new Module,'id'=>$id]);
     }
 
     /**
