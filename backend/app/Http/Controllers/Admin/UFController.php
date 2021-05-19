@@ -92,12 +92,12 @@ class UFController extends Controller
         $request->validate([
             'id_module' => 'required',
             'name' => 'required',
-            'hours' => 'requried',
+            'hours' => 'required',
             'year' => 'required',
         ]);
 
-        $dataForm = request()->except('_token');
-        UF::create($dataForm);
+        $dataForm = request()->except(['_token','_method']);
+        UF::where('id','=',$id)->update($dataForm);
 
         return redirect()->back()
             ->with('message',$request->name. ': ' . $request->description. ' UF actualizada correctamente.');
