@@ -1,11 +1,10 @@
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CookieConsent from "react-cookie-consent";
 import { useStyle } from "../Layout/styles";
 import Iframe from "react-iframe";
-import { Grid, Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 export default function Footer() {
   const classes = useStyle();
@@ -95,20 +94,6 @@ export default function Footer() {
           </Grid>
         </Grid>
 
-        {/* <div className={classes.div}>
-            <p className={classes.p}></p>
-            <p>Dirección</p>
-          </div>
-          <div>Av. Esplugues, 36-42. 08034. Barcelona</div>
-          <Iframe
-            url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.4326609789214!2d2.1035558157269683!3d41.38640940401817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49854b2af7bcb%3A0x4e993d78d0267a9f!2sAv.%20d&#39;Esplugues%2C%2036%2C%2042%2C%2008034%20Barcelona!5e0!3m2!1ses!2ses!4v1620892802065!5m2!1ses!2ses"
-            width="100%"
-            id="myId"
-            className="myClassname"
-            display="initial"
-            position="relative"
-          />
-        </div> */}
         {/* <Typography variant="body1" color="inherit" style={{backgroundColor: 'red'}}> */}
         {/* <p>© 2021 Kolvintrícula</p> */}
         {/* </Typography> */}

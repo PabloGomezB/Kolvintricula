@@ -1,12 +1,4 @@
-import {
-  Checkbox,
-  FormGroup,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Typography,
-} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
@@ -23,7 +15,6 @@ export const AcademicData = ({ cursmoduluf, values }) => {
         <div>
           <div>
             <FormikControl
-              className={classes.formOptionInput}
               fullWidth
               control="select"
               label="Curso académico"
@@ -34,16 +25,16 @@ export const AcademicData = ({ cursmoduluf, values }) => {
               ]}
             />
           </div>
-          <List dense>
+          <div dense>
             {values.academic_data.course === 1 ||
             values.academic_data.course === 2
               ? cursmoduluf[values.academic_data.course - 1].moduls.map(
                   (modul, index) => {
                     return (
-                      <ListItem key={modul.modul_key}>
-                        <ListItemText primary={modul.name} />
+                      <div key={modul.modul_key}>
+                        <div className={classes.paddingTop}>{modul.name}</div>
 
-                        <ListItemSecondaryAction>
+                        <div>
                           {modul.ufs.map((uf) => {
                             return (
                               <React.Fragment key={uf.uf_key}>
@@ -55,13 +46,13 @@ export const AcademicData = ({ cursmoduluf, values }) => {
                               </React.Fragment>
                             );
                           })}
-                        </ListItemSecondaryAction>
-                      </ListItem>
+                        </div>
+                      </div>
                     );
                   }
                 )
               : null}
-          </List>
+          </div>
         </div>
       </FieldArray>
     </div>

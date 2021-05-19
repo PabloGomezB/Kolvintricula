@@ -14,11 +14,16 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { Alert } from "@material-ui/lab";
 
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
+
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   const [studentData, setStudentData] = useState(0);
   const [datosEncontrados, setDatosEncontrados] = useState(0);
   const [showAlert, setShowAlert] = useState(0);
+  const [resetNif, setResetNif] = useState(0);
 
   let match = useRouteMatch();
 
@@ -29,7 +34,6 @@ const EnrolmentList = () => {
         "http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses"
       )
       .then((response) => {
-        console.log("Course", response.data);
         setCourseArray(response.data);
       })
       .catch((error) => {
@@ -39,6 +43,7 @@ const EnrolmentList = () => {
 
   // Obtener datos existentes del estudiante y mostrar alertas
   const searchStudent = () => {
+    setResetNif(false);
     let nifToSearch = document.getElementById("nif_field").value;
     axios
       .get(
@@ -60,8 +65,16 @@ const EnrolmentList = () => {
       setOpen(false);
   }
 
+  function resetNifData(){
+    setShowAlert(true);
+    setResetNif(true);
+    setStudentData(0);
+    document.getElementById("nif_field").value = "";
+  }
+
   const closeAlert = (event, reason) => {
     setShowAlert(false);
+    setResetNif(false);
   };
 
   const [open, setOpen] = useState(false);
@@ -111,7 +124,9 @@ const EnrolmentList = () => {
               <Button onClick={searchStudent} color="primary">
                 Cargar datos
               </Button>
-
+              <IconButton aria-label="delete" onClick={ resetNifData }>
+                <DeleteIcon />
+              </IconButton>
             </DialogActions>
           </Dialog>
           {showAlert
@@ -124,21 +139,32 @@ const EnrolmentList = () => {
                 autoHideDuration={3000}
                 onClose={closeAlert}
               >
-                {datosEncontrados ? (
+                {resetNif ? (
                   <Alert
                     onClose={closeAlert}
                     variant="filled"
                     severity="success"
                   >
-                    Se han cargado tus datos!
+                    Datos reestablecidos!
                   </Alert>
                 ) : (
-                  <Alert onClose={closeAlert} variant="filled" severity="error">
-                    No tienes matrículas previas
-                  </Alert>
+                  datosEncontrados ? (
+                    <Alert
+                      onClose={closeAlert}
+                      variant="filled"
+                      severity="success"
+                    >
+                      Se han cargado tus datos!
+                    </Alert>
+                  ) : (
+                    <Alert onClose={closeAlert} variant="filled" severity="error">
+                      No tienes matrículas previas
+                    </Alert>
+                  )
                 )}
               </Snackbar>
             ) : null}
+
           </Container>
         </Container>
     </Switch>

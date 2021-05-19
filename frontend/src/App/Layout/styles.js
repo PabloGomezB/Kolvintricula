@@ -49,6 +49,18 @@ const useStyle = makeStyles(() => ({
   alignRight: {
     textAlign: "right",
   },
+  dblock: {
+    display: "block",
+  },
+  dflex: {
+    display: "flex",
+  },
+  flexend: {
+    justifyContent: "flex-end",
+  },
+  paddingTop: {
+    paddingTop: theme.spacing(1),
+  },
   // footerDiv: {
   //   margin: theme.spacing(2),
   // },

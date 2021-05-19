@@ -2,7 +2,6 @@
 // import { Field, ErrorMessage } from "formik";
 // import TextError from "./TextError";
 import React from "react";
-import PropTypes from "prop-types";
 import { at } from "lodash";
 import { useField } from "formik";
 import {
