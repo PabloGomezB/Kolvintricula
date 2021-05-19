@@ -5,20 +5,19 @@ import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Enrolment from "../Enrolment";
 import NoDisponible from "../Others/NoDisponible";
 import CourseList from "./CourseList";
-import Grid from '@material-ui/core/Grid';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
+import Grid from "@material-ui/core/Grid";
 import { Alert } from "@material-ui/lab";
+
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   const [studentData, setStudentData] = useState(0);
   const [datosEncontrados, setDatosEncontrados] = useState(0);
   const [showAlert, setShowAlert] = useState(0);
+  const [resetNif, setResetNif] = useState(0);
 
   let match = useRouteMatch();
 
@@ -29,7 +28,6 @@ const EnrolmentList = () => {
         "http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses"
       )
       .then((response) => {
-        console.log("Course", response.data);
         setCourseArray(response.data);
       })
       .catch((error) => {
@@ -39,6 +37,7 @@ const EnrolmentList = () => {
 
   // Obtener datos existentes del estudiante y mostrar alertas
   const searchStudent = () => {
+    setResetNif(false);
     let nifToSearch = document.getElementById("nif_field").value;
     axios
       .get(
@@ -56,22 +55,18 @@ const EnrolmentList = () => {
       .catch((error) => {
         console.log(error);
       });
+  };
 
-      setOpen(false);
+  function resetNifData(){
+    setShowAlert(true);
+    setResetNif(true);
+    setStudentData(0);
+    document.getElementById("nif_field").value = "";
   }
 
   const closeAlert = (event, reason) => {
     setShowAlert(false);
-  };
-
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
+    setResetNif(false);
   };
 
   return (
@@ -85,37 +80,28 @@ const EnrolmentList = () => {
           )}
         </Route>
       ))}
-      <Container maxWidth="xl" style={{ flexGrow: 1, backgroundImage: 'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px', backgroundBlendMode: 'saturation' }}>
-        <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Nuestros cursos</h1>
-        <Grid container style={{ textAlign: 'center' }}>
-          <CourseList courses={courseArray}></CourseList>
-        </Grid>
-        <Container style={{ textAlign: 'center' }}>
-          <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{ padding: '10px', borderRadius: '10px', fontWeight: 'bolder', backgroundColor: 'white' }}>
-            ¿Quieres cargar tus datos?
-          </Button>
-          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">
-            <DialogTitle id="form-dialog-title">Introduce tu NIF</DialogTitle>
-            <DialogContent>
-              {/* <DialogContentText>
-                Carga tus datos introduciendo tu NIF
-              </DialogContentText> */}
-              <TextField autoFocus id="nif_field" label="NIF" variant="outlined" style={{ marginBottom: '20px' }}/>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancelar
-              </Button>
-              <Button onClick={searchStudent} color="primary">
-                Cargar datos
-              </Button>
+      <>
+        <Container maxWidth="sm" style={{ flexGrow: 1 }}>
+          <Grid container spacing={3}>
+            <CourseList courses={courseArray}></CourseList>
+          </Grid>
+          <Container>
+            <TextField id="nif_field" label="NIF" variant="outlined" />
+            <Button
+              id="nif_button"
+              onClick={searchStudent}
+              variant="outlined"
+              color="primary"
+            >
+              Cargar datos
+            </Button>
+            
+            <IconButton aria-label="delete" onClick={ resetNifData }>
+              <DeleteIcon />
+            </IconButton>
 
-            </DialogActions>
-          </Dialog>
-          {showAlert
-            ? (<Snackbar
+            {showAlert ? (
+              <Snackbar
                 anchorOrigin={{
                   vertical: "top",
                   horizontal: "center",
@@ -124,23 +110,35 @@ const EnrolmentList = () => {
                 autoHideDuration={3000}
                 onClose={closeAlert}
               >
-                {datosEncontrados ? (
+                {resetNif ? (
                   <Alert
                     onClose={closeAlert}
                     variant="filled"
                     severity="success"
                   >
-                    Se han cargado tus datos!
+                    Datos reestablecidos!
                   </Alert>
                 ) : (
-                  <Alert onClose={closeAlert} variant="filled" severity="error">
-                    No tienes matrículas previas
-                  </Alert>
+                  datosEncontrados ? (
+                    <Alert
+                      onClose={closeAlert}
+                      variant="filled"
+                      severity="success"
+                    >
+                      Se han cargado tus datos!
+                    </Alert>
+                  ) : (
+                    <Alert onClose={closeAlert} variant="filled" severity="error">
+                      No tienes matrículas previas
+                    </Alert>
+                  )
                 )}
               </Snackbar>
             ) : null}
+
           </Container>
         </Container>
+      </>
     </Switch>
   );
 };

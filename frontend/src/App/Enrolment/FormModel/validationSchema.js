@@ -5,15 +5,15 @@ const validationSchema = [
       name: Yup.string()
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
-        .matches(/^[aA-zZ\s]+$/, "Solo letras"),
+        .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
       last_name1: Yup.string()
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
-        .matches(/^[aA-zZ\s]+$/, "Solo letras"),
+        .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
       last_name2: Yup.string()
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
-        .matches(/^[aA-zZ\s]+$/, "Solo letras"),
+        .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
       nif: Yup.string().required("Requerido"),
       mobile_number: Yup.number()
         .integer("Debe de ser numerico")
