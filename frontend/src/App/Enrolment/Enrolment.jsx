@@ -97,12 +97,18 @@ const Enrolment = (props) => {
   }
 
   const handleNext = (values, actions) => {
+
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
       if (props.studentData !== 0) {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
+      }
+      if (activeStep === 2) {
+        if (isAdult(values.student.date_birth)) {
+          values.custodians = [];
+        }
       }
       if (activeStep === 0 && props.studentData === 0) {
         // Checkear solo si el student es nuevo
@@ -138,14 +144,10 @@ const Enrolment = (props) => {
             console.log(error);
           });
       } else {
-        if (activeStep === 2) {
-          if (isAdult(values.student.date_birth)) {
-            values.custodians = [];
-          }
-        }
         nextStep(values, actions);
       }
     }
+    console.log("HN - activeStep:",activeStep);
   };
 
   function nextStep(values, actions) {
@@ -169,6 +171,7 @@ const Enrolment = (props) => {
     } else {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
+    console.log("HB - activeStep:",activeStep);
   }
 
   async function _submitForm(values, actions) {
