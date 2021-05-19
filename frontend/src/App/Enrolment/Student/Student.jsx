@@ -2,8 +2,9 @@ import { Grid, Typography, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import axios from "axios";
+import { Field } from "formik";
 
-export const Student = () => {
+export const Student = ({setFieldValue}) => {
   const [imagePreviewUrl, setimagePreviewUrl] = useState('');
 
   // const handleSubmit = e => {
@@ -13,7 +14,7 @@ export const Student = () => {
   // }
 
   const handleImageChange = (e) => {
-    e.preventDefault();
+    
     let reader = new FileReader();
     let file = e.target.files[0];
 
@@ -34,9 +35,7 @@ export const Student = () => {
     );
   }
 
-  console.log($imagePreview.props.src);
-
-  let profilePhoto = $imagePreview.props.src;
+  console.log($imagePreview);
 
   // axios
   //   .post(
@@ -52,20 +51,20 @@ export const Student = () => {
   //   });
 
 
-  axios
-    .post(`http://127.0.0.1:8000/api/students/photo/43216711V`, {
-      profilePhoto,
-    })
-    .then((response) => {
-      console.log("response:", response.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // axios
+  //   .post(`http://127.0.0.1:8000/api/students/photo/43216711V`, {
+  //     profilePhoto,
+  //   })
+  //   .then((response) => {
+  //     console.log("response:", response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //   });
 
   return (
     <div>
-      <div name="student.photo_path" style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
+      <div style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover', height: '100px', width: '100px', marginRight: '300px' }} className="imgPreview">{$imagePreview}</div>
       <Typography variant="h4" gutterBottom>
         Datos del alumno
@@ -136,9 +135,9 @@ export const Student = () => {
         </Grid>
       </Grid>
       <div>
-        <form>
-          <input
+          <Field
             style={{ display: 'none' }}
+            name="student.photo_path"
             type="file"
             id="contained-button-file"
             onChange={(e) => handleImageChange(e)}
@@ -155,7 +154,6 @@ export const Student = () => {
               Subir foto
             </Button>
           </label>
-        </form>
       </div>
     </div>
   );
