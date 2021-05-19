@@ -8,6 +8,8 @@ import { Grid } from "@material-ui/core";
 
 export default function Footer() {
   const classes = useStyle();
+  let aceptar = false;
+  //const [cookies, setCookie] = useCookies(["cookie"]);
 
   return (
     <AppBar position="static" component="footer">
@@ -97,10 +99,8 @@ export default function Footer() {
         {/* <Typography variant="body1" color="inherit" style={{backgroundColor: 'red'}}> */}
         {/* <p>© 2021 Kolvintrícula</p> */}
         {/* </Typography> */}
-        {/* </Toolbar> */}
-        <CookieConsent  
-          // debug={true}
-          cookieName="KolvintriculaCookie"
+        <CookieConsent
+          debug={true}
           location="bottom"
           buttonText="Entiendo"
           style={{ background: "black" }}
