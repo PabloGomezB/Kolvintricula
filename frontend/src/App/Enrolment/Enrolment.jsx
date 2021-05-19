@@ -206,9 +206,6 @@ const Enrolment = (props) => {
   return (
     <div>
       <Link to="/">Volver</Link>
-      {/* <div style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', height: '100px', width: '100px' }} className="imgPreview">{$imagePreview}</div> */}
-
       <Typography variant="h3" gutterBottom align="center">
         Matrícula
       </Typography>

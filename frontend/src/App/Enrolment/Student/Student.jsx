@@ -26,16 +26,15 @@ export const Student = ({setFieldValue}) => {
     reader.readAsDataURL(file);
   };
 
-  let $imagePreview = null;
+  let imagePreview = "";
   if (imagePreviewUrl) {
-    $imagePreview = <img style={{ float: 'right', height: '100px', width: '100px' }} src={imagePreviewUrl} alt="Artwork" />;
+    imagePreview = <img style={{ height: '100px', width: '100px', borderRadius: '50px' }} src={imagePreviewUrl}/>
   } else {
-    $imagePreview = (
-      <div className="previewText"></div>
-    );
+    imagePreview = <img style={{ backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover', borderRadius: '50px', height: '100px', width: '100px' }}/>
   }
 
-  console.log($imagePreview);
+  console.log(imagePreview.props.src);
 
   // axios
   //   .post(
@@ -64,8 +63,7 @@ export const Student = ({setFieldValue}) => {
 
   return (
     <div>
-      <div style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', height: '100px', width: '100px', marginRight: '300px' }} className="imgPreview">{$imagePreview}</div>
+      <div style={{ float: 'right', height: '100px', width: '100px', marginRight: '300px' }} className="imgPreview">{imagePreview}</div>
       <Typography variant="h4" gutterBottom>
         Datos del alumno
       </Typography>
