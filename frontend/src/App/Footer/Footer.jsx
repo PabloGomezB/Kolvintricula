@@ -1,5 +1,4 @@
 import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CookieConsent from "react-cookie-consent";
 import { useStyle } from "../Layout/styles";
@@ -8,7 +7,7 @@ import { Grid } from "@material-ui/core";
 
 export default function Footer() {
   const classes = useStyle();
-  let aceptar = false;
+  // let aceptar = false;
   //const [cookies, setCookie] = useCookies(["cookie"]);
 
   return (

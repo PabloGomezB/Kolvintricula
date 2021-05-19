@@ -16,6 +16,9 @@ import {
   Stepper,
   Typography,
   Snackbar,
+  Dialog,
+  DialogContent,
+  DialogTitle,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import axios from "axios";
@@ -34,6 +37,10 @@ const Enrolment = (props) => {
   const [messageError, setMessageError] = useState(0);
   const [showAlert, setShowAlert] = useState(0);
 
+  const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
+  const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
+
+  
   let studentData = {
     student: {
       updateStudent: false,
@@ -175,12 +182,11 @@ const Enrolment = (props) => {
     if (!isAdult(values.student.date_birth) && values.custodians.length === 0) {
       alert("Añade un responsable");
       actions.setSubmitting(false);
-
       return;
     }
     await _sleep(1000);
 
-    alert(JSON.stringify(values, null, 2));
+    // alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
     console.log("submit", values);
 
@@ -190,16 +196,28 @@ const Enrolment = (props) => {
       })
       .then((response) => {
         console.log("response:", response.data);
+        setEnrolmentSubmited(true);
+
+        if(response.data.addStudentResult === "OK" && (response.data.addCustodiansResult === "OK" || response.data.addCustodiansResult === "NO_CUSTODIANS")){
+          setSuccessfullyEnrolled(true);
+        }
+        else{
+          setSuccessfullyEnrolled(false);
+        }
       })
       .catch((error) => {
         console.log(error);
-        alert("vaya...parece que ha habido algun error...");
+        setSuccessfullyEnrolled(false);
       });
   }
 
   const closeAlert = (event, reason) => {
     setShowAlert(false);
   };
+
+  function closeModal(){
+    setEnrolmentSubmited(false);
+  }
 
   return (
     <div>
@@ -298,6 +316,32 @@ const Enrolment = (props) => {
           </Form>
         )}
       </Formik>
+      {!!enrolmentSubmited &&
+        <div>
+          {successfullyEnrolled ? (
+            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
+              <DialogTitle>¡Te has matriculado con éxito!
+              </DialogTitle>
+              <DialogContent>
+                <Button component={Link} to="/" color="primary">
+                  Volver
+                </Button>
+              </DialogContent>
+            </Dialog>
+          ):(
+            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
+              <DialogTitle>Algo ha ido mal...
+              </DialogTitle>
+              <DialogContent>
+                Porfavor escribe a: soporte@inspedralbes.cat
+                <Button onClick={closeModal} color="primary">
+                  Volver
+                </Button>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
+      }
     </div>
   );
 };
