@@ -59,7 +59,7 @@ class ApiController extends Controller
             $addStudentResult = ["addStudentResult" => $this->addStudent($studentData)];
             $addCustodiansResult = ["addCustodiansResult" => $this->addCustodians($custodiansData, $studentData["nif"])];
             
-
+            // return $custodiansData;
             return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
 
         }
@@ -158,11 +158,11 @@ class ApiController extends Controller
 
         if (!empty($custodiansData)){ // Necesario porque a veces se buggea
             if ($custodiansData[0]["name"] != null || $custodiansData[0]["name"] != ""){
-                $newCustodian = new Custodian;
                 $id_student = Student::where('nif', $newStudentNif)->get('id');
 
                 foreach ($custodiansData as $custodian) {
                     try {
+                        $newCustodian = new Custodian;
                         $newCustodian->id_student = $id_student["0"]["id"];
                         $newCustodian->responsible = $custodian["type"];
                         $newCustodian->nif = $custodian["nif"];
@@ -177,7 +177,6 @@ class ApiController extends Controller
                         return $ex->getMessage();
                     }
                 }
-
                 return "OK";
             }
         }
