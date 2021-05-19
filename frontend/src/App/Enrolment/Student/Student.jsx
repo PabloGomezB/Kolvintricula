@@ -51,18 +51,20 @@ export const Student = () => {
   //     console.log(error);
   //   });
 
-
-  axios
-    .post(`http://127.0.0.1:8000/api/students/photo/43216711V`, {
-      profilePhoto,
-    })
-    .then((response) => {
-      console.log("response:", response.data);
-    })
-    .catch((error) => {
+  axios({
+      method: 'post',
+      url: 'http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/student/43216711V',
+      data: {
+          photo_path: profilePhoto
+      },
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+      },
+  }).then(function (response) {
+      console.log(response);
+  }).catch(function (error) {
       console.log(error);
-    });
-
+  });
   return (
     <div>
       <div name="student.photo_path" style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
