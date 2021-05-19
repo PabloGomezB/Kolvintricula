@@ -104,11 +104,6 @@ const Enrolment = (props) => {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
       }
-      if (activeStep === 2) {
-        if (isAdult(values.student.date_birth)) {
-          values.custodians = [];
-        }
-      }
       if (activeStep === 0 && props.studentData === 0) {
         // Checkear solo si el student es nuevo
         let studentError = false;
@@ -143,6 +138,11 @@ const Enrolment = (props) => {
             console.log(error);
           });
       } else {
+        if (activeStep === 2) {
+          if (isAdult(values.student.date_birth)) {
+            values.custodians = [];
+          }
+        }
         nextStep(values, actions);
       }
     }
@@ -158,7 +158,7 @@ const Enrolment = (props) => {
         return newSkipped;
       });
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    // setActiveStep((prevActiveStep) => prevActiveStep + 1);
     actions.setTouched({});
     actions.setSubmitting(false);
   }
