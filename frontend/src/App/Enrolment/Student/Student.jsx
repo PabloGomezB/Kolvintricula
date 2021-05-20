@@ -1,10 +1,64 @@
-import { Grid, Typography } from "@material-ui/core";
-import React from "react";
+import { Button, Grid, Typography } from "@material-ui/core";
+import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
+import axios from "axios";
+import { Field, useFormikContext } from "formik";
 
 export const Student = (props) => {
+
+  const [imagePreviewUrl, setimagePreviewUrl] = useState(null);
+
+  const handleImageChange = (e) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      props.setFieldValue("student.photo_path", reader.result)
+      setimagePreviewUrl(reader.result)
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  let imagePreview = "";
+  if (imagePreviewUrl) {
+    imagePreview = (
+      <img
+        style={{ height: "100px", width: "100px", borderRadius: "50px" }}
+        src={imagePreviewUrl}
+        alt="Imagen cambiada"
+      />
+    );
+  } else {
+    imagePreview = (
+      <img
+        style={{
+          backgroundImage:
+            'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          borderRadius: "50px",
+          height: "100px",
+          width: "100px",
+        }}
+        alt=""
+      />
+    );
+  }
+
   return (
     <div>
+      <div
+        style={{
+          float: "right",
+          height: "100px",
+          width: "100px",
+          marginRight: "300px",
+        }}
+        className="imgPreview"
+      >
+        {imagePreview}
+      </div>
       <Typography variant="h4" gutterBottom>
         Datos del alumno
       </Typography>
@@ -85,6 +139,27 @@ export const Student = (props) => {
           />
         </Grid>
       </Grid>
+      <div>
+        <input
+          style={{ display: "none" }}
+          name="student.photo_path"
+          type="file"
+          id="contained-button-file"
+          onChange={(e) => handleImageChange(e)}
+        />
+        {/* <label htmlFor="contained-button-file">
+            <button
+              onClick={(e) => handleSubmit(e)}
+            >
+              Upload Image
+            </button>
+          </label> */}
+        <label htmlFor="contained-button-file">
+          <Button variant="contained" color="primary" component="span">
+            Subir foto
+          </Button>
+        </label>
+      </div>
     </div>
   );
 };

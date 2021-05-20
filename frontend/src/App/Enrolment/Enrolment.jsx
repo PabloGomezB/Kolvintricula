@@ -52,6 +52,7 @@ const Enrolment = (props) => {
       email_personal: "",
       nif: "",
       mobile_number: "",
+      photo_path: null,
     },
     custodians: [
       {
@@ -73,10 +74,10 @@ const Enrolment = (props) => {
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values) {
+  function _renderStepContent(step, values, setFieldValue) {
     switch (step) {
       case 0:
-        return <Student nif={studentData.student.nif}/>;
+        return <Student nif={studentData.student.nif} setFieldValue={setFieldValue}/>;
       case 1:
         return <Custodian />;
       case 2:
@@ -285,7 +286,7 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values)}
+            {_renderStepContent(activeStep, values, setFieldValue)}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button
@@ -307,14 +308,14 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            {/* <div>
+            <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div> */}
+            </div>
           </Form>
         )}
       </Formik>
