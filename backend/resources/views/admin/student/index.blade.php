@@ -56,7 +56,7 @@
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dataStudents as $student)
-                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('students.show',$student->id) }}'">
+                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('students.show',$student->id) }}'>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->id }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->nif }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->name }}</td>
