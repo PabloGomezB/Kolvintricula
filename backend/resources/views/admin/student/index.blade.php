@@ -19,6 +19,9 @@
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID
                                                 </th>
+                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                    Foto
+                                                </th>
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     DNI
                                                 </th>
@@ -41,9 +44,6 @@
                                                     Foto
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Fotografía del alumno
-                                                </th>
-                                                <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Email personal del alumno
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
@@ -56,16 +56,15 @@
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dataStudents as $student)
-                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('students.show',$student->id) }}'">
+                                            <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('students.show',$student->id) }}'>
                                                 <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->id }}</td>
+                                                <td><img src="{{ URL::to('/') }}/uploads/{{ $student->photo_path }}" class="img-thumbnail" width="75" /></td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->nif }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->name }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->last_name1 }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->last_name2 }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->date_birth }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->mobile_number }}</td>
-                                                <td><img src="{{ $student->photo_path }}" class="img-thumbnail" width="75" /></td>
-                                                <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->photo_path }}</td> -->
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->enrolment_status }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->email_personal }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->email_pedralbes }}</td>

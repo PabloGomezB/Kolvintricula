@@ -35,7 +35,7 @@
                     </div>
                     <div class="p-1">
                         <strong>Foto:</strong>
-                        {{ $student->photo_path }}
+                        <td><img src="{{ URL::to('/') }}/uploads/{{ $student->photo_path }}" class="img-thumbnail" width="75" /></td>
                     </div>
                     <div class="p-1">
                         <strong>Estado de la Matrícula:</strong>
@@ -52,9 +52,9 @@
 
                     {{-- <div class="mt-10">
                         <a class="mt-5 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('students.index') }}">Atrás</a>
-                    </div> --}}
-                </div>
+                </div> --}}
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>

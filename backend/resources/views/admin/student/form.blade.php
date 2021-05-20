@@ -15,7 +15,7 @@
         </div>
         <div>
             <x-label for="mobile_number" :value="__('Número de teléfono del alumno')" />
-            <x-input id="mobile_number" type="integer" name="mobile_number" placeholder="" value="{{ $student->mobile_number }}" class="block mt-1 w-full" autofocus />
+            <x-input id="mobile_number" type="number" name="mobile_number" placeholder="" value="{{ $student->mobile_number }}" class="block mt-1 w-full" autofocus />
         </div>
         <div>
             <x-label for="enrolment_status" :value="__('Estado de la matrícula')" />
