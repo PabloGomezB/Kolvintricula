@@ -59,28 +59,11 @@ class ApiController extends Controller
             $custodiansData = $values["custodians"];
             $academicData = $values["academic_data"];
 
-
-
-
-            $image = $request->image;  // your base64 encoded
-
-            $image = str_replace('data:image/png;base64,', '', $image);
-
-            $image = str_replace(' ', '+', $image);
-            $imageName = rand() . '.png';
-
-            
-            Storage::disk('local')->put($imageName, base64_decode($image));
-
-            return $studentData["photo_path"];
-
-
             $addStudentResult = ["addStudentResult" => $this->addStudent($studentData)];
             $addCustodiansResult = ["addCustodiansResult" => $this->addCustodians($custodiansData, $studentData["nif"])];
             // $addEnrolmentResult = ["addEnrolmentResult" => $this->addJsonEnrolment($academicData, $studentData["nif"])];
 
             return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
-
         }
         catch(\Illuminate\Database\QueryException | Exception $ex){ 
             return $ex->getMessage(); 
@@ -144,6 +127,11 @@ class ApiController extends Controller
 
         $newStudentID = Student::where('nif', $studentData["nif"])->get("id");
 
+        $image = $studentData["photo_path"];
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = rand() . '.png';
+
         if(count($newStudentID) != 0 && $studentData["updateStudent"]){
             $newStudent = Student::find($newStudentID[0]["id"]);
         }
@@ -164,8 +152,10 @@ class ApiController extends Controller
             $newStudent->enrolment_status = 'BORRADOR';
             $newStudent->email_personal = $studentData["email_personal"];
             // $newStudent->email_pedralbes = 'nuevo@email.com';
-            // $newStudent->photo_path = 'photo path';
+            $newStudent->photo_path = $imageName;
             $newStudent->save();
+            Storage::disk('public')->put($imageName, base64_decode($image));
+
         } catch(\Illuminate\Database\QueryException | Exception $ex){
             return $ex->getMessage(); 
         }
