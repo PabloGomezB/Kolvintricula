@@ -7,6 +7,7 @@ import Custodian from "./Custodian";
 import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
+import Consent from "./Consent";
 
 import {
   Button,
@@ -22,7 +23,13 @@ import axios from "axios";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
-const steps = ["Alumno", "Responsable", "Académicos", "Revision"];
+const steps = [
+  "Alumno",
+  "Responsable",
+  "Académicos",
+  "Consentimiento",
+  "Revision",
+];
 
 const Enrolment = (props) => {
   const classes = useStyle();
@@ -74,6 +81,8 @@ const Enrolment = (props) => {
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
+        return <Consent />;
+      case 4:
         return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
