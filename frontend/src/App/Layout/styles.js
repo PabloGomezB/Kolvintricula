@@ -110,6 +110,22 @@ const useStyle = makeStyles(() => ({
   //   textDecoration: "none"
   // },
   // display: 'flex',
+  dialogTitleSuccess: {
+    border: "3px solid green",
+    borderBottom: "0",
+  },
+  dialogContentSuccess: {
+    border: "3px solid green",
+    borderTop: "0",
+  },
+  dialogTitleError: {
+    border: "3px solid red",
+    borderBottom: "0",
+  },
+  dialogContentError: {
+    border: "3px solid red",
+    borderBottom: "0",
+  }
 }));
 
 export { theme, useStyle };

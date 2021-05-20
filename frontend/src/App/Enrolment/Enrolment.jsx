@@ -322,15 +322,17 @@ const Enrolment = (props) => {
         <div>
           {successfullyEnrolled ? (
             <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
-              <DialogTitle style={{border: "3px solid green", borderBottom: "0"}}>
+              <DialogTitle className={classes.dialogTitleSuccess}>
                 ¡Te has matriculado con éxito!
-              </DialogTitle>
-              <DialogContent style={{border: "3px solid green", borderTop: "0"}}>
-                <DoneOutlineTwoToneIcon style={{color: "green"}}/>
                 <Button component={Link} to="/" color="primary">
-                  Volver
+                  <DoneOutlineTwoToneIcon style={{color: "green"}}/>
                 </Button>
-              </DialogContent>
+              </DialogTitle>
+              {/* <DialogContent className={classes.dialogContentSuccess}>
+                <Button component={Link} to="/" color="primary">
+                  <DoneOutlineTwoToneIcon style={{color: "green"}}/>
+                </Button>
+              </DialogContent> */}
             </Dialog>
           ):(
             <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
