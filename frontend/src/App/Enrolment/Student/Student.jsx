@@ -142,6 +142,7 @@ export const Student = (props) => {
           style={{ display: "none" }}
           name="student.photo_path"
           type="file"
+          accept=".png, .jpg"
           id="contained-button-file"
           onChange={(e) => handleImageChange(e)}
         />

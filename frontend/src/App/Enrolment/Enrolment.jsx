@@ -194,7 +194,7 @@ const Enrolment = (props) => {
 
     axios
       .post(`http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`, {
-      // .post(`http://127.0.0.1:8000/api/enrolments/add`, {
+      //.post(`http://localhost:8000/api/enrolments/add`, {
         values,
       })
       .then((response) => {
