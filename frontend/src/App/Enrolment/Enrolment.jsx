@@ -80,20 +80,20 @@ const Enrolment = (props) => {
       enfermedades: "",
       medicamentos: "",
       otros: "",
-      1: "",
       2: "",
       3: "",
       4: "",
       5: "",
       6: "",
       7: "",
+      firma: "",
     },
   };
   // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values, setFieldValue) {
+  function _renderStepContent(step, values, setFieldValue, errors) {
     switch (step) {
       case 0:
         return (
@@ -107,7 +107,7 @@ const Enrolment = (props) => {
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
-        return <Consent />;
+        return <Consent setFieldValue={setFieldValue} errors={errors} />;
       case 4:
         return <Revision values={values} />;
       default:
@@ -317,7 +317,7 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values, setFieldValue)}
+            {_renderStepContent(activeStep, values, setFieldValue, errors)}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button

@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useRef } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
-const Consent = () => {
+import SignatureCanvas from "react-signature-canvas";
+
+const Consent = ({ setFieldValue, errors }) => {
+  const signatureRef = useRef({});
+  function onChange() {
+    setFieldValue(
+      "consent.firma",
+      signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
+    );
+  }
   return (
     <div>
       <h4>DECLARACIÓN RESPONSABLES</h4>
@@ -227,7 +236,7 @@ const Consent = () => {
           orientadora.
           <FormikControl
             control="radio"
-            name="consent.1"
+            name="consent.7"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -262,7 +271,7 @@ const Consent = () => {
             control="input"
             type="text"
             label="Otros"
-            name="consent.others"
+            name="consent.otros"
             fullWidth
           />
           <Table aria-label="custom pagination table">
@@ -291,6 +300,16 @@ const Consent = () => {
           </Table>
         </li>
       </ol>
+      <SignatureCanvas
+        canvasProps={{
+          width: 500,
+          height: 200,
+          style: { border: "1px solid #000000" },
+        }}
+        ref={signatureRef}
+        onEnd={() => onChange()}
+      />
+      {/* {errors.conserrors.consent.firma===null */}
     </div>
   );
 };
