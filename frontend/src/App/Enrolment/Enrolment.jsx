@@ -75,6 +75,19 @@ const Enrolment = (props) => {
       course: "",
       moduluf: [],
     },
+    consent: {
+      alergias: "",
+      enfermedades: "",
+      medicamentos: "",
+      otros: "",
+      1: "",
+      2: "",
+      3: "",
+      4: "",
+      5: "",
+      6: "",
+      7: "",
+    },
   };
   // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
@@ -326,14 +339,14 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            {/* <div>
+            <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div> */}
+            </div>
           </Form>
         )}
       </Formik>

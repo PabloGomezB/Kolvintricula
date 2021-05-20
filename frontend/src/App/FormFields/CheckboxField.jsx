@@ -7,8 +7,9 @@ import { Checkbox, FormControl, FormControlLabel } from "@material-ui/core";
  */
 export default function CheckboxField(props) {
   const { label, ...rest } = props;
-  const [field, helper] = useField(props);
-  const { setValue } = helper;
+  const [field, helper, helper2] = useField(props);
+  console.log(useField(props));
+  const { setValue } = helper2;
   /**
    * Cambia el valor
    * @param {Event} e
