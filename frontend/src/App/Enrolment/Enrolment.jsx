@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Student from "./Student";
 import Custodian from "./Custodian";
-import cursmoduluf from "./cursmoduluf";
+// import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
-import DoneOutlineTwoToneIcon from '@material-ui/icons/DoneOutlineTwoTone';
+import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
+import Consent from "./Consent";
 
 import {
   Button,
@@ -20,13 +21,20 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  Box,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import axios from "axios";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
-const steps = ["Alumno", "Responsable", "Académicos", "Revision"];
+const steps = [
+  "Alumno",
+  "Responsable",
+  "Académicos",
+  "Consentimiento",
+  "Revision",
+];
 
 const Enrolment = (props) => {
   const classes = useStyle();
@@ -40,8 +48,20 @@ const Enrolment = (props) => {
 
   const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
   const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
+  const [emailPedralbes, setEmailPedralbes] = useState(0);
 
-  
+  const [cursmoduluf, setCursmoduluf] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
+      )
+      .then((res) => {
+        setCursmoduluf(res.data);
+      });
+  }, [props.idCourse]);
+
   let studentData = {
     student: {
       updateStudent: false,
@@ -66,23 +86,43 @@ const Enrolment = (props) => {
       },
     ],
     academic_data: {
-      course: "",
-      moduluf: [],
+      year: "",
+      modules: [],
+    },
+    consent: {
+      alergias: "",
+      enfermedades: "",
+      medicamentos: "",
+      otros: "",
+      2: "",
+      3: "",
+      4: "",
+      5: "",
+      6: "",
+      7: "",
+      firma: "",
     },
   };
   // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values, setFieldValue) {
+  function _renderStepContent(step, values, setFieldValue, errors) {
     switch (step) {
       case 0:
-        return <Student nif={studentData.student.nif} setFieldValue={setFieldValue}/>;
+        return (
+          <Student
+            nif={studentData.student.nif}
+            setFieldValue={setFieldValue}
+          />
+        );
       case 1:
         return <Custodian />;
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
+        return <Consent setFieldValue={setFieldValue} errors={errors} />;
+      case 4:
         return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
@@ -106,7 +146,6 @@ const Enrolment = (props) => {
   }
 
   const handleNext = (values, actions) => {
-
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
@@ -193,18 +232,25 @@ const Enrolment = (props) => {
     console.log("submit", values);
 
     axios
-      .post(`http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`, {
-      //.post(`http://localhost:8000/api/enrolments/add`, {
-        values,
-      })
+      .post(
+        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
+        // `http://127.0.0.1:8000/api/enrolments/add`,
+        {
+          values,
+        }
+      )
       .then((response) => {
         console.log("response:", response.data);
         setEnrolmentSubmited(true);
 
-        if(response.data.addStudentResult === "OK" && (response.data.addCustodiansResult === "OK" || response.data.addCustodiansResult === "NO_CUSTODIANS")){
+        if (
+          response.data.addStudentResult[0].response === "OK" &&
+          (response.data.addCustodiansResult === "OK" ||
+            response.data.addCustodiansResult === "NO_CUSTODIANS")
+        ) {
+          setEmailPedralbes(response.data.addStudentResult[0].email_pedralbes);
           setSuccessfullyEnrolled(true);
-        }
-        else{
+        } else {
           setSuccessfullyEnrolled(false);
         }
       })
@@ -218,7 +264,7 @@ const Enrolment = (props) => {
     setShowAlert(false);
   };
 
-  function closeModal(){
+  function closeModal() {
     setEnrolmentSubmited(false);
   }
 
@@ -286,7 +332,7 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values, setFieldValue)}
+            {_renderStepContent(activeStep, values, setFieldValue, errors)}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button
@@ -308,39 +354,43 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            {/* <div>
+            <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div> */}
+            </div>
           </Form>
         )}
       </Formik>
-      {!!enrolmentSubmited &&
+      {!!enrolmentSubmited && (
         <div>
           {successfullyEnrolled ? (
-            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
+            <Dialog
+              open={enrolmentSubmited}
+              // onEnter={console.log("dialog success.")}
+            >
               <DialogTitle className={classes.dialogTitleSuccess}>
                 ¡Te has matriculado con éxito!
-                <Button component={Link} to="/" color="primary">
-                  <DoneOutlineTwoToneIcon style={{color: "green"}}/>
-                </Button>
               </DialogTitle>
-              {/* <DialogContent className={classes.dialogContentSuccess}>
-                <Button component={Link} to="/" color="primary">
+              <DialogContent className={classes.dialogContentSuccess}>
+                Tu email de alumno es: <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
+                <Button component={Link} to="/" color="primary" className={classes.dialogButtonSuccess}>
                   <DoneOutlineTwoToneIcon style={{color: "green"}}/>
                 </Button>
-              </DialogContent> */}
+              </DialogContent>
             </Dialog>
-          ):(
-            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
-              <DialogTitle style={{border: "3px solid red", borderBottom: "0"}}>
+          ) : (
+            <Dialog
+              open={enrolmentSubmited}
+              // onEnter={console.log("dialog error.")}
+            >
+              <DialogTitle className={classes.dialogTitleError}>
                 Algo ha ido mal...
               </DialogTitle>
-              <DialogContent style={{border: "3px solid red", borderTop: "0"}}>
+              <DialogContent className={classes.dialogContentError}>
                 Porfavor escribe a: soporte@inspedralbes.cat
                 <Button onClick={closeModal} color="primary">
                   Volver
@@ -349,7 +399,7 @@ const Enrolment = (props) => {
             </Dialog>
           )}
         </div>
-      }
+      )}
     </div>
   );
 };

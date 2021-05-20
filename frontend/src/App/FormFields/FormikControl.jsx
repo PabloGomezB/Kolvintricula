@@ -5,7 +5,11 @@ import SelectField from "./SelectField";
 import RadioButtons from "./RadioButtons";
 import CheckboxField from "./CheckboxField";
 import DatePicker from "./DatePicker.jsx";
-
+/**
+ * Componente que construye otro componente inputs para el formulario
+ * @param {*} props
+ * @returns
+ */
 const FormikControl = (props) => {
   const { control, ...rest } = props;
   switch (control) {

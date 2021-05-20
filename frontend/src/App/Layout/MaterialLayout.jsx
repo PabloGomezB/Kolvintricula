@@ -7,8 +7,10 @@ import Footer from "../Footer";
 
 import { theme, useStyle } from "./styles";
 
-export default function MaterialLayout(props) {
-  const { children } = props;
+/**
+ * Componente que que añade el tema de material al componente children.
+ */
+export default function MaterialLayout({ children }) {
   const classes = useStyle();
 
   return (

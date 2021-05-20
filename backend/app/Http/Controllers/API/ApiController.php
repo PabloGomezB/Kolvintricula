@@ -59,28 +59,11 @@ class ApiController extends Controller
             $custodiansData = $values["custodians"];
             $academicData = $values["academic_data"];
 
-
-
-
-            $image = $request->image;  // your base64 encoded
-
-            $image = str_replace('data:image/png;base64,', '', $image);
-
-            $image = str_replace(' ', '+', $image);
-            $imageName = rand() . '.png';
-
-            
-            Storage::disk('local')->put($imageName, base64_decode($image));
-
-            return $studentData["photo_path"];
-
-
             $addStudentResult = ["addStudentResult" => $this->addStudent($studentData)];
             $addCustodiansResult = ["addCustodiansResult" => $this->addCustodians($custodiansData, $studentData["nif"])];
             // $addEnrolmentResult = ["addEnrolmentResult" => $this->addJsonEnrolment($academicData, $studentData["nif"])];
 
             return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
-
         }
         catch(\Illuminate\Database\QueryException | Exception $ex){ 
             return $ex->getMessage(); 
@@ -143,6 +126,15 @@ class ApiController extends Controller
     function addStudent($studentData){
 
         $newStudentID = Student::where('nif', $studentData["nif"])->get("id");
+        $email_pedralbes = $this->createPedralbesEmail($studentData);
+        $photo_path = "error";
+
+        try{
+            $photo_path = $this->uploadStudentPhoto($studentData);
+        }
+        catch(\Illuminate\Database\QueryException | Exception $ex){
+            return $ex->getMessage();
+        }
 
         if(count($newStudentID) != 0 && $studentData["updateStudent"]){
             $newStudent = Student::find($newStudentID[0]["id"]);
@@ -163,14 +155,35 @@ class ApiController extends Controller
             $newStudent->mobile_number = $studentData["mobile_number"];
             $newStudent->enrolment_status = 'BORRADOR';
             $newStudent->email_personal = $studentData["email_personal"];
-            // $newStudent->email_pedralbes = 'nuevo@email.com';
-            // $newStudent->photo_path = 'photo path';
+            $newStudent->email_pedralbes = $email_pedralbes;
+            $newStudent->photo_path = $photo_path;
             $newStudent->save();
         } catch(\Illuminate\Database\QueryException | Exception $ex){
             return $ex->getMessage(); 
         }
 
-        return "OK";
+        $response = array(["response" => "OK", "email_pedralbes" => $email_pedralbes]);
+        return $response;
+    }
+
+    function createPedralbesEmail($studentData){
+
+        $year = substr(date("Y"), 2, 4);
+        $newEmail = 'a' . $year;
+        $name = substr($studentData["name"], 0, 3);
+        $last1 = substr($studentData["last_name1"], 0, 3);
+        $last2 = substr($studentData["last_name2"], 0, 3);
+        return $newEmail . strtolower($name) . strtolower($last1) . strtolower($last2) . '@inspedralbes.cat';
+    }
+
+    function uploadStudentPhoto($studentData){
+
+        $image = $studentData["photo_path"];
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = rand() . '.png';
+        Storage::disk('public')->put($imageName, base64_decode($image));
+        return $imageName;
     }
 
     function addCustodians($custodiansData, $newStudentNif){

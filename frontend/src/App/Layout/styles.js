@@ -124,7 +124,13 @@ const useStyle = makeStyles(() => ({
   },
   dialogContentError: {
     border: "3px solid red",
-    borderBottom: "0",
+    borderTop: "0",
+  },
+  dialogButtonSuccess: {
+    float: "right",
+    marginTop: "-30px",
+    marginRight: "-20px",
+    padding: "-20px",
   }
 }));
 

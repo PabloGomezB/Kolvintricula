@@ -27,6 +27,7 @@ const validationSchema = [
         .email("Email no válido.")
         .required("Requerido"),
       date_birth: Yup.date().required("Requerido").nullable(),
+      photo_path: Yup.string().required("Requerido"),
     }),
   }),
   Yup.object({
@@ -62,10 +63,15 @@ const validationSchema = [
   }),
   Yup.object({
     academic_data: Yup.object().shape({
-      course: Yup.number()
+      year: Yup.number()
         .typeError("Elige una opción válida")
         .equals([1, 2])
         .required("Requerido"),
+    }),
+  }),
+  Yup.object({
+    consent: Yup.object().shape({
+      firma: Yup.string().required("Requerido"),
     }),
   }),
 ];

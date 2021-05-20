@@ -8,10 +8,12 @@ import CourseList from "./CourseList";
 import Grid from "@material-ui/core/Grid";
 import { Alert } from "@material-ui/lab";
 
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
 
-
+/**
+ * Lista de matriculas por ciclo disponibles.
+ */
 const EnrolmentList = () => {
   const [courseArray, setCourseArray] = useState([]);
   const [studentData, setStudentData] = useState(0);
@@ -20,8 +22,9 @@ const EnrolmentList = () => {
   const [resetNif, setResetNif] = useState(0);
 
   let match = useRouteMatch();
-
-  // Obtener cursos para crear botones y rutas
+  /**
+   * Obtener cursos para crear botones y rutas
+   */
   useEffect(() => {
     axios
       .get(
@@ -35,7 +38,9 @@ const EnrolmentList = () => {
       });
   }, []);
 
-  // Obtener datos existentes del estudiante y mostrar alertas
+  /**
+   * Obtener datos existentes del estudiante y mostrar alertas
+   */
   const searchStudent = () => {
     setResetNif(false);
     let nifToSearch = document.getElementById("nif_field").value;
@@ -57,14 +62,19 @@ const EnrolmentList = () => {
       });
   };
 
-  function resetNifData(){
+  /**
+   * Resetea del NIF
+   */
+  function resetNifData() {
     setShowAlert(true);
     setResetNif(true);
     setStudentData(0);
     document.getElementById("nif_field").value = "";
   }
-
-  const closeAlert = (event, reason) => {
+  /**
+   * Cerrar alerta
+   */
+  const closeAlert = () => {
     setShowAlert(false);
     setResetNif(false);
   };
@@ -74,7 +84,7 @@ const EnrolmentList = () => {
       {courseArray.map((course) => (
         <Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? (
-            <Enrolment studentData={studentData}/>
+            <Enrolment studentData={studentData} idCourse={course.id} />
           ) : (
             <NoDisponible />
           )}
@@ -95,8 +105,8 @@ const EnrolmentList = () => {
             >
               Cargar datos
             </Button>
-            
-            <IconButton aria-label="delete" onClick={ resetNifData }>
+
+            <IconButton aria-label="delete" onClick={resetNifData}>
               <DeleteIcon />
             </IconButton>
 
@@ -118,24 +128,21 @@ const EnrolmentList = () => {
                   >
                     Datos reestablecidos!
                   </Alert>
+                ) : datosEncontrados ? (
+                  <Alert
+                    onClose={closeAlert}
+                    variant="filled"
+                    severity="success"
+                  >
+                    Se han cargado tus datos!
+                  </Alert>
                 ) : (
-                  datosEncontrados ? (
-                    <Alert
-                      onClose={closeAlert}
-                      variant="filled"
-                      severity="success"
-                    >
-                      Se han cargado tus datos!
-                    </Alert>
-                  ) : (
-                    <Alert onClose={closeAlert} variant="filled" severity="error">
-                      No tienes matrículas previas
-                    </Alert>
-                  )
+                  <Alert onClose={closeAlert} variant="filled" severity="error">
+                    No tienes matrículas previas
+                  </Alert>
                 )}
               </Snackbar>
             ) : null}
-
           </Container>
         </Container>
       </>
