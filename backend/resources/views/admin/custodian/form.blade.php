@@ -1,36 +1,41 @@
 <div class="grid grid-cols-2 gap-6">
     <div class="grid grid-rows-2 gap-6">
         <div>
-            <x-label class="required" for="name" :value="__('Nombre del curso')" />
-            <x-input id="text" type="text" name="name" placeholder="DAW" value="{{ $course->name }}" class="block mt-1 w-full" autofocus/>
+            <x-label class="required" for="id_student" :value="__('Iid del alumno')" />
+            <x-input id="id_student" type="text" name="id_student" placeholder="" value="{{ $custodian->name }}" class="block mt-1 w-full" autofocus />
         </div>
         <div>
-            <x-label class="required" for="type" :value="__('Tipo de estudios')" />
+            <x-label for="last_name1" :value="__('Primer apellido delresponsable')" />
+            <x-input id="last_name1" type="text" name="last_name1" placeholder="" value="{{ $custodian->last_name1 }}" class="block mt-1 w-full" autofocus />
+        </div>
+        <div>
+            <x-label class="required" for="responsible" :value="__('Tipo de responsable')" />
             <div class="inline-block relative w-64">
-                <select id="type" name="type" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="CFGS" <?php if ($course->type == "CFGS") { ?> selected <?php } ?>>CFGS</option>
-                    <option value="CFGM" <?php if ($course->type == "CFGM") { ?> selected <?php } ?>>CFGM</option>
-                    <option value="BACHILLERATO" <?php if ($course->type == "BACHILLERATO") { ?> selected <?php } ?>>Bachillerato</option>
-                    <option value="ESO" <?php if ($course->type == "ESO") { ?> selected <?php } ?>>ESO</option>
+                <select id="responsible" name="responsible" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <option value="PADRE" <?php if ($custodian->type == "PADRE") { ?> selected <?php } ?>>PADRE</option>
+                    <option value="MADRE" <?php if ($custodian->type == "MADRE") { ?> selected <?php } ?>>MADRE</option>
+                    <option value="TUTOR" <?php if ($custodian->type == "TUTOR") { ?> selected <?php } ?>>TUTOR</option>
                 </select>
             </div>
         </div>
     </div>
     <div class="grid grid-rows-2 gap-6">
         <div>
-            <x-label class="required" for="description" :value="__('Descripción del curso')" />
-            <x-input id="description" type="text" name="description" value="{{ $course->description }}" placeholder="Desarrollo de Aplicaciones Web" class="block mt-1 w-full" autofocus/>
+            <x-label for="name" :value="__('Nombre del responsable')" />
+            <x-input id="name" type="text" name="name" placeholder="" value="{{ $custodian->name }}" class="block mt-1 w-full" autofocus />
         </div>
         <div>
-            <x-label class="required" for="state" :value="__('Estado del curso')" />
-            <div class="inline-block relative w-64">
-                <select id="state" name="state" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="DESHABILITADO" <?php if ($course->state == "DESHABILITADO") { ?> selected <?php } ?>>Deshabilitado</option>
-                    <option value="BORRADOR" <?php if ($course->state == "BORRADOR") { ?> selected <?php } ?>>Borrador</option>
-                    <option value="PREMATRICULA" <?php if ($course->state == "PREMATRICULA") { ?> selected <?php } ?>>Prematrícula</option>
-                    <option value="MATRICULA" <?php if ($course->state == "MATRICULA") { ?> selected <?php } ?>>Matrícula</option>
-                </select>
-            </div>
+            <x-label for="last_name2" :value="__('Segundo apellido del responsable')" />
+            <x-input id="last_name2" type="text" name="last_name2" placeholder="" value="{{ $custodian->last_name2 }}" class="block mt-1 w-full" autofocus />
         </div>
+        <div>
+            <x-label for="email_personal" :value="__('Correo electrónico del responsable')" />
+            <x-input id="email_personal" type="text" name="email" placeholder="" value="{{ $custodian->email}}" class="block mt-1 w-full" autofocus />
+        </div>
+        <div>
+            <x-label for="mobile_number" :value="__('Número de teléfono del responsable')" />
+            <x-input id="mobile_number" type="integer" name="mobile_number" placeholder="" value="{{ $custodian->mobile_number }}" class="block mt-1 w-full" autofocus />
+        </div>
+
     </div>
 </div>

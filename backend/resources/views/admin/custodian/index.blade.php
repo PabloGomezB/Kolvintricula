@@ -78,7 +78,7 @@
                                     </table>
                                 </div>
                                 <div class="mt-4">
-                                    {!! $dataCustodiams->links() !!}
+                                    {!! $dataCustodians->links() !!}
                                 </div>
                             </div>
                         </div>

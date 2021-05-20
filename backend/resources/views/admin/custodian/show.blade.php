@@ -2,11 +2,11 @@
 
 use App\Models\Course; ?>
 <x-app-layout>
-    @include('admin.course.header')
+    @include('admin.custodian.header')
 
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
-            <h1>Información del curso:</h1>
+            <h1>Información de la autorización legal:</h1>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white p-6 border-b border-gray-200">
                     <div class="p-1">
@@ -18,11 +18,11 @@ use App\Models\Course; ?>
                         {{ $custodian->id_student }}
                     </div>
                     <div class="p-1">
-                        <strong>Responsable:</strong>
-                        {{ $custodian->responsible }}
+                        <strong>Tipo:</strong>
+                        {{ $custodian->reponsible }}
                     </div>
                     <div class="p-1">
-                        <strong>DNI del responsable:</strong>
+                        <strong>DNI /NIE:</strong>
                         {{ $custodian->nif }}
                     </div>
                     <div class="p-1">
@@ -38,11 +38,11 @@ use App\Models\Course; ?>
                         {{ $custodian->last_name2 }}
                     </div>
                     <div class="p-1">
-                        <strong>Telefono:</strong>
+                        <strong>Teléfono:</strong>
                         {{ $custodian->mobile_number }}
                     </div>
                     <div class="p-1">
-                        <strong>Email:</strong>
+                        <strong>Email del responsable legal:</strong>
                         {{ $custodian->email }}
                     </div>
 
