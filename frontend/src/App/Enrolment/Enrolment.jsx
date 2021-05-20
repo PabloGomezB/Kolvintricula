@@ -7,6 +7,7 @@ import Custodian from "./Custodian";
 import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
+import DoneOutlineTwoToneIcon from '@material-ui/icons/DoneOutlineTwoTone';
 
 import {
   Button,
@@ -321,9 +322,11 @@ const Enrolment = (props) => {
         <div>
           {successfullyEnrolled ? (
             <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
-              <DialogTitle>¡Te has matriculado con éxito!
+              <DialogTitle style={{border: "3px solid green", borderBottom: "0"}}>
+                ¡Te has matriculado con éxito!
               </DialogTitle>
-              <DialogContent>
+              <DialogContent style={{border: "3px solid green", borderTop: "0"}}>
+                <DoneOutlineTwoToneIcon style={{color: "green"}}/>
                 <Button component={Link} to="/" color="primary">
                   Volver
                 </Button>
@@ -331,9 +334,10 @@ const Enrolment = (props) => {
             </Dialog>
           ):(
             <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
-              <DialogTitle>Algo ha ido mal...
+              <DialogTitle style={{border: "3px solid red", borderBottom: "0"}}>
+                Algo ha ido mal...
               </DialogTitle>
-              <DialogContent>
+              <DialogContent style={{border: "3px solid red", borderTop: "0"}}>
                 Porfavor escribe a: soporte@inspedralbes.cat
                 <Button onClick={closeModal} color="primary">
                   Volver

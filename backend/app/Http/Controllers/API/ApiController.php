@@ -5,8 +5,11 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Models\Custodian;
+use App\Models\Enrolment;
 use App\Models\Student;
 use Exception;
+
+use Illuminate\Support\Facades\Storage;
 
 class ApiController extends Controller
 {
@@ -56,10 +59,26 @@ class ApiController extends Controller
             $custodiansData = $values["custodians"];
             $academicData = $values["academic_data"];
 
+
+
+
+            $image = $request->image;  // your base64 encoded
+
+            $image = str_replace('data:image/png;base64,', '', $image);
+
+            $image = str_replace(' ', '+', $image);
+            $imageName = rand() . '.png';
+
+            
+            Storage::disk('local')->put($imageName, base64_decode($image));
+
+            return $studentData["photo_path"];
+
+
             $addStudentResult = ["addStudentResult" => $this->addStudent($studentData)];
             $addCustodiansResult = ["addCustodiansResult" => $this->addCustodians($custodiansData, $studentData["nif"])];
-            
-            // return $custodiansData;
+            // $addEnrolmentResult = ["addEnrolmentResult" => $this->addJsonEnrolment($academicData, $studentData["nif"])];
+
             return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
 
         }
@@ -181,5 +200,22 @@ class ApiController extends Controller
             }
         }
         return "NO_CUSTODIANS";
+    }
+
+    function addJsonEnrolment($studentData, $newStudentNif){
+
+        $id_student = Student::where('nif', $newStudentNif)->get('id');
+
+        try {
+            $newEnrolment = new Enrolment;
+
+            $newEnrolment->id_student = $id_student["0"]["id"];
+            $newEnrolment->json_course_module_uf = $studentData;
+            $newEnrolment->save();
+        } catch(\Illuminate\Database\QueryException | Exception $ex){
+            return $ex->getMessage(); 
+        }
+
+        return "OK";
     }
 }
