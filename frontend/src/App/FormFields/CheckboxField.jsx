@@ -7,20 +7,18 @@ import {
   FormControlLabel,
   FormHelperText,
 } from "@material-ui/core";
-
+/**
+ * Componente que crear un checkbox a partir de las props.
+ * @param {Object} props
+ */
 export default function CheckboxField(props) {
   const { label, ...rest } = props;
-  const [field, meta, helper] = useField(props);
+  const [field, helper] = useField(props);
   const { setValue } = helper;
-  console.log("check field", field);
-  console.log("rest", rest);
-  function _renderHelperText() {
-    const [touched, error] = at(meta, "touched", "error");
-    if (touched && error) {
-      return <FormHelperText>{error}</FormHelperText>;
-    }
-  }
-
+  /**
+   * Cambia el valor
+   * @param {Event} e
+   */
   function _onChange(e) {
     setValue(e.target.checked);
   }
@@ -38,7 +36,6 @@ export default function CheckboxField(props) {
         }
         label={label}
       />
-      {_renderHelperText()}
     </FormControl>
   );
 }

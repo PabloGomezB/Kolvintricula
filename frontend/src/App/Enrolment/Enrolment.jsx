@@ -7,7 +7,8 @@ import Custodian from "./Custodian";
 import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
-import DoneOutlineTwoToneIcon from '@material-ui/icons/DoneOutlineTwoTone';
+import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
+import Consent from "./Consent";
 
 import {
   Button,
@@ -26,7 +27,13 @@ import axios from "axios";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
-const steps = ["Alumno", "Responsable", "Académicos", "Revision"];
+const steps = [
+  "Alumno",
+  "Responsable",
+  "Académicos",
+  "Consentimiento",
+  "Revision",
+];
 
 const Enrolment = (props) => {
   const classes = useStyle();
@@ -41,7 +48,6 @@ const Enrolment = (props) => {
   const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
   const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
 
-  
   let studentData = {
     student: {
       updateStudent: false,
@@ -77,12 +83,19 @@ const Enrolment = (props) => {
   function _renderStepContent(step, values, setFieldValue) {
     switch (step) {
       case 0:
-        return <Student nif={studentData.student.nif} setFieldValue={setFieldValue}/>;
+        return (
+          <Student
+            nif={studentData.student.nif}
+            setFieldValue={setFieldValue}
+          />
+        );
       case 1:
         return <Custodian />;
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
+        return <Consent />;
+      case 4:
         return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
@@ -106,7 +119,6 @@ const Enrolment = (props) => {
   }
 
   const handleNext = (values, actions) => {
-
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
@@ -193,18 +205,24 @@ const Enrolment = (props) => {
     console.log("submit", values);
 
     axios
-      .post(`http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`, {
-      // .post(`http://127.0.0.1:8000/api/enrolments/add`, {
-        values,
-      })
+      .post(
+        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
+        {
+          // .post(`http://127.0.0.1:8000/api/enrolments/add`, {
+          values,
+        }
+      )
       .then((response) => {
         console.log("response:", response.data);
         setEnrolmentSubmited(true);
 
-        if(response.data.addStudentResult === "OK" && (response.data.addCustodiansResult === "OK" || response.data.addCustodiansResult === "NO_CUSTODIANS")){
+        if (
+          response.data.addStudentResult === "OK" &&
+          (response.data.addCustodiansResult === "OK" ||
+            response.data.addCustodiansResult === "NO_CUSTODIANS")
+        ) {
           setSuccessfullyEnrolled(true);
-        }
-        else{
+        } else {
           setSuccessfullyEnrolled(false);
         }
       })
@@ -218,7 +236,7 @@ const Enrolment = (props) => {
     setShowAlert(false);
   };
 
-  function closeModal(){
+  function closeModal() {
     setEnrolmentSubmited(false);
   }
 
@@ -319,14 +337,17 @@ const Enrolment = (props) => {
           </Form>
         )}
       </Formik>
-      {!!enrolmentSubmited &&
+      {!!enrolmentSubmited && (
         <div>
           {successfullyEnrolled ? (
-            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
+            <Dialog
+              open={enrolmentSubmited}
+              onEnter={console.log("dialog success.")}
+            >
               <DialogTitle className={classes.dialogTitleSuccess}>
                 ¡Te has matriculado con éxito!
                 <Button component={Link} to="/" color="primary">
-                  <DoneOutlineTwoToneIcon style={{color: "green"}}/>
+                  <DoneOutlineTwoToneIcon style={{ color: "green" }} />
                 </Button>
               </DialogTitle>
               {/* <DialogContent className={classes.dialogContentSuccess}>
@@ -335,12 +356,19 @@ const Enrolment = (props) => {
                 </Button>
               </DialogContent> */}
             </Dialog>
-          ):(
-            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
-              <DialogTitle style={{border: "3px solid red", borderBottom: "0"}}>
+          ) : (
+            <Dialog
+              open={enrolmentSubmited}
+              onEnter={console.log("dialog error.")}
+            >
+              <DialogTitle
+                style={{ border: "3px solid red", borderBottom: "0" }}
+              >
                 Algo ha ido mal...
               </DialogTitle>
-              <DialogContent style={{border: "3px solid red", borderTop: "0"}}>
+              <DialogContent
+                style={{ border: "3px solid red", borderTop: "0" }}
+              >
                 Porfavor escribe a: soporte@inspedralbes.cat
                 <Button onClick={closeModal} color="primary">
                   Volver
@@ -349,7 +377,7 @@ const Enrolment = (props) => {
             </Dialog>
           )}
         </div>
-      }
+      )}
     </div>
   );
 };

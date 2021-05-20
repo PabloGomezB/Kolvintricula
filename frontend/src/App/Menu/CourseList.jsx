@@ -3,6 +3,10 @@ import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import { Link, useRouteMatch } from "react-router-dom";
 
+/**
+ * Componente que lista los ciclos
+ * @param {Object[]} courses Lista de ciclos
+ */
 const CourseList = ({ courses }) => {
   let match = useRouteMatch();
 
