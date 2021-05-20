@@ -13,10 +13,10 @@ use App\Models\Course; ?>
                         <strong>ID:</strong>
                         {{ $custodian->id }}
                     </div>
-                    <div class="p-1">
+                    <!-- <div class="p-1">
                         <strong>ID Estudiante:</strong>
                         {{ $custodian->id_student }}
-                    </div>
+                    </div> -->
                     <div class="p-1">
                         <strong>Tipo:</strong>
                         {{ $custodian->reponsible }}

@@ -22,9 +22,9 @@
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID
                                                 </th>
-                                                <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
+                                                <!-- <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     ID Estudiante
-                                                </th>
+                                                </th> -->
                                                 <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Responsable
                                                 </th>
