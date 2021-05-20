@@ -85,7 +85,22 @@ const Enrolment = (props) => {
     ],
     academic_data: {
       year: "",
-      modules: [],
+      modules: {
+        MP1: [],
+        MP2: [],
+        MP3: [],
+        MP: [],
+        MP5: [],
+        MP6: [],
+        MP7: [],
+        MP8: [],
+        MP9: [],
+        MP10: [],
+        MP12: [],
+        MP13: [],
+        MP14: [],
+        MP15: [],
+      },
     },
     consent: {
       alergias: "",
