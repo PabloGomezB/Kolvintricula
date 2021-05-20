@@ -1,8 +1,6 @@
 import { Button, Grid, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
-import axios from "axios";
-import { Field, useFormikContext } from "formik";
 
 export const Student = (props) => {
 
