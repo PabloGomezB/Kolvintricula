@@ -1,12 +1,6 @@
 import React from "react";
-import { at } from "lodash";
 import { useField } from "formik";
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-} from "@material-ui/core";
+import { Checkbox, FormControl, FormControlLabel } from "@material-ui/core";
 /**
  * Componente que crear un checkbox a partir de las props.
  * @param {Object} props
