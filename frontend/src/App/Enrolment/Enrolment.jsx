@@ -21,6 +21,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  Box,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import axios from "axios";
@@ -47,6 +48,8 @@ const Enrolment = (props) => {
 
   const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
   const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
+
+  const [emailPedralbes, setEmailPedralbes] = useState(0);
 
   let studentData = {
     student: {
@@ -230,10 +233,11 @@ const Enrolment = (props) => {
         setEnrolmentSubmited(true);
 
         if (
-          response.data.addStudentResult === "OK" &&
+          response.data.addStudentResult[0].response === "OK" &&
           (response.data.addCustodiansResult === "OK" ||
             response.data.addCustodiansResult === "NO_CUSTODIANS")
         ) {
+          setEmailPedralbes(response.data.addStudentResult[0].email_pedralbes);
           setSuccessfullyEnrolled(true);
         } else {
           setSuccessfullyEnrolled(false);
@@ -355,33 +359,27 @@ const Enrolment = (props) => {
           {successfullyEnrolled ? (
             <Dialog
               open={enrolmentSubmited}
-              onEnter={console.log("dialog success.")}
+              // onEnter={console.log("dialog success.")}
             >
               <DialogTitle className={classes.dialogTitleSuccess}>
                 ¡Te has matriculado con éxito!
-                <Button component={Link} to="/" color="primary">
-                  <DoneOutlineTwoToneIcon style={{ color: "green" }} />
-                </Button>
               </DialogTitle>
-              {/* <DialogContent className={classes.dialogContentSuccess}>
-                <Button component={Link} to="/" color="primary">
+              <DialogContent className={classes.dialogContentSuccess}>
+                Tu email de alumno es: <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
+                <Button component={Link} to="/" color="primary" className={classes.dialogButtonSuccess}>
                   <DoneOutlineTwoToneIcon style={{color: "green"}}/>
                 </Button>
-              </DialogContent> */}
+              </DialogContent>
             </Dialog>
           ) : (
             <Dialog
               open={enrolmentSubmited}
-              onEnter={console.log("dialog error.")}
+              // onEnter={console.log("dialog error.")}
             >
-              <DialogTitle
-                style={{ border: "3px solid red", borderBottom: "0" }}
-              >
+              <DialogTitle className={classes.dialogTitleError}>
                 Algo ha ido mal...
               </DialogTitle>
-              <DialogContent
-                style={{ border: "3px solid red", borderTop: "0" }}
-              >
+              <DialogContent className={classes.dialogContentError}>
                 Porfavor escribe a: soporte@inspedralbes.cat
                 <Button onClick={closeModal} color="primary">
                   Volver
