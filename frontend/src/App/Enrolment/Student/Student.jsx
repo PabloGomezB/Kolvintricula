@@ -2,25 +2,20 @@ import { Grid, Typography, Button } from "@material-ui/core";
 import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import axios from "axios";
-import { Field } from "formik";
+import { Field, useFormikContext } from "formik";
 
-export const Student = ({setFieldValue}) => {
-  const [imagePreviewUrl, setimagePreviewUrl] = useState('');
+export const Student = ({ setFieldValue }) => {
 
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   // TODO: do something with -> this.state.file
-  //   console.log('handle uploading-', file);
-  // }
+  const [imagePreviewUrl, setimagePreviewUrl] = useState(null);
+
 
   const handleImageChange = (e) => {
-    
     let reader = new FileReader();
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      //setFile(file);
-      setimagePreviewUrl(reader.result);
+      setFieldValue("student.photo_path", reader.result)
+      setimagePreviewUrl(reader.result)
     };
 
     reader.readAsDataURL(file);
@@ -28,13 +23,32 @@ export const Student = ({setFieldValue}) => {
 
   let imagePreview = "";
   if (imagePreviewUrl) {
-    imagePreview = <img style={{ height: '100px', width: '100px', borderRadius: '50px' }} src={imagePreviewUrl}/>
+    imagePreview = (
+      <img
+        style={{ height: "100px", width: "100px", borderRadius: "50px" }}
+        src={imagePreviewUrl}
+        alt="Imagen cambiada"
+      />
+    );
   } else {
-    imagePreview = <img style={{ backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover', borderRadius: '50px', height: '100px', width: '100px' }}/>
+    imagePreview = (
+      <img
+        style={{
+          backgroundImage:
+            'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          borderRadius: "50px",
+          height: "100px",
+          width: "100px",
+        }}
+        alt=""
+      />
+    );
   }
 
-  console.log(imagePreview.props.src);
+  // console.log("src", imagePreview.props.src);
+  // console.log("imagePreviewUrl: " + imagePreviewUrl);
 
   // axios
   //   .post(
@@ -49,7 +63,6 @@ export const Student = ({setFieldValue}) => {
   //     console.log(error);
   //   });
 
-
   // axios
   //   .post(`http://127.0.0.1:8000/api/students/photo/43216711V`, {
   //     profilePhoto,
@@ -63,7 +76,17 @@ export const Student = ({setFieldValue}) => {
 
   return (
     <div>
-      <div style={{ float: 'right', height: '100px', width: '100px', marginRight: '300px' }} className="imgPreview">{imagePreview}</div>
+      <div
+        style={{
+          float: "right",
+          height: "100px",
+          width: "100px",
+          marginRight: "300px",
+        }}
+        className="imgPreview"
+      >
+        {imagePreview}
+      </div>
       <Typography variant="h4" gutterBottom>
         Datos del alumno
       </Typography>
@@ -133,25 +156,25 @@ export const Student = ({setFieldValue}) => {
         </Grid>
       </Grid>
       <div>
-          <Field
-            style={{ display: 'none' }}
-            name="student.photo_path"
-            type="file"
-            id="contained-button-file"
-            onChange={(e) => handleImageChange(e)}
-          />
-          {/* <label htmlFor="contained-button-file">
+        <input
+          style={{ display: "none" }}
+          name="student.photo_path"
+          type="file"
+          id="contained-button-file"
+          onChange={(e) => handleImageChange(e)}
+        />
+        {/* <label htmlFor="contained-button-file">
             <button
               onClick={(e) => handleSubmit(e)}
             >
               Upload Image
             </button>
           </label> */}
-          <label htmlFor="contained-button-file">
-            <Button variant="contained" color="primary" component="span">
-              Subir foto
-            </Button>
-          </label>
+        <label htmlFor="contained-button-file">
+          <Button variant="contained" color="primary" component="span">
+            Subir foto
+          </Button>
+        </label>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ const Enrolment = (props) => {
       email_personal: "",
       nif: "",
       mobile_number: "",
-      photo_path: "",
+      photo_path: null,
     },
     custodians: [
       {
@@ -66,10 +66,10 @@ const Enrolment = (props) => {
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values) {
+  function _renderStepContent(step, values, setFieldValue) {
     switch (step) {
       case 0:
-        return <Student />;
+        return <Student setFieldValue={setFieldValue}/>;
       case 1:
         return <Custodian />;
       case 2:
@@ -206,6 +206,9 @@ const Enrolment = (props) => {
   return (
     <div>
       <Link to="/">Volver</Link>
+      {/* <div style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover', height: '100px', width: '100px' }} className="imgPreview">{$imagePreview}</div> */}
+
       <Typography variant="h3" gutterBottom align="center">
         Matrícula
       </Typography>
@@ -264,7 +267,7 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values)}
+            {_renderStepContent(activeStep, values, setFieldValue)}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button

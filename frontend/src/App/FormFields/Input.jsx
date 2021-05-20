@@ -17,7 +17,7 @@ function Input(props) {
   return (
     <TextField
       type="text"
-      error={meta.touched && meta.error && true}
+      error={meta.touched && meta.error && true}s
       helperText={_renderHelperText()}
       {...field}
       {...rest}
