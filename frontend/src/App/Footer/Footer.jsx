@@ -1,5 +1,4 @@
 import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import CookieConsent from "react-cookie-consent";
 import { useStyle } from "../Layout/styles";
@@ -8,6 +7,8 @@ import { Grid } from "@material-ui/core";
 
 export default function Footer() {
   const classes = useStyle();
+  // let aceptar = false;
+  //const [cookies, setCookie] = useCookies(["cookie"]);
 
   return (
     <AppBar position="static" component="footer">
@@ -97,10 +98,8 @@ export default function Footer() {
         {/* <Typography variant="body1" color="inherit" style={{backgroundColor: 'red'}}> */}
         {/* <p>© 2021 Kolvintrícula</p> */}
         {/* </Typography> */}
-        {/* </Toolbar> */}
-        <CookieConsent  
-          // debug={true}
-          cookieName="KolvintriculaCookie"
+        <CookieConsent
+          debug={true}
           location="bottom"
           buttonText="Entiendo"
           style={{ background: "black" }}

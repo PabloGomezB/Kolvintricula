@@ -2,20 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-// use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Routing\Controller;
-
-use App\Models\Course;
 use App\Models\Custodian;
 use App\Models\Student;
-use App\Models\Enrolment;
 use Exception;
-use Illuminate\Support\Facades\DB;
-
-use function PHPUnit\Framework\isEmpty;
-
 
 class ApiController extends Controller
 {
@@ -68,7 +59,7 @@ class ApiController extends Controller
             $addStudentResult = ["addStudentResult" => $this->addStudent($studentData)];
             $addCustodiansResult = ["addCustodiansResult" => $this->addCustodians($custodiansData, $studentData["nif"])];
             
-
+            // return $custodiansData;
             return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
 
         }
@@ -167,11 +158,11 @@ class ApiController extends Controller
 
         if (!empty($custodiansData)){ // Necesario porque a veces se buggea
             if ($custodiansData[0]["name"] != null || $custodiansData[0]["name"] != ""){
-                $newCustodian = new Custodian;
                 $id_student = Student::where('nif', $newStudentNif)->get('id');
 
                 foreach ($custodiansData as $custodian) {
                     try {
+                        $newCustodian = new Custodian;
                         $newCustodian->id_student = $id_student["0"]["id"];
                         $newCustodian->responsible = $custodian["type"];
                         $newCustodian->nif = $custodian["nif"];
@@ -186,19 +177,9 @@ class ApiController extends Controller
                         return $ex->getMessage();
                     }
                 }
-
                 return "OK";
             }
         }
         return "NO_CUSTODIANS";
-    }
-
-    function uploadPhoto($nif, Request $request){
-
-        try {
-            return $nif;
-        } catch(\Illuminate\Database\QueryException | Exception $ex){
-            return $ex->getMessage();
-        }
     }
 }

@@ -25,7 +25,7 @@ export const AcademicData = ({ cursmoduluf, values }) => {
               ]}
             />
           </div>
-          <div dense>
+          <div>
             {values.academic_data.course === 1 ||
             values.academic_data.course === 2
               ? cursmoduluf[values.academic_data.course - 1].moduls.map(

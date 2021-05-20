@@ -96,23 +96,20 @@ const useStyle = makeStyles(() => ({
   //   borderLeft: '5px solid white',
   //   marginRight: '10px'
   // },
-  a: {
-    textDecoration: 'none',
-    color: 'white'
-  },
-  pp: {
-    color: "#fff",
-    fontSize: "12px",
-    background: "#006dcc",
-    textShadow: "0 1px 1px rgb(255 255 255 / 75%)",
-    borderRadius: "3px",
-    padding: "5px",
-    textDecoration: "none"
-  },
-  formOptionInput: {
-    // display: 'flex',
-    width: "20%",
-  },
+  // a: {
+  //   textDecoration: 'none',
+  //   color: 'white'
+  // },
+  // pp: {
+  //   color: "#fff",
+  //   fontSize: "12px",
+  //   background: "#006dcc",
+  //   textShadow: "0 1px 1px rgb(255 255 255 / 75%)",
+  //   borderRadius: "3px",
+  //   padding: "5px",
+  //   textDecoration: "none"
+  // },
+  // display: 'flex',
 }));
 
 export { theme, useStyle };

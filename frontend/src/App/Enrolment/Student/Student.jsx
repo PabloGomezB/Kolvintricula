@@ -1,20 +1,19 @@
-import { Grid, Typography, Button } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import axios from "axios";
 import { Field, useFormikContext } from "formik";
 
-export const Student = ({ setFieldValue }) => {
+export const Student = (props) => {
 
   const [imagePreviewUrl, setimagePreviewUrl] = useState(null);
-
 
   const handleImageChange = (e) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      setFieldValue("student.photo_path", reader.result)
+      props.setFieldValue("student.photo_path", reader.result)
       setimagePreviewUrl(reader.result)
     };
 
@@ -47,33 +46,6 @@ export const Student = ({ setFieldValue }) => {
     );
   }
 
-  // console.log("src", imagePreview.props.src);
-  // console.log("imagePreviewUrl: " + imagePreviewUrl);
-
-  // axios
-  //   .post(
-  //     `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/student/43216711V`, {
-  //       photo_path: profilePhoto
-  //     }
-  //   )
-  //   .then((response) => {
-  //     console.log(response);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
-  // axios
-  //   .post(`http://127.0.0.1:8000/api/students/photo/43216711V`, {
-  //     profilePhoto,
-  //   })
-  //   .then((response) => {
-  //     console.log("response:", response.data);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   });
-
   return (
     <div>
       <div
@@ -90,6 +62,7 @@ export const Student = ({ setFieldValue }) => {
       <Typography variant="h4" gutterBottom>
         Datos del alumno
       </Typography>
+
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <FormikControl
@@ -120,13 +93,24 @@ export const Student = ({ setFieldValue }) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <FormikControl
-            control="input"
-            type="text"
-            label="NIF: "
-            name="student.nif"
-            fullWidth
-          />
+          { props.nif.length === 0 ? (
+            <FormikControl
+              control="input"
+              type="text"
+              label="NIF: "
+              name="student.nif"
+              fullWidth
+            />
+          ) : (
+            <FormikControl
+              control="input"
+              type="text"
+              label="NIF: "
+              name="student.nif"
+              fullWidth
+              disabled
+            />
+          )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormikControl

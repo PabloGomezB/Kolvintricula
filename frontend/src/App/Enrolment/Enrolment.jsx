@@ -16,6 +16,9 @@ import {
   Stepper,
   Typography,
   Snackbar,
+  Dialog,
+  DialogContent,
+  DialogTitle,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import axios from "axios";
@@ -34,6 +37,10 @@ const Enrolment = (props) => {
   const [messageError, setMessageError] = useState(0);
   const [showAlert, setShowAlert] = useState(0);
 
+  const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
+  const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
+
+  
   let studentData = {
     student: {
       updateStudent: false,
@@ -69,7 +76,7 @@ const Enrolment = (props) => {
   function _renderStepContent(step, values, setFieldValue) {
     switch (step) {
       case 0:
-        return <Student setFieldValue={setFieldValue}/>;
+        return <Student nif={studentData.student.nif} setFieldValue={setFieldValue}/>;
       case 1:
         return <Custodian />;
       case 2:
@@ -98,68 +105,68 @@ const Enrolment = (props) => {
   }
 
   const handleNext = (values, actions) => {
+
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
       if (props.studentData !== 0) {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
-        if (activeStep === 2) {
-          if (isAdult(values.student.date_birth)) {
-            values.custodians = [];
-          }
+      }
+      if (activeStep === 2) {
+        if (isAdult(values.student.date_birth)) {
+          values.custodians = [];
         }
-        if (activeStep === 0 && props.studentData === 0) {
-          // Checkear solo si el student es nuevo
-          let studentError = false;
-          let newStudentNif = values.student.nif;
-          let newStudentEmail = values.student.email_personal;
+      }
+      if (activeStep === 0 && props.studentData === 0) {
+        // Checkear solo si el student es nuevo
+        let studentError = false;
+        let newStudentNif = values.student.nif;
+        let newStudentEmail = values.student.email_personal;
 
-          axios
-            .post(
-              `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
-              {
-                nif: newStudentNif,
-                email: newStudentEmail,
+        axios
+          .post(
+            `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
+            {
+              nif: newStudentNif,
+              email: newStudentEmail,
+            }
+          )
+          .then((response) => {
+            if (response.data.nifFound || response.data.emailFound) {
+              if (response.data.nifFound) {
+                setMessageError("Ya existe un alumno con este mismo NIF");
+              } else {
+                setMessageError("Ya existe un alumno con este mismo EMAIL");
               }
-            )
-            .then((response) => {
-              if (response.data.nifFound || response.data.emailFound) {
-                if (response.data.nifFound) {
-                  setMessageError("Ya existe un alumno con este mismo NIF");
-                } else {
-                  setMessageError("Ya existe un alumno con este mismo EMAIL");
-                }
-                setShowAlert(true);
-                studentError = true;
-              }
-              if (studentError === false) {
-                nextStep(values, actions);
-              }
-              actions.setTouched({});
-              actions.setSubmitting(false);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        } else {
-          nextStep(values, actions);
-        }
+              setShowAlert(true);
+              studentError = true;
+            }
+            if (studentError === false) {
+              nextStep(values, actions);
+            }
+            actions.setTouched({});
+            actions.setSubmitting(false);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        nextStep(values, actions);
       }
     }
   };
 
   function nextStep(values, actions) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    if (isAdult(values.student.date_birth)) {
-      setActiveStep((previousActiveStep) => previousActiveStep + 1);
+    if (activeStep === 0 && isAdult(values.student.date_birth)) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setSkipped((prevSkipped) => {
         const newSkipped = new Set(prevSkipped.values());
         newSkipped.add(activeStep + 1);
         return newSkipped;
       });
     }
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
     actions.setTouched({});
     actions.setSubmitting(false);
   }
@@ -176,26 +183,33 @@ const Enrolment = (props) => {
     if (!isAdult(values.student.date_birth) && values.custodians.length === 0) {
       alert("Añade un responsable");
       actions.setSubmitting(false);
-
       return;
     }
     await _sleep(1000);
 
-    alert(JSON.stringify(values, null, 2));
+    // alert(JSON.stringify(values, null, 2));
     actions.setSubmitting(false);
-    // setActiveStep(activeStep + 1);
     console.log("submit", values);
 
     axios
-      .post(`http://127.0.0.1:8000/api/enrolments/add`, {
+      .post(`http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`, {
+      // .post(`http://127.0.0.1:8000/api/enrolments/add`, {
         values,
       })
       .then((response) => {
         console.log("response:", response.data);
+        setEnrolmentSubmited(true);
+
+        if(response.data.addStudentResult === "OK" && (response.data.addCustodiansResult === "OK" || response.data.addCustodiansResult === "NO_CUSTODIANS")){
+          setSuccessfullyEnrolled(true);
+        }
+        else{
+          setSuccessfullyEnrolled(false);
+        }
       })
       .catch((error) => {
         console.log(error);
-        alert("vaya...parece que ha habido algun error...");
+        setSuccessfullyEnrolled(false);
       });
   }
 
@@ -203,11 +217,15 @@ const Enrolment = (props) => {
     setShowAlert(false);
   };
 
+  function closeModal(){
+    setEnrolmentSubmited(false);
+  }
+
   return (
     <div>
-      <Link to="/">Volver</Link>
-      {/* <div style={{ float: 'right', backgroundImage: 'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")', backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', height: '100px', width: '100px' }} className="imgPreview">{$imagePreview}</div> */}
+      <Button component={Link} to="/" variant="contained">
+        Volver
+      </Button>
 
       <Typography variant="h3" gutterBottom align="center">
         Matrícula
@@ -300,6 +318,32 @@ const Enrolment = (props) => {
           </Form>
         )}
       </Formik>
+      {!!enrolmentSubmited &&
+        <div>
+          {successfullyEnrolled ? (
+            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
+              <DialogTitle>¡Te has matriculado con éxito!
+              </DialogTitle>
+              <DialogContent>
+                <Button component={Link} to="/" color="primary">
+                  Volver
+                </Button>
+              </DialogContent>
+            </Dialog>
+          ):(
+            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
+              <DialogTitle>Algo ha ido mal...
+              </DialogTitle>
+              <DialogContent>
+                Porfavor escribe a: soporte@inspedralbes.cat
+                <Button onClick={closeModal} color="primary">
+                  Volver
+                </Button>
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
+      }
     </div>
   );
 };
