@@ -63,7 +63,7 @@ const validationSchema = [
   }),
   Yup.object({
     academic_data: Yup.object().shape({
-      course: Yup.number()
+      year: Yup.number()
         .typeError("Elige una opción válida")
         .equals([1, 2])
         .required("Requerido"),

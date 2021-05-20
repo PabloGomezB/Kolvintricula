@@ -84,7 +84,7 @@ const EnrolmentList = () => {
       {courseArray.map((course) => (
         <Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? (
-            <Enrolment studentData={studentData} />
+            <Enrolment studentData={studentData} idCourse={course.id} />
           ) : (
             <NoDisponible />
           )}

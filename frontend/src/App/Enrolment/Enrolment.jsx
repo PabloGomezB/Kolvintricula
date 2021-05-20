@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Student from "./Student";
 import Custodian from "./Custodian";
-import cursmoduluf from "./cursmoduluf";
+// import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
 import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
@@ -48,6 +48,18 @@ const Enrolment = (props) => {
   const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
   const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
 
+  const [cursmoduluf, setCursmoduluf] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
+      )
+      .then((res) => {
+        setCursmoduluf(res.data);
+      });
+  }, [props.idCourse]);
+
   let studentData = {
     student: {
       updateStudent: false,
@@ -72,8 +84,8 @@ const Enrolment = (props) => {
       },
     ],
     academic_data: {
-      course: "",
-      moduluf: [],
+      year: "",
+      modules: [],
     },
     consent: {
       alergias: "",
