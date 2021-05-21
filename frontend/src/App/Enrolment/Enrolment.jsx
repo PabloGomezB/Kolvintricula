@@ -91,7 +91,7 @@ const Enrolment = (props) => {
         MP1: [],
         MP2: [],
         MP3: [],
-        MP: [],
+        MP4: [],
         MP5: [],
         MP6: [],
         MP7: [],
@@ -109,12 +109,12 @@ const Enrolment = (props) => {
       enfermedades: "",
       medicamentos: "",
       otros: "",
-      2: "",
-      3: "",
-      4: "",
-      5: "",
-      6: "",
-      7: "",
+      c2: "",
+      c3: "",
+      c4: "",
+      c5: "",
+      c6: "",
+      c7: "",
       firma: "",
     },
   };
@@ -391,9 +391,15 @@ const Enrolment = (props) => {
                 ¡Te has matriculado con éxito!
               </DialogTitle>
               <DialogContent className={classes.dialogContentSuccess}>
-                Tu email de alumno es: <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
-                <Button component={Link} to="/" color="primary" className={classes.dialogButtonSuccess}>
-                  <DoneOutlineTwoToneIcon style={{color: "green"}}/>
+                Tu email de alumno es:{" "}
+                <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
+                <Button
+                  component={Link}
+                  to="/"
+                  color="primary"
+                  className={classes.dialogButtonSuccess}
+                >
+                  <DoneOutlineTwoToneIcon style={{ color: "green" }} />
                 </Button>
               </DialogContent>
             </Dialog>

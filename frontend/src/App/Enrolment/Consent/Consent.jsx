@@ -107,7 +107,7 @@ const Consent = ({ setFieldValue, errors }) => {
           públic. Període de validesa de l'autorització: curs
           <FormikControl
             control="radio"
-            name="consent.2"
+            name="consent.c2"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -126,7 +126,7 @@ const Consent = ({ setFieldValue, errors }) => {
           sigui identificable.
           <FormikControl
             control="radio"
-            name="consent.3"
+            name="consent.c3"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -142,7 +142,7 @@ const Consent = ({ setFieldValue, errors }) => {
           desenvolupar l'activitat educativa.
           <FormikControl
             control="radio"
-            name="consent.4"
+            name="consent.c4"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -183,7 +183,7 @@ const Consent = ({ setFieldValue, errors }) => {
           procés formatiu.
           <FormikControl
             control="radio"
-            name="consent.5"
+            name="consent.c5"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -198,7 +198,7 @@ const Consent = ({ setFieldValue, errors }) => {
           s'haurien de dur a terme les pràctiques lectives.
           <FormikControl
             control="radio"
-            name="consent.6"
+            name="consent.c6"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -236,7 +236,7 @@ const Consent = ({ setFieldValue, errors }) => {
           orientadora.
           <FormikControl
             control="radio"
-            name="consent.7"
+            name="consent.c7"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -250,7 +250,7 @@ const Consent = ({ setFieldValue, errors }) => {
             control="input"
             type="text"
             label="Enfermades"
-            name="consent.malalties"
+            name="consent.enfermedades"
             fullWidth
           />
           <FormikControl

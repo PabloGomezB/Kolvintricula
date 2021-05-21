@@ -128,6 +128,78 @@ export default function Revision({ values }) {
             </Grid>
           </div>
         )}
+      <div>
+        <Typography variant="h4" gutterBottom>
+          Datos academicos
+        </Typography>
+
+        <List>
+          <ListItem>
+            <ListItemText
+              primary="Curso"
+              secondary={values.academic_data.year}
+            />
+          </ListItem>
+          {Object.keys(values.academic_data.modules).map((key, index) => {
+            return (
+              values.academic_data.modules[key].length !== 0 && (
+                <ListItem>
+                  <ListItemText
+                    primary={key}
+                    secondary={values.academic_data.modules[key].join(", ")}
+                  />
+                </ListItem>
+              )
+            );
+          })}
+        </List>
+      </div>
+      <div>
+        <Typography variant="h4" gutterBottom>
+          Consentimiento
+        </Typography>
+        <List>
+          {/* <ListItem>
+            <ListItemText primary="2" secondary={values.consent.c2} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="3" secondary={values.consent.c3} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="4" secondary={values.consent.c4} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="5" secondary={values.consent.c5} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="6" secondary={values.consent.c6} />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="7" secondary={values.consent.c7} />
+          </ListItem> */}
+          <ListItem>
+            <ListItemText
+              primary="Enfermedades"
+              secondary={values.consent.enfermedades}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="Alergias"
+              secondary={values.consent.alergias}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="Medicamentos"
+              secondary={values.consent.medicamentos}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Otros" secondary={values.consent.otros} />
+          </ListItem>
+        </List>
+      </div>
     </div>
   );
 }
