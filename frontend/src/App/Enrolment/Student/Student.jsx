@@ -5,18 +5,44 @@ import FormikControl from "../../FormFields/FormikControl";
 export const Student = (props) => {
 
   const [imagePreviewUrl, setimagePreviewUrl] = useState(null);
+  const [imagenNoValida, setimagenNoValida] = useState(false);
+  //let imagenNoValida = false;
 
   const handleImageChange = (e) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    reader.onloadend = () => {
-      props.setFieldValue("student.photo_path", reader.result)
-      setimagePreviewUrl(reader.result)
-    };
-
-    reader.readAsDataURL(file);
+    if (!file.name.match(/.(png)$/i)) {
+      window.alert("No puedes subir una imagen jpg");
+      //setimagenNoValida(true);
+      //console.log("Imagen no válida", imagenNoValida);
+      reader.onloadend = () => {
+        //console.log("Reader result antes: ", reader.result);
+        props.setFieldValue("student.photo_path", null)
+        //console.log("Reader result después: ", reader.result);
+        setimagePreviewUrl(null)
+      };
+    }
+    else {
+      reader.onloadend = () => {
+        //console.log("Reader result antes: ", reader.result);
+        props.setFieldValue("student.photo_path", reader.result)
+        //console.log("Reader result después: ", reader.result);
+        setimagePreviewUrl(reader.result)
+      };
+  
+      reader.readAsDataURL(file);
+      console.log(file);
+    }
   };
+
+  //console.log("Fuera de la función", imagePreviewUrl);
+
+  // if(imagePreviewUrl == null){
+  //   alert("La imagen es obligatoria");
+  // }
+
+  //console.log("Imagen no válida fuera de la función", imagenNoValida);
 
   let imagePreview = "";
   if (imagePreviewUrl) {
