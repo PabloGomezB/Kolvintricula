@@ -27,7 +27,7 @@ const validationSchema = [
         .email("Email no válido.")
         .required("Requerido"),
       date_birth: Yup.date().required("Requerido").nullable(),
-      photo_path: Yup.string().required("Requerido"),
+      photo_path: Yup.string(),
     }),
   }),
   Yup.object({
