@@ -1,4 +1,7 @@
 import * as Yup from "yup";
+/**
+ * Objeto de validación de datos para Formik
+ */
 const validationSchema = [
   Yup.object({
     student: Yup.object().shape({

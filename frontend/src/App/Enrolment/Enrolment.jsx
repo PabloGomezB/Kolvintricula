@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import moment from "moment";
@@ -35,7 +36,11 @@ const steps = [
   "Consentimiento",
   "Revision",
 ];
-
+/**
+ * Componente que construye el formulario entero
+ * @param {*} props
+ * @returns
+ */
 const Enrolment = (props) => {
   const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
@@ -423,5 +428,12 @@ const Enrolment = (props) => {
       )}
     </div>
   );
+};
+
+Enrolment.propTypes = {
+  /** ID del curso */
+  idCourse: PropTypes.any,
+  /** Datos del estudiante */
+  studentData: PropTypes.number,
 };
 export default Enrolment;

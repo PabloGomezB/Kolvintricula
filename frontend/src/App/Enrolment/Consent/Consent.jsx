@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useRef } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -6,6 +7,11 @@ import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
 import SignatureCanvas from "react-signature-canvas";
 
+/**
+ * Componente que cosntruye el paso de consentimiento
+ * @param {*} param0
+ * @returns
+ */
 const Consent = ({ setFieldValue, errors }) => {
   const signatureRef = useRef({});
   function onChange() {
@@ -312,6 +318,13 @@ const Consent = ({ setFieldValue, errors }) => {
       {/* {errors.conserrors.consent.firma===null */}
     </div>
   );
+};
+
+Consent.propTypes = {
+  /** Errores */
+  errors: PropTypes.any,
+  /** Funcion para guarda en values de formik */
+  setFieldValue: PropTypes.func,
 };
 
 export default Consent;

@@ -1,7 +1,13 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Field, ErrorMessage } from "formik";
 import TextError from "./TextError";
 
+/**
+ * Componente que construye un text area
+ * @param {*} props
+ * @returns
+ */
 function Textarea(props) {
   const { label, name, ...rest } = props;
   return (
@@ -12,5 +18,12 @@ function Textarea(props) {
     </div>
   );
 }
+
+Textarea.propTypes = {
+  /** Label del text area */
+  label: PropTypes.any,
+  /** Value en el que se guardará  */
+  name: PropTypes.any,
+};
 
 export default Textarea;

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import Input from "./Input";
 import Textarea from "./Textarea";
@@ -6,7 +7,7 @@ import RadioButtons from "./RadioButtons";
 import CheckboxField from "./CheckboxField";
 import DatePicker from "./DatePicker.jsx";
 /**
- * Componente que construye otro componente inputs para el formulario
+ * Componente que construye otro componente input para el formulario
  * @param {*} props
  * @returns
  */
@@ -29,6 +30,11 @@ const FormikControl = (props) => {
     default:
       return null;
   }
+};
+
+FormikControl.propTypes = {
+  /** Tipo de field */
+  control: PropTypes.any,
 };
 
 export default FormikControl;

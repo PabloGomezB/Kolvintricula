@@ -1,9 +1,13 @@
+import PropTypes from "prop-types";
 import { Button, Grid, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
-
+/**
+ * Componente que construye el paso de Datos del estudiante
+ * @param {*} props
+ * @returns
+ */
 export const Student = (props) => {
-
   const [imagePreviewUrl, setimagePreviewUrl] = useState(null);
 
   const handleImageChange = (e) => {
@@ -11,8 +15,8 @@ export const Student = (props) => {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      props.setFieldValue("student.photo_path", reader.result)
-      setimagePreviewUrl(reader.result)
+      props.setFieldValue("student.photo_path", reader.result);
+      setimagePreviewUrl(reader.result);
     };
 
     reader.readAsDataURL(file);
@@ -91,7 +95,7 @@ export const Student = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          { props.nif.length === 0 ? (
+          {props.nif.length === 0 ? (
             <FormikControl
               control="input"
               type="text"
@@ -160,5 +164,12 @@ export const Student = (props) => {
       </div>
     </div>
   );
+};
+
+Student.propTypes = {
+  nif: PropTypes.shape({
+    length: PropTypes.number,
+  }),
+  setFieldValue: PropTypes.func,
 };
 export default Student;

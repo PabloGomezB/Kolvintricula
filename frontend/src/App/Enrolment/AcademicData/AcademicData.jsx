@@ -4,6 +4,12 @@ import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { useStyle } from "../../Layout/styles";
 import { CheckboxWithLabel } from "formik-material-ui";
+import PropTypes from "prop-types";
+/**
+ * Componente que construye el paso de Datos Académicos
+ * @param {*} param0
+ * @returns
+ */
 
 export const AcademicData = ({ cursmoduluf, values }) => {
   const classes = useStyle();
@@ -63,5 +69,15 @@ export const AcademicData = ({ cursmoduluf, values }) => {
     </div>
   );
 };
+AcademicData.propTypes = {
+  /** Array de cursos con modulos y ufs */
+  cursmoduluf: PropTypes.array.isRequired,
+  /** Valores que Formik guarda */
+  values: PropTypes.object.isRequired,
+};
 
+AcademicData.defaultProps = {
+  cursmoduluf: [],
+  values: {},
+};
 export default AcademicData;

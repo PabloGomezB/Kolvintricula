@@ -6,6 +6,7 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import es from "date-fns/locale/es";
+import PropTypes from "prop-types";
 
 /**
  * Componente que crea un calendario para que elijas una fecha
@@ -59,6 +60,11 @@ const DatePicker = (props) => {
       />
     </MuiPickersUtilsProvider>
   );
+};
+
+DatePicker.propTypes = {
+  /** Props para construir el DatePicker */
+  props: PropTypes.object,
 };
 
 export default DatePicker;

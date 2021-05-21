@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Field, ErrorMessage, useField } from "formik";
 import TextError from "./TextError";
@@ -8,6 +9,11 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 
+/**
+ * Componente radio button
+ * @param {*} props
+ * @returns
+ */
 function RadioButtons(props) {
   const [field, helper, helper2] = useField(props);
   console.log(useField(props));
@@ -33,5 +39,16 @@ function RadioButtons(props) {
     </>
   );
 }
+
+RadioButtons.propTypes = {
+  /** Label del radio button */
+  label: PropTypes.any,
+  /** Donde se va aguardar en el value de formik */
+  name: PropTypes.any,
+  /** Las opciones que pueden ser elegidas */
+  options: PropTypes.shape({
+    map: PropTypes.func,
+  }),
+};
 
 export default RadioButtons;
