@@ -1,14 +1,18 @@
 import PropTypes from "prop-types";
 import { Button, Grid, Typography } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
+import { Field, useFormikContext } from "formik";
 /**
  * Componente que construye el paso de Datos del estudiante
  * @param {*} props
  * @returns
  */
 export const Student = (props) => {
-  const [imagePreviewUrl, setimagePreviewUrl] = useState(null);
+  const { values, submitForm } = useFormikContext();
+  const [imagePreviewUrl, setimagePreviewUrl] = useState(
+    values.student.photo_path
+  );
 
   const handleImageChange = (e) => {
     let reader = new FileReader();
@@ -22,45 +26,78 @@ export const Student = (props) => {
     reader.readAsDataURL(file);
   };
 
-  let imagePreview = "";
-  if (imagePreviewUrl) {
-    imagePreview = (
-      <img
-        style={{ height: "100px", width: "100px", borderRadius: "50px" }}
-        src={imagePreviewUrl}
-        alt="Imagen cambiada"
-      />
-    );
-  } else {
-    imagePreview = (
-      <img
-        style={{
-          backgroundImage:
-            'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          borderRadius: "50px",
-          height: "100px",
-          width: "100px",
-        }}
-        alt=""
-      />
-    );
-  }
+  const setImagePreview = () => {
+    if (imagePreviewUrl) {
+      return (
+        <img
+          style={{ height: "100px", width: "100px", borderRadius: "50px" }}
+          src={imagePreviewUrl}
+          alt="Imagen cambiada"
+        />
+      );
+    } else {
+      return (
+        <img
+          style={{
+            backgroundImage:
+              'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            borderRadius: "50px",
+            height: "100px",
+            width: "100px",
+          }}
+          alt=""
+        />
+      );
+    }
+  };
 
   return (
     <div>
       <div
         style={{
-          float: "right",
           height: "100px",
           width: "100px",
-          marginRight: "300px",
         }}
         className="imgPreview"
       >
-        {imagePreview}
+        {setImagePreview()}
       </div>
+
+      <div
+        style={{
+          height: "100px",
+          width: "100px",
+        }}
+      >
+        <Field name="student.photo_path">
+          {({
+            field, // { name, value, onChange, onBlur }
+            form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+            meta,
+          }) => (
+            <div>
+              <input
+                style={{ display: "none" }}
+                type="file"
+                id="contained-button-file"
+                onChange={(e) => handleImageChange(e)}
+              />
+              {meta.touched && meta.error && (
+                <div className="error">{meta.error}</div>
+              )}
+            </div>
+          )}
+        </Field>
+
+        <label htmlFor="contained-button-file">
+          <Button variant="contained" color="primary" component="span">
+            Subir foto
+          </Button>
+        </label>
+      </div>
+
       <Typography variant="h4" gutterBottom>
         Datos del alumno
       </Typography>
@@ -141,35 +178,11 @@ export const Student = (props) => {
           />
         </Grid>
       </Grid>
-      <div>
-        <input
-          style={{ display: "none" }}
-          name="student.photo_path"
-          type="file"
-          id="contained-button-file"
-          onChange={(e) => handleImageChange(e)}
-        />
-        {/* <label htmlFor="contained-button-file">
-            <button
-              onClick={(e) => handleSubmit(e)}
-            >
-              Upload Image
-            </button>
-          </label> */}
-        <label htmlFor="contained-button-file">
-          <Button variant="contained" color="primary" component="span">
-            Subir foto
-          </Button>
-        </label>
-      </div>
     </div>
   );
 };
 
 Student.propTypes = {
-  nif: PropTypes.shape({
-    length: PropTypes.number,
-  }),
   setFieldValue: PropTypes.func,
 };
 export default Student;

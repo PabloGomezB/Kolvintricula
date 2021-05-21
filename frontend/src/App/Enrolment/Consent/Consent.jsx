@@ -6,6 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
 import SignatureCanvas from "react-signature-canvas";
+import { Field } from "formik";
 
 /**
  * Componente que cosntruye el paso de consentimiento
@@ -306,16 +307,28 @@ const Consent = ({ setFieldValue, errors }) => {
           </Table>
         </li>
       </ol>
-      <SignatureCanvas
-        canvasProps={{
-          width: 500,
-          height: 200,
-          style: { border: "1px solid #000000" },
-        }}
-        ref={signatureRef}
-        onEnd={() => onChange()}
-      />
-      {/* {errors.conserrors.consent.firma===null */}
+      <Field name="consent.firma">
+        {({
+          field, // { name, value, onChange, onBlur }
+          form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+          meta,
+        }) => (
+          <>
+            <SignatureCanvas
+              canvasProps={{
+                width: 500,
+                height: 200,
+                style: { border: "1px solid #000000" },
+              }}
+              ref={signatureRef}
+              onEnd={() => onChange()}
+            />
+            {meta.touched && meta.error && (
+              <div className="error">{meta.error}</div>
+            )}
+          </>
+        )}
+      </Field>
     </div>
   );
 };

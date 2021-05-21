@@ -127,13 +127,15 @@ const Enrolment = (props) => {
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values, setFieldValue, errors) {
+  function _renderStepContent(step, values, setFieldValue, errors, touched) {
     switch (step) {
       case 0:
         return (
           <Student
             nif={studentData.student.nif}
             setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
           />
         );
       case 1:
@@ -352,7 +354,13 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values, setFieldValue, errors)}
+            {_renderStepContent(
+              activeStep,
+              values,
+              setFieldValue,
+              errors,
+              touched
+            )}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button

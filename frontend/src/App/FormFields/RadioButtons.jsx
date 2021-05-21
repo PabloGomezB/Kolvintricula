@@ -4,6 +4,7 @@ import { Field, ErrorMessage, useField } from "formik";
 import TextError from "./TextError";
 import {
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   Radio,
   RadioGroup,
@@ -18,6 +19,13 @@ function RadioButtons(props) {
   const [field, helper, helper2] = useField(props);
   console.log(useField(props));
   const { label, name, options, ...rest } = props;
+
+  const isError = helper.touched && helper.error && true;
+  function _renderHelperText() {
+    if (isError) {
+      return <FormHelperText error={isError}>{helper.error}</FormHelperText>;
+    }
+  }
   return (
     <>
       <FormLabel>{label}</FormLabel>
@@ -36,6 +44,7 @@ function RadioButtons(props) {
           />
         ))}
       </RadioGroup>
+      {_renderHelperText()}
     </>
   );
 }
