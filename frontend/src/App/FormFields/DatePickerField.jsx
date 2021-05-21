@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useField } from "formik";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import es from "date-fns/locale/es";
 import PropTypes from "prop-types";
@@ -13,7 +10,7 @@ import PropTypes from "prop-types";
  * @param {*} props
  * @returns
  */
-const DatePicker = (props) => {
+const DatePickerField = (props) => {
   const [field, meta, helper] = useField(props);
   const { touched, error } = meta;
   const { setValue } = helper;
@@ -47,7 +44,7 @@ const DatePicker = (props) => {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={es}>
-      <KeyboardDatePicker
+      <DatePicker
         {...field}
         {...props}
         value={selectedDate}
@@ -62,9 +59,9 @@ const DatePicker = (props) => {
   );
 };
 
-DatePicker.propTypes = {
+DatePickerField.propTypes = {
   /** Props para construir el DatePicker */
   props: PropTypes.object,
 };
 
-export default DatePicker;
+export default DatePickerField;

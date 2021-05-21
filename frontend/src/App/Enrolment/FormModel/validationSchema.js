@@ -17,7 +17,12 @@ const validationSchema = [
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
         .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
-      nif: Yup.string().required("Requerido"),
+      nif: Yup.string()
+        .required("Requerido")
+        .matches(
+          /([a-z]|[A-Z]|[0-9])[0-9]{7}([a-z]|[A-Z]|[0-9])/,
+          "Introduce un NIF o NIE válido"
+        ),
       mobile_number: Yup.number()
         .integer("Debe de ser numerico")
         .required("Requerido")
@@ -30,7 +35,7 @@ const validationSchema = [
         .email("Email no válido.")
         .required("Requerido"),
       date_birth: Yup.date().required("Requerido").nullable(),
-      photo_path: Yup.string().required("Requerido"),
+      photo_path: Yup.mixed().required("Requerido"),
     }),
   }),
   Yup.object({
@@ -74,6 +79,12 @@ const validationSchema = [
   }),
   Yup.object({
     consent: Yup.object().shape({
+      c2: Yup.string().required("Requerido"),
+      c3: Yup.string().required("Requerido"),
+      c4: Yup.string().required("Requerido"),
+      c5: Yup.string().required("Requerido"),
+      c6: Yup.string().required("Requerido"),
+      c7: Yup.string().required("Requerido"),
       firma: Yup.string().required("Requerido"),
     }),
   }),

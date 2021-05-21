@@ -5,7 +5,7 @@ import Textarea from "./Textarea";
 import SelectField from "./SelectField";
 import RadioButtons from "./RadioButtons";
 import CheckboxField from "./CheckboxField";
-import DatePicker from "./DatePicker.jsx";
+import DatePickerField from "./DatePickerField";
 /**
  * Componente que construye otro componente input para el formulario
  * @param {*} props
@@ -25,7 +25,7 @@ const FormikControl = (props) => {
     case "checkbox":
       return <CheckboxField {...rest} />;
     case "date":
-      return <DatePicker {...rest} />;
+      return <DatePickerField {...rest} />;
 
     default:
       return null;
