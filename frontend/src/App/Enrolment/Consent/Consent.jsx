@@ -15,6 +15,7 @@ import { Field } from "formik";
  */
 const Consent = ({ setFieldValue, errors }) => {
   const signatureRef = useRef({});
+  console.log("signatureRef", signatureRef);
   function onChange() {
     setFieldValue(
       "consent.firma",
