@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UFController;
 use App\Http\Controllers\Admin\CustodianController;
+use App\Http\Controllers\Admin\FullCalendarController;
 
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -34,3 +35,7 @@ Route::get('/dashboard', function () {
 Route::view('profile', 'admin.user.profile')->name('profile');
 
 Route::put('profile', [ProfileController::class, 'update'])->name('profile.update');
+
+//Calendar routes
+Route::get('fullcalendar', [FullCalendarController::class, 'index']);
+Route::post('fullcalendarAjax', [FullCalendarController::class, 'ajax']);
