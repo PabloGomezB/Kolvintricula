@@ -1,7 +1,7 @@
 <?php 
     use App\Models\Course;
     use App\Models\UF;
- ?>
+?>
 <x-app-layout>
     @include('admin.module.header')
     
@@ -19,7 +19,7 @@
                     </div>
                     <div class="p-1">
                         <strong>Curso:</strong>
-                        <?php                                                         
+                        <?php
                             $course = Course::find($module->id_course); 
                             echo "$course->name"; 
                         ?>
@@ -41,7 +41,7 @@
             <br>
             <h1>UFS que incluye el modulo:</h1>
             <br>
-            <table id="table" class="table-auto min-w-full divide-y divide-gray-200" width="100%">                
+            <table id="table" class="table-auto min-w-full divide-y divide-gray-200" width="100%">
                 <thead class="bg-gray-50">
                     <tr>
                         <th scope="col" data-priority="1" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
@@ -89,8 +89,7 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>    
-
+            </table>
         </div>
     </div>
 </x-app-layout>
