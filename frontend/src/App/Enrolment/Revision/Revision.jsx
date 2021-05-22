@@ -164,24 +164,6 @@ export default function Revision({ values }) {
           Consentimiento
         </Typography>
         <List>
-          {/* <ListItem>
-            <ListItemText primary="2" secondary={values.consent.c2} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="3" secondary={values.consent.c3} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="4" secondary={values.consent.c4} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="5" secondary={values.consent.c5} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="6" secondary={values.consent.c6} />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="7" secondary={values.consent.c7} />
-          </ListItem> */}
           <ListItem>
             <ListItemText
               primary="Enfermedades"

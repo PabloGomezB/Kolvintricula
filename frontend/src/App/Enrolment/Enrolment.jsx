@@ -143,7 +143,7 @@ const Enrolment = (props) => {
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
-        return <Consent setFieldValue={setFieldValue} errors={errors} />;
+        return <Consent />;
       case 4:
         return <Revision values={values} />;
       default:

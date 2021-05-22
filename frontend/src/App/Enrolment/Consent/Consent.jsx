@@ -5,23 +5,15 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
-import SignatureCanvas from "react-signature-canvas";
 import { Field } from "formik";
+import { SignatureField } from "../../FormFields/SignatureField";
 
 /**
  * Componente que cosntruye el paso de consentimiento
  * @param {*} param0
  * @returns
  */
-const Consent = ({ setFieldValue, errors }) => {
-  const signatureRef = useRef({});
-  console.log("signatureRef", signatureRef);
-  function onChange() {
-    setFieldValue(
-      "consent.firma",
-      signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-    );
-  }
+const Consent = () => {
   return (
     <div>
       <h4>DECLARACIÓN RESPONSABLES</h4>
@@ -308,28 +300,7 @@ const Consent = ({ setFieldValue, errors }) => {
           </Table>
         </li>
       </ol>
-      <Field name="consent.firma">
-        {({
-          field, // { name, value, onChange, onBlur }
-          form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-          meta,
-        }) => (
-          <>
-            <SignatureCanvas
-              canvasProps={{
-                width: 500,
-                height: 200,
-                style: { border: "1px solid #000000" },
-              }}
-              ref={signatureRef}
-              onEnd={() => onChange()}
-            />
-            {meta.touched && meta.error && (
-              <div className="error">{meta.error}</div>
-            )}
-          </>
-        )}
-      </Field>
+      <SignatureField />
     </div>
   );
 };

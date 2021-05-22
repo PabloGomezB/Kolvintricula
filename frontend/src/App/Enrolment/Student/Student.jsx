@@ -55,41 +55,38 @@ export const Student = (props) => {
 
   return (
     <div>
-      <div
-        style={{
-          height: "100px",
-          width: "100px",
-        }}
-        className="imgPreview"
-      >
-        {setImagePreview()}
-      </div>
+      <div style={{ float: "right" }}>
+        <div
+          style={{
+            height: "100px",
+            width: "100px",
+          }}
+          className="imgPreview"
+        >
+          {setImagePreview()}
+        </div>
 
-      <div
-        style={{
-          height: "100px",
-          width: "100px",
-        }}
-      >
-        <Field name="student.photo_path">
-          {({
-            field, // { name, value, onChange, onBlur }
-            form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-            meta,
-          }) => (
-            <div>
-              <input
-                style={{ display: "none" }}
-                type="file"
-                id="contained-button-file"
-                onChange={(e) => handleImageChange(e)}
-              />
-              {meta.touched && meta.error && (
-                <div className="error">{meta.error}</div>
-              )}
-            </div>
-          )}
-        </Field>
+        <div>
+          <Field name="student.photo_path">
+            {({
+              field, // { name, value, onChange, onBlur }
+              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+              meta,
+            }) => (
+              <>
+                <input
+                  style={{ display: "none" }}
+                  type="file"
+                  id="contained-button-file"
+                  onChange={(e) => handleImageChange(e)}
+                />
+                {meta.touched && meta.error && (
+                  <div className="error">{meta.error}</div>
+                )}
+              </>
+            )}
+          </Field>
+        </div>
 
         <label htmlFor="contained-button-file">
           <Button variant="contained" color="primary" component="span">
