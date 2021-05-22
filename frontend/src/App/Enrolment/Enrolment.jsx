@@ -266,11 +266,11 @@ const Enrolment = (props) => {
         setEnrolmentSubmited(true);
 
         if (
-          response.data.addStudentResult[0].response === "OK" &&
-          (response.data.addCustodiansResult === "OK" ||
-            response.data.addCustodiansResult === "NO_CUSTODIANS")
+          response.data.addStudentResult.response === "OK" &&
+          response.data.addCustodiansResult.response === "OK" &&
+          response.data.addEnrolmentResult.response === "OK"
         ) {
-          setEmailPedralbes(response.data.addStudentResult[0].email_pedralbes);
+          setEmailPedralbes(response.data.addStudentResult.email_pedralbes);
           setSuccessfullyEnrolled(true);
         } else {
           setSuccessfullyEnrolled(false);
