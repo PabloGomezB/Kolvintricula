@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Paper, CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -7,8 +8,10 @@ import Footer from "../Footer";
 
 import { theme, useStyle } from "./styles";
 
-export default function MaterialLayout(props) {
-  const { children } = props;
+/**
+ * Componente que que añade el tema de material al componente children.
+ */
+export default function MaterialLayout({ children }) {
   const classes = useStyle();
 
   return (
@@ -22,3 +25,8 @@ export default function MaterialLayout(props) {
     </ThemeProvider>
   );
 }
+
+MaterialLayout.propTypes = {
+  /** Componente que será hijo */
+  children: PropTypes.any,
+};

@@ -1,44 +1,17 @@
 import React from "react";
-import { at } from "lodash";
-import { useField } from "formik";
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-} from "@material-ui/core";
+import { Field } from "formik";
+import PropTypes from "prop-types";
 
-export default function CheckboxField(props) {
-  const { label, ...rest } = props;
-  const [field, meta, helper] = useField(props);
-  const { setValue } = helper;
-  console.log("check field", field);
-  console.log("rest", rest);
-  function _renderHelperText() {
-    const [touched, error] = at(meta, "touched", "error");
-    if (touched && error) {
-      return <FormHelperText>{error}</FormHelperText>;
-    }
-  }
+/**
+ * Componente que crear un checkbox a partir de las props.
+ * @param {Object} props
+ */
+const CheckboxField = (props) => {
+  return <Field type="checkbox" {...props} />;
+};
 
-  function _onChange(e) {
-    setValue(e.target.checked);
-  }
-
-  return (
-    <FormControl {...rest}>
-      <FormControlLabel
-        control={
-          <Checkbox
-            {...field}
-            onChange={_onChange}
-            value={field.checked}
-            checked={field.checked}
-          />
-        }
-        label={label}
-      />
-      {_renderHelperText()}
-    </FormControl>
-  );
-}
+CheckboxField.propTypes = {
+  /** Props que sirven para construir el checkbox */
+  props: PropTypes.object,
+};
+export default CheckboxField;

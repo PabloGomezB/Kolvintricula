@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import Student from "./Student";
 import Custodian from "./Custodian";
-import cursmoduluf from "./cursmoduluf";
+// import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
+import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
+import Consent from "./Consent";
 
 import {
   Button,
@@ -19,14 +22,25 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  Box,
 } from "@material-ui/core";
 import validationSchema from "./FormModel/validationSchema";
 import axios from "axios";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
-const steps = ["Alumno", "Responsable", "Académicos", "Revision"];
-
+const steps = [
+  "Alumno",
+  "Responsable",
+  "Académicos",
+  "Consentimiento",
+  "Revision",
+];
+/**
+ * Componente que construye el formulario entero
+ * @param {*} props
+ * @returns
+ */
 const Enrolment = (props) => {
   const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
@@ -39,8 +53,20 @@ const Enrolment = (props) => {
 
   const [enrolmentSubmited, setEnrolmentSubmited] = useState(0);
   const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
+  const [emailPedralbes, setEmailPedralbes] = useState(0);
 
-  
+  const [cursmoduluf, setCursmoduluf] = useState({});
+
+  useEffect(() => {
+    axios
+      .get(
+        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
+      )
+      .then((res) => {
+        setCursmoduluf(res.data);
+      });
+  }, [props.idCourse]);
+
   let studentData = {
     student: {
       updateStudent: false,
@@ -51,6 +77,7 @@ const Enrolment = (props) => {
       email_personal: "",
       nif: "",
       mobile_number: "",
+      photo_path: null,
     },
     custodians: [
       {
@@ -64,23 +91,60 @@ const Enrolment = (props) => {
       },
     ],
     academic_data: {
-      course: "",
-      moduluf: [],
+      year: "",
+      modules: {
+        MP1: [],
+        MP2: [],
+        MP3: [],
+        MP4: [],
+        MP5: [],
+        MP6: [],
+        MP7: [],
+        MP8: [],
+        MP9: [],
+        MP10: [],
+        MP12: [],
+        MP13: [],
+        MP14: [],
+        MP15: [],
+      },
+    },
+    consent: {
+      alergias: "",
+      enfermedades: "",
+      medicamentos: "",
+      otros: "",
+      c2: "",
+      c3: "",
+      c4: "",
+      c5: "",
+      c6: "",
+      c7: "",
+      firma: "",
     },
   };
   // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values) {
+  function _renderStepContent(step, values, setFieldValue, errors, touched) {
     switch (step) {
       case 0:
-        return <Student nif={studentData.student.nif}/>;
+        return (
+          <Student
+            nif={studentData.student.nif}
+            setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
+          />
+        );
       case 1:
         return <Custodian />;
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
+        return <Consent />;
+      case 4:
         return <Revision values={values} />;
       default:
         return <div>Not Found</div>;
@@ -104,7 +168,6 @@ const Enrolment = (props) => {
   }
 
   const handleNext = (values, actions) => {
-
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
@@ -191,18 +254,25 @@ const Enrolment = (props) => {
     console.log("submit", values);
 
     axios
-      .post(`http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`, {
-      // .post(`http://127.0.0.1:8000/api/enrolments/add`, {
-        values,
-      })
+      .post(
+        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
+        // `http://127.0.0.1:8000/api/enrolments/add`,
+        {
+          values,
+        }
+      )
       .then((response) => {
         console.log("response:", response.data);
         setEnrolmentSubmited(true);
 
-        if(response.data.addStudentResult === "OK" && (response.data.addCustodiansResult === "OK" || response.data.addCustodiansResult === "NO_CUSTODIANS")){
+        if (
+          response.data.addStudentResult.response === "OK" &&
+          response.data.addCustodiansResult.response === "OK" &&
+          response.data.addEnrolmentResult.response === "OK"
+        ) {
+          setEmailPedralbes(response.data.addStudentResult.email_pedralbes);
           setSuccessfullyEnrolled(true);
-        }
-        else{
+        } else {
           setSuccessfullyEnrolled(false);
         }
       })
@@ -216,7 +286,7 @@ const Enrolment = (props) => {
     setShowAlert(false);
   };
 
-  function closeModal(){
+  function closeModal() {
     setEnrolmentSubmited(false);
   }
 
@@ -284,7 +354,13 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values)}
+            {_renderStepContent(
+              activeStep,
+              values,
+              setFieldValue,
+              errors,
+              touched
+            )}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button
@@ -306,34 +382,49 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            {/* <div>
+            <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div> */}
+            </div>
           </Form>
         )}
       </Formik>
-      {!!enrolmentSubmited &&
+      {!!enrolmentSubmited && (
         <div>
           {successfullyEnrolled ? (
-            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog success.")}>
-              <DialogTitle>¡Te has matriculado con éxito!
+            <Dialog
+              open={enrolmentSubmited}
+              // onEnter={console.log("dialog success.")}
+            >
+              <DialogTitle className={classes.dialogTitleSuccess}>
+                ¡Te has matriculado con éxito!
               </DialogTitle>
-              <DialogContent>
-                <Button component={Link} to="/" color="primary">
-                  Volver
+              <DialogContent className={classes.dialogContentSuccess}>
+                Tu email de alumno es:{" "}
+                <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
+                <Button
+                  component={Link}
+                  to="/"
+                  color="primary"
+                  className={classes.dialogButtonSuccess}
+                >
+                  <DoneOutlineTwoToneIcon style={{ color: "green" }} />
                 </Button>
               </DialogContent>
             </Dialog>
-          ):(
-            <Dialog open={enrolmentSubmited} onEnter={console.log("dialog error.")}>
-              <DialogTitle>Algo ha ido mal...
+          ) : (
+            <Dialog
+              open={enrolmentSubmited}
+              // onEnter={console.log("dialog error.")}
+            >
+              <DialogTitle className={classes.dialogTitleError}>
+                Algo ha ido mal...
               </DialogTitle>
-              <DialogContent>
+              <DialogContent className={classes.dialogContentError}>
                 Porfavor escribe a: soporte@inspedralbes.cat
                 <Button onClick={closeModal} color="primary">
                   Volver
@@ -342,8 +433,15 @@ const Enrolment = (props) => {
             </Dialog>
           )}
         </div>
-      }
+      )}
     </div>
   );
+};
+
+Enrolment.propTypes = {
+  /** ID del curso */
+  idCourse: PropTypes.any,
+  /** Datos del estudiante */
+  studentData: PropTypes.number,
 };
 export default Enrolment;

@@ -14,6 +14,11 @@ class CustodianO {
     this.email = "";
   }
 }
+
+/**
+ * Componente que construye el paso de Responsables
+ * @returns
+ */
 export const Custodian = () => {
   // const classes = useStyle();
   return (

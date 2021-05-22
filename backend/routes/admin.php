@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ModuleController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UFController;
+use App\Http\Controllers\Admin\CustodianController;
 
 use App\Http\Controllers\Admin\ProfileController;
 
@@ -23,6 +24,7 @@ Route::resource('modules', ModuleController::class);
 Route::resource('students', StudentController::class);
 Route::resource('ufs', UFController::class);
 // Route::post('/admin/ufs/create?id={id}','UFController@create');
+Route::resource('custodians', CustodianController::class);
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');

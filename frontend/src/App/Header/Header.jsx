@@ -3,11 +3,11 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-// import { useStyle } from "../Layout/styles";
-
+/**
+ * Componente header
+ */
 export default function Header() {
   return (
-    // <div className={classes.main}>
     <AppBar position="static">
       <Toolbar>
         <Container>
@@ -17,6 +17,5 @@ export default function Header() {
         </Container>
       </Toolbar>
     </AppBar>
-    // </div>
   );
 }

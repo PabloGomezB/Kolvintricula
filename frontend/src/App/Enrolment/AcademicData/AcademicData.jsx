@@ -1,8 +1,15 @@
-import { Typography } from "@material-ui/core";
+import { FormGroup, FormLabel, Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { useStyle } from "../../Layout/styles";
+import { CheckboxWithLabel } from "formik-material-ui";
+import PropTypes from "prop-types";
+/**
+ * Componente que construye el paso de Datos Académicos
+ * @param {*} param0
+ * @returns
+ */
 
 export const AcademicData = ({ cursmoduluf, values }) => {
   const classes = useStyle();
@@ -18,7 +25,7 @@ export const AcademicData = ({ cursmoduluf, values }) => {
               fullWidth
               control="select"
               label="Curso académico"
-              name="academic_data.course"
+              name="academic_data.year"
               options={[
                 { label: "1er Curso", value: 1 },
                 { label: "2ndo Curso", value: 2 },
@@ -26,27 +33,31 @@ export const AcademicData = ({ cursmoduluf, values }) => {
             />
           </div>
           <div>
-            {values.academic_data.course === 1 ||
-            values.academic_data.course === 2
-              ? cursmoduluf[values.academic_data.course - 1].moduls.map(
+            {values.academic_data.year === 1 || values.academic_data.year === 2
+              ? cursmoduluf[values.academic_data.year - 1].modules.map(
                   (modul, index) => {
                     return (
-                      <div key={modul.modul_key}>
-                        <div className={classes.paddingTop}>{modul.name}</div>
+                      <div key={modul.name}>
+                        {/* <div className={classes.paddingTop}>{modul.name}</div> */}
+                        <FormLabel component="legend">
+                          {modul.name}. {modul.description}
+                        </FormLabel>
 
-                        <div>
+                        <FormGroup>
                           {modul.ufs.map((uf) => {
                             return (
-                              <React.Fragment key={uf.uf_key}>
+                              <React.Fragment key={`${modul.name}${uf.name}`}>
                                 <FormikControl
                                   control="checkbox"
-                                  name={`academic_data.moduluf[${index}].${modul.modul_key}.${uf.uf_key}`}
-                                  label={uf.name}
+                                  component={CheckboxWithLabel}
+                                  name={`academic_data.modules.${modul.name}`}
+                                  Label={{ label: uf.name }}
+                                  value={uf.name}
                                 />
                               </React.Fragment>
                             );
                           })}
-                        </div>
+                        </FormGroup>
                       </div>
                     );
                   }
@@ -58,5 +69,15 @@ export const AcademicData = ({ cursmoduluf, values }) => {
     </div>
   );
 };
+AcademicData.propTypes = {
+  /** Array de cursos con modulos y ufs */
+  cursmoduluf: PropTypes.array.isRequired,
+  /** Valores que Formik guarda */
+  values: PropTypes.object.isRequired,
+};
 
+AcademicData.defaultProps = {
+  cursmoduluf: [],
+  values: {},
+};
 export default AcademicData;

@@ -6,7 +6,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white p-6 border-b border-gray-200">
                     <x-validation-errors />
-                    <form class="mt-5" action="{{ route('students.store') }}" method="POST">
+                    <form class="mt-5" action="{{ route('students.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @include('admin.student.form')
                         <div class="mt-10">

@@ -6,7 +6,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white p-6 border-b border-gray-200">
                     <x-validation-errors />
-                    <form class="mt-5" action="{{ route('students.update',$student->id) }}" method="POST">
+                    <form class="mt-5" action="{{ route('students.update',$student->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         {{ method_field('PATCH') }}
                         @include('admin.student.form')
@@ -16,9 +16,9 @@
                     </form>
                     {{-- <div class="mt-10">
                         <a class="mt-5 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded" href="{{ route('students.index') }}">Atrás</a>
-                    </div> --}}
-                </div>
+                </div> --}}
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>

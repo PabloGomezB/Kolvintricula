@@ -2,8 +2,10 @@
     <div class="grid grid-rows-2 gap-6">
         <div>
             <x-label for="photo_path" :value="__('Fotografía del alumno')" />
-            <x-input id="photo_path" type="text" name="photo_path" placeholder="" value="{{ $student->photo_path }}" class="block mt-1 w-full" autofocus />
-            <br>
+            <!-- <x-input id="photo_path" type="text" name="photo_path" placeholder="" value="{{ $student->photo_path }}" class="block mt-1 w-full" autofocus /> -->
+            <input type="file" name="photo_path" accept="image/*" />
+        </div>
+        <div>
             <x-label for="last_name1" :value="__('Primer apellido del alumno')" />
             <x-input id="last_name1" type="text" name="last_name1" placeholder="" value="{{ $student->last_name1 }}" class="block mt-1 w-full" autofocus />
         </div>
@@ -15,7 +17,7 @@
         </div>
         <div>
             <x-label for="mobile_number" :value="__('Número de teléfono del alumno')" />
-            <x-input id="mobile_number" type="integer" name="mobile_number" placeholder="" value="{{ $student->mobile_number }}" class="block mt-1 w-full" autofocus />
+            <x-input id="mobile_number" type="number" name="mobile_number" placeholder="" value="{{ $student->mobile_number }}" class="block mt-1 w-full" autofocus />
         </div>
         <div>
             <x-label for="enrolment_status" :value="__('Estado de la matrícula')" />

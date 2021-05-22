@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useField } from "formik";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { MuiPickersUtilsProvider, DatePicker } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import es from "date-fns/locale/es";
+import PropTypes from "prop-types";
 
-function DatePicker(props) {
+/**
+ * Componente que crea un calendario para que elijas una fecha
+ * @param {*} props
+ * @returns
+ */
+const DatePickerField = (props) => {
   const [field, meta, helper] = useField(props);
   const { touched, error } = meta;
   const { setValue } = helper;
@@ -21,7 +24,10 @@ function DatePicker(props) {
       setSelectedDate(date);
     }
   }, [value]);
-
+  /**
+   * Al detectar un cambio en el input guarda el date
+   * @param {*} date
+   */
   function _onChange(date) {
     if (date) {
       setSelectedDate(date);
@@ -38,7 +44,7 @@ function DatePicker(props) {
 
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils} locale={es}>
-      <KeyboardDatePicker
+      <DatePicker
         {...field}
         {...props}
         value={selectedDate}
@@ -51,6 +57,11 @@ function DatePicker(props) {
       />
     </MuiPickersUtilsProvider>
   );
-}
+};
 
-export default DatePicker;
+DatePickerField.propTypes = {
+  /** Props para construir el DatePicker */
+  props: PropTypes.object,
+};
+
+export default DatePickerField;
