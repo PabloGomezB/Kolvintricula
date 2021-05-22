@@ -267,7 +267,8 @@ const Enrolment = (props) => {
 
         if (
           response.data.addStudentResult.response === "OK" &&
-          (response.data.addCustodiansResult.response === "OK")
+          response.data.addCustodiansResult.response === "OK" &&
+          response.data.addEnrolmentResult.response === "OK"
         ) {
           setEmailPedralbes(response.data.addStudentResult.email_pedralbes);
           setSuccessfullyEnrolled(true);

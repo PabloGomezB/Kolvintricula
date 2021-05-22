@@ -67,69 +67,16 @@ class ApiController extends Controller
             if ($addCustodiansResult["addCustodiansResult"]["response"] == "FAIL"){
                 return $addCustodiansResult;
             }
-            // $addEnrolmentResult = ["addEnrolmentResult" => $this->addJsonEnrolment($academicData, $studentData["nif"])];
-            // if ($addEnrolmentResult["addEnrolmentResult"]["response"] == "FAIL"){
-            //     return $addEnrolmentResult;
-            // }
+            $addEnrolmentResult = ["addEnrolmentResult" => $this->addJsonEnrolment($academicData, $studentData["nif"])];
+            if ($addEnrolmentResult["addEnrolmentResult"]["response"] == "FAIL"){
+                return $addEnrolmentResult;
+            }
 
             return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
         }
         catch(\Illuminate\Database\QueryException | Exception $ex){ 
             return $ex->getMessage(); 
         }
-
-        
-        // try{
-        //     $this->addStudent($request);
-        // }
-        // catch(\Illuminate\Database\QueryException $ex){ 
-        //     return $ex->getMessage(); 
-        // }
-
-        // $enrolmentData = $request->getContent();
-        // $aux = json_decode($enrolmentData, true);
-        // $studentData = $aux["values"]["student"];
-
-
-        // $idNewStudent = Student::where('nif', $studentData["nif"])->get('id');
-        // $newEnrolment = new Enrolment;
-        // $academicData = $aux["values"]["academic_data"];
-
-        // $newEnrolment->id_student = $idNewStudent[0]["id"];
-        // $newEnrolment->json_course_module_uf = $academicData;
-
-        // $newEnrolment->save();
-
-        
-
-
-
-
-        // if ($result1 && $result2){
-        //     return 'OK';
-        // }
-        // else{
-        //     return 'FAIL';
-        // }
-
-
-        // $studentData = array();
-        // foreach ($enrolmentData["student"] as $value) {
-        //     array_push($studentData, $value);
-        // }
-
-        // $custodiansData = array();
-        // foreach ($enrolmentData["custodians"] as $value) {
-        //     array_push($custodiansData, $value);
-        // }
-
-        // $academicData = array();
-        // foreach ($enrolmentData["academic_data"] as $value) {
-        //     array_push($academicData, $value);
-        // }
-
-
-        // return array_merge($studentData, $custodiansData, $academicData);
     }
 
 
@@ -250,20 +197,19 @@ class ApiController extends Controller
         return ["response"=> "OK", "message" => "NO_CUSTODIANS"];
     }
 
+
     function addJsonEnrolment($studentData, $newStudentNif){
 
         $id_student = Student::where('nif', $newStudentNif)->get('id');
 
         try {
             $newEnrolment = new Enrolment;
-
             $newEnrolment->id_student = $id_student["0"]["id"];
             $newEnrolment->json_course_module_uf = $studentData;
             $newEnrolment->save();
         } catch(\Illuminate\Database\QueryException | Exception $ex){
-            return $ex->getMessage(); 
+            return ["response"=> "FAIL", "message" => $ex->getMessage()];
         }
-
-        return "OK";
+        return ["response"=> "OK"];
     }
 }
