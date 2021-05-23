@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import { Form, Formik } from "formik";
 import moment from "moment";
@@ -35,7 +36,11 @@ const steps = [
   "Consentimiento",
   "Revision",
 ];
-
+/**
+ * Componente que construye el formulario entero
+ * @param {*} props
+ * @returns
+ */
 const Enrolment = (props) => {
   const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
@@ -91,7 +96,7 @@ const Enrolment = (props) => {
         MP1: [],
         MP2: [],
         MP3: [],
-        MP: [],
+        MP4: [],
         MP5: [],
         MP6: [],
         MP7: [],
@@ -109,12 +114,12 @@ const Enrolment = (props) => {
       enfermedades: "",
       medicamentos: "",
       otros: "",
-      2: "",
-      3: "",
-      4: "",
-      5: "",
-      6: "",
-      7: "",
+      c2: "",
+      c3: "",
+      c4: "",
+      c5: "",
+      c6: "",
+      c7: "",
       firma: "",
     },
   };
@@ -122,13 +127,15 @@ const Enrolment = (props) => {
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values, setFieldValue, errors) {
+  function _renderStepContent(step, values, setFieldValue, errors, touched) {
     switch (step) {
       case 0:
         return (
           <Student
             nif={studentData.student.nif}
             setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
           />
         );
       case 1:
@@ -136,7 +143,7 @@ const Enrolment = (props) => {
       case 2:
         return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
       case 3:
-        return <Consent setFieldValue={setFieldValue} errors={errors} />;
+        return <Consent />;
       case 4:
         return <Revision values={values} />;
       default:
@@ -259,11 +266,11 @@ const Enrolment = (props) => {
         setEnrolmentSubmited(true);
 
         if (
-          response.data.addStudentResult[0].response === "OK" &&
-          (response.data.addCustodiansResult === "OK" ||
-            response.data.addCustodiansResult === "NO_CUSTODIANS")
+          response.data.addStudentResult.response === "OK" &&
+          response.data.addCustodiansResult.response === "OK" &&
+          response.data.addEnrolmentResult.response === "OK"
         ) {
-          setEmailPedralbes(response.data.addStudentResult[0].email_pedralbes);
+          setEmailPedralbes(response.data.addStudentResult.email_pedralbes);
           setSuccessfullyEnrolled(true);
         } else {
           setSuccessfullyEnrolled(false);
@@ -347,7 +354,13 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(activeStep, values, setFieldValue, errors)}
+            {_renderStepContent(
+              activeStep,
+              values,
+              setFieldValue,
+              errors,
+              touched
+            )}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button
@@ -391,9 +404,15 @@ const Enrolment = (props) => {
                 ¡Te has matriculado con éxito!
               </DialogTitle>
               <DialogContent className={classes.dialogContentSuccess}>
-                Tu email de alumno es: <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
-                <Button component={Link} to="/" color="primary" className={classes.dialogButtonSuccess}>
-                  <DoneOutlineTwoToneIcon style={{color: "green"}}/>
+                Tu email de alumno es:{" "}
+                <Box fontWeight="fontWeightBold">{emailPedralbes}</Box>
+                <Button
+                  component={Link}
+                  to="/"
+                  color="primary"
+                  className={classes.dialogButtonSuccess}
+                >
+                  <DoneOutlineTwoToneIcon style={{ color: "green" }} />
                 </Button>
               </DialogContent>
             </Dialog>
@@ -417,5 +436,12 @@ const Enrolment = (props) => {
       )}
     </div>
   );
+};
+
+Enrolment.propTypes = {
+  /** ID del curso */
+  idCourse: PropTypes.any,
+  /** Datos del estudiante */
+  studentData: PropTypes.number,
 };
 export default Enrolment;

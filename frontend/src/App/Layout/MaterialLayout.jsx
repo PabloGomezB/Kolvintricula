@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Paper, CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -24,3 +25,8 @@ export default function MaterialLayout({ children }) {
     </ThemeProvider>
   );
 }
+
+MaterialLayout.propTypes = {
+  /** Componente que será hijo */
+  children: PropTypes.any,
+};

@@ -1,19 +1,19 @@
+import PropTypes from "prop-types";
 import React, { useRef } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
-import SignatureCanvas from "react-signature-canvas";
+import { Field } from "formik";
+import { SignatureField } from "../../FormFields/SignatureField";
 
-const Consent = ({ setFieldValue, errors }) => {
-  const signatureRef = useRef({});
-  function onChange() {
-    setFieldValue(
-      "consent.firma",
-      signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-    );
-  }
+/**
+ * Componente que cosntruye el paso de consentimiento
+ * @param {*} param0
+ * @returns
+ */
+const Consent = () => {
   return (
     <div>
       <h4>DECLARACIÓN RESPONSABLES</h4>
@@ -107,7 +107,7 @@ const Consent = ({ setFieldValue, errors }) => {
           públic. Període de validesa de l'autorització: curs
           <FormikControl
             control="radio"
-            name="consent.2"
+            name="consent.c2"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -126,7 +126,7 @@ const Consent = ({ setFieldValue, errors }) => {
           sigui identificable.
           <FormikControl
             control="radio"
-            name="consent.3"
+            name="consent.c3"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -142,7 +142,7 @@ const Consent = ({ setFieldValue, errors }) => {
           desenvolupar l'activitat educativa.
           <FormikControl
             control="radio"
-            name="consent.4"
+            name="consent.c4"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -183,7 +183,7 @@ const Consent = ({ setFieldValue, errors }) => {
           procés formatiu.
           <FormikControl
             control="radio"
-            name="consent.5"
+            name="consent.c5"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -198,7 +198,7 @@ const Consent = ({ setFieldValue, errors }) => {
           s'haurien de dur a terme les pràctiques lectives.
           <FormikControl
             control="radio"
-            name="consent.6"
+            name="consent.c6"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -236,7 +236,7 @@ const Consent = ({ setFieldValue, errors }) => {
           orientadora.
           <FormikControl
             control="radio"
-            name="consent.7"
+            name="consent.c7"
             options={[
               { key: "SI", value: "yes" },
               { key: "NO", value: "no" },
@@ -250,7 +250,7 @@ const Consent = ({ setFieldValue, errors }) => {
             control="input"
             type="text"
             label="Enfermades"
-            name="consent.malalties"
+            name="consent.enfermedades"
             fullWidth
           />
           <FormikControl
@@ -300,18 +300,16 @@ const Consent = ({ setFieldValue, errors }) => {
           </Table>
         </li>
       </ol>
-      <SignatureCanvas
-        canvasProps={{
-          width: 500,
-          height: 200,
-          style: { border: "1px solid #000000" },
-        }}
-        ref={signatureRef}
-        onEnd={() => onChange()}
-      />
-      {/* {errors.conserrors.consent.firma===null */}
+      <SignatureField />
     </div>
   );
+};
+
+Consent.propTypes = {
+  /** Errores */
+  errors: PropTypes.any,
+  /** Funcion para guarda en values de formik */
+  setFieldValue: PropTypes.func,
 };
 
 export default Consent;

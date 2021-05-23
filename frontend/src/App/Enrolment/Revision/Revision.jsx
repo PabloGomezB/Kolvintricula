@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Grid,
   List,
@@ -7,7 +8,11 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import React from "react";
-
+/**
+ * Componente que construye el paso de Revision
+ * @param {*} param0
+ * @returns
+ */
 export default function Revision({ values }) {
   return (
     <div>
@@ -128,6 +133,89 @@ export default function Revision({ values }) {
             </Grid>
           </div>
         )}
+      <div>
+        <Typography variant="h4" gutterBottom>
+          Datos academicos
+        </Typography>
+
+        <List>
+          <ListItem>
+            <ListItemText
+              primary="Curso"
+              secondary={values.academic_data.year}
+            />
+          </ListItem>
+          {Object.keys(values.academic_data.modules).map((key, index) => {
+            return (
+              values.academic_data.modules[key].length !== 0 && (
+                <ListItem>
+                  <ListItemText
+                    primary={key}
+                    secondary={values.academic_data.modules[key].join(", ")}
+                  />
+                </ListItem>
+              )
+            );
+          })}
+        </List>
+      </div>
+      <div>
+        <Typography variant="h4" gutterBottom>
+          Consentimiento
+        </Typography>
+        <List>
+          <ListItem>
+            <ListItemText
+              primary="Enfermedades"
+              secondary={values.consent.enfermedades}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="Alergias"
+              secondary={values.consent.alergias}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText
+              primary="Medicamentos"
+              secondary={values.consent.medicamentos}
+            />
+          </ListItem>
+          <ListItem>
+            <ListItemText primary="Otros" secondary={values.consent.otros} />
+          </ListItem>
+        </List>
+      </div>
     </div>
   );
 }
+
+Revision.propTypes = {
+  /** Values de formik */
+  values: PropTypes.shape({
+    academic_data: PropTypes.shape({
+      modules: PropTypes.any,
+      year: PropTypes.any,
+    }),
+    consent: PropTypes.shape({
+      alergias: PropTypes.any,
+      enfermedades: PropTypes.any,
+      medicamentos: PropTypes.any,
+      otros: PropTypes.any,
+    }),
+    custodians: PropTypes.shape({
+      length: PropTypes.number,
+      map: PropTypes.func,
+    }),
+    student: PropTypes.shape({
+      date_birth: PropTypes.any,
+      email_personal: PropTypes.any,
+      last_name1: PropTypes.any,
+      last_name2: PropTypes.any,
+      mobile_number: PropTypes.any,
+      name: PropTypes.any,
+      nif: PropTypes.any,
+    }),
+  }),
+};

@@ -1,6 +1,7 @@
 // import React from "react";
 // import { Field, ErrorMessage } from "formik";
 // import TextError from "./TextError";
+import PropTypes from "prop-types";
 import React from "react";
 import { at } from "lodash";
 import { useField } from "formik";
@@ -12,8 +13,12 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 
+/**
+ * Componente que construye un select
+ * @param {*} props
+ * @returns
+ */
 function SelectField(props) {
-  // const { label, name, options, ...rest } = props;
   const { label, options, ...rest } = props;
   const [field, meta] = useField(props);
   const { value: selectedValue } = field;
@@ -38,5 +43,14 @@ function SelectField(props) {
     </FormControl>
   );
 }
+
+SelectField.propTypes = {
+  /** Label del select */
+  label: PropTypes.any,
+  /** Opciones del select */
+  options: PropTypes.shape({
+    map: PropTypes.func,
+  }),
+};
 
 export default SelectField;

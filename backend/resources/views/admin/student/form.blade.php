@@ -10,8 +10,6 @@
             <x-input id="last_name1" type="text" name="last_name1" placeholder="" value="{{ $student->last_name1 }}" class="block mt-1 w-full" autofocus />
         </div>
         <div>
-        </div>
-        <div>
             <x-label for="nif" :value="__('DNI del alumno')" />
             <x-input id="nif" type="text" name="nif" placeholder="" value="{{ $student->nif }}" class="block mt-1 w-full" autofocus />
         </div>
@@ -38,8 +36,6 @@
             <br>
             <x-label for="last_name2" :value="__('Segundo apellido del alumno')" />
             <x-input id="last_name2" type="text" name="last_name2" placeholder="" value="{{ $student->last_name2 }}" class="block mt-1 w-full" autofocus />
-        </div>
-        <div>
         </div>
         <div>
             <x-label for="date_birth" :value="__('Fecha de nacimiento del alumno')" />

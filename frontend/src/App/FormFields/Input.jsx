@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { at } from "lodash";
 import { useField } from "formik";
@@ -30,6 +31,11 @@ const Input = (props) => {
       {...rest}
     />
   );
+};
+
+Input.propTypes = {
+  /** Texto de error */
+  errorText: PropTypes.any,
 };
 
 export default Input;

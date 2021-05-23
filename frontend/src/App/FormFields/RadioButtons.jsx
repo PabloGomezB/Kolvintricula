@@ -1,17 +1,31 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Field, ErrorMessage, useField } from "formik";
 import TextError from "./TextError";
 import {
   FormControlLabel,
+  FormHelperText,
   FormLabel,
   Radio,
   RadioGroup,
 } from "@material-ui/core";
 
+/**
+ * Componente radio button
+ * @param {*} props
+ * @returns
+ */
 function RadioButtons(props) {
   const [field, helper, helper2] = useField(props);
   console.log(useField(props));
   const { label, name, options, ...rest } = props;
+
+  const isError = helper.touched && helper.error && true;
+  function _renderHelperText() {
+    if (isError) {
+      return <FormHelperText error={isError}>{helper.error}</FormHelperText>;
+    }
+  }
   return (
     <>
       <FormLabel>{label}</FormLabel>
@@ -30,8 +44,20 @@ function RadioButtons(props) {
           />
         ))}
       </RadioGroup>
+      {_renderHelperText()}
     </>
   );
 }
+
+RadioButtons.propTypes = {
+  /** Label del radio button */
+  label: PropTypes.any,
+  /** Donde se va aguardar en el value de formik */
+  name: PropTypes.any,
+  /** Las opciones que pueden ser elegidas */
+  options: PropTypes.shape({
+    map: PropTypes.func,
+  }),
+};
 
 export default RadioButtons;
