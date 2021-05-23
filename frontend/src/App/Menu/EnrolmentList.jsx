@@ -10,6 +10,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { useStyle } from "../Layout/styles";
 import { Alert } from "@material-ui/lab";
 
 import IconButton from "@material-ui/core/IconButton";
@@ -25,6 +26,7 @@ const EnrolmentList = () => {
   const [showAlert, setShowAlert] = useState(0);
   const [resetNif, setResetNif] = useState(0);
   const [open, setOpen] = useState(false);
+  const classes = useStyle();
 
   let match = useRouteMatch();
   /**
@@ -99,76 +101,74 @@ const EnrolmentList = () => {
       {courseArray.map((course) => (
         <Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? (
-            <Enrolment studentData={studentData} idCourse={course.id} />
+            <Enrolment studentData={studentData} idCourse={course.id} courseName={course.name}/>
           ) : (
             <NoDisponible />
           )}
         </Route>
       ))}
-        <Container maxWidth="xl" style={{ flexGrow: 1, backgroundImage: 'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px', backgroundBlendMode: 'saturation' }}>
-          <h1 style={{ textAlign: 'center', fontSize: '50px' }}>Nuestros cursos</h1>
-          <Grid container spacing={3} style={{ textAlign: 'center' }}>
-            <CourseList courses={courseArray}></CourseList>
-          </Grid>
-          <Container style={{ textAlign: 'center' }}>
-            <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{ padding: '10px', borderRadius: '10px', fontWeight: 'bolder', backgroundColor: 'white' }}>
-              ¿Quieres cargar tus datos?
-            </Button>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">
-              <DialogTitle id="form-dialog-title">Introduce tu NIF</DialogTitle>
-              <DialogContent>
-                <TextField autoFocus id="nif_field" label="NIF" variant="outlined" style={{ marginBottom: '20px' }}/>
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  Cancelar
-                </Button>
-                <Button onClick={searchStudent} color="primary">
-                  Cargar datos
-                </Button>
-                <IconButton aria-label="delete" onClick={ resetNifData }>
-                  <DeleteIcon />
-                </IconButton>
-              </DialogActions>
-            </Dialog>
+      <Container maxWidth="xl" className={classes.mainContainer}>
+        <h1 className={classes.title}>Nuestros cursos</h1>
+        <Grid container align="center">
+          <CourseList courses={courseArray}></CourseList>
+        </Grid>
+        <Container align="center">
+          <Button variant="contained" onClick={handleClickOpen} className={classes.loadData}>
+            ¿Quieres cargar tus datos?
+          </Button>
+          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">
+            <DialogTitle id="form-dialog-title">Introduce tu NIF</DialogTitle>
+            <DialogContent>
+              <TextField autoFocus id="nif_field" label="NIF" variant="outlined" className={classes.textFieldNIF}/>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancelar
+              </Button>
+              <Button onClick={searchStudent} color="primary">
+                Cargar datos
+              </Button>
+              <IconButton aria-label="delete" onClick={ resetNifData }>
+                <DeleteIcon />
+              </IconButton>
+            </DialogActions>
+          </Dialog>
 
-            {showAlert ? (
-              <Snackbar
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
-                open={showAlert}
-                autoHideDuration={3000}
-                onClose={closeAlert}
-              >
-                {resetNif ? (
-                  <Alert
-                    onClose={closeAlert}
-                    variant="filled"
-                    severity="success"
-                  >
-                    Datos reestablecidos!
-                  </Alert>
-                ) : datosEncontrados ? (
-                  <Alert
-                    onClose={closeAlert}
-                    variant="filled"
-                    severity="success"
-                  >
-                    Se han cargado tus datos!
-                  </Alert>
-                ) : (
-                  <Alert onClose={closeAlert} variant="filled" severity="error">
-                    No tienes matrículas previas
-                  </Alert>
-                )}
-              </Snackbar>
-            ) : null}
-          </Container>
+          {showAlert ? (
+            <Snackbar
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}
+              open={showAlert}
+              autoHideDuration={3000}
+              onClose={closeAlert}
+            >
+              {resetNif ? (
+                <Alert
+                  onClose={closeAlert}
+                  variant="filled"
+                  severity="success"
+                >
+                  Datos reestablecidos!
+                </Alert>
+              ) : datosEncontrados ? (
+                <Alert
+                  onClose={closeAlert}
+                  variant="filled"
+                  severity="success"
+                >
+                  Se han cargado tus datos!
+                </Alert>
+              ) : (
+                <Alert onClose={closeAlert} variant="filled" severity="error">
+                  No tienes matrículas previas
+                </Alert>
+              )}
+            </Snackbar>
+          ) : null}
         </Container>
+      </Container>
     </Switch>
   );
 };

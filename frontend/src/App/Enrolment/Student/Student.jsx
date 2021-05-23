@@ -3,6 +3,7 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { Field, useFormikContext } from "formik";
+import { useStyle } from "../../Layout/styles";
 /**
  * Componente que construye el paso de Datos del estudiante
  * @param {*} props
@@ -13,6 +14,7 @@ export const Student = (props) => {
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
+  const classes = useStyle();
 
   const handleImageChange = (e) => {
     let reader = new FileReader();
@@ -55,14 +57,8 @@ export const Student = (props) => {
 
   return (
     <div>
-      <div style={{ float: "right" }}>
-        <div
-          style={{
-            height: "100px",
-            width: "100px",
-          }}
-          className="imgPreview"
-        >
+      <div className={classes.photoPosition}>
+        <div width="100px" height="100px">
           {setImagePreview()}
         </div>
 
@@ -81,7 +77,7 @@ export const Student = (props) => {
                   onChange={(e) => handleImageChange(e)}
                 />
                 {meta.touched && meta.error && (
-                  <div className="error">{meta.error}</div>
+                  <div className={classes.errorPhoto}>{meta.error}</div>
                 )}
               </>
             )}
@@ -95,7 +91,7 @@ export const Student = (props) => {
         </label>
       </div>
 
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom className={classes.studentData}>
         Datos del alumno
       </Typography>
 

@@ -16,11 +16,11 @@ export const AcademicData = ({ cursmoduluf, values }) => {
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Datos academicos
+        Datos académicos
       </Typography>
       <FieldArray name="academic_data.moduluf">
         <div>
-          <div>
+          <div className={classes.academicData}>
             <FormikControl
               fullWidth
               control="select"

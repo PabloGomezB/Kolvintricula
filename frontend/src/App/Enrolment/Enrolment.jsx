@@ -297,8 +297,9 @@ const Enrolment = (props) => {
       </Button>
 
       <Typography variant="h3" gutterBottom align="center">
-        Matrícula
+        Matrícula {props.courseName}
       </Typography>
+
       <Stepper
         activeStep={activeStep}
         alternativeLabel
