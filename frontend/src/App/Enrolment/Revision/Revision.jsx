@@ -18,7 +18,7 @@ export default function Revision({ values }) {
     <div>
       <div>
         <Typography variant="h4" gutterBottom>
-          Datos alumno
+          Datos del alumno
         </Typography>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
@@ -135,7 +135,7 @@ export default function Revision({ values }) {
         )}
       <div>
         <Typography variant="h4" gutterBottom>
-          Datos academicos
+          Datos académicos
         </Typography>
 
         <List>

@@ -20,7 +20,7 @@ const CourseList = ({ courses }) => {
             {course.name}
           </Button>
         ) : (
-          <Button component={Link} to={`${match.url}${course.name}`} className={classes.buttonEnabled}>
+          <Button component={Link} to={`${match.url}${course.name}`} variant="contained" color="primary" className={classes.buttonEnabled}>
             {course.name}
           </Button>
         )}

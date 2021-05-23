@@ -8,15 +8,15 @@ const validationSchema = [
       name: Yup.string()
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
-        .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
+        .matches(/^[A-zÀ-ú]+$/, "Tu nombre no puede contener espacios o números"),
       last_name1: Yup.string()
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
-        .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
+        .matches(/^[A-zÀ-ú]+$/, "Tu primer apellido no puede contener espacios o números"),
       last_name2: Yup.string()
         .max(15, "Máximo 15 carácteres.")
         .required("Requerido")
-        .matches(/^[A-zÀ-ú]+$/, "Solo letras"),
+        .matches(/^[A-zÀ-ú]+$/, "Tu segundo apellido no puede contener espacios o números"),
       nif: Yup.string()
         .required("Requerido")
         .matches(
@@ -24,9 +24,9 @@ const validationSchema = [
           "Introduce un NIF o NIE válido"
         ),
       mobile_number: Yup.number()
-        .integer("Debe de ser numerico")
+        .integer("Debe de ser numérico")
         .required("Requerido")
-        .test("len", "Ha de ser de 9 digitos", (val) => {
+        .test("len", "Ha de ser de 9 dígitos", (val) => {
           if (val !== undefined) {
             return val.toString().length === 9;
           }
@@ -45,21 +45,27 @@ const validationSchema = [
           .matches(/(P|M|T)/, "Elige una opción válida.")
           .required("Requerido")
           .nullable(),
-        nif: Yup.string().required("Requerido"),
+        nif: Yup.string().required("Requerido").matches(
+          /([a-z]|[A-Z]|[0-9])[0-9]{7}([a-z]|[A-Z]|[0-9])/,
+          "Introduce un NIF o NIE válido"
+        ),
         name: Yup.string()
           .required("Requerido")
-          .max(50, "Máximo 50 carácteres."),
+          .max(50, "Máximo 50 carácteres.")
+          .matches(/^[A-zÀ-ú]+$/, "Tu nombre no puede contener espacios o números"),
         last_name1: Yup.string()
           .required("Requerido")
-          .max(50, "Máximo 50 carácteres."),
+          .max(50, "Máximo 50 carácteres.")
+          .matches(/^[A-zÀ-ú]+$/, "Tu primer apellido no puede contener espacios o números"),
         last_name2: Yup.string()
           .required("Requerido")
-          .max(50, "Máximo 50 carácteres."),
+          .max(50, "Máximo 50 carácteres.")
+          .matches(/^[A-zÀ-ú]+$/, "Tu segundo apellido no puede contener espacios o números"),
         mobile_number: Yup.number()
-          .typeError("Escribe tipo numero")
+          .typeError("Escribe tipo número")
           .required("Requerido")
-          .integer("Debe de ser numerico")
-          .test("len2", "Ha de ser de 9 digitos", (val) => {
+          .integer("Debe de ser numérico")
+          .test("len2", "Ha de ser de 9 dígitos", (val) => {
             if (val !== undefined) {
               return val.toString().length === 9;
             }

@@ -45,7 +45,11 @@ const useStyle = makeStyles(() => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2)
   },
-  btn: { margin: theme.spacing(2) },
+  btn: { 
+    margin: theme.spacing(2),
+    borderRadius: '20px',
+    border: '5px solid #231F20'
+  },
   alignRight: {
     textAlign: "right"
   },
@@ -148,39 +152,37 @@ const useStyle = makeStyles(() => ({
   },
   loadData: {
     padding: '10px',
-    borderRadius: '10px',
-    fontWeight: 'bolder'
+    borderRadius: '30px',
+    border: '5px solid #231F20'
   },
   textFieldNIF: {
     marginBottom: '20px'
   },
   buttonDisabled: {
     padding: '10px',
-    textAlign: 'center',
     width: '200px',
-    borderRadius: '10px',
+    borderRadius: '20px',
     marginBottom: '50px',
     border: '5px solid #231F20',
     backgroundColor: '#dddddd'
   },
   buttonEnabled: {
     padding: '10px',
-    textAlign: 'center',
     width: '200px',
-    borderRadius: '10px',
+    borderRadius: '20px',
     marginBottom: '50px',
-    border: '5px solid #231F20',
-    color: 'white',
-    fontWeight: 'bolder',
-    backgroundColor: '#231F20'
+    border: '5px solid #231F20'
   },
   errorPhoto: {
     color: 'red',
     textAlign: 'center',
-    fontWeight: 'bolder'
+    fontWeight: '400'
   },
   photoPosition: {
     float: "right"
+  },
+  photoButton: {
+    borderRadius: '20px'
   },
   studentData: {
     paddingTop: '120px'
@@ -191,8 +193,11 @@ const useStyle = makeStyles(() => ({
   addCustodian: {
     marginTop: '5%',
     border: '5px solid #231F20',
-    borderRadius: '10px',
-    backgroundColor: 'white',
+    borderRadius: '20px'
+  },
+  removeCustodian: {
+    border: '5px solid #231F20',
+    borderRadius: '20px'
   }
 }));
 

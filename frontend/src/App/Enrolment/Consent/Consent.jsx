@@ -109,8 +109,8 @@ const Consent = () => {
             control="radio"
             name="consent.c2"
             options={[
-              { key: "SI", value: "yes" },
-              { key: "NO", value: "no" },
+              { key: "Sí", value: "yes" },
+              { key: "No", value: "no" },
             ]}
           />
         </li>
@@ -128,8 +128,8 @@ const Consent = () => {
             control="radio"
             name="consent.c3"
             options={[
-              { key: "SI", value: "yes" },
-              { key: "NO", value: "no" },
+              { key: "Sí", value: "yes" },
+              { key: "No", value: "no" },
             ]}
           />
         </li>
@@ -144,8 +144,8 @@ const Consent = () => {
             control="radio"
             name="consent.c4"
             options={[
-              { key: "SI", value: "yes" },
-              { key: "NO", value: "no" },
+              { key: "Sí", value: "yes" },
+              { key: "No", value: "no" },
             ]}
           />
           <Table>
@@ -185,8 +185,8 @@ const Consent = () => {
             control="radio"
             name="consent.c5"
             options={[
-              { key: "SI", value: "yes" },
-              { key: "NO", value: "no" },
+              { key: "Sí", value: "yes" },
+              { key: "No", value: "no" },
             ]}
           />
         </li>
@@ -200,8 +200,8 @@ const Consent = () => {
             control="radio"
             name="consent.c6"
             options={[
-              { key: "SI", value: "yes" },
-              { key: "NO", value: "no" },
+              { key: "Sí", value: "yes" },
+              { key: "No", value: "no" },
             ]}
           />
           <Table aria-label="custom pagination table">
@@ -238,8 +238,8 @@ const Consent = () => {
             control="radio"
             name="consent.c7"
             options={[
-              { key: "SI", value: "yes" },
-              { key: "NO", value: "no" },
+              { key: "Sí", value: "yes" },
+              { key: "No", value: "no" },
             ]}
           />
           <p>

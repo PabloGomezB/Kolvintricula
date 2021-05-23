@@ -25,7 +25,7 @@ export const SignatureField = () => {
               canvasProps={{
                 width: 500,
                 height: 200,
-                style: { border: "1px solid #000000" },
+                style: { border: "1px solid #000000", marginLeft: '25%' },
               }}
               ref={signatureRef}
               onEnd={() => onChange(setFieldValue)}

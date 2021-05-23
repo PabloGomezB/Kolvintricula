@@ -113,7 +113,7 @@ const EnrolmentList = () => {
           <CourseList courses={courseArray}></CourseList>
         </Grid>
         <Container align="center">
-          <Button variant="contained" onClick={handleClickOpen} className={classes.loadData}>
+          <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.loadData}>
             ¿Quieres cargar tus datos?
           </Button>
           <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">

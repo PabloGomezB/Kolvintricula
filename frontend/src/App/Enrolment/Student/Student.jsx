@@ -85,7 +85,7 @@ export const Student = (props) => {
         </div>
 
         <label htmlFor="contained-button-file">
-          <Button variant="contained" color="primary" component="span">
+          <Button variant="contained" color="primary" component="span" className={classes.photoButton}>
             Subir foto
           </Button>
         </label>
@@ -100,7 +100,7 @@ export const Student = (props) => {
           <FormikControl
             control="input"
             type="text"
-            label="Primer nombre: "
+            label="Nombre: "
             name="student.name"
             fullWidth
           />

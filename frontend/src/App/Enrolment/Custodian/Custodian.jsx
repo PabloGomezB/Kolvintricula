@@ -57,6 +57,7 @@ export const Custodian = () => {
                           <Button
                             className={classes.removeCustodian}
                             variant="contained"
+                            color="primary"
                             onClick={() => remove(index)}
                           >
                             Eliminar responsable
@@ -126,6 +127,7 @@ export const Custodian = () => {
                 <Button
                   className={classes.addCustodian}
                   variant="contained"
+                  color="primary"
                   onClick={() => push(new CustodianO())}
                 >
                   Añadir un responsable
