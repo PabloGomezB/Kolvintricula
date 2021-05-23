@@ -9,7 +9,7 @@ import { TextField } from "@material-ui/core";
  * @returns
  */
 const Input = (props) => {
-  const { errorText, ...rest } = props;
+  const { ...rest } = props;
   const [field, meta] = useField(props);
   /**
    * Renderiza el mensaje de error
@@ -34,8 +34,7 @@ const Input = (props) => {
 };
 
 Input.propTypes = {
-  /** Texto de error */
-  errorText: PropTypes.any,
+  props: PropTypes.object,
 };
 
 export default Input;

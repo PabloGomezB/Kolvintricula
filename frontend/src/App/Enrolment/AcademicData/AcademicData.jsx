@@ -1,8 +1,7 @@
 import { FormGroup, FormLabel, Typography } from "@material-ui/core";
-import { FieldArray } from "formik";
+import { FieldArray, useFormikContext } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
-import { useStyle } from "../../Layout/styles";
 import { CheckboxWithLabel } from "formik-material-ui";
 import PropTypes from "prop-types";
 /**
@@ -11,8 +10,9 @@ import PropTypes from "prop-types";
  * @returns
  */
 
-export const AcademicData = ({ cursmoduluf, values }) => {
-  const classes = useStyle();
+export const AcademicData = ({ cursmoduluf }) => {
+  const { values } = useFormikContext();
+
   return (
     <div>
       <Typography variant="h4" gutterBottom>

@@ -48,9 +48,7 @@ SelectField.propTypes = {
   /** Label del select */
   label: PropTypes.any,
   /** Opciones del select */
-  options: PropTypes.shape({
-    map: PropTypes.func,
-  }),
+  options: PropTypes.array.isRequired,
 };
 
 export default SelectField;
