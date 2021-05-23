@@ -105,7 +105,6 @@ const EnrolmentList = () => {
           )}
         </Route>
       ))}
-      <>
         <Container maxWidth="xl" style={{ flexGrow: 1, backgroundImage: 'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover', marginTop: '-35px', height: '500px', borderRadius: '10px', backgroundBlendMode: 'saturation' }}>
@@ -169,7 +168,6 @@ const EnrolmentList = () => {
             ) : null}
           </Container>
         </Container>
-      </>
     </Switch>
   );
 };

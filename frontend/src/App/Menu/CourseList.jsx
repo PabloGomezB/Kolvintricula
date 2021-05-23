@@ -13,12 +13,7 @@ const CourseList = ({ courses }) => {
   const listItems = courses.map((course) => (
     <Fragment key={course.id}>
       <Grid item xs={6}>
-        <Button
-          component={Link}
-          to={`${match.url}${course.name}`}
-          variant="outlined"
-          style={{ padding: "10px", textAlign: "center", color: "black" }}
-        >
+        <Button component={Link} to={`${match.url}${course.name}`} variant="contained" style={{ padding: '10px', textAlign: 'center', width: '200px', borderRadius: '10px', marginBottom: '50px', border: '5px solid #00aeef', color: 'black', backgroundColor: 'white' }}>
           {course.name}
         </Button>
       </Grid>
