@@ -9,8 +9,8 @@ import { useStyle } from "../../Layout/styles";
  * @param {*} props
  * @returns
  */
-export const Student = (props) => {
-  const { values, submitForm } = useFormikContext();
+export const Student = ({ nif }) => {
+  const { values, setFieldValue } = useFormikContext();
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
@@ -21,7 +21,7 @@ export const Student = (props) => {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      props.setFieldValue("student.photo_path", reader.result);
+      setFieldValue("student.photo_path", reader.result);
       setimagePreviewUrl(reader.result);
     };
 
@@ -125,7 +125,7 @@ export const Student = (props) => {
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          {props.nif.length === 0 ? (
+          {nif.length === 0 ? (
             <FormikControl
               control="input"
               type="text"
@@ -176,6 +176,9 @@ export const Student = (props) => {
 };
 
 Student.propTypes = {
-  setFieldValue: PropTypes.func,
+  nif: PropTypes.shape({
+    length: PropTypes.number,
+  }),
 };
+
 export default Student;

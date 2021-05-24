@@ -17,7 +17,6 @@ import {
  */
 function RadioButtons(props) {
   const [field, helper, helper2] = useField(props);
-  console.log(useField(props));
   const { label, name, options, ...rest } = props;
 
   const isError = helper.touched && helper.error && true;
@@ -55,9 +54,7 @@ RadioButtons.propTypes = {
   /** Donde se va aguardar en el value de formik */
   name: PropTypes.any,
   /** Las opciones que pueden ser elegidas */
-  options: PropTypes.shape({
-    map: PropTypes.func,
-  }),
+  options: PropTypes.array.isRequired,
 };
 
 export default RadioButtons;

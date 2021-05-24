@@ -8,12 +8,15 @@ import {
 } from "@material-ui/core";
 import moment from "moment";
 import React from "react";
+import { useFormikContext } from "formik";
 /**
  * Componente que construye el paso de Revision
  * @param {*} param0
  * @returns
  */
-export default function Revision({ values }) {
+export default function Revision() {
+  const { values, submitForm } = useFormikContext();
+
   return (
     <div>
       <div>
@@ -190,32 +193,3 @@ export default function Revision({ values }) {
     </div>
   );
 }
-
-Revision.propTypes = {
-  /** Values de formik */
-  values: PropTypes.shape({
-    academic_data: PropTypes.shape({
-      modules: PropTypes.any,
-      year: PropTypes.any,
-    }),
-    consent: PropTypes.shape({
-      alergias: PropTypes.any,
-      enfermedades: PropTypes.any,
-      medicamentos: PropTypes.any,
-      otros: PropTypes.any,
-    }),
-    custodians: PropTypes.shape({
-      length: PropTypes.number,
-      map: PropTypes.func,
-    }),
-    student: PropTypes.shape({
-      date_birth: PropTypes.any,
-      email_personal: PropTypes.any,
-      last_name1: PropTypes.any,
-      last_name2: PropTypes.any,
-      mobile_number: PropTypes.any,
-      name: PropTypes.any,
-      nif: PropTypes.any,
-    }),
-  }),
-};

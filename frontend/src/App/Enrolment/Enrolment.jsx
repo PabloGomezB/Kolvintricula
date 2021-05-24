@@ -5,7 +5,6 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import Student from "./Student";
 import Custodian from "./Custodian";
-// import cursmoduluf from "./cursmoduluf";
 import AcademicData from "./AcademicData";
 import { Alert } from "@material-ui/lab";
 import DoneOutlineTwoToneIcon from "@material-ui/icons/DoneOutlineTwoTone";
@@ -60,12 +59,12 @@ const Enrolment = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
+        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
       )
       .then((res) => {
         setCursmoduluf(res.data);
       });
-  }, [props.idCourse]);
+  }, [props.courseData.id]);
 
   let studentData = {
     student: {
@@ -91,22 +90,27 @@ const Enrolment = (props) => {
       },
     ],
     academic_data: {
+      course: {
+        type: props.courseData.type,
+        name: props.courseData.name,
+        description: props.courseData.description,
+      },
       year: "",
       modules: {
-        MP1: [],
-        MP2: [],
-        MP3: [],
-        MP4: [],
-        MP5: [],
-        MP6: [],
-        MP7: [],
-        MP8: [],
-        MP9: [],
-        MP10: [],
-        MP12: [],
-        MP13: [],
-        MP14: [],
-        MP15: [],
+        // MP1: [],
+        // MP2: [],
+        // MP3: [],
+        // MP4: [],
+        // MP5: [],
+        // MP6: [],
+        // MP7: [],
+        // MP8: [],
+        // MP9: [],
+        // MP10: [],
+        // MP12: [],
+        // MP13: [],
+        // MP14: [],
+        // MP15: [],
       },
     },
     consent: {
@@ -127,27 +131,26 @@ const Enrolment = (props) => {
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
-  function _renderStepContent(step, values, setFieldValue, errors, touched) {
+  function _renderStepContent(step) {
     switch (step) {
       case 0:
-        return (
-          <Student
-            nif={studentData.student.nif}
-            setFieldValue={setFieldValue}
-            errors={errors}
-            touched={touched}
-          />
-        );
+        return <Student nif={studentData.student.nif} />;
       case 1:
         return <Custodian />;
       case 2:
-        return <AcademicData cursmoduluf={cursmoduluf} values={values} />;
+        return <AcademicData cursmoduluf={cursmoduluf} />;
       case 3:
         return <Consent />;
       case 4:
-        return <Revision values={values} />;
+        return <Revision />;
       default:
-        return <div>Not Found</div>;
+        return (
+          <div>
+            Paso desconocido. No deberías estar aquí. Esto es una zona
+            desconocida. No nos hacemos responables a partir de este punto. Tu
+            eliges.
+          </div>
+        );
     }
   }
 
@@ -175,10 +178,8 @@ const Enrolment = (props) => {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
       }
-      if (activeStep === 2) {
-        if (isAdult(values.student.date_birth)) {
-          values.custodians = [];
-        }
+      if (activeStep === 2 && isAdult(values.student.date_birth)) {
+        values.custodians = [];
       }
       if (activeStep === 0 && props.studentData === 0) {
         // Checkear solo si el student es nuevo
@@ -355,13 +356,7 @@ const Enrolment = (props) => {
               </Snackbar>
             ) : null}
 
-            {_renderStepContent(
-              activeStep,
-              values,
-              setFieldValue,
-              errors,
-              touched
-            )}
+            {_renderStepContent(activeStep)}
             <div className={classes.alignRight}>
               {activeStep !== 0 && (
                 <Button
@@ -441,8 +436,8 @@ const Enrolment = (props) => {
 
 Enrolment.propTypes = {
   /** ID del curso */
-  idCourse: PropTypes.any,
+  idCourse: PropTypes.any.isRequired,
   /** Datos del estudiante */
-  studentData: PropTypes.number,
+  studentData: PropTypes.any,
 };
 export default Enrolment;

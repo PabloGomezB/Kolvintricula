@@ -1,8 +1,7 @@
 import { FormGroup, FormLabel, Typography } from "@material-ui/core";
-import { FieldArray } from "formik";
+import { FieldArray, useFormikContext } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
-import { useStyle } from "../../Layout/styles";
 import { CheckboxWithLabel } from "formik-material-ui";
 import PropTypes from "prop-types";
 /**
@@ -11,8 +10,9 @@ import PropTypes from "prop-types";
  * @returns
  */
 
-export const AcademicData = ({ cursmoduluf, values }) => {
-  const classes = useStyle();
+export const AcademicData = ({ cursmoduluf }) => {
+  const { values } = useFormikContext();
+
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -45,12 +45,13 @@ export const AcademicData = ({ cursmoduluf, values }) => {
 
                         <FormGroup>
                           {modul.ufs.map((uf) => {
+                            
                             return (
                               <React.Fragment key={`${modul.name}${uf.name}`}>
                                 <FormikControl
                                   control="checkbox"
                                   component={CheckboxWithLabel}
-                                  name={`academic_data.modules.${modul.name}`}
+                                  name={`academic_data.modules.${modul.name} - ${modul.description}`}
                                   Label={{ label: uf.name }}
                                   value={uf.name}
                                 />
