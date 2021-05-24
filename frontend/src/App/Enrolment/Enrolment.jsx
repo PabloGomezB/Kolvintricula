@@ -298,7 +298,7 @@ const Enrolment = (props) => {
       </Button>
 
       <Typography variant="h3" gutterBottom align="center">
-        Matrícula para {props.courseName}
+        Matrícula para {props.courseData.name}
       </Typography>
 
       <Stepper

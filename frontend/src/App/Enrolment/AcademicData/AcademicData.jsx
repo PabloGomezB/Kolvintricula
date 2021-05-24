@@ -3,6 +3,7 @@ import { FieldArray, useFormikContext } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { CheckboxWithLabel } from "formik-material-ui";
+import { useStyle } from "../../Layout/styles";
 import PropTypes from "prop-types";
 /**
  * Componente que construye el paso de Datos Académicos
@@ -12,6 +13,7 @@ import PropTypes from "prop-types";
 
 export const AcademicData = ({ cursmoduluf }) => {
   const { values } = useFormikContext();
+  const classes = useStyle();
 
   return (
     <div>
