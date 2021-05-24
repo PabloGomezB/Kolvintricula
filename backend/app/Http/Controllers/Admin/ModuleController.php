@@ -17,7 +17,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $data['dataModules'] = Module::paginate(4);
+        $data['dataModules'] = Module::orderBy('updated_at', 'desc')->paginate(10);
         return view('admin.module.index',$data);
     }
 

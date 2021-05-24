@@ -3,6 +3,7 @@ import { FieldArray, useFormikContext } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { CheckboxWithLabel } from "formik-material-ui";
+import { useStyle } from "../../Layout/styles";
 import PropTypes from "prop-types";
 /**
  * Componente que construye el paso de Datos Académicos
@@ -12,15 +13,16 @@ import PropTypes from "prop-types";
 
 export const AcademicData = ({ cursmoduluf }) => {
   const { values } = useFormikContext();
+  const classes = useStyle();
 
   return (
     <div>
       <Typography variant="h4" gutterBottom>
-        Datos academicos
+        Datos académicos
       </Typography>
       <FieldArray name="academic_data.moduluf">
         <div>
-          <div>
+          <div className={classes.academicData}>
             <FormikControl
               fullWidth
               control="select"
@@ -50,7 +52,7 @@ export const AcademicData = ({ cursmoduluf }) => {
                                 <FormikControl
                                   control="checkbox"
                                   component={CheckboxWithLabel}
-                                  name={`academic_data.modules.${modul.name}-${modul.description}`}
+                                  name={`academic_data.modules.${modul.name} - ${modul.description}`}
                                   Label={{ label: uf.name }}
                                   value={uf.name}
                                 />

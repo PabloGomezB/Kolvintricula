@@ -3,6 +3,7 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { Field, useFormikContext } from "formik";
+import { useStyle } from "../../Layout/styles";
 /**
  * Componente que construye el paso de Datos del estudiante
  * @param {*} props
@@ -13,6 +14,8 @@ export const Student = ({ nif }) => {
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
+  const classes = useStyle();
+
   /**
    * Controla el cambio de imagen
    * @param {*} e
@@ -58,14 +61,8 @@ export const Student = ({ nif }) => {
 
   return (
     <div>
-      <div style={{ float: "right" }}>
-        <div
-          style={{
-            height: "100px",
-            width: "100px",
-          }}
-          className="imgPreview"
-        >
+      <div className={classes.photoPosition}>
+        <div width="100px" height="100px">
           {setImagePreview()}
         </div>
 
@@ -84,7 +81,7 @@ export const Student = ({ nif }) => {
                   onChange={(e) => handleImageChange(e)}
                 />
                 {meta.touched && meta.error && (
-                  <div className="error">{meta.error}</div>
+                  <div className={classes.errorPhoto}>{meta.error}</div>
                 )}
               </>
             )}
@@ -92,13 +89,18 @@ export const Student = ({ nif }) => {
         </div>
 
         <label htmlFor="contained-button-file">
-          <Button variant="contained" color="primary" component="span">
+          <Button
+            variant="contained"
+            color="primary"
+            component="span"
+            className={classes.photoButton}
+          >
             Subir foto
           </Button>
         </label>
       </div>
 
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom className={classes.studentData}>
         Datos del alumno
       </Typography>
 
@@ -107,7 +109,7 @@ export const Student = ({ nif }) => {
           <FormikControl
             control="input"
             type="text"
-            label="Primer nombre: "
+            label="Nombre: "
             name="student.name"
             fullWidth
           />

@@ -2,6 +2,7 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import { FieldArray } from "formik";
 import React from "react";
 import FormikControl from "../../FormFields/FormikControl";
+import { useStyle } from "../../Layout/styles";
 
 class CustodianO {
   constructor() {
@@ -20,7 +21,7 @@ class CustodianO {
  * @returns
  */
 export const Custodian = () => {
-  // const classes = useStyle();
+  const classes = useStyle();
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -54,7 +55,9 @@ export const Custodian = () => {
                       {custodians.length !== 1 && (
                         <Grid item xs={12} sm={6}>
                           <Button
+                            className={classes.removeCustodian}
                             variant="contained"
+                            color="primary"
                             onClick={() => remove(index)}
                           >
                             Eliminar responsable
@@ -122,7 +125,9 @@ export const Custodian = () => {
                 ))}
               {custodians.length < 2 && (
                 <Button
+                  className={classes.addCustodian}
                   variant="contained"
+                  color="primary"
                   onClick={() => push(new CustodianO())}
                 >
                   Añadir un responsable

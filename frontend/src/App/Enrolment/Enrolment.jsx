@@ -59,15 +59,13 @@ const Enrolment = (props) => {
     /** Obtiene los modulos y ufs a partir de la id del curso */
     axios
       .get(
-        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
+        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
       )
       .then((res) => {
         setCursmoduluf(res.data);
       });
-  }, [props.idCourse]);
-  /**
-   * Objeto con el se inicia los valores del formulario
-   */
+  }, [props.courseData.id]);
+
   let studentData = {
     student: {
       updateStudent: false,
@@ -92,6 +90,11 @@ const Enrolment = (props) => {
       },
     ],
     academic_data: {
+      course: {
+        type: props.courseData.type,
+        name: props.courseData.name,
+        description: props.courseData.description,
+      },
       year: "",
       modules: {
         // MP1: [],
@@ -331,12 +334,13 @@ const Enrolment = (props) => {
   return (
     <div>
       <Button component={Link} to="/" variant="contained">
-        Volver
+        Volver al inicio
       </Button>
 
       <Typography variant="h3" gutterBottom align="center">
-        Matrícula
+        Matrícula para {props.courseData.name}
       </Typography>
+
       <Stepper
         activeStep={activeStep}
         alternativeLabel
@@ -414,14 +418,14 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            <div>
+            {/* <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div>
+            </div> */}
           </Form>
         )}
       </Formik>
