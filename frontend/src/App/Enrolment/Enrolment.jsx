@@ -243,21 +243,20 @@ const Enrolment = (props) => {
   }
 
   async function _submitForm(values, actions) {
+    
     if (!isAdult(values.student.date_birth) && values.custodians.length === 0) {
       alert("Añade un responsable");
       actions.setSubmitting(false);
       return;
     }
-    await _sleep(1000);
 
-    // alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
+    document.body.style.cursor = "wait";
+
     console.log("submit", values);
 
     axios
       .post(
         `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
-        // `http://127.0.0.1:8000/api/enrolments/add`,
         {
           values,
         }
@@ -265,6 +264,7 @@ const Enrolment = (props) => {
       .then((response) => {
         console.log("response:", response.data);
         setEnrolmentSubmited(true);
+        document.body.style.cursor = "default";
 
         if (
           response.data.addStudentResult.response === "OK" &&
@@ -280,6 +280,9 @@ const Enrolment = (props) => {
       .catch((error) => {
         console.log(error);
         setSuccessfullyEnrolled(false);
+      })
+      .then(function () {
+        actions.setSubmitting(false);
       });
   }
 
@@ -361,6 +364,7 @@ const Enrolment = (props) => {
               {activeStep !== 0 && (
                 <Button
                   variant="contained"
+                  disabled={isSubmitting}
                   className={classes.btn}
                   onClick={() => _handleBack(values)}
                 >
