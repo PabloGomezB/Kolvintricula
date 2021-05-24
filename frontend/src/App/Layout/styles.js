@@ -179,13 +179,18 @@ const useStyle = makeStyles(() => ({
     fontWeight: '400'
   },
   photoPosition: {
-    float: "right"
+    width: '200px',
+    marginLeft: '65%',
+    textAlign: 'center'
   },
   photoButton: {
     borderRadius: '20px'
   },
   studentData: {
-    paddingTop: '120px'
+    width: '450px',
+    marginTop: '-90px',
+    marginBottom: '75px',
+    textAlign: 'center'
   },
   academicData: {
     marginBottom: '1.5%'
