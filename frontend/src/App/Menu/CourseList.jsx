@@ -15,7 +15,7 @@ const CourseList = ({ courses }) => {
   const listItems = courses.map((course) => (
     <Fragment key={course.id}>
       <Grid item xs={6}>
-        {course.state === "DESHABILITADO" ? (
+        {course.state !== "MATRICULA" ? (
           <Button component={Link} to={`${match.url}${course.name}`} className={classes.buttonDisabled} disabled>
             {course.name}
           </Button>

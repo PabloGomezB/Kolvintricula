@@ -293,7 +293,7 @@ const Enrolment = (props) => {
   return (
     <div>
       <Button component={Link} to="/" variant="contained">
-        Volver
+        Volver al inicio
       </Button>
 
       <Typography variant="h3" gutterBottom align="center">
@@ -383,14 +383,14 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            <div>
+            {/* <div>
               VALUES:
               <pre>{JSON.stringify(values, null, 2)}</pre>
               ERRORS:
               <pre>{JSON.stringify(errors, null, 2)}</pre>
               TOUCHED:
               <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div>
+            </div> */}
           </Form>
         )}
       </Formik>
