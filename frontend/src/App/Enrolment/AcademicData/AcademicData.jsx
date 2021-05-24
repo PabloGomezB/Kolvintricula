@@ -20,6 +20,11 @@ export const AcademicData = ({ cursmoduluf }) => {
       <Typography variant="h4" gutterBottom>
         Datos académicos
       </Typography>
+      <u>
+        <Typography variant="overline" gutterBottom>
+          * En caso de matricularte de un curso entero no selecciones ninguna UF *
+        </Typography>
+      </u>
       <FieldArray name="academic_data.moduluf">
         <div>
           <div className={classes.academicData}>
