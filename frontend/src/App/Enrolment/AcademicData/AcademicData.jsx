@@ -50,7 +50,7 @@ export const AcademicData = ({ cursmoduluf }) => {
                                 <FormikControl
                                   control="checkbox"
                                   component={CheckboxWithLabel}
-                                  name={`academic_data.modules.${modul.name}`}
+                                  name={`academic_data.modules.${modul.name}-${modul.description}`}
                                   Label={{ label: uf.name }}
                                   value={uf.name}
                                 />

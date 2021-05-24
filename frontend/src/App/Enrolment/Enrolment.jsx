@@ -37,8 +37,8 @@ const steps = [
 ];
 /**
  * Componente que construye el formulario entero
- * @param {*} props
- * @returns
+ * @param {*} props Props
+ * @returns JSX
  */
 const Enrolment = (props) => {
   const classes = useStyle();
@@ -55,8 +55,8 @@ const Enrolment = (props) => {
   const [emailPedralbes, setEmailPedralbes] = useState(0);
 
   const [cursmoduluf, setCursmoduluf] = useState({});
-
   useEffect(() => {
+    /** Obtiene los modulos y ufs a partir de la id del curso */
     axios
       .get(
         `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
@@ -65,7 +65,9 @@ const Enrolment = (props) => {
         setCursmoduluf(res.data);
       });
   }, [props.idCourse]);
-
+  /**
+   * Objeto con el se inicia los valores del formulario
+   */
   let studentData = {
     student: {
       updateStudent: false,
@@ -92,20 +94,20 @@ const Enrolment = (props) => {
     academic_data: {
       year: "",
       modules: {
-        MP1: [],
-        MP2: [],
-        MP3: [],
-        MP4: [],
-        MP5: [],
-        MP6: [],
-        MP7: [],
-        MP8: [],
-        MP9: [],
-        MP10: [],
-        MP12: [],
-        MP13: [],
-        MP14: [],
-        MP15: [],
+        // MP1: [],
+        // MP2: [],
+        // MP3: [],
+        // MP4: [],
+        // MP5: [],
+        // MP6: [],
+        // MP7: [],
+        // MP8: [],
+        // MP9: [],
+        // MP10: [],
+        // MP12: [],
+        // MP13: [],
+        // MP14: [],
+        // MP15: [],
       },
     },
     consent: {
@@ -126,6 +128,11 @@ const Enrolment = (props) => {
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
 
+  /**
+   * Dependiendo el paso que esté renderizará una vista u otra
+   * @param {*} step Paso
+   * @returns
+   */
   function _renderStepContent(step) {
     switch (step) {
       case 0:
@@ -143,20 +150,32 @@ const Enrolment = (props) => {
           <div>
             Paso desconocido. No deberías estar aquí. Esto es una zona
             desconocida. No nos hacemos responables a partir de este punto. Tu
-            eliges.
+            decides.
           </div>
         );
     }
   }
-
+  /**
+   * Comprueba si la persona es adulta
+   * @param {*} date Fecha
+   * @returns Boolean
+   */
   const isAdult = (date) => {
     return moment().diff(date, "years") >= 18;
   };
-
+  /**
+   * Comprueba si estás en el paso opcional
+   * @param {*} step Paso
+   * @returns Boolean
+   */
   const isStepOptional = (step) => {
     return step === 1;
   };
-
+  /**
+   * Comprueba si ese paso ha sido saltado
+   * @param {*} step Paso
+   * @returns Boolean
+   */
   const isStepSkipped = (step) => {
     return skipped.has(step);
   };
@@ -164,7 +183,11 @@ const Enrolment = (props) => {
   function _sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-
+  /**
+   * Controla la acción de siguiente del formulario. Dependiendo del paso en el que estés hará diferentes cosas.
+   * @param {*} values Valores del formulario
+   * @param {*} actions Acciones del formik
+   */
   const handleNext = (values, actions) => {
     if (isLastStep) {
       _submitForm(values, actions);
@@ -215,6 +238,11 @@ const Enrolment = (props) => {
     }
   };
 
+  /**
+   * Cambia al siguiente paso
+   * @param {*} values
+   * @param {*} actions
+   */
   function nextStep(values, actions) {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     if (activeStep === 0 && isAdult(values.student.date_birth)) {
@@ -228,7 +256,10 @@ const Enrolment = (props) => {
     actions.setTouched({});
     actions.setSubmitting(false);
   }
-
+  /**
+   * Controla la acción de volver al anterior paso.
+   * @param {*} values
+   */
   function _handleBack(values) {
     if (activeStep === 2 && isAdult(values.student.date_birth)) {
       setActiveStep((prevActiveStep) => prevActiveStep - 2);
@@ -236,7 +267,12 @@ const Enrolment = (props) => {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
   }
-
+  /**
+   * Cuando todos las compronaciones del formulario han sido realizadas envia los valores al backend
+   * @param {*} values
+   * @param {*} actions
+   * @returns
+   */
   async function _submitForm(values, actions) {
     if (!isAdult(values.student.date_birth) && values.custodians.length === 0) {
       alert("Añade un responsable");
@@ -277,11 +313,17 @@ const Enrolment = (props) => {
         setSuccessfullyEnrolled(false);
       });
   }
-
+  /**
+   * Cierra la alerta
+   * @param {*} event
+   * @param {*} reason
+   */
   const closeAlert = (event, reason) => {
     setShowAlert(false);
   };
-
+  /**
+   * Cierra el modal
+   */
   function closeModal() {
     setEnrolmentSubmited(false);
   }

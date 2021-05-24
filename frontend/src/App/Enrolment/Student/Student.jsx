@@ -13,7 +13,10 @@ export const Student = ({ nif }) => {
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
-
+  /**
+   * Controla el cambio de imagen
+   * @param {*} e
+   */
   const handleImageChange = (e) => {
     let reader = new FileReader();
     let file = e.target.files[0];
