@@ -111,6 +111,11 @@ th:hover {
     cursor: not-allowed;
 }
 
-.customSelect {
-    border:
+.wait {
+    cursor: wait;
+    user-select: none;
+}
+  
+.wait * {
+    pointer-events: none;
 }

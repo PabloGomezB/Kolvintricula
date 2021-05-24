@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\CustodianController;
 use App\Http\Controllers\Admin\FullCalendarController;
 
 use App\Http\Controllers\Admin\ProfileController;
-
+use Illuminate\Support\Facades\DB;
 
 Route::get('', function () {
     return view('admin.index');
@@ -24,12 +24,7 @@ Route::resource('courses', CourseController::class);
 Route::resource('modules', ModuleController::class);
 Route::resource('students', StudentController::class);
 Route::resource('ufs', UFController::class);
-// Route::post('/admin/ufs/create?id={id}','UFController@create');
 Route::resource('custodians', CustodianController::class);
-
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->name('dashboard');
 
 /* Params: [ruta,template] */
 Route::view('profile', 'admin.user.profile')->name('profile');
@@ -39,3 +34,8 @@ Route::put('profile', [ProfileController::class, 'update'])->name('profile.updat
 //Calendar routes
 Route::get('fullcalendar', [FullCalendarController::class, 'index']);
 Route::post('fullcalendarAjax', [FullCalendarController::class, 'ajax']);
+
+Route::get('courses/update/state/{id}/{newState}', function($id, $newState){
+    DB::table('courses')->where('id', $id)->update(['state' => $newState]);
+    return redirect()->route('admin');
+})->name('courses.update.state');
