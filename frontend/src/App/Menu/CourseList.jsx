@@ -19,7 +19,8 @@ const CourseList = ({ courses }) => {
           variant="outlined"
           style={{ padding: "10px", textAlign: "center", color: "black" }}
         >
-          {course.description}<br/>({course.name})
+          {/* {course.description}<br/>({course.name}){course.name} */}
+          {course.name}
         </Button>
       </Grid>
     </Fragment>
