@@ -57,6 +57,7 @@ th:hover {
 #table_filter>label>input {
     margin-left: 10px;
 }
+
 .arrow {
     border: solid black;
     border-width: 0 3px 3px 0;
@@ -100,14 +101,16 @@ th:hover {
 }
 
 .required:after {
-    content:" *";
+    content: " *";
     font-size: large;
     color: red;
 }
+
 .disabled {
     pointer-events: none;
     cursor: not-allowed;
 }
-.customSelect{
-    border: 
+
+.customSelect {
+    border:
 }
