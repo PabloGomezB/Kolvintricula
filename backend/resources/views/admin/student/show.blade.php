@@ -1,12 +1,3 @@
-<?php 
-    use App\Models\Enrolment;
-    use App\Models\Custodian;
-
-    $enrolment_string = Enrolment::where('id_student', $student->id)->first();
-    $enrolment = json_decode($enrolment_string, true);
-
-    $custodians = Custodian::where('id_student', $student->id)->get();
-?>
 <x-app-layout>
     @include('admin.student.header')
 
@@ -134,7 +125,9 @@
                     <div class="mb-20">
                         <h2 class="mb-5">Datos de la matrícula</h2>
                         <p class="mb-3">
-                            <strong>Curso matriculado: </strong>{{ $enrolment["json_course_module_uf"]["year"]}}
+                            <strong>Tipo de estudios: </strong>{{ $enrolment["json_course_module_uf"]["course"]["type"] }}
+                            <br/>
+                            <strong>Curso: </strong>{{ $enrolment["json_course_module_uf"]["course"]["name"] }} - {{ $enrolment["json_course_module_uf"]["course"]["description"] }}
                         </p>
                         <div>
                             @foreach($enrolment["json_course_module_uf"]["modules"] as $module_name => $ufs)

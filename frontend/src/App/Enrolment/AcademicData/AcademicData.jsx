@@ -45,12 +45,13 @@ export const AcademicData = ({ cursmoduluf, values }) => {
 
                         <FormGroup>
                           {modul.ufs.map((uf) => {
+                            
                             return (
                               <React.Fragment key={`${modul.name}${uf.name}`}>
                                 <FormikControl
                                   control="checkbox"
                                   component={CheckboxWithLabel}
-                                  name={`academic_data.modules.${modul.name}`}
+                                  name={`academic_data.modules.${modul.name} - ${modul.description}`}
                                   Label={{ label: uf.name }}
                                   value={uf.name}
                                 />

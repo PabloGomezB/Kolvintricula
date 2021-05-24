@@ -60,12 +60,12 @@ const Enrolment = (props) => {
   useEffect(() => {
     axios
       .get(
-        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.idCourse}/modules`
+        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
       )
       .then((res) => {
         setCursmoduluf(res.data);
       });
-  }, [props.idCourse]);
+  }, [props.courseData.id]);
 
   let studentData = {
     student: {
@@ -91,22 +91,27 @@ const Enrolment = (props) => {
       },
     ],
     academic_data: {
+      course: {
+        type: props.courseData.type,
+        name: props.courseData.name,
+        description: props.courseData.description,
+      },
       year: "",
       modules: {
-        MP1: [],
-        MP2: [],
-        MP3: [],
-        MP4: [],
-        MP5: [],
-        MP6: [],
-        MP7: [],
-        MP8: [],
-        MP9: [],
-        MP10: [],
-        MP12: [],
-        MP13: [],
-        MP14: [],
-        MP15: [],
+        // MP1: [],
+        // MP2: [],
+        // MP3: [],
+        // MP4: [],
+        // MP5: [],
+        // MP6: [],
+        // MP7: [],
+        // MP8: [],
+        // MP9: [],
+        // MP10: [],
+        // MP12: [],
+        // MP13: [],
+        // MP14: [],
+        // MP15: [],
       },
     },
     consent: {
