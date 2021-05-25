@@ -139,10 +139,10 @@ const useStyle = makeStyles(() => ({
     borderTop: "0",
   },
   dialogButtonSuccess: {
-    float: "right",
-    marginTop: "-30px",
-    marginRight: "-20px",
-    padding: "-20px",
+    position: "absolute",
+    top: "15px",
+    left:"83%",
+    backgroundColor: "#BDFFCB",
   },
   mainContainer: {
     flexGrow: 1,

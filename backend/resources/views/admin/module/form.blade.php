@@ -12,7 +12,7 @@
                     <?php                         
                         $courses = Course::all();
                         foreach ($courses as $course) {
-                            if($course->id == $id){
+                            if($course->id == $module->id_course){
                                 echo "<option selected value='$course->id'>$course->name</option>";
                             }
                             else{
