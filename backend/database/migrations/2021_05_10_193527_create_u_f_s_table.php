@@ -19,7 +19,8 @@ class CreateUFSTable extends Migration
             $table->string('name');
             $table->integer('hours');
             $table->enum('year', ['1','2']);
-            $table->foreign('id_module')->references('id')->on('modules');
+            $table->string('description');
+            $table->foreign('id_module')->references('id')->on('modules')->onDelete('cascade');
             $table->timestamps();
         });
     }
