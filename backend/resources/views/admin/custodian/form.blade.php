@@ -5,6 +5,10 @@
             <x-input id="id_student" type="text" name="id_student" placeholder="" value="{{ $custodian->name }}" class="block mt-1 w-full" autofocus />
         </div>
         <div>
+            <x-label for="nif" :value="__('DNI del responsable')" />
+            <x-input id="nif" type="text" name="nif" placeholder="" value="{{ $custodian->nif }}" class="block mt-1 w-full" autofocus />
+        </div>
+        <div>
             <x-label for="last_name1" :value="__('Primer apellido delresponsable')" />
             <x-input id="last_name1" type="text" name="last_name1" placeholder="" value="{{ $custodian->last_name1 }}" class="block mt-1 w-full" autofocus />
         </div>
@@ -34,7 +38,7 @@
         </div>
         <div>
             <x-label for="mobile_number" :value="__('Número de teléfono del responsable')" />
-            <x-input id="mobile_number" type="integer" name="mobile_number" placeholder="" value="{{ $custodian->mobile_number }}" class="block mt-1 w-full" autofocus />
+            <x-input id="mobile_number" type="number" name="mobile_number" placeholder="" value="{{ $custodian->mobile_number }}" class="block mt-1 w-full" autofocus />
         </div>
 
     </div>
