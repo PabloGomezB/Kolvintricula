@@ -1,4 +1,4 @@
-import { Button, Container, Snackbar, TextField } from "@material-ui/core";
+import { Button, Container, Snackbar, TextField, CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
@@ -26,6 +26,7 @@ const EnrolmentList = () => {
   const [showAlert, setShowAlert] = useState(0);
   const [resetNif, setResetNif] = useState(0);
   const [open, setOpen] = useState(false);
+  const [loadingBTN, setLoadingBTN] = useState(true);
   const classes = useStyle();
 
   let match = useRouteMatch();
@@ -39,6 +40,7 @@ const EnrolmentList = () => {
       )
       .then((response) => {
         setCourseArray(response.data);
+        setLoadingBTN(false);
       })
       .catch((error) => {
         console.log(error);
@@ -109,9 +111,15 @@ const EnrolmentList = () => {
       ))}
       <Container maxWidth="xl" className={classes.mainContainer}>
         <h1 className={classes.title}>Nuestros cursos</h1>
+        {/* {<CircularProgress /> && loadingBTN } */}
+        {loadingBTN ? <CircularProgress className={classes.loadingButton}/> : 
         <Grid container align="center">
           <CourseList courses={courseArray}></CourseList>
         </Grid>
+        }
+        {/* <Grid container align="center">
+          <CourseList courses={courseArray}></CourseList>
+        </Grid> */}
         <Container align="center">
           <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.loadData}>
             ¿Quieres cargar tus datos?
