@@ -29,17 +29,16 @@ export const Student = ({ nif }) => {
       setOnlyPNG(true);
 
       reader.onloadend = () => {
-        setFieldValue("student.photo_path", null)
-        setimagePreviewUrl(null)
+        setFieldValue("student.photo_path", null);
+        setimagePreviewUrl(null);
       };
-    }
-    else {
+    } else {
       setOnlyPNG(false);
       reader.onloadend = () => {
-        setFieldValue("student.photo_path", reader.result)
-        setimagePreviewUrl(reader.result)
+        setFieldValue("student.photo_path", reader.result);
+        setimagePreviewUrl(reader.result);
       };
-  
+
       reader.readAsDataURL(file);
       console.log(file);
     }
@@ -104,7 +103,9 @@ export const Student = ({ nif }) => {
                       <div className={classes.errorPhoto}>{meta.error}</div>
                     )}
                     {onlyPNG && (
-                      <div className={classes.errorPhoto}>Solo se pueden subir imágenes PNG</div>
+                      <div className={classes.errorPhoto}>
+                        Solo se pueden subir imágenes PNG
+                      </div>
                     )}
                   </>
                 )}
@@ -121,7 +122,7 @@ export const Student = ({ nif }) => {
                 Subir foto
               </Button>
             </label>
-          </div> 
+          </div>
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormikControl

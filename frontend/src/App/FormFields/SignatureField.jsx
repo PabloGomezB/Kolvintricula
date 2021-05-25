@@ -1,34 +1,43 @@
-import { Field } from "formik";
-import React, { useRef } from "react";
+import { Field, useFormikContext } from "formik";
+import React, { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
+import { useStyle } from "../Layout/styles";
 
 export const SignatureField = () => {
-  const signatureRef = useRef({});
+  const classes = useStyle();
 
-  function onChange(setFieldValue) {
+  const signatureRef = useRef({});
+  const { values, setFieldValue } = useFormikContext();
+  const [signature, setSignature] = useState(values.consent.firma);
+
+  useEffect(() => {
+    signatureRef.current.fromDataURL(signature);
+  }, []);
+
+  function onChange() {
     setFieldValue(
       "consent.firma",
+      signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
+    );
+    setSignature(
       signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
     );
   }
 
   return (
-    <div>
+    <div className={classes.alignCenter}>
       <Field name="consent.firma">
         {({
           field, // { name, value, onChange, onBlur }
-          form: { touched, errors, setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+          form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
           meta,
         }) => (
           <>
             <SignatureCanvas
-              canvasProps={{
-                width: 500,
-                height: 200,
-                style: { border: "1px solid #000000", marginLeft: '25%' },
-              }}
+              clearOnResize={false}
+              canvasProps={{ className: classes.canvasFirma }}
               ref={signatureRef}
-              onEnd={() => onChange(setFieldValue)}
+              onEnd={() => onChange()}
             />
             {meta.touched && meta.error && (
               <div className="error">{meta.error}</div>

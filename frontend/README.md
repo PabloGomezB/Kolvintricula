@@ -2,6 +2,8 @@
 
 Esta parte del proyecto hace la matrícula de un alumno y la envía a backend.
 
+URL: http://www.kolvintricula.alumnes.iam.cat/
+
 ## Comenzando 🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
@@ -33,6 +35,23 @@ npm start
 En este punto se te abrirá un ventana con el menú de matrícula.
 
 ## Estructura de carpetas
+
+- build: Este directorio es donde se guardan los archivos compilados y listos para producción.
+- node_modules: Directorio en el que se guardan las dependencias del proyecto.
+- public: Aquí es donde se ponen los ficheros estáticos como el index.html y los iconos/imágenes. En el index.html es donde se renderiza react.
+- src: Este directorio es donde se guardan los componentes de React.
+  - Está compuesto por diferentes directorios-componentes, es decir, cada componente o conjunto de componentes es guardado en un directorio. Cada directorio tiene su index.js en el que exporta el componente principal.
+- .editorconfig: Este fichero sirve para configurar el modo en el que se formatea un fichero y qué en qué tipo de ficheros actúa.
+- .gitignore: Este fichero hace git no detecte e ignora cambios en el fichero o directorio que se le indica.
+- package-lock.json: Fichero que se crea a partir de las dependencias de nuestras dependencias.
+- package.json: Fichero importante que guarda las distintas dependencias de nuestro proyecto.
+- README.md: Fichero que informa del proyecto,
+- styleguide.config.js: Este fichero configura la documentación de Styleguidist.
+- .env: Este fichero guarda las variables de entorno
+
+## Configuración
+
+Se ha creado un archivo .env donde se guardan las variables de entorno como la URL de la API de backend.
 
 ## Despliegue 📦
 
@@ -86,17 +105,17 @@ Script para compilar y minificar la documentación de React.
 
 ## Construido con 🛠️
 
-- [Create-react-app](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-- [React](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-- [NodeJS](https://maven.apache.org/) - Manejador de dependencias
-- [NPM](https://rometools.github.io/rome/) - Usado para generar RSS
-- [React Router](https://rometools.github.io/rome/) - Usado para generar RSS
-- [Formik](https://rometools.github.io/rome/) - Usado para generar RSS
-- [Material UI](https://rometools.github.io/rome/) - Usado para generar RSS
-- [Styleguidist](https://rometools.github.io/rome/) - Usado para generar RSS
-- [Axios](https://rometools.github.io/rome/) - Usado para generar RSS
-- [Prop Types](https://rometools.github.io/rome/) - Usado para generar RSS
-- [React Signature Canvas](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Create-react-app](https://create-react-app.dev/) - Create React App es una forma oficialmente compatible de crear aplicaciones React de una sola página. Ofrece una configuración de construcción moderna sin configuración.
+- [React](https://es.reactjs.org/) - Una biblioteca de JavaScript para construir interfaces de usuario SPA
+- [NodeJS](https://nodejs.org/en/) - Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma
+- [NPM](https://www.npmjs.com/) - Manejador de dependecias
+- [React Router](https://reactrouter.com/) - React Router es una colección de componentes de navegación que se componen declarativamente con su aplicación
+- [Formik](https://formik.org/) - Formik is the world's most popular open source form library for React and React Native.
+- [Material UI](https://material-ui.com/) - React componentes para un desarrollo web más rápido y sencillo.
+- [Styleguidist](https://github.com/styleguidist/react-styleguidist) - React Styleguidist es un entorno de desarrollo de componentes con un servidor de desarrollo y una guía de estilo viva que puede compartir con su equipo.
+- [Axios](https://github.com/axios/axios) - Cliente HTTP basado en promesas para el navegador y node.js
+- [Prop Types](https://es.reactjs.org/docs/typechecking-with-proptypes.html) - Verificación de tipos con PropTypes
+- [React Signature Canvas](https://github.com/agilgur5/react-signature-canvas) - Usado para generar RSS
 - [React Cookie Banner](https://rometools.github.io/rome/) - Usado para generar RSS
 
 ## Autores ✒️
