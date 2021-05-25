@@ -34,8 +34,6 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 
 ## Estructura de carpetas
 
-
-
 ## Despliegue 📦
 
 Para desplegar el proyecto primero hay hacer build
@@ -106,7 +104,3 @@ Script para compilar y minificar la documentación de React.
 - **Jordi Callupe** - [a18jorcalari](https://github.com/a18jorcalari)
 - **Kevin Larriega** - [a18kevlarpal](#fulanito-de-tal)
 - **Pablo Gómez** - [a18pabgombra](#fulanito-de-tal)
-
-## Licencia 📄
-
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
