@@ -59,7 +59,7 @@ const Enrolment = (props) => {
     /** Obtiene los modulos y ufs a partir de la id del curso */
     axios
       .get(
-        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
+        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
       )
       .then((res) => {
         setCursmoduluf(res.data);
@@ -334,7 +334,8 @@ const Enrolment = (props) => {
         if (
           response.data.addStudentResult.response === "OK" &&
           response.data.addCustodiansResult.response === "OK" &&
-          response.data.addEnrolmentResult.response === "OK"
+          response.data.addEnrolmentResult.response === "OK" &&
+          response.data.sendEmailResult.response === "OK"
         ) {
           setEmailPedralbes(response.data.addStudentResult.email_pedralbes);
           setSuccessfullyEnrolled(true);
@@ -482,8 +483,10 @@ const Enrolment = (props) => {
                   color="primary"
                   className={classes.dialogButtonSuccess}
                 >
-                  <DoneOutlineTwoToneIcon style={{ color: "green" }} />
+                  <DoneOutlineTwoToneIcon fontSize="large" style={{ color: "green"}} />
                 </Button>
+                <hr />
+                <Box>En breves recibirás una copia de la matrícula en tu email personal</Box>
               </DialogContent>
             </Dialog>
           ) : (
