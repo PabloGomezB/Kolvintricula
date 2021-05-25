@@ -59,7 +59,7 @@ const Enrolment = (props) => {
     /** Obtiene los modulos y ufs a partir de la id del curso */
     axios
       .get(
-        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
+        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
       )
       .then((res) => {
         setCursmoduluf(res.data);
