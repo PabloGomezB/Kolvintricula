@@ -4,6 +4,8 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
+import backgroundImageCourses from "../img/backgroundImageCourses.png";
+
 let theme = createMuiTheme({
   palette: {
     type: "light",
@@ -138,13 +140,11 @@ const useStyle = makeStyles(() => ({
   },
   mainContainer: {
     flexGrow: 1,
-    backgroundImage: 'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
-    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${backgroundImageCourses})`,
     backgroundSize: 'cover',
     marginTop: '-35px',
     height: '500px',
-    borderRadius: '10px',
-    backgroundBlendMode: 'saturation'
+    borderRadius: '10px'
   },
   title: {
     textAlign: 'center',
@@ -201,6 +201,9 @@ const useStyle = makeStyles(() => ({
   },
   loadingButton: {
     marginLeft: theme.spacing(50)
+  },
+  imageStudent: {
+    borderRadius: "50px"
   }
 }));
 

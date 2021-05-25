@@ -4,7 +4,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 /**
- * Componente header
+ * Componente que construye el Header
+ * @param {*} param0
+ * @returns
  */
 export default function Header() {
   return (

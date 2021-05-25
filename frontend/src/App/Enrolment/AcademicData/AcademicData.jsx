@@ -5,12 +5,12 @@ import FormikControl from "../../FormFields/FormikControl";
 import { CheckboxWithLabel } from "formik-material-ui";
 import { useStyle } from "../../Layout/styles";
 import PropTypes from "prop-types";
+
 /**
  * Componente que construye el paso de Datos Académicos
  * @param {*} param0
  * @returns
  */
-
 export const AcademicData = ({ cursmoduluf }) => {
   const { values } = useFormikContext();
   const classes = useStyle();
@@ -25,6 +25,7 @@ export const AcademicData = ({ cursmoduluf }) => {
           * En caso de matricularte de un curso entero no selecciones ninguna UF *
         </Typography>
       </u>
+      {/* Muestra los módulos y las ufs dependiendo del curso que se clique */}
       <FieldArray name="academic_data.moduluf">
         <div>
           <div className={classes.academicData}>

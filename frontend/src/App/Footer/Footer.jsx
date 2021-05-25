@@ -4,11 +4,17 @@ import CookieConsent from "react-cookie-consent";
 import { useStyle } from "../Layout/styles";
 import Iframe from "react-iframe";
 import { Grid } from "@material-ui/core";
-
+/**
+ * Componente que construye el Footer
+ * @param {*} param0
+ * @returns
+ */
 export default function Footer() {
+  //Declaración de los estilos
   const classes = useStyle();
 
   return (
+    //Muestra los elementos del Footer
     <AppBar position="static" component="footer">
       <Container className={classes.footerContainer}>
         <Grid container spacing={3}>
@@ -92,6 +98,7 @@ export default function Footer() {
             </div>
           </Grid>
         </Grid>
+        {/* Barra de cookies a aceptar por el alumno */}
         <CookieConsent
           location="bottom"
           cookieName="KolvintriculaCookie"

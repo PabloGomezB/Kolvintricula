@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+//Componente que servía en un principio para mostrar cuando se hacía clic en un curso que tenía un estado diferente al de matrícula
 const NoDisponible = () => {
   return (
     <React.Fragment>

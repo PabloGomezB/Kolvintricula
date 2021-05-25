@@ -15,8 +15,10 @@ import { useFormikContext } from "formik";
  * @returns
  */
 export default function Revision() {
+  //Sirve para poder acceder al valor del JSON que está en Enrolment.jsx
   const { values } = useFormikContext();
 
+  //Contiene toda la información que el alumno ha ido rellenando y dicha información se enviará en Enrolment.jsx
   return (
     <div>
       <div>

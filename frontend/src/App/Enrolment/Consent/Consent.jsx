@@ -14,6 +14,7 @@ import { SignatureField } from "../../FormFields/SignatureField";
  */
 const Consent = () => {
   return (
+    //Muestra la información con respecto al consentimiento y la firma
     <div>
       <h4>DECLARACIÓN RESPONSABLES</h4>
       <Table aria-label="custom pagination table">

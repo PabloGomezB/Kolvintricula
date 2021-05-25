@@ -15,6 +15,7 @@ export const SignatureField = () => {
   }
 
   return (
+    //Muestra el campo que contiene la firma
     <div>
       <Field name="consent.firma">
         {({
@@ -33,6 +34,7 @@ export const SignatureField = () => {
               ref={signatureRef}
               onEnd={() => onChange(setFieldValue)}
             />
+            {/* Muestra un mensaje de error si es que no se rellena el campo */}
             {meta.touched && meta.error && (
               <div className={classes.error}>{meta.error}</div>
             )}
