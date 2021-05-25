@@ -14,18 +14,30 @@ export const Student = ({ nif }) => {
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
+  const [onlyPNG, setOnlyPNG] = useState(false);
   const classes = useStyle();
 
   const handleImageChange = (e) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    reader.onloadend = () => {
-      setFieldValue("student.photo_path", reader.result);
-      setimagePreviewUrl(reader.result);
-    };
+    if (!file.name.match(/.(png)$/i)) {
+      setOnlyPNG(true);
 
-    reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFieldValue("student.photo_path", null)
+        setimagePreviewUrl(null)
+      };
+    }
+    else {
+      reader.onloadend = () => {
+        setFieldValue("student.photo_path", reader.result)
+        setimagePreviewUrl(reader.result)
+      };
+  
+      reader.readAsDataURL(file);
+      console.log(file);
+    }
   };
 
   const setImagePreview = () => {
@@ -79,6 +91,9 @@ export const Student = ({ nif }) => {
                 {meta.touched && meta.error && (
                   <div className={classes.errorPhoto}>{meta.error}</div>
                 )}
+                {onlyPNG && (
+                  <div className={classes.errorPhoto}>Solo se pueden subir imágenes PNG</div>
+                )}
               </>
             )}
           </Field>
@@ -129,7 +144,7 @@ export const Student = ({ nif }) => {
             <FormikControl
               control="input"
               type="text"
-              label="NIF: "
+              label="NIF o NIE: "
               name="student.nif"
               fullWidth
             />

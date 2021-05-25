@@ -203,6 +203,9 @@ const useStyle = makeStyles(() => ({
   removeCustodian: {
     border: '5px solid #231F20',
     borderRadius: '20px'
+  },
+  loadingButton: {
+    marginLeft: theme.spacing(50)
   }
 }));
 

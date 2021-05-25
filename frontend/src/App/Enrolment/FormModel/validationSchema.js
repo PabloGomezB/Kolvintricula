@@ -20,7 +20,7 @@ const validationSchema = [
       nif: Yup.string()
         .required("Requerido")
         .matches(
-          /([a-z]|[A-Z]|[0-9])[0-9]{7}([a-z]|[A-Z]|[0-9])/,
+          /^[XYZ]?\d{5,8}[A-Z]$/,
           "Introduce un NIF o NIE válido"
         ),
       mobile_number: Yup.number()
@@ -46,7 +46,7 @@ const validationSchema = [
           .required("Requerido")
           .nullable(),
         nif: Yup.string().required("Requerido").matches(
-          /([a-z]|[A-Z]|[0-9])[0-9]{7}([a-z]|[A-Z]|[0-9])/,
+          /^[XYZ]?\d{5,8}[A-Z]$/,
           "Introduce un NIF o NIE válido"
         ),
         name: Yup.string()
