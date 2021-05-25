@@ -94,7 +94,7 @@ class UFSeeder extends Seeder {
             ['id_module' => '20', 'name' => 'UF3', 'hours' => '12', 'year' => '2', 'description' => 'Desenvolupament web en entorn client 3', 'created_at' => '2021-05-10 20:20:04'],
             ['id_module' => '20', 'name' => 'UF4', 'hours' => '50', 'year' => '2', 'description' => 'Desenvolupament web en entorn client 4', 'created_at' => '2021-05-10 20:20:04'],
 
-            
+
             ['id_module' => '21', 'name' => 'UF1', 'hours' => '27', 'year' => '2', 'description' => 'Desenvolupament web en entorn servidor 1', 'created_at' => '2021-05-10 20:20:04'],
             ['id_module' => '21', 'name' => 'UF2', 'hours' => '40', 'year' => '2', 'description' => 'Desenvolupament web en entorn servidor 2', 'created_at' => '2021-05-10 20:20:04'],
             ['id_module' => '21', 'name' => 'UF3', 'hours' => '12', 'year' => '2', 'description' => 'Desenvolupament web en entorn servidor 3', 'created_at' => '2021-05-10 20:20:04'],
@@ -108,7 +108,7 @@ class UFSeeder extends Seeder {
             ['id_module' => '23', 'name' => 'UF1', 'hours' => '27', 'year' => '2', 'description' => 'Disseny d’interfícies web 1', 'created_at' => '2021-05-10 20:20:04'],
             ['id_module' => '23', 'name' => 'UF2', 'hours' => '40', 'year' => '2', 'description' => 'Disseny d’interfícies web 2', 'created_at' => '2021-05-10 20:20:04'],
             ['id_module' => '23', 'name' => 'UF3', 'hours' => '12', 'year' => '2', 'description' => 'Disseny d’interfícies web 3', 'created_at' => '2021-05-10 20:20:04'],
-        
+
             ['id_module' => '24', 'name' => 'UF1', 'hours' => '40', 'year' => '1', 'description' => 'Formació i orientació laboral 1', 'created_at' => '2021-05-10 20:20:04'],
             ['id_module' => '24', 'name' => 'UF2', 'hours' => '30', 'year' => '1', 'description' => 'Formació i orientació laboral 2', 'created_at' => '2021-05-10 20:20:04'],
 
@@ -120,11 +120,11 @@ class UFSeeder extends Seeder {
 
 
 
-            
+
         ];
 
 
-        ];
+
         DB::table('u_f_s')->insert($u_f_s);
     }
 }
