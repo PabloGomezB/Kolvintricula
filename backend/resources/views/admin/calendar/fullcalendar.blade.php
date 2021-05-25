@@ -49,6 +49,7 @@ var calendar = $('#calendar').fullCalendar({
                         center: 'title',
                         left:'today,prev,next'
                     },
+                    eventColor :'#ADD8E6',
                     firstDay: 1,         
                     editable: true,
                     events: SITEURL + "/fullcalendar/",
