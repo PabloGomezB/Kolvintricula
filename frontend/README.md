@@ -115,8 +115,8 @@ Script para compilar y minificar la documentación de React.
 - [Styleguidist](https://github.com/styleguidist/react-styleguidist) - React Styleguidist es un entorno de desarrollo de componentes con un servidor de desarrollo y una guía de estilo viva que puede compartir con su equipo.
 - [Axios](https://github.com/axios/axios) - Cliente HTTP basado en promesas para el navegador y node.js
 - [Prop Types](https://es.reactjs.org/docs/typechecking-with-proptypes.html) - Verificación de tipos con PropTypes
-- [React Signature Canvas](https://github.com/agilgur5/react-signature-canvas) - Usado para generar RSS
-- [React Cookie Banner](https://rometools.github.io/rome/) - Usado para generar RSS
+- [React Signature Canvas](https://github.com/agilgur5/react-signature-canvas) - Un componente React de firma
+- [React Cookie Banner](https://github.com/buildo/react-cookie-banner/) - Un banner de cookies para React
 
 ## Autores ✒️
 
