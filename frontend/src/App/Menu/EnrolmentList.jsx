@@ -111,15 +111,11 @@ const EnrolmentList = () => {
       ))}
       <Container maxWidth="xl" className={classes.mainContainer}>
         <h1 className={classes.title}>Nuestros cursos</h1>
-        {/* {<CircularProgress /> && loadingBTN } */}
         {loadingBTN ? <CircularProgress className={classes.loadingButton}/> : 
         <Grid container align="center">
           <CourseList courses={courseArray}></CourseList>
         </Grid>
         }
-        {/* <Grid container align="center">
-          <CourseList courses={courseArray}></CourseList>
-        </Grid> */}
         <Container align="center">
           <Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.loadData}>
             ¿Quieres cargar tus datos?

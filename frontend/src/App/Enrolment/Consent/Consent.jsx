@@ -1,11 +1,10 @@
 import PropTypes from "prop-types";
-import React, { useRef } from "react";
+import React from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
-import { Field } from "formik";
 import { SignatureField } from "../../FormFields/SignatureField";
 
 /**

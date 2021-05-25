@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+
 import {
   Grid,
   List,
@@ -15,7 +15,7 @@ import { useFormikContext } from "formik";
  * @returns
  */
 export default function Revision() {
-  const { values, submitForm } = useFormikContext();
+  const { values } = useFormikContext();
 
   return (
     <div>
@@ -49,7 +49,7 @@ export default function Revision() {
             <ListItem>
               <ListItemText
                 primary="Fecha de nacimiento"
-                secondary={values.student.date_birth}
+                secondary={moment(values.student.date_birth).format('D/MM/YYYY')}
               />
             </ListItem>
           </Grid>

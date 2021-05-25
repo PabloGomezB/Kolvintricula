@@ -1,9 +1,11 @@
 import { Field } from "formik";
 import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
+import { useStyle } from "../../App/Layout/styles";
 
 export const SignatureField = () => {
   const signatureRef = useRef({});
+  const classes = useStyle();
 
   function onChange(setFieldValue) {
     setFieldValue(
@@ -16,22 +18,23 @@ export const SignatureField = () => {
     <div>
       <Field name="consent.firma">
         {({
-          field, // { name, value, onChange, onBlur }
-          form: { touched, errors, setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+          field,
+          form: { touched, errors, setFieldValue },
           meta,
         }) => (
           <>
+            <h4 align="center">Para continuar, firma aquí por favor</h4>
             <SignatureCanvas
               canvasProps={{
                 width: 500,
                 height: 200,
-                style: { border: "1px solid #000000", marginLeft: '25%' },
+                style: { border: "1px solid #000000", marginLeft: '23%' },
               }}
               ref={signatureRef}
               onEnd={() => onChange(setFieldValue)}
             />
             {meta.touched && meta.error && (
-              <div className="error">{meta.error}</div>
+              <div className={classes.error}>{meta.error}</div>
             )}
           </>
         )}

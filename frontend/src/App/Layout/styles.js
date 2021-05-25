@@ -173,7 +173,7 @@ const useStyle = makeStyles(() => ({
     marginBottom: '50px',
     border: '5px solid #231F20'
   },
-  errorPhoto: {
+  error: {
     color: 'red',
     textAlign: 'center',
     fontWeight: '400'

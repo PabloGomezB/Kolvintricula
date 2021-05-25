@@ -96,22 +96,7 @@ const Enrolment = (props) => {
         description: props.courseData.description,
       },
       year: "",
-      modules: {
-        // MP1: [],
-        // MP2: [],
-        // MP3: [],
-        // MP4: [],
-        // MP5: [],
-        // MP6: [],
-        // MP7: [],
-        // MP8: [],
-        // MP9: [],
-        // MP10: [],
-        // MP12: [],
-        // MP13: [],
-        // MP14: [],
-        // MP15: [],
-      },
+      modules: {},
     },
     consent: {
       alergias: "",
@@ -183,9 +168,6 @@ const Enrolment = (props) => {
     return skipped.has(step);
   };
 
-  function _sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   /**
    * Controla la acción de siguiente del formulario. Dependiendo del paso en el que estés hará diferentes cosas.
    * @param {*} values Valores del formulario
@@ -453,14 +435,6 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            {/* <div>
-              VALUES:
-              <pre>{JSON.stringify(values, null, 2)}</pre>
-              ERRORS:
-              <pre>{JSON.stringify(errors, null, 2)}</pre>
-              TOUCHED:
-              <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div> */}
           </Form>
         )}
       </Formik>

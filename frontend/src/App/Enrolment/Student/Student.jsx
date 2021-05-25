@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Button, Grid, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { Field, useFormikContext } from "formik";
 import { useStyle } from "../../Layout/styles";
@@ -89,8 +89,8 @@ export const Student = ({ nif }) => {
             <div>
               <Field name="student.photo_path">
                 {({
-                  field, // { name, value, onChange, onBlur }
-                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                  field,
+                  form: { touched, errors },
                   meta,
                 }) => (
                   <>
@@ -104,7 +104,7 @@ export const Student = ({ nif }) => {
                       <div className={classes.errorPhoto}>{meta.error}</div>
                     )}
                     {onlyPNG && (
-                      <div className={classes.errorPhoto}>Solo se pueden subir imágenes PNG</div>
+                      <div className={classes.error}>Solo se pueden subir imágenes PNG</div>
                     )}
                   </>
                 )}

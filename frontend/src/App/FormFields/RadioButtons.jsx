@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Field, ErrorMessage, useField } from "formik";
-import TextError from "./TextError";
+import { useField } from "formik";
+
 import {
   FormControlLabel,
   FormHelperText,

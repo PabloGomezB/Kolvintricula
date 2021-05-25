@@ -45,7 +45,6 @@ export const AcademicData = ({ cursmoduluf }) => {
                   (modul, index) => {
                     return (
                       <div key={modul.name}>
-                        {/* <div className={classes.paddingTop}>{modul.name}</div> */}
                         <FormLabel component="legend">
                           {modul.name}. {modul.description}
                         </FormLabel>
