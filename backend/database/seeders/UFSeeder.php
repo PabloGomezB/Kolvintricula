@@ -119,6 +119,60 @@ class UFSeeder extends Seeder {
             ['id_module' => '27', 'name' => 'Formació en centres de treball', 'hours' => '400', 'year' => '2', 'description' => 'Formació en centres de treball', 'created_at' => '2021-05-10 20:20:04'],
 
 
+            ['id_module' => '28', 'name' => 'UF1', 'hours' => '40', 'year' => '1', 'description' => 'Implantació de sistemes operatius 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '28', 'name' => 'UF2', 'hours' => '27', 'year' => '1', 'description' => 'Implantació de sistemes operatius 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '28', 'name' => 'UF3', 'hours' => '27', 'year' => '1', 'description' => 'Implantació de sistemes operatius 3', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '28', 'name' => 'UF4', 'hours' => '40', 'year' => '2', 'description' => 'Implantació de sistemes operatius 4', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '29', 'name' => 'UF1', 'hours' => '40', 'year' => '1', 'description' => 'Gestió de bases de dades 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '29', 'name' => 'UF2', 'hours' => '27', 'year' => '1', 'description' => 'Gestió de bases de dades 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '29', 'name' => 'UF3', 'hours' => '27', 'year' => '2', 'description' => 'Gestió de bases de dades 3', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '30', 'name' => 'UF1', 'hours' => '40', 'year' => '1', 'description' => 'Programació bàsica 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '30', 'name' => 'UF2', 'hours' => '50', 'year' => '1', 'description' => 'Programació bàsica 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '30', 'name' => 'UF3', 'hours' => '25', 'year' => '1', 'description' => 'Programació  3', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '31', 'name' => 'UF1', 'hours' => '40', 'year' => '1', 'description' => 'Llenguatges de marques i sistemes de gestió d’informació 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '31', 'name' => 'UF2', 'hours' => '27', 'year' => '1', 'description' => 'Llenguatges de marques i sistemes de gestió d’informació 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '31', 'name' => 'UF3', 'hours' => '27', 'year' => '1', 'description' => 'Llenguatges de marques i sistemes de gestió d’informació 3', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '32', 'name' => 'UF1', 'hours' => '12', 'year' => '2', 'description' => 'Fonaments de maquinari 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '32', 'name' => 'UF2', 'hours' => '50', 'year' => '2', 'description' => 'Fonaments de maquinari 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '32', 'name' => 'UF3', 'hours' => '30', 'year' => '2', 'description' => 'Fonaments de maquinari 3', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '33', 'name' => 'UF1', 'hours' => '40', 'year' => '2', 'description' => 'Administració de sistemes operatius 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '33', 'name' => 'UF2', 'hours' => '50', 'year' => '2', 'description' => 'Administració de sistemes operatius 2', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '34', 'name' => 'UF1', 'hours' => '25', 'year' => '2', 'description' => 'Planificació i administració de xarxes 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '34', 'name' => 'UF2', 'hours' => '20', 'year' => '2', 'description' => 'Planificació i administració de xarxes 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '34', 'name' => 'UF3', 'hours' => '60', 'year' => '2', 'description' => 'Planificació i administració de xarxes 3', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '35', 'name' => 'UF1', 'hours' => '27', 'year' => '2', 'description' => 'Servei de xarxa i Internet 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '35', 'name' => 'UF2', 'hours' => '40', 'year' => '2', 'description' => 'Servei de xarxa i Internet 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '35', 'name' => 'UF3', 'hours' => '12', 'year' => '2', 'description' => 'Servei de xarxa i Internet 3', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '35', 'name' => 'UF4', 'hours' => '50', 'year' => '2', 'description' => 'Servei de xarxa i Internet 4', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '36', 'name' => 'UF1', 'hours' => '40', 'year' => '2', 'description' => 'Implantació d’aplicacions web 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '36', 'name' => 'UF2', 'hours' => '29', 'year' => '2', 'description' => 'Implantació d’aplicacions web 2', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '37', 'name' => 'UF1', 'hours' => '30', 'year' => '1', 'description' => 'Administració de sistemes gestors de bases de dades 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '37', 'name' => 'UF2', 'hours' => '15', 'year' => '2', 'description' => 'Administració de sistemes gestors de bases de dades 2', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '38', 'name' => 'UF1', 'hours' => '27', 'year' => '2', 'description' => 'Seguretat i alta disponibilitat 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '38', 'name' => 'UF2', 'hours' => '40', 'year' => '2', 'description' => 'Seguretat i alta disponibilitat 2', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '38', 'name' => 'UF3', 'hours' => '12', 'year' => '2', 'description' => 'Seguretat i alta disponibilitat 3', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '38', 'name' => 'UF4', 'hours' => '50', 'year' => '2', 'description' => 'Seguretat i alta disponibilitat 4', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '39', 'name' => 'UF1', 'hours' => '40', 'year' => '1', 'description' => 'Formació i orientació laboral 1', 'created_at' => '2021-05-10 20:20:04'],
+            ['id_module' => '39', 'name' => 'UF2', 'hours' => '30', 'year' => '1', 'description' => 'Formació i orientació laboral 2', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '40', 'name' => 'UF1', 'hours' => '85', 'year' => '1', 'description' => 'Empresa i iniciativa emprenedora 1', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '41', 'name' => 'UF1', 'hours' => '80', 'year' => '2', 'description' => 'Projecte d’administració de sistemes informàtics en xarxa', 'created_at' => '2021-05-10 20:20:04'],
+
+            ['id_module' => '42', 'name' => 'Formació en centres de treball', 'hours' => '400', 'year' => '2', 'description' => 'Formació en centres de treball', 'created_at' => '2021-05-10 20:20:04'],
+
+
 
 
         ];
