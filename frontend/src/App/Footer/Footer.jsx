@@ -5,6 +5,10 @@ import { useStyle } from "../Layout/styles";
 import Iframe from "react-iframe";
 import { Grid } from "@material-ui/core";
 
+/**
+ * Componente Footer
+ * @returns
+ */
 export default function Footer() {
   const classes = useStyle();
 

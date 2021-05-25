@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Enrolment/Student/Student.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Enrolment/Student/Student.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import PropTypes from "prop-types";
+import { Button, Grid, Typography } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import FormikControl from "../../FormFields/FormikControl";
+import { Field, useFormikContext } from "formik";
+import { useStyle } from "../../Layout/styles";
+/**
+ * Componente que construye el paso de Datos del estudiante
+ * @param {*} props
+ * @returns
+ */
+export const Student = ({ nif }) => {
+  const { values, setFieldValue } = useFormikContext();
+  const [imagePreviewUrl, setimagePreviewUrl] = useState(
+    values.student.photo_path
+  );
+  const classes = useStyle();
+
+  /**
+   * Controla el cambio de imagen
+   * @param {*} e
+   */
+  const handleImageChange = (e) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      setFieldValue("student.photo_path", reader.result);
+      setimagePreviewUrl(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  const setImagePreview = () => {
+    if (imagePreviewUrl) {
+      return (
+        &lt;img
+          style={{ height: "100px", width: "100px", borderRadius: "50px" }}
+          src={imagePreviewUrl}
+          alt="Imagen cambiada"
+        />
+      );
+    } else {
+      return (
+        &lt;img
+          style={{
+            backgroundImage:
+              'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            borderRadius: "50px",
+            height: "100px",
+            width: "100px",
+          }}
+          alt=""
+        />
+      );
+    }
+  };
+
+  return (
+    &lt;div>
+      &lt;div className={classes.photoPosition}>
+        &lt;div width="100px" height="100px">
+          {setImagePreview()}
+        &lt;/div>
+
+        &lt;div>
+          &lt;Field name="student.photo_path">
+            {({
+              field, // { name, value, onChange, onBlur }
+              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+              meta,
+            }) => (
+              &lt;>
+                &lt;input
+                  style={{ display: "none" }}
+                  type="file"
+                  id="contained-button-file"
+                  onChange={(e) => handleImageChange(e)}
+                />
+                {meta.touched &amp;&amp; meta.error &amp;&amp; (
+                  &lt;div className={classes.errorPhoto}>{meta.error}&lt;/div>
+                )}
+              &lt;/>
+            )}
+          &lt;/Field>
+        &lt;/div>
+
+        &lt;label htmlFor="contained-button-file">
+          &lt;Button
+            variant="contained"
+            color="primary"
+            component="span"
+            className={classes.photoButton}
+          >
+            Subir foto
+          &lt;/Button>
+        &lt;/label>
+      &lt;/div>
+
+      &lt;Typography variant="h4" gutterBottom className={classes.studentData}>
+        Datos del alumno
+      &lt;/Typography>
+
+      &lt;Grid container spacing={3}>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;FormikControl
+            control="input"
+            type="text"
+            label="Nombre: "
+            name="student.name"
+            fullWidth
+          />
+        &lt;/Grid>
+
+        &lt;Grid item xs={12} sm={6}>
+          &lt;FormikControl
+            control="input"
+            type="text"
+            label="Primer apellido: "
+            name="student.last_name1"
+            fullWidth
+          />
+        &lt;/Grid>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;FormikControl
+            control="input"
+            type="text"
+            label="Segundo apellido: "
+            name="student.last_name2"
+            fullWidth
+          />
+        &lt;/Grid>
+        &lt;Grid item xs={12} sm={6}>
+          {nif.length === 0 ? (
+            &lt;FormikControl
+              control="input"
+              type="text"
+              label="NIF: "
+              name="student.nif"
+              fullWidth
+            />
+          ) : (
+            &lt;FormikControl
+              control="input"
+              type="text"
+              label="NIF: "
+              name="student.nif"
+              fullWidth
+              disabled
+            />
+          )}
+        &lt;/Grid>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;FormikControl
+            control="input"
+            type="email"
+            label="Email: "
+            name="student.email_personal"
+            fullWidth
+          />
+        &lt;/Grid>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;FormikControl
+            control="input"
+            type="number"
+            label="Movil: "
+            name="student.mobile_number"
+            fullWidth
+          />
+        &lt;/Grid>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;FormikControl
+            control="date"
+            label="Fecha de nacimiento: "
+            name="student.date_birth"
+            fullWidth
+          />
+        &lt;/Grid>
+      &lt;/Grid>
+    &lt;/div>
+  );
+};
+
+Student.propTypes = {
+  nif: PropTypes.shape({
+    length: PropTypes.number,
+  }),
+};
+
+export default Student;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AcademicData">AcademicData</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#CheckboxField">CheckboxField</a></li><li><a href="global.html#Consent">Consent</a></li><li><a href="global.html#CourseList">CourseList</a></li><li><a href="global.html#Custodian">Custodian</a></li><li><a href="global.html#DatePickerField">DatePickerField</a></li><li><a href="global.html#Enrolment">Enrolment</a></li><li><a href="global.html#EnrolmentList">EnrolmentList</a></li><li><a href="global.html#FormikControl">FormikControl</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#NoDisponible">NoDisponible</a></li><li><a href="global.html#RadioButtons">RadioButtons</a></li><li><a href="global.html#SelectField">SelectField</a></li><li><a href="global.html#Student">Student</a></li><li><a href="global.html#Textarea">Textarea</a></li><li><a href="global.html#validationSchema">validationSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:33 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

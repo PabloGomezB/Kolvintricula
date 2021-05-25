@@ -1,87 +1,16 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
 # Proyecto Kolvintricula Frontend
 
-Esta parte del proyecto hace la matrícula de un alumno.
+Esta parte del proyecto hace la matrícula de un alumno y la envía a backend.
 
 ## Comenzando 🚀
 
 _Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
 
-Mira **Deployment** para conocer como desplegar el proyecto.
+Mira **Despliegue** para conocer como desplegar el proyecto.
 
 ### Pre-requisitos 📋
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+Instalar Node JS
 
 ```
 Da un ejemplo
@@ -89,42 +18,94 @@ Da un ejemplo
 
 ### Instalación 🔧
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
-
-_Dí cómo será ese paso_
+Instalar dependecias del proyecto
 
 ```
-Da un ejemplo
+npm install
 ```
 
-_Y repite_
+Arrancar servidor local con puerto 3000
 
 ```
-hasta finalizar
+npm start
 ```
 
-_Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+En este punto se te abrirá un ventana con el menú de matrícula.
+
+## Estructura de carpetas
+
+
 
 ## Despliegue 📦
 
-_Agrega notas adicionales sobre como hacer deploy_
+Para desplegar el proyecto primero hay hacer build
+
+```
+npm build
+```
+
+Luego en la carpeta /build se encontraran los archivos que se subiran a producción.
+
+## Scripts disponibles
+
+### `npm start`
+
+Ejecuta la aplicación en modo de desarrollo.
+Abra http://localhost:3000 para verlo en el navegador.
+
+La página se recargará si realiza modificaciones.
+También verá errores de lint en la consola.
+
+### `npm build`
+
+Compila la aplicación para producción en la carpeta de compilación.
+Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
+
+La compilación se minimiza y los nombres de archivo incluyen los hash.
+¡Tu aplicación está lista para implementarse!
+
+### `npm test`
+
+Script para hacer pruebas y test (no se ha utilizado)
+
+### `npm eject`
+
+Nota: esta es una operación unidireccional. Una vez que hagas `eject`, ¡no podrás regresar!
+
+Si no está satisfecho con la herramienta de compilación y las opciones de configuración, puede hacer `eject` en cualquier momento. Este comando eliminará la dependencia de compilación única de su proyecto.
+
+En su lugar, copiará todos los archivos de configuración y las dependencias transitivas (paquete web, Babel, ESLint, etc.) directamente en su proyecto para que tenga un control total sobre ellos. Todos los comandos, excepto el de expulsión, seguirán funcionando, pero apuntarán a los scripts copiados para que pueda modificarlos. En este punto, estás solo.
+
+No es necesario que utilice la opción de expulsión. El conjunto de funciones seleccionadas es adecuado para implementaciones pequeñas y medianas, y no debe sentirse obligado a utilizar esta función. Sin embargo, entendemos que esta herramienta no sería útil si no pudiera personalizarla cuando esté listo para usarla.
+
+### `npm styleguide`
+
+Script para abrir un servidor local para la documentación de componentes de React
+
+### `npm styleguide:build`
+
+Script para compilar y minificar la documentación de React.
 
 ## Construido con 🛠️
 
-_Menciona las herramientas que utilizaste para crear tu proyecto_
-
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
-- [Maven](https://maven.apache.org/) - Manejador de dependencias
-- [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Create-react-app](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
+- [React](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
+- [NodeJS](https://maven.apache.org/) - Manejador de dependencias
+- [NPM](https://rometools.github.io/rome/) - Usado para generar RSS
+- [React Router](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Formik](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Material UI](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Styleguidist](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Axios](https://rometools.github.io/rome/) - Usado para generar RSS
+- [Prop Types](https://rometools.github.io/rome/) - Usado para generar RSS
+- [React Signature Canvas](https://rometools.github.io/rome/) - Usado para generar RSS
+- [React Cookie Banner](https://rometools.github.io/rome/) - Usado para generar RSS
 
 ## Autores ✒️
 
-_Menciona a todos aquellos que ayudaron a levantar el proyecto desde sus inicios_
-
-- **Andrés Villanueva** - _Trabajo Inicial_ - [villanuevand](https://github.com/villanuevand)
-- **Fulanito Detal** - _Documentación_ - [fulanitodetal](#fulanito-de-tal)
-
-También puedes mirar la lista de todos los [contribuyentes](https://github.com/your/project/contributors) quíenes han participado en este proyecto.
+- **Jordi Callupe** - [a18jorcalari](https://github.com/a18jorcalari)
+- **Kevin Larriega** - [a18kevlarpal](#fulanito-de-tal)
+- **Pablo Gómez** - [a18pabgombra](#fulanito-de-tal)
 
 ## Licencia 📄
 
