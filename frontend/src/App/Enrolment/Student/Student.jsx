@@ -34,6 +34,7 @@ export const Student = ({ nif }) => {
       };
     }
     else {
+      setOnlyPNG(false);
       reader.onloadend = () => {
         setFieldValue("student.photo_path", reader.result)
         setimagePreviewUrl(reader.result)
