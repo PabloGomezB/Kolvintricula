@@ -195,16 +195,13 @@ const Enrolment = (props) => {
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
+
       if (props.studentData !== 0) {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
       }
-      if (activeStep === 2 && isAdult(values.student.date_birth)) {
-        values.custodians = [];
-      }
-      if (activeStep === 0 && props.studentData === 0) {
+      else if (activeStep === 0 && props.studentData === 0) {
         // Checkear solo si el student es nuevo
-        let studentError = false;
         let newStudentNif = values.student.nif;
         let newStudentEmail = values.student.email_personal;
 
@@ -217,6 +214,7 @@ const Enrolment = (props) => {
             }
           )
           .then((response) => {
+            let errorInForm = false;
             if (response.data.nifFound || response.data.emailFound) {
               if (response.data.nifFound) {
                 setMessageError("Ya existe un alumno con este mismo NIF");
@@ -224,9 +222,9 @@ const Enrolment = (props) => {
                 setMessageError("Ya existe un alumno con este mismo EMAIL");
               }
               setShowAlert(true);
-              studentError = true;
+              errorInForm = true;
             }
-            if (studentError === false) {
+            if (errorInForm === false) {
               nextStep(values, actions);
             }
             actions.setTouched({});
@@ -235,7 +233,40 @@ const Enrolment = (props) => {
           .catch((error) => {
             console.log(error);
           });
-      } else {
+      }
+
+      else if (activeStep === 2 && isAdult(values.student.date_birth)) {
+        values.custodians = [];
+        nextStep(values, actions);
+      }
+
+      else if(activeStep === 3){
+        // Si el estudiante no selecciona ninguna uf entonces debemos pasar a back todos los modulos con sus ufs de forma automática
+        // Comprobamos si el objeto modules está vacío (si el usuario no ha seleccionado niguna UF)
+        if (Object.keys(values.academic_data.modules).length === 0 && values.academic_data.modules.constructor === Object) {
+          // Seteamos el array en el que almacenaremos las UF de cada módulo
+          let ufs = [];
+          // forEach sobre todos los cursos que nos envía back
+          cursmoduluf.forEach(function(curso){
+            // Tabajamos únicamente sobre el curso que se al mismo que el user haya escogido
+            if(curso.year === values.academic_data.year){
+              // Una vez tenemos el curso le hacemos forEach para obtener sus módulos y de cada modulo forEach para obtener sus UF
+              curso.modules.forEach(function(modulo){
+                modulo.ufs.forEach(function(uf){
+                  // Almacenamos cada UF del modulo en el array
+                  ufs.push(uf.name);
+                })
+                // Guardamos en el objeto que se pasará a back el modulo (clave)con su array de UF (valor) siguiendo la estructura de AcademicData.jsx
+                values.academic_data.modules[`${modulo.name} - ${modulo.description}`] = ufs;
+                // Reset al array ufs para no repetirlas en los siguientes modulos
+                ufs = [];
+              })
+            }
+          });
+        }
+        nextStep(values, actions);
+      }
+      else {
         nextStep(values, actions);
       }
     }
@@ -277,21 +308,20 @@ const Enrolment = (props) => {
    * @returns
    */
   async function _submitForm(values, actions) {
+    
     if (!isAdult(values.student.date_birth) && values.custodians.length === 0) {
       alert("Añade un responsable");
       actions.setSubmitting(false);
       return;
     }
-    await _sleep(1000);
 
-    // alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
+    document.body.style.cursor = "wait";
+
     console.log("submit", values);
 
     axios
       .post(
         `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
-        // `http://127.0.0.1:8000/api/enrolments/add`,
         {
           values,
         }
@@ -299,6 +329,7 @@ const Enrolment = (props) => {
       .then((response) => {
         console.log("response:", response.data);
         setEnrolmentSubmited(true);
+        document.body.style.cursor = "default";
 
         if (
           response.data.addStudentResult.response === "OK" &&
@@ -314,6 +345,9 @@ const Enrolment = (props) => {
       .catch((error) => {
         console.log(error);
         setSuccessfullyEnrolled(false);
+      })
+      .then(function () {
+        actions.setSubmitting(false);
       });
   }
   /**
@@ -401,6 +435,7 @@ const Enrolment = (props) => {
               {activeStep !== 0 && (
                 <Button
                   variant="contained"
+                  disabled={isSubmitting}
                   className={classes.btn}
                   onClick={() => _handleBack(values)}
                 >
@@ -434,7 +469,6 @@ const Enrolment = (props) => {
           {successfullyEnrolled ? (
             <Dialog
               open={enrolmentSubmited}
-              // onEnter={console.log("dialog success.")}
             >
               <DialogTitle className={classes.dialogTitleSuccess}>
                 ¡Te has matriculado con éxito!
@@ -455,16 +489,15 @@ const Enrolment = (props) => {
           ) : (
             <Dialog
               open={enrolmentSubmited}
-              // onEnter={console.log("dialog error.")}
             >
               <DialogTitle className={classes.dialogTitleError}>
                 Algo ha ido mal...
               </DialogTitle>
               <DialogContent className={classes.dialogContentError}>
-                Porfavor escribe a: soporte@inspedralbes.cat
-                <Button onClick={closeModal} color="primary">
-                  Volver
-                </Button>
+                Puede ponerse en contacto con soporte técnico:<br/>ebota@inspedralbes.cat
+                <Box>
+                  <Button onClick={closeModal} color="primary">Volver</Button>
+                </Box>
               </DialogContent>
             </Dialog>
           )}

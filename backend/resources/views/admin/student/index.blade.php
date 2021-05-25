@@ -1,7 +1,3 @@
-{{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.3/css/foundation.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/1.10.24/css/dataTables.foundation.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/responsive/2.2.7/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
-
 <x-app-layout>
     @include('admin.student.header')
 
@@ -92,12 +88,6 @@
         </div>
     </div>
 </x-app-layout>
-<!--Datatables -->
-{{-- <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/dataTables.foundation.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.7/js/responsive.foundation.min.js"></script> --}}
-
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script>
     $(".clickable-row").click(function() {

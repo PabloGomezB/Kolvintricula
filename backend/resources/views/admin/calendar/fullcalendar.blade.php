@@ -16,8 +16,7 @@
 <body>
   
 <div class="container">
-    <!-- <h1>Calendario</h1> -->
-    <div id='calendar'></div>
+    <div class="bg-white rounded shadow p-6" id='calendar'></div>
 </div>
 
 <script>

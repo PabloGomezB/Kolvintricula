@@ -13,28 +13,28 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
+                    <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')" style="text-decoration:none;">
                         {{ __('INS PEDRALBES') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')">
+                    <x-nav-link :href="route('courses.index')" :active="request()->routeIs('courses.index')" style="text-decoration:none;">
                         {{ __('Cursos') }}
                     </x-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('modules.index')" :active="request()->routeIs('modules.index')">
+                    <x-nav-link :href="route('modules.index')" :active="request()->routeIs('modules.index')" style="text-decoration:none;">
                         {{ __('Modulos') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')">
+                    <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.index')" style="text-decoration:none;">
                         {{ __('Alumnos') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('custodians.index')" :active="request()->routeIs('custodians.index')">
+                    <x-nav-link :href="route('custodians.index')" :active="request()->routeIs('custodians.index')" style="text-decoration:none;">
                         {{ __('Custodian') }}
                     </x-nav-link>
                 </div>

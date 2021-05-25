@@ -138,12 +138,27 @@ class ApiController extends Controller
 
     function createPedralbesEmail($studentData){
 
+        $normalizeChars = array(
+            'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+            'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+            'Ï'=>'I', 'Ñ'=>'N', 'Ń'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+            'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+            'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+            'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ń'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+            'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+            'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T',
+        );
+
         try {
+            $name_normalized = strtr($studentData["name"], $normalizeChars);
+            $lastName1_normalized = strtr($studentData["last_name1"], $normalizeChars);
+            $lastName2_normalized = strtr($studentData["last_name2"], $normalizeChars);
+
             $year = substr(date("Y"), 2, 4);
             $newEmail = 'a' . $year;
-            $name = substr($studentData["name"], 0, 3);
-            $last1 = substr($studentData["last_name1"], 0, 3);
-            $last2 = substr($studentData["last_name2"], 0, 3);
+            $name = substr($name_normalized, 0, 3);
+            $last1 = substr($lastName1_normalized, 0, 3);
+            $last2 = substr($lastName2_normalized, 0, 3);
         } catch(Exception $ex){
             return ["response"=> "FAIL", "message" => $ex->getMessage()];
         }

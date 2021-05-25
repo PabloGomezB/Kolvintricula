@@ -14,6 +14,7 @@ export const Student = ({ nif }) => {
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
+  const [onlyPNG, setOnlyPNG] = useState(false);
   const classes = useStyle();
 
   /**
@@ -24,12 +25,24 @@ export const Student = ({ nif }) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    reader.onloadend = () => {
-      setFieldValue("student.photo_path", reader.result);
-      setimagePreviewUrl(reader.result);
-    };
+    if (!file.name.match(/.(png)$/i)) {
+      setOnlyPNG(true);
 
-    reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFieldValue("student.photo_path", null)
+        setimagePreviewUrl(null)
+      };
+    }
+    else {
+      setOnlyPNG(false);
+      reader.onloadend = () => {
+        setFieldValue("student.photo_path", reader.result)
+        setimagePreviewUrl(reader.result)
+      };
+  
+      reader.readAsDataURL(file);
+      console.log(file);
+    }
   };
 
   const setImagePreview = () => {
@@ -61,50 +74,55 @@ export const Student = ({ nif }) => {
 
   return (
     <div>
-      <div className={classes.photoPosition}>
-        <div width="100px" height="100px">
-          {setImagePreview()}
-        </div>
-
-        <div>
-          <Field name="student.photo_path">
-            {({
-              field, // { name, value, onChange, onBlur }
-              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-              meta,
-            }) => (
-              <>
-                <input
-                  style={{ display: "none" }}
-                  type="file"
-                  id="contained-button-file"
-                  onChange={(e) => handleImageChange(e)}
-                />
-                {meta.touched && meta.error && (
-                  <div className={classes.errorPhoto}>{meta.error}</div>
-                )}
-              </>
-            )}
-          </Field>
-        </div>
-
-        <label htmlFor="contained-button-file">
-          <Button
-            variant="contained"
-            color="primary"
-            component="span"
-            className={classes.photoButton}
-          >
-            Subir foto
-          </Button>
-        </label>
-      </div>
-
-      <Typography variant="h4" gutterBottom className={classes.studentData}>
-        Datos del alumno
-      </Typography>
-
       <Grid container spacing={3}>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="h4" gutterBottom className={classes.studentData}>
+            Datos del alumno
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <div className={classes.photoPosition}>
+            <div width="100px" height="100px">
+              {setImagePreview()}
+            </div>
+
+            <div>
+              <Field name="student.photo_path">
+                {({
+                  field, // { name, value, onChange, onBlur }
+                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                  meta,
+                }) => (
+                  <>
+                    <input
+                      style={{ display: "none" }}
+                      type="file"
+                      id="contained-button-file"
+                      onChange={(e) => handleImageChange(e)}
+                    />
+                    {meta.touched && meta.error && (
+                      <div className={classes.errorPhoto}>{meta.error}</div>
+                    )}
+                    {onlyPNG && (
+                      <div className={classes.errorPhoto}>Solo se pueden subir imágenes PNG</div>
+                    )}
+                  </>
+                )}
+              </Field>
+            </div>
+
+            <label htmlFor="contained-button-file">
+              <Button
+                variant="contained"
+                color="primary"
+                component="span"
+                className={classes.photoButton}
+              >
+                Subir foto
+              </Button>
+            </label>
+          </div> 
+        </Grid>
         <Grid item xs={12} sm={6}>
           <FormikControl
             control="input"
@@ -138,7 +156,7 @@ export const Student = ({ nif }) => {
             <FormikControl
               control="input"
               type="text"
-              label="NIF: "
+              label="NIF o NIE: "
               name="student.nif"
               fullWidth
             />

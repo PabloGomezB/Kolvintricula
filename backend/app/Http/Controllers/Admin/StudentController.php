@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Models\Student;
 
@@ -81,7 +80,7 @@ class StudentController extends Controller {
     public function show($id) {
 
         $student = Student::findOrFail($id);
-        $enrolment_string = Enrolment::where('id_student', $student->id)->first();
+        $enrolment_string = Enrolment::where('id_student', $student->id)->orderBy('updated_at', 'desc')->first();
         $enrolment = json_decode($enrolment_string, true);
         $custodians = Custodian::where('id_student', $student->id)->get();
         

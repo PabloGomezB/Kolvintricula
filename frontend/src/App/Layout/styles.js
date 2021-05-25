@@ -32,7 +32,7 @@ const useStyle = makeStyles(() => ({
 
     [theme.breakpoints.up("md")]: {
       marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
+      marginBottom: theme.spacing(12),
       width: theme.breakpoints.values.md
     },
   },
@@ -179,17 +179,12 @@ const useStyle = makeStyles(() => ({
     fontWeight: '400'
   },
   photoPosition: {
-    width: '200px',
-    marginLeft: '65%',
     textAlign: 'center'
   },
   photoButton: {
     borderRadius: '20px'
   },
   studentData: {
-    width: '450px',
-    marginTop: '-90px',
-    marginBottom: '75px',
     textAlign: 'center'
   },
   academicData: {
@@ -203,6 +198,9 @@ const useStyle = makeStyles(() => ({
   removeCustodian: {
     border: '5px solid #231F20',
     borderRadius: '20px'
+  },
+  loadingButton: {
+    marginLeft: theme.spacing(50)
   }
 }));
 
