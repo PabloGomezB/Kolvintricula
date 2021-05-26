@@ -10,10 +10,10 @@ let theme = createMuiTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#231F20"
+      main: "#231F20",
     },
     secondary: {
-      main: "#00AEEF"
+      main: "#00AEEF",
     },
   },
 });
@@ -21,7 +21,7 @@ theme = responsiveFontSizes(theme);
 const useStyle = makeStyles(() => ({
   root: {
     width: "auto",
-    margin: theme.spacing(2)
+    margin: theme.spacing(2),
   },
   paper: {
     margin: theme.spacing(3),
@@ -35,37 +35,45 @@ const useStyle = makeStyles(() => ({
     [theme.breakpoints.up("md")]: {
       marginTop: theme.spacing(6),
       marginBottom: theme.spacing(12),
-      width: theme.breakpoints.values.md
+      width: theme.breakpoints.values.md,
     },
   },
   paper2: {
     padding: theme.spacing(2),
     textAlign: "center",
-    color: theme.palette.text.secondary
+    color: theme.palette.text.secondary,
   },
   footerContainer: {
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
+    marginBottom: theme.spacing(2),
   },
-  btn: { 
+  btn: {
     margin: theme.spacing(2),
-    borderRadius: '20px',
-    border: '5px solid #231F20'
+    borderRadius: "20px",
+    border: "5px solid #231F20",
   },
   alignRight: {
-    textAlign: "right"
+    textAlign: "right",
+  },
+  alignCenter: {
+    textAlign: "center",
   },
   dblock: {
-    display: "block"
+    display: "block",
   },
   dflex: {
-    display: "flex"
+    display: "flex",
   },
   flexend: {
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   paddingTop: {
     paddingTop: theme.spacing(1),
+  },
+  canvasFirma: {
+    border: "1px solid #000000",
+    width: 500,
+    height: 200,
   },
   // footerDiv: {
   //   margin: theme.spacing(2),
@@ -103,8 +111,8 @@ const useStyle = makeStyles(() => ({
   //   marginRight: '10px'
   // },
   a: {
-    textDecoration: 'none',
-    color: 'white'
+    textDecoration: "none",
+    color: "white",
   },
   pp: {
     color: "#fff",
@@ -113,30 +121,30 @@ const useStyle = makeStyles(() => ({
     textShadow: "0 1px 1px rgb(255 255 255 / 75%)",
     borderRadius: "3px",
     padding: "5px",
-    textDecoration: "none"
+    textDecoration: "none",
   },
   // display: 'flex',
   dialogTitleSuccess: {
     border: "3px solid green",
-    borderBottom: "0"
+    borderBottom: "0",
   },
   dialogContentSuccess: {
     border: "3px solid green",
-    borderTop: "0"
+    borderTop: "0",
   },
   dialogTitleError: {
     border: "3px solid red",
-    borderBottom: "0"
+    borderBottom: "0",
   },
   dialogContentError: {
     border: "3px solid red",
-    borderTop: "0"
+    borderTop: "0",
   },
   dialogButtonSuccess: {
-    float: "right",
-    marginTop: "-30px",
-    marginRight: "-20px",
-    padding: "-20px"
+    position: "absolute",
+    top: "15px",
+    left:"83%",
+    backgroundColor: "#BDFFCB",
   },
   mainContainer: {
     flexGrow: 1,
@@ -147,31 +155,31 @@ const useStyle = makeStyles(() => ({
     borderRadius: '10px'
   },
   title: {
-    textAlign: 'center',
-    fontSize: '50px'
+    textAlign: "center",
+    fontSize: "50px",
   },
   loadData: {
-    padding: '10px',
-    borderRadius: '30px',
-    border: '5px solid #231F20'
+    padding: "10px",
+    borderRadius: "30px",
+    border: "5px solid #231F20",
   },
   textFieldNIF: {
-    marginBottom: '20px'
+    marginBottom: "20px",
   },
   buttonDisabled: {
-    padding: '10px',
-    width: '200px',
-    borderRadius: '20px',
-    marginBottom: '50px',
-    border: '5px solid #231F20',
-    backgroundColor: '#dddddd'
+    padding: "10px",
+    width: "200px",
+    borderRadius: "20px",
+    marginBottom: "50px",
+    border: "5px solid #231F20",
+    backgroundColor: "#dddddd",
   },
   buttonEnabled: {
-    padding: '10px',
-    width: '200px',
-    borderRadius: '20px',
-    marginBottom: '50px',
-    border: '5px solid #231F20'
+    padding: "10px",
+    width: "200px",
+    borderRadius: "20px",
+    marginBottom: "50px",
+    border: "5px solid #231F20",
   },
   error: {
     color: 'red',
@@ -179,25 +187,25 @@ const useStyle = makeStyles(() => ({
     fontWeight: '400'
   },
   photoPosition: {
-    textAlign: 'center'
+    textAlign: "center",
   },
   photoButton: {
-    borderRadius: '20px'
+    borderRadius: "20px",
   },
   studentData: {
-    textAlign: 'center'
+    textAlign: "center",
   },
   academicData: {
-    marginBottom: '1.5%'
+    marginBottom: "1.5%",
   },
   addCustodian: {
-    marginTop: '5%',
-    border: '5px solid #231F20',
-    borderRadius: '20px'
+    marginTop: "5%",
+    border: "5px solid #231F20",
+    borderRadius: "20px",
   },
   removeCustodian: {
-    border: '5px solid #231F20',
-    borderRadius: '20px'
+    border: "5px solid #231F20",
+    borderRadius: "20px",
   },
   loadingButton: {
     marginLeft: theme.spacing(50)

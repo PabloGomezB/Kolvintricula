@@ -81,19 +81,7 @@ class CustodianController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        // Control para poder hacer update manteniendo el requisito UNIQUE
-        $custodianToUpdate = DB::table('courses')->where('id', $id)->get();
-        $newName = request()->only('name');
 
-        // Si el nombre del curso actual es distinto del que quiere introducir se verifica que no exista ya
-        // En caso contrario se omite la comprobación porque sino dará error ya que se verifica contra su propio nombre y no deja hacer update
-        if ($custodianToUpdate[0]->name != $newName['name']) {
-            $request->validate([
-                'name' => 'unique:custodians',
-            ]);
-        }
-
-        // Se verifican los campos restantes y se continúa con la lógica normal
         $request->validate([
             'id_student' => 'required',
             'responsible' => 'required',
@@ -109,7 +97,7 @@ class CustodianController extends Controller {
         $dataForm = request()->except(['_token', '_method']);
         Custodian::where('id', '=', $id)->update($dataForm);
 
-        return redirect()->route('custodian.index')
+        return redirect()->route('custodians.index')
             ->with('message', 'La autorización  ' . $request->description . ' se ha actualizado correctamente');
     }
 

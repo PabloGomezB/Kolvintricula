@@ -1,70 +1,125 @@
-# Getting Started with Create React App
+# Proyecto Kolvintricula Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Esta parte del proyecto hace la matrícula de un alumno y la envía a backend.
 
-## Available Scripts
+URL: http://www.kolvintricula.alumnes.iam.cat/
 
-In the project directory, you can run:
+## Comenzando 🚀
+
+_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+
+Mira **Despliegue** para conocer como desplegar el proyecto.
+
+### Pre-requisitos 📋
+
+Instalar Node JS
+
+```
+Da un ejemplo
+```
+
+### Instalación 🔧
+
+Instalar dependecias del proyecto
+
+```
+npm install
+```
+
+Arrancar servidor local con puerto 3000
+
+```
+npm start
+```
+
+En este punto se te abrirá un ventana con el menú de matrícula.
+
+## Estructura de carpetas
+
+- build: Este directorio es donde se guardan los archivos compilados y listos para producción.
+- node_modules: Directorio en el que se guardan las dependencias del proyecto.
+- public: Aquí es donde se ponen los ficheros estáticos como el index.html y los iconos/imágenes. En el index.html es donde se renderiza react.
+- src: Este directorio es donde se guardan los componentes de React.
+  - Está compuesto por diferentes directorios-componentes, es decir, cada componente o conjunto de componentes es guardado en un directorio. Cada directorio tiene su index.js en el que exporta el componente principal.
+- .editorconfig: Este fichero sirve para configurar el modo en el que se formatea un fichero y qué en qué tipo de ficheros actúa.
+- .gitignore: Este fichero hace git no detecte e ignora cambios en el fichero o directorio que se le indica.
+- package-lock.json: Fichero que se crea a partir de las dependencias de nuestras dependencias.
+- package.json: Fichero importante que guarda las distintas dependencias de nuestro proyecto.
+- README.md: Fichero que informa del proyecto,
+- styleguide.config.js: Este fichero configura la documentación de Styleguidist.
+- .env: Este fichero guarda las variables de entorno
+
+## Configuración
+
+Se ha creado un archivo .env donde se guardan las variables de entorno como la URL de la API de backend.
+
+## Despliegue 📦
+
+Para desplegar el proyecto primero hay hacer build
+
+```
+npm build
+```
+
+Luego en la carpeta /build se encontraran los archivos que se subiran a producción.
+
+## Scripts disponibles
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Ejecuta la aplicación en modo de desarrollo.
+Abra http://localhost:3000 para verlo en el navegador.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+La página se recargará si realiza modificaciones.
+También verá errores de lint en la consola.
+
+### `npm build`
+
+Compila la aplicación para producción en la carpeta de compilación.
+Agrupa correctamente React en el modo de producción y optimiza la compilación para obtener el mejor rendimiento.
+
+La compilación se minimiza y los nombres de archivo incluyen los hash.
+¡Tu aplicación está lista para implementarse!
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Script para hacer pruebas y test (no se ha utilizado)
 
-### `npm run build`
+### `npm eject`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Nota: esta es una operación unidireccional. Una vez que hagas `eject`, ¡no podrás regresar!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Si no está satisfecho con la herramienta de compilación y las opciones de configuración, puede hacer `eject` en cualquier momento. Este comando eliminará la dependencia de compilación única de su proyecto.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+En su lugar, copiará todos los archivos de configuración y las dependencias transitivas (paquete web, Babel, ESLint, etc.) directamente en su proyecto para que tenga un control total sobre ellos. Todos los comandos, excepto el de expulsión, seguirán funcionando, pero apuntarán a los scripts copiados para que pueda modificarlos. En este punto, estás solo.
 
-### `npm run eject`
+No es necesario que utilice la opción de expulsión. El conjunto de funciones seleccionadas es adecuado para implementaciones pequeñas y medianas, y no debe sentirse obligado a utilizar esta función. Sin embargo, entendemos que esta herramienta no sería útil si no pudiera personalizarla cuando esté listo para usarla.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### `npm styleguide`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Script para abrir un servidor local para la documentación de componentes de React
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### `npm styleguide:build`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Script para compilar y minificar la documentación de React.
 
-## Learn More
+## Construido con 🛠️
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Create-react-app](https://create-react-app.dev/) - Create React App es una forma oficialmente compatible de crear aplicaciones React de una sola página. Ofrece una configuración de construcción moderna sin configuración.
+- [React](https://es.reactjs.org/) - Una biblioteca de JavaScript para construir interfaces de usuario SPA
+- [NodeJS](https://nodejs.org/en/) - Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma
+- [NPM](https://www.npmjs.com/) - Manejador de dependecias
+- [React Router](https://reactrouter.com/) - React Router es una colección de componentes de navegación que se componen declarativamente con su aplicación
+- [Formik](https://formik.org/) - Formik is the world's most popular open source form library for React and React Native.
+- [Material UI](https://material-ui.com/) - React componentes para un desarrollo web más rápido y sencillo.
+- [Styleguidist](https://github.com/styleguidist/react-styleguidist) - React Styleguidist es un entorno de desarrollo de componentes con un servidor de desarrollo y una guía de estilo viva que puede compartir con su equipo.
+- [Axios](https://github.com/axios/axios) - Cliente HTTP basado en promesas para el navegador y node.js
+- [Prop Types](https://es.reactjs.org/docs/typechecking-with-proptypes.html) - Verificación de tipos con PropTypes
+- [React Signature Canvas](https://github.com/agilgur5/react-signature-canvas) - Un componente React de firma
+- [React Cookie Banner](https://github.com/buildo/react-cookie-banner/) - Un banner de cookies para React
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Autores ✒️
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Jordi Callupe** - [a18jorcalari](https://github.com/a18jorcalari)
+- **Kevin Larriega** - [a18kevlarpal](#fulanito-de-tal)
+- **Pablo Gómez** - [a18pabgombra](#fulanito-de-tal)

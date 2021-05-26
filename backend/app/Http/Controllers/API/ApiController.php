@@ -8,8 +8,11 @@ use App\Models\Custodian;
 use App\Models\Enrolment;
 use App\Models\Student;
 use Exception;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Mail as FacadesMail;
 
 class ApiController extends Controller
 {
@@ -71,8 +74,12 @@ class ApiController extends Controller
             if ($addEnrolmentResult["addEnrolmentResult"]["response"] == "FAIL"){
                 return $addEnrolmentResult;
             }
+            $sendEmailResult = ["sendEmailResult" => $this->sendEmail($studentData["nif"])];
+            if ($sendEmailResult["sendEmailResult"]["response"] == "FAIL"){
+                return $sendEmailResult;
+            }
 
-            return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult);
+            return array_merge($addStudentResult, $addCustodiansResult, $addEnrolmentResult, $sendEmailResult);
         }
         catch(\Illuminate\Database\QueryException | Exception $ex){ 
             return $ex->getMessage(); 
@@ -215,14 +222,81 @@ class ApiController extends Controller
 
     function addJsonEnrolment($studentData, $newStudentNif){
 
-        $id_student = Student::where('nif', $newStudentNif)->get('id');
-
         try {
+            $id_student = Student::where('nif', $newStudentNif)->get('id');
             $newEnrolment = new Enrolment;
             $newEnrolment->id_student = $id_student["0"]["id"];
             $newEnrolment->json_course_module_uf = $studentData;
             $newEnrolment->save();
         } catch(\Illuminate\Database\QueryException | Exception $ex){
+            return ["response"=> "FAIL", "message" => $ex->getMessage()];
+        }
+        return ["response"=> "OK"];
+    }
+
+    function modules_ufsGenerator($id){
+
+        $jsonFinal = array();
+
+        //set the total number of courses in this loop
+        //this loop finds all the modules of the selected course in each year
+        for ($i=1; $i <= 2; $i++) { 
+
+            $jsonModules = DB::table('modules')
+                ->join('u_f_s','u_f_s.id_module','=','modules.id')
+                ->where('modules.id_course',$id)
+                ->where('u_f_s.year', $i)            
+                ->groupBy('modules.id')
+                ->get(['modules.id','modules.name','modules.description']);
+                
+
+            $jsonModules = json_decode($jsonModules, TRUE);
+
+            //this loop finds all the ufs in each module of the actual year
+            for($j = 0; $j < sizeof($jsonModules); $j++) {
+                
+                $jsonUfs = DB::table('u_f_s')
+                    ->where('u_f_s.year',$i)
+                    ->where('u_f_s.id_module',$jsonModules[$j]['id'])
+                    ->get(['u_f_s.name','u_f_s.description','u_f_s.year','u_f_s.id_module']);
+
+                $jsonModules[$j]['ufs'] = $jsonUfs;
+            }
+
+            $courseInfo = array("year" => $i ,"modules" => $jsonModules);
+            array_push($jsonFinal,$courseInfo);
+        }
+
+        return $jsonFinal;
+    }
+
+    function sendEmail($newStudentNif){
+
+        try {
+            $student = Student::where('nif', $newStudentNif)->first();
+            $enrolment_string = Enrolment::where('id_student', $student->id)->orderBy('updated_at', 'desc')->first();
+            $enrolment = json_decode($enrolment_string, true);
+            $custodians = Custodian::where('id_student', $student->id)->get();
+        } catch(\Illuminate\Database\QueryException | Exception $ex){
+            return ["response"=> "FAIL", "message" => $ex->getMessage()];
+        }
+
+        $data = [
+            'subject' => "Copia de matrícula - INS Pedralbes",
+            'email' => $student->email_personal,
+            'student' => $student,
+            'custodians' => $custodians,
+            'enrolment' => $enrolment,
+        ];
+
+        try {
+            $pdf = PDF::loadView('layouts.email-pdf-template', $data);
+            FacadesMail::send('layouts.email-body-template', $data, function($message) use ($data, $pdf) {
+                $message->to($data['email'])
+                ->subject($data['subject'])
+                ->attachData($pdf->output(), "Resguardo_Matricula.pdf");
+            });
+        } catch(Exception $ex){
             return ["response"=> "FAIL", "message" => $ex->getMessage()];
         }
         return ["response"=> "OK"];

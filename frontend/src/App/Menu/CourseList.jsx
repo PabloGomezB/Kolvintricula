@@ -21,11 +21,22 @@ const CourseList = ({ courses }) => {
     <Fragment key={course.id}>
       <Grid item xs={6}>
         {course.state !== "MATRICULA" ? (
-          <Button component={Link} to={`${match.url}${course.name}`} className={classes.buttonDisabled} disabled>
+          <Button
+            component={Link}
+            to={`${match.url}${course.name}`}
+            className={classes.buttonDisabled}
+            disabled
+          >
             {course.name}
           </Button>
         ) : (
-          <Button component={Link} to={`${match.url}${course.name}`} variant="contained" color="primary" className={classes.buttonEnabled}>
+          <Button
+            component={Link}
+            to={`${match.url}${course.name}`}
+            variant="contained"
+            color="primary"
+            className={classes.buttonEnabled}
+          >
             {course.name}
           </Button>
         )}
@@ -39,7 +50,5 @@ CourseList.propTypes = {
   /** Array de cursos */
   courses: PropTypes.array.isRequired,
 };
-CourseList.defaultProps = {
-  courses: [],
-};
+
 export default CourseList;
