@@ -4,6 +4,7 @@ import {
   Snackbar,
   TextField,
   CircularProgress,
+  Typography,
 } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -113,12 +114,18 @@ const EnrolmentList = () => {
       ))}
       <>
         <Container maxWidth="xl" className={classes.mainContainer}>
-          <h1 className={classes.title}>Nuestros cursos</h1>
+          <Typography
+            variant="h3"
+            align="center"
+            className={classes.titleEnrolList}
+          >
+            Nuestros cursos
+          </Typography>
           {/* {<CircularProgress /> && loadingBTN } */}
           {loadingBTN ? (
             <CircularProgress className={classes.loadingButton} />
           ) : (
-            <Grid container align="center">
+            <Grid container align="center" spacing={1}>
               <CourseList courses={courseArray}></CourseList>
             </Grid>
           )}

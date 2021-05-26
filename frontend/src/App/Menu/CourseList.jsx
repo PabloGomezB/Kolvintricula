@@ -15,7 +15,7 @@ const CourseList = ({ courses }) => {
 
   const listItems = courses.map((course) => (
     <Fragment key={course.id}>
-      <Grid item xs={6}>
+      <Grid item xs={12} md={6}>
         {course.state !== "MATRICULA" ? (
           <Button
             component={Link}

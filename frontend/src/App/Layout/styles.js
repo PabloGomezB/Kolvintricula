@@ -23,8 +23,6 @@ const useStyle = makeStyles(() => ({
   },
   paper: {
     margin: theme.spacing(3),
-
-    // textAlign: "center",
     padding: theme.spacing(3),
     width: "auto",
     marginLeft: "auto",
@@ -41,15 +39,73 @@ const useStyle = makeStyles(() => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  mainContainer: {
+    backgroundImage:
+      'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover",
+    borderRadius: "10px",
+    backgroundBlendMode: "saturation",
+  },
   footerContainer: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
+  //Enrolment list
+  titleEnrolList: {
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+  },
+  //Botones
   btn: {
     margin: theme.spacing(2),
     borderRadius: "20px",
     border: "5px solid #231F20",
   },
+  buttonDisabled: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(1),
+    width: "50%",
+    borderRadius: "15px",
+    border: "4px solid #231F20",
+    backgroundColor: "#dddddd",
+  },
+  buttonEnabled: {
+    margin: theme.spacing(2),
+    padding: theme.spacing(1),
+    width: "50%",
+    borderRadius: "15px",
+    border: "4px solid #231F20",
+  },
+  loadingButton: {
+    marginLeft: theme.spacing(50),
+  },
+  addCustodian: {
+    marginTop: "5%",
+    border: "5px solid #231F20",
+    borderRadius: "20px",
+  },
+  removeCustodian: {
+    border: "5px solid #231F20",
+    borderRadius: "20px",
+  },
+  photoButton: {
+    borderRadius: "20px",
+  },
+  loadData: {
+    margin: theme.spacing(2),
+    borderRadius: "15px",
+    border: "4px solid #231F20",
+  },
+
+  //Canvas firma
+  canvasFirma: {
+    border: "1px solid #000000",
+    width: 500,
+    height: 200,
+  },
+
+  //Otros
   alignRight: {
     textAlign: "right",
   },
@@ -68,46 +124,6 @@ const useStyle = makeStyles(() => ({
   paddingTop: {
     paddingTop: theme.spacing(1),
   },
-  canvasFirma: {
-    border: "1px solid #000000",
-    width: 500,
-    height: 200,
-  },
-  // footerDiv: {
-  //   margin: theme.spacing(2),
-  // },
-  // footerToolbar: {
-  //   [theme.breakpoints.up("sm")]: {
-  //     alignItems: "flex-start",
-  //   },
-  // },
-
-  // main: {
-  //   flexGrow: 1
-  // },
-  // title: {
-  //   flexGrow: 1
-  // },
-  // appBar: {
-  //   backgroundColor: '#333'
-  // },
-  // toolBar: {
-  //   height: '350px',
-  //   width: '1500px'
-  // },
-  // typography: {
-  //   width: '250px',
-  //   height: '200px',
-  //   marginTop: '-100px',
-  //   marginRight: '50px'
-  // },
-  // div: {
-  //   display: 'flex'
-  // },
-  // p: {
-  //   borderLeft: '5px solid white',
-  //   marginRight: '10px'
-  // },
   a: {
     textDecoration: "none",
     color: "white",
@@ -121,7 +137,27 @@ const useStyle = makeStyles(() => ({
     padding: "5px",
     textDecoration: "none",
   },
-  // display: 'flex',
+  textFieldNIF: {
+    marginBottom: "20px",
+  },
+
+  errorPhoto: {
+    color: "red",
+    textAlign: "center",
+    fontWeight: "400",
+  },
+  photoPosition: {
+    textAlign: "center",
+  },
+
+  studentData: {
+    textAlign: "center",
+  },
+  academicData: {
+    marginBottom: "1.5%",
+  },
+
+  //Dialogs
   dialogTitleSuccess: {
     border: "3px solid green",
     borderBottom: "0",
@@ -143,73 +179,6 @@ const useStyle = makeStyles(() => ({
     marginTop: "-30px",
     marginRight: "-20px",
     padding: "-20px",
-  },
-  mainContainer: {
-    flexGrow: 1,
-    backgroundImage:
-      'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    marginTop: "-35px",
-    height: "500px",
-    borderRadius: "10px",
-    backgroundBlendMode: "saturation",
-  },
-  title: {
-    textAlign: "center",
-    fontSize: "50px",
-  },
-  loadData: {
-    padding: "10px",
-    borderRadius: "30px",
-    border: "5px solid #231F20",
-  },
-  textFieldNIF: {
-    marginBottom: "20px",
-  },
-  buttonDisabled: {
-    padding: "10px",
-    width: "200px",
-    borderRadius: "20px",
-    marginBottom: "50px",
-    border: "5px solid #231F20",
-    backgroundColor: "#dddddd",
-  },
-  buttonEnabled: {
-    padding: "10px",
-    width: "200px",
-    borderRadius: "20px",
-    marginBottom: "50px",
-    border: "5px solid #231F20",
-  },
-  errorPhoto: {
-    color: "red",
-    textAlign: "center",
-    fontWeight: "400",
-  },
-  photoPosition: {
-    textAlign: "center",
-  },
-  photoButton: {
-    borderRadius: "20px",
-  },
-  studentData: {
-    textAlign: "center",
-  },
-  academicData: {
-    marginBottom: "1.5%",
-  },
-  addCustodian: {
-    marginTop: "5%",
-    border: "5px solid #231F20",
-    borderRadius: "20px",
-  },
-  removeCustodian: {
-    border: "5px solid #231F20",
-    borderRadius: "20px",
-  },
-  loadingButton: {
-    marginLeft: theme.spacing(50),
   },
 }));
 
