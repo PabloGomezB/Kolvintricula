@@ -423,12 +423,12 @@ const Enrolment = (props) => {
             ) : null}
 
             {_renderStepContent(activeStep)}
-            <div className={classes.alignRight}>
+            <div className={`${classes.alignRight} ${classes.marginTop}`}>
               {activeStep !== 0 && (
                 <Button
                   variant="contained"
                   disabled={isSubmitting}
-                  className={classes.btn}
+                  className={classes.btnEnrolmentBack}
                   onClick={() => _handleBack(values)}
                 >
                   Atrás

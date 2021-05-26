@@ -15,7 +15,7 @@ Mira **Despliegue** para conocer como desplegar el proyecto.
 Instalar Node JS
 
 ```
-Da un ejemplo
+https://nodejs.org/es/
 ```
 
 ### Instalación 🔧

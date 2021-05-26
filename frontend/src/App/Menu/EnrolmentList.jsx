@@ -4,6 +4,7 @@ import {
   Snackbar,
   TextField,
   CircularProgress,
+  Typography,
 } from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -113,27 +114,29 @@ const EnrolmentList = () => {
       ))}
       <>
         <Container maxWidth="xl" className={classes.mainContainer}>
-          <h1 className={classes.title}>Nuestros cursos</h1>
-          {/* {<CircularProgress /> && loadingBTN } */}
-          {loadingBTN ? (
-            <CircularProgress className={classes.loadingButton} />
-          ) : (
-            <Grid container align="center">
-              <CourseList courses={courseArray}></CourseList>
-            </Grid>
-          )}
-          {/* <Grid container align="center">
-          <CourseList courses={courseArray}></CourseList>
-        </Grid> */}
-          <Container align="center">
+          <Typography variant="h3" align="center" gutterBottom>
+            Nuestros Cursos
+          </Typography>
+          <div className={`${classes.divEnrolList}`}>
+            {loadingBTN ? (
+              <CircularProgress className={classes.loadingButton} />
+            ) : (
+              <Grid container align="center" spacing={2}>
+                <CourseList courses={courseArray}></CourseList>
+              </Grid>
+            )}
+          </div>
+          <div className={`${classes.alignCenter} ${classes.marginTop}`}>
             <Button
               variant="contained"
-              color="primary"
               onClick={handleClickOpen}
-              className={classes.loadData}
+              className={classes.btnEnrolList}
             >
               ¿Quieres cargar tus datos?
             </Button>
+          </div>
+
+          <Container align="center">
             <Dialog
               open={open}
               onClose={handleClose}
