@@ -29,80 +29,64 @@ const useStyle = makeStyles(() => ({
     marginRight: "auto",
 
     [theme.breakpoints.up("md")]: {
-      marginTop: theme.spacing(6),
+      marginTop: theme.spacing(12),
       marginBottom: theme.spacing(12),
       width: theme.breakpoints.values.md,
     },
   },
-  paper2: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
   mainContainer: {
-    backgroundImage:
-      'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    borderRadius: "10px",
-    backgroundBlendMode: "saturation",
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(3),
+    // backgroundImage:
+    //   'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
+    // backgroundRepeat: "no-repeat",
+    // backgroundSize: "cover",
+    // borderRadius: "10px",
+    // backgroundBlendMode: "saturation",
   },
   footerContainer: {
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
   //Enrolment list
-  titleEnrolList: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
+  divEnrolList: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(3),
   },
   //Botones
-  btn: {
-    margin: theme.spacing(2),
-    borderRadius: "20px",
-    border: "5px solid #231F20",
+  btnEnrolList: {
+    width: "70%",
   },
-  buttonDisabled: {
-    margin: theme.spacing(2),
-    padding: theme.spacing(1),
-    width: "50%",
-    borderRadius: "15px",
-    border: "4px solid #231F20",
-    backgroundColor: "#dddddd",
+  btnEnrolmentBack: {
+    float: "left",
   },
-  buttonEnabled: {
-    margin: theme.spacing(2),
-    padding: theme.spacing(1),
-    width: "50%",
-    borderRadius: "15px",
-    border: "4px solid #231F20",
-  },
-  loadingButton: {
-    marginLeft: theme.spacing(50),
-  },
+  // loadingButton: {
+  //   marginLeft: theme.spacing(50),
+  // },
   addCustodian: {
-    marginTop: "5%",
-    border: "5px solid #231F20",
-    borderRadius: "20px",
+    marginTop: theme.spacing(4),
   },
-  removeCustodian: {
-    border: "5px solid #231F20",
-    borderRadius: "20px",
-  },
-  photoButton: {
-    borderRadius: "20px",
-  },
-  loadData: {
-    margin: theme.spacing(2),
-    borderRadius: "15px",
-    border: "4px solid #231F20",
-  },
+  // removeCustodian: {
+  //   border: "5px solid #231F20",
+  //   borderRadius: "20px",
+  // },
+  // photoButton: {
+  //   borderRadius: "20px",
+  // },
+  // loadData: {
+  //   margin: theme.spacing(2),
+  //   borderRadius: "15px",
+  //   border: "4px solid #231F20",
+  // },
 
   //Canvas firma
   canvasFirma: {
     border: "1px solid #000000",
-    width: 500,
+    width: 240,
     height: 200,
+    [theme.breakpoints.up("sm")]: {
+      width: 500,
+    },
   },
 
   //Otros
@@ -111,6 +95,9 @@ const useStyle = makeStyles(() => ({
   },
   alignCenter: {
     textAlign: "center",
+  },
+  marginTop: {
+    marginTop: theme.spacing(8),
   },
   dblock: {
     display: "block",

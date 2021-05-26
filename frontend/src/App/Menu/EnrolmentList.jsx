@@ -114,33 +114,29 @@ const EnrolmentList = () => {
       ))}
       <>
         <Container maxWidth="xl" className={classes.mainContainer}>
-          <Typography
-            variant="h3"
-            align="center"
-            className={classes.titleEnrolList}
-          >
-            Nuestros cursos
+          <Typography variant="h3" align="center" gutterBottom>
+            Nuestros Cursos
           </Typography>
-          {/* {<CircularProgress /> && loadingBTN } */}
-          {loadingBTN ? (
-            <CircularProgress className={classes.loadingButton} />
-          ) : (
-            <Grid container align="center" spacing={1}>
-              <CourseList courses={courseArray}></CourseList>
-            </Grid>
-          )}
-          {/* <Grid container align="center">
-          <CourseList courses={courseArray}></CourseList>
-        </Grid> */}
-          <Container align="center">
+          <div className={`${classes.divEnrolList}`}>
+            {loadingBTN ? (
+              <CircularProgress className={classes.loadingButton} />
+            ) : (
+              <Grid container align="center" spacing={2}>
+                <CourseList courses={courseArray}></CourseList>
+              </Grid>
+            )}
+          </div>
+          <div className={`${classes.alignCenter} ${classes.marginTop}`}>
             <Button
               variant="contained"
-              color="primary"
               onClick={handleClickOpen}
-              className={classes.loadData}
+              className={classes.btnEnrolList}
             >
               ¿Quieres cargar tus datos?
             </Button>
+          </div>
+
+          <Container align="center">
             <Dialog
               open={open}
               onClose={handleClose}
