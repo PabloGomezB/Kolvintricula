@@ -9,14 +9,13 @@ import Header from "./Header";
  */
 const App = () => {
   return (
-      <Router>
-        <Route path="/">
-          <Header />
-          <MaterialLayout>
-            <Menu />
-          </MaterialLayout>
-        </Route>
-      </Router>
+    <Router>
+      <Route path="/">
+        <MaterialLayout>
+          <Menu />
+        </MaterialLayout>
+      </Route>
+    </Router>
   );
 };
 

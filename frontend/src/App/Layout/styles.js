@@ -75,6 +75,15 @@ const useStyle = makeStyles(() => ({
     width: 500,
     height: 200,
   },
+  containerHeader: {
+    padding: theme.spacing(3),
+  },
+  floatLeft: {
+    float: "left",
+  },
+  floatRight: {
+    float: "right",
+  },
   // footerDiv: {
   //   margin: theme.spacing(2),
   // },
@@ -143,16 +152,16 @@ const useStyle = makeStyles(() => ({
   dialogButtonSuccess: {
     position: "absolute",
     top: "15px",
-    left:"83%",
+    left: "83%",
     backgroundColor: "#BDFFCB",
   },
   mainContainer: {
     flexGrow: 1,
     backgroundImage: `url(${backgroundImageCourses})`,
-    backgroundSize: 'cover',
-    marginTop: '-35px',
-    height: '500px',
-    borderRadius: '10px'
+    backgroundSize: "cover",
+    marginTop: "-35px",
+    height: "500px",
+    borderRadius: "10px",
   },
   title: {
     textAlign: "center",
@@ -182,9 +191,9 @@ const useStyle = makeStyles(() => ({
     border: "5px solid #231F20",
   },
   error: {
-    color: 'red',
-    textAlign: 'center',
-    fontWeight: '400'
+    color: "red",
+    textAlign: "center",
+    fontWeight: "400",
   },
   photoPosition: {
     textAlign: "center",
@@ -208,11 +217,11 @@ const useStyle = makeStyles(() => ({
     borderRadius: "20px",
   },
   loadingButton: {
-    marginLeft: theme.spacing(50)
+    marginLeft: theme.spacing(50),
   },
   imageStudent: {
-    borderRadius: "50px"
-  }
+    borderRadius: "50px",
+  },
 }));
 
 export { theme, useStyle };

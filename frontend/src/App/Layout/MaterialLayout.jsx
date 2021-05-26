@@ -5,6 +5,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import Footer from "../Footer";
 
 import { theme, useStyle } from "./styles";
+import Header from "../Header";
 
 /**
  * Componente que que añade el tema de material al componente children.
@@ -15,12 +16,7 @@ export default function MaterialLayout({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      {/* <Router>
-        <Route path="/">
-          
-        </Route>
-      </Router> */}
-      {/* <Header /> */}
+      <Header />
       <div className={classes.root}>
         <Paper className={classes.paper}>{children}</Paper>
       </div>
