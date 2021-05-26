@@ -60,24 +60,10 @@ const useStyle = makeStyles(() => ({
   btnEnrolmentBack: {
     float: "left",
   },
-  // loadingButton: {
-  //   marginLeft: theme.spacing(50),
-  // },
+
   addCustodian: {
     marginTop: theme.spacing(4),
   },
-  // removeCustodian: {
-  //   border: "5px solid #231F20",
-  //   borderRadius: "20px",
-  // },
-  // photoButton: {
-  //   borderRadius: "20px",
-  // },
-  // loadData: {
-  //   margin: theme.spacing(2),
-  //   borderRadius: "15px",
-  //   border: "4px solid #231F20",
-  // },
 
   //Canvas firma
   canvasFirma: {
@@ -143,6 +129,9 @@ const useStyle = makeStyles(() => ({
   academicData: {
     marginBottom: "1.5%",
   },
+  loading: {
+    textAlign: "center",
+  },
 
   //Dialogs
   dialogTitleSuccess: {
@@ -164,7 +153,7 @@ const useStyle = makeStyles(() => ({
   dialogButtonSuccess: {
     position: "absolute",
     top: "15px",
-    left:"83%",
+    left: "83%",
     backgroundColor: "#BDFFCB",
   },
 }));

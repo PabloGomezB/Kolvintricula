@@ -119,7 +119,9 @@ const EnrolmentList = () => {
           </Typography>
           <div className={`${classes.divEnrolList}`}>
             {loadingBTN ? (
-              <CircularProgress className={classes.loadingButton} />
+              <div className={classes.loading}>
+                <CircularProgress />
+              </div>
             ) : (
               <Grid container align="center" spacing={2}>
                 <CourseList courses={courseArray}></CourseList>
