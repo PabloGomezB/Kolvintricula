@@ -4,6 +4,8 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
+import backgroundImageCourses from "../img/backgroundImageCourses.png";
+
 let theme = createMuiTheme({
   palette: {
     type: "light",
@@ -97,6 +99,17 @@ const useStyle = makeStyles(() => ({
   paddingTop: {
     paddingTop: theme.spacing(1),
   },
+
+  containerHeader: {
+    padding: theme.spacing(3),
+  },
+  floatLeft: {
+    float: "left",
+  },
+  floatRight: {
+    float: "right",
+  },
+
   a: {
     textDecoration: "none",
     color: "white",

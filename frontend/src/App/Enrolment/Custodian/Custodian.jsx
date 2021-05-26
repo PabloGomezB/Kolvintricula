@@ -21,12 +21,16 @@ class CustodianO {
  * @returns
  */
 export const Custodian = () => {
+  //Declaración de los estilos
   const classes = useStyle();
+
   return (
     <div>
       <Typography variant="h4" gutterBottom>
         Datos de la/s persona/s responsable/s
       </Typography>
+
+      {/* Muestra los campos del formulario de los responsables y se puede tanto añadir responsables como eliminarlos */}
       <FieldArray name="custodians">
         {(fieldArrayProps) => {
           const { push, remove, form } = fieldArrayProps;

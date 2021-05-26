@@ -27,6 +27,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
  * Lista de matriculas por ciclo disponibles.
  */
 const EnrolmentList = () => {
+  //Declaración de los estados y los estilos
   const [courseArray, setCourseArray] = useState([]);
   const [studentData, setStudentData] = useState(0);
   const [datosEncontrados, setDatosEncontrados] = useState(0);
@@ -36,7 +37,9 @@ const EnrolmentList = () => {
   const [loadingBTN, setLoadingBTN] = useState(true);
   const classes = useStyle();
 
+  //Variable que permite obtener la ruta actual
   let match = useRouteMatch();
+
   /**
    * Obtener cursos para crear botones y rutas
    */
@@ -85,6 +88,7 @@ const EnrolmentList = () => {
     setStudentData(0);
     document.getElementById("nif_field").value = "";
   }
+
   /**
    * Cerrar alerta
    */
@@ -93,6 +97,7 @@ const EnrolmentList = () => {
     setResetNif(false);
   };
 
+  //Funciones pare abrir y cerrar el popup que permite cargar los datos del alumno
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -103,6 +108,7 @@ const EnrolmentList = () => {
 
   return (
     <Switch>
+      {/* Lógica que hace posible la navegación por rutas dependiendo del estado del curso */}
       {courseArray.map((course) => (
         <Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? (

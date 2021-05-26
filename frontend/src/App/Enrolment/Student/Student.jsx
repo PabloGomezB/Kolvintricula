@@ -1,16 +1,20 @@
 import PropTypes from "prop-types";
 import { Button, Grid, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { Field, useFormikContext } from "formik";
 import { useStyle } from "../../Layout/styles";
+import imageDefault from "../../img/defaultPhotoProfile.png";
 /**
  * Componente que construye el paso de Datos del estudiante
  * @param {*} props
  * @returns
  */
 export const Student = ({ nif }) => {
+  //values: para poder acceder al valor de la foto y setFieldValue: para guardar el valor de la foto en el JSON
   const { values, setFieldValue } = useFormikContext();
+  
+  //Declaración de los estados y los estilos
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
@@ -25,6 +29,7 @@ export const Student = ({ nif }) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
+    //Controla si la imagen que se sube es PNG o no
     if (!file.name.match(/.(png)$/i)) {
       setOnlyPNG(true);
 
@@ -40,15 +45,17 @@ export const Student = ({ nif }) => {
       };
 
       reader.readAsDataURL(file);
-      console.log(file);
     }
   };
 
+  //Muestra la imagen por defecto o la subida por el alumno dependiendo del valor del estado
   const setImagePreview = () => {
     if (imagePreviewUrl) {
       return (
         <img
-          style={{ height: "100px", width: "100px", borderRadius: "50px" }}
+          width="100px"
+          height="100px"
+          className={classes.imageStudent}
           src={imagePreviewUrl}
           alt="Imagen cambiada"
         />
@@ -56,21 +63,17 @@ export const Student = ({ nif }) => {
     } else {
       return (
         <img
-          style={{
-            backgroundImage:
-              'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            borderRadius: "50px",
-            height: "100px",
-            width: "100px",
-          }}
+          width="100px"
+          height="100px"
+          className={classes.imageStudent}
+          src={imageDefault}
           alt=""
         />
       );
     }
   };
 
+  //Muestra los campos del formulario que el alumno tiene que rellenar y un botón que le permite subir su foto
   return (
     <div>
       <Grid container spacing={3}>
@@ -88,8 +91,8 @@ export const Student = ({ nif }) => {
             <div>
               <Field name="student.photo_path">
                 {({
-                  field, // { name, value, onChange, onBlur }
-                  form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+                  field,
+                  form: { touched, errors },
                   meta,
                 }) => (
                   <>
@@ -99,13 +102,12 @@ export const Student = ({ nif }) => {
                       id="contained-button-file"
                       onChange={(e) => handleImageChange(e)}
                     />
+                    {/* Errores que se muestran cuando no se subió ninguna foto y cuando se sube una imagen que no es PNG */}
                     {meta.touched && meta.error && (
-                      <div className={classes.errorPhoto}>{meta.error}</div>
+                      <div className={classes.error}>{meta.error}</div>
                     )}
                     {onlyPNG && (
-                      <div className={classes.errorPhoto}>
-                        Solo se pueden subir imágenes PNG
-                      </div>
+                      <div className={classes.error}>Solo se pueden subir imágenes PNG</div>
                     )}
                   </>
                 )}
