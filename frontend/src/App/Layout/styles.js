@@ -127,7 +127,7 @@ const useStyle = makeStyles(() => ({
     marginBottom: "20px",
   },
 
-  errorPhoto: {
+  error: {
     color: "red",
     textAlign: "center",
     fontWeight: "400",
@@ -169,6 +169,9 @@ const useStyle = makeStyles(() => ({
     left: "83%",
     backgroundColor: "#BDFFCB",
   },
+  imageStudent: {
+    borderRadius: '50px'
+  }
 }));
 
 export { theme, useStyle };
