@@ -4,7 +4,7 @@
             <a class="set-border-bottom-hover" href="{{ route('custodians.index') }}">
                 <h2 class="font-semibold text-2xl text-gray-800 leading-tight relative">
                     {{ __('Autorización de responsabilidad del menor') }}
-                    <span class="content-head-separator"></span>
+                    {{-- <span class="content-head-separator"></span> --}}
                     {{-- <span class="arrow-left"></span> --}}
                 </h2>
             </a>

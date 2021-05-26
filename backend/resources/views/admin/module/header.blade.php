@@ -4,8 +4,8 @@
             <a class="set-border-bottom-hover" href="{{ route('modules.index') }}">
                 <h2 class="font-semibold text-2xl text-gray-800 leading-tight relative">
                     {{ __('Modulos') }}
-                    <span class="content-head-separator"></span>
-                    <span class="arrow-left"></span>
+                    {{-- <span class="content-head-separator"></span>
+                    <span class="arrow-left"></span> --}}
                 </h2>
             </a>
             <div class="ml-20 pt-0.5">
