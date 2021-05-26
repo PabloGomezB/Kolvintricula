@@ -109,6 +109,7 @@ th:hover {
 .disabled {
     pointer-events: none;
     cursor: not-allowed;
+    background-color: lightgray;
 }
 
 .wait {

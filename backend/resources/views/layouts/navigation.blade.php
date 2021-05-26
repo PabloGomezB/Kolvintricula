@@ -35,7 +35,7 @@
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('custodians.index')" :active="request()->routeIs('custodians.index')" style="text-decoration:none;">
-                        {{ __('Custodian') }}
+                        {{ __('Responsable') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -103,7 +103,7 @@
         </div>
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('custodians.index')" :active="request()->routeIs('custodians.index')">
-                {{ __('Custodian') }}
+                {{ __('Responsable') }}
             </x-responsive-nav-link>
         </div>
 

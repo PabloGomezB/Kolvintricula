@@ -99,7 +99,9 @@ class UFController extends Controller
         $dataForm = request()->except(['_token','_method']);
         UF::where('id','=',$id)->update($dataForm);
 
-        return redirect()->back()
+        $uf = UF::findOrFail($id);
+
+        return redirect()->route('modules.show',['module' => Module::findOrFail($uf->id_module)])
             ->with('message',$request->name. ': ' . $request->description. ' UF actualizada correctamente.');
     }
 
