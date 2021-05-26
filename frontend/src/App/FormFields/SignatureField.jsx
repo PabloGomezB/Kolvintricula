@@ -25,11 +25,12 @@ export const SignatureField = () => {
   }
 
   return (
+    //Muestra el campo que contiene la firma
     <div className={classes.alignCenter}>
       <Field name="consent.firma">
         {({
-          field, // { name, value, onChange, onBlur }
-          form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+          field,
+          form: { touched, errors },
           meta,
         }) => (
           <>

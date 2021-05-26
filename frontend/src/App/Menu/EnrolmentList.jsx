@@ -148,47 +148,6 @@ const EnrolmentList = () => {
             </DialogActions>
           </Dialog>
           {/* Alertas que informan la acción que el alumno realiza */}
-          {/* {showAlert ? (
-            <Snackbar
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              open={showAlert}
-              autoHideDuration={3000}
-              onClose={closeAlert}
-            >
-              ¿Quieres cargar tus datos?
-            </Button>
-            <Dialog
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="form-dialog-title"
-              aria-describedby="alert-dialog-slide-description"
-            >
-              <DialogTitle id="form-dialog-title">Introduce tu NIF</DialogTitle>
-              <DialogContent>
-                <TextField
-                  autoFocus
-                  id="nif_field"
-                  label="NIF"
-                  variant="outlined"
-                  className={classes.textFieldNIF}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  Cancelar
-                </Button>
-                <Button onClick={searchStudent} color="primary">
-                  Cargar datos
-                </Button>
-                <IconButton aria-label="delete" onClick={resetNifData}>
-                  <DeleteIcon />
-                </IconButton>
-              </DialogActions>
-            </Dialog> */}
-
             {showAlert ? (
               <Snackbar
                 anchorOrigin={{

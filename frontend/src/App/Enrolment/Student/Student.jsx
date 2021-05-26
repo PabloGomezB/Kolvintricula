@@ -45,7 +45,6 @@ export const Student = ({ nif }) => {
       };
 
       reader.readAsDataURL(file);
-      console.log(file);
     }
   };
 
@@ -105,7 +104,7 @@ export const Student = ({ nif }) => {
                     />
                     {/* Errores que se muestran cuando no se subió ninguna foto y cuando se sube una imagen que no es PNG */}
                     {meta.touched && meta.error && (
-                      <div className={classes.errorPhoto}>{meta.error}</div>
+                      <div className={classes.error}>{meta.error}</div>
                     )}
                     {onlyPNG && (
                       <div className={classes.error}>Solo se pueden subir imágenes PNG</div>
