@@ -69,7 +69,7 @@ export const Custodian = () => {
                         <FormikControl
                           control="input"
                           type="text"
-                          label="NIF: "
+                          label="NIF o NIE: "
                           name={`custodians[${index}].nif`}
                           fullWidth
                         />

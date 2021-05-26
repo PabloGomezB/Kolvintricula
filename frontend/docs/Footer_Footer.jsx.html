@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Footer/Footer.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Footer/Footer.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import AppBar from "@material-ui/core/AppBar";
+import Container from "@material-ui/core/Container";
+import CookieConsent from "react-cookie-consent";
+import { useStyle } from "../Layout/styles";
+import Iframe from "react-iframe";
+import { Grid } from "@material-ui/core";
+
+/**
+ * Componente Footer
+ * @returns
+ */
+export default function Footer() {
+  const classes = useStyle();
+
+  return (
+    &lt;AppBar position="static" component="footer">
+      &lt;Container className={classes.footerContainer}>
+        &lt;Grid container spacing={3}>
+          &lt;Grid item xs={12} sm={3}>
+            &lt;div>
+              &lt;div>
+                &lt;p>El centro&lt;/p>
+              &lt;/div>
+              &lt;div>
+                &lt;p>
+                  Instituto público (08076391) del distrito de Les Corts, con
+                  oferta de ESO, Bachillerato, CF de Informática, y de Imagen y
+                  sonido, y PFI (Programas de formación e inserción).
+                &lt;/p>
+              &lt;/div>
+            &lt;/div>
+          &lt;/Grid>
+          &lt;Grid item xs={12} sm={3}>
+            &lt;div>
+              &lt;div>
+                &lt;p>Legal&lt;/p>
+              &lt;/div>
+              &lt;div>
+                &lt;a
+                  href="http://www.institutpedralbes.cat/cookies/"
+                  className={classes.a}
+                >
+                  Cookies
+                &lt;/a>
+              &lt;/div>
+              &lt;div>
+                &lt;a
+                  href="http://web.gencat.cat/ca/menu-ajuda/ajuda/avis_legal/"
+                  className={classes.a}
+                >
+                  Aviso legal
+                &lt;/a>
+              &lt;/div>
+              &lt;div>
+                &lt;a
+                  href="http://ensenyament.gencat.cat/ca/departament/proteccio-dades/dpd/"
+                  className={classes.a}
+                >
+                  Protección de datos
+                &lt;/a>
+              &lt;/div>
+            &lt;/div>
+          &lt;/Grid>
+          &lt;Grid item xs={12} sm={3}>
+            &lt;div>
+              &lt;div>
+                &lt;p>Contacto&lt;/p>
+              &lt;/div>
+              &lt;div>93 203 33 32&lt;/div>
+              &lt;div>93 203 36 42&lt;/div>
+              &lt;div>93 203 83 86&lt;/div>
+              &lt;div>inspedralbes@xtec.cat&lt;/div>
+              &lt;a
+                href="https://afapedralbes.wordpress.com/"
+                className={classes.a}
+              >
+                Web AFA
+              &lt;/a>
+            &lt;/div>
+          &lt;/Grid>
+          &lt;Grid item xs={12} sm={3}>
+            &lt;div>
+              &lt;div className={classes.div}>
+                &lt;p className={classes.p}>&lt;/p>
+                &lt;p>Dirección&lt;/p>
+              &lt;/div>
+              &lt;div>Av. Esplugues, 36-42. 08034. Barcelona&lt;/div>
+              &lt;Iframe
+                url="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.4326609789214!2d2.1035558157269683!3d41.38640940401817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a49854b2af7bcb%3A0x4e993d78d0267a9f!2sAv.%20d&amp;#39;Esplugues%2C%2036%2C%2042%2C%2008034%20Barcelona!5e0!3m2!1ses!2ses!4v1620892802065!5m2!1ses!2ses"
+                width="100%"
+                id="myId"
+                className="myClassname"
+                display="initial"
+                position="relative"
+              />
+            &lt;/div>
+          &lt;/Grid>
+        &lt;/Grid>
+        &lt;CookieConsent
+          location="bottom"
+          cookieName="KolvintriculaCookie"
+          buttonText="Entiendo"
+          style={{ background: "black" }}
+          buttonStyle={{
+            color: "#fff",
+            fontSize: "12px",
+            background: "#006dcc",
+            textShadow: "0 1px 1px rgb(255 255 255 / 75%)",
+            borderRadius: "3px",
+          }}
+        >
+          Utilizamos cookies para asegurar que damos la mejor experiencia al
+          usuario en nuestra web. Si quieres continuar utilizando este sitio
+          entendemos que estás de acuerdo.{" "}
+          &lt;a
+            href="http://www.institutpedralbes.cat/cookies/"
+            className={classes.pp}
+          >
+            Política de privacidad
+          &lt;/a>
+        &lt;/CookieConsent>
+      &lt;/Container>
+    &lt;/AppBar>
+  );
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AcademicData">AcademicData</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#CheckboxField">CheckboxField</a></li><li><a href="global.html#Consent">Consent</a></li><li><a href="global.html#CourseList">CourseList</a></li><li><a href="global.html#Custodian">Custodian</a></li><li><a href="global.html#DatePickerField">DatePickerField</a></li><li><a href="global.html#Enrolment">Enrolment</a></li><li><a href="global.html#EnrolmentList">EnrolmentList</a></li><li><a href="global.html#FormikControl">FormikControl</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#NoDisponible">NoDisponible</a></li><li><a href="global.html#RadioButtons">RadioButtons</a></li><li><a href="global.html#SelectField">SelectField</a></li><li><a href="global.html#Student">Student</a></li><li><a href="global.html#Textarea">Textarea</a></li><li><a href="global.html#validationSchema">validationSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:33 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

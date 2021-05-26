@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Enrolment/AcademicData/AcademicData.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Enrolment/AcademicData/AcademicData.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { FormGroup, FormLabel, Typography } from "@material-ui/core";
+import { FieldArray, useFormikContext } from "formik";
+import React from "react";
+import FormikControl from "../../FormFields/FormikControl";
+import { CheckboxWithLabel } from "formik-material-ui";
+import { useStyle } from "../../Layout/styles";
+import PropTypes from "prop-types";
+/**
+ * Componente que construye el paso de Datos Académicos
+ * @param {*} param0
+ * @returns
+ */
+
+export const AcademicData = ({ cursmoduluf }) => {
+  const { values } = useFormikContext();
+  const classes = useStyle();
+
+  return (
+    &lt;div>
+      &lt;Typography variant="h4" gutterBottom>
+        Datos académicos
+      &lt;/Typography>
+      &lt;FieldArray name="academic_data.moduluf">
+        &lt;div>
+          &lt;div className={classes.academicData}>
+            &lt;FormikControl
+              fullWidth
+              control="select"
+              label="Curso académico"
+              name="academic_data.year"
+              options={[
+                { label: "1er Curso", value: 1 },
+                { label: "2ndo Curso", value: 2 },
+              ]}
+            />
+          &lt;/div>
+          &lt;div>
+            {values.academic_data.year === 1 || values.academic_data.year === 2
+              ? cursmoduluf[values.academic_data.year - 1].modules.map(
+                  (modul, index) => {
+                    return (
+                      &lt;div key={modul.name}>
+                        {/* &lt;div className={classes.paddingTop}>{modul.name}&lt;/div> */}
+                        &lt;FormLabel component="legend">
+                          {modul.name}. {modul.description}
+                        &lt;/FormLabel>
+
+                        &lt;FormGroup>
+                          {modul.ufs.map((uf) => {
+                            return (
+                              &lt;React.Fragment key={`${modul.name}${uf.name}`}>
+                                &lt;FormikControl
+                                  control="checkbox"
+                                  component={CheckboxWithLabel}
+                                  name={`academic_data.modules.${modul.name} - ${modul.description}`}
+                                  Label={{ label: uf.name }}
+                                  value={uf.name}
+                                />
+                              &lt;/React.Fragment>
+                            );
+                          })}
+                        &lt;/FormGroup>
+                      &lt;/div>
+                    );
+                  }
+                )
+              : null}
+          &lt;/div>
+        &lt;/div>
+      &lt;/FieldArray>
+    &lt;/div>
+  );
+};
+AcademicData.propTypes = {
+  /** Array de cursos con modulos y ufs */
+  cursmoduluf: PropTypes.array.isRequired,
+  /** Valores que Formik guarda */
+  values: PropTypes.object.isRequired,
+};
+
+AcademicData.defaultProps = {
+  cursmoduluf: [],
+  values: {},
+};
+export default AcademicData;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AcademicData">AcademicData</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#CheckboxField">CheckboxField</a></li><li><a href="global.html#Consent">Consent</a></li><li><a href="global.html#CourseList">CourseList</a></li><li><a href="global.html#Custodian">Custodian</a></li><li><a href="global.html#DatePickerField">DatePickerField</a></li><li><a href="global.html#Enrolment">Enrolment</a></li><li><a href="global.html#EnrolmentList">EnrolmentList</a></li><li><a href="global.html#FormikControl">FormikControl</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#NoDisponible">NoDisponible</a></li><li><a href="global.html#RadioButtons">RadioButtons</a></li><li><a href="global.html#SelectField">SelectField</a></li><li><a href="global.html#Student">Student</a></li><li><a href="global.html#Textarea">Textarea</a></li><li><a href="global.html#validationSchema">validationSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:32 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

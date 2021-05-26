@@ -120,3 +120,11 @@ th:hover {
 .wait * {
     pointer-events: none;
 }
+
+.dot{
+    background-color: white;
+}
+input:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #add8e6 !important;
+}

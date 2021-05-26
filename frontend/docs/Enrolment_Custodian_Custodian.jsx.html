@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Enrolment/Custodian/Custodian.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Enrolment/Custodian/Custodian.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Button, Grid, Typography } from "@material-ui/core";
+import { FieldArray } from "formik";
+import React from "react";
+import FormikControl from "../../FormFields/FormikControl";
+import { useStyle } from "../../Layout/styles";
+
+class CustodianO {
+  constructor() {
+    this.type = "";
+    this.nif = "";
+    this.name = "";
+    this.last_name1 = "";
+    this.last_name2 = "";
+    this.mobile_number = "";
+    this.email = "";
+  }
+}
+
+/**
+ * Componente que construye el paso de Responsables
+ * @returns
+ */
+export const Custodian = () => {
+  const classes = useStyle();
+  return (
+    &lt;div>
+      &lt;Typography variant="h4" gutterBottom>
+        Datos de la/s persona/s responsable/s
+      &lt;/Typography>
+      &lt;FieldArray name="custodians">
+        {(fieldArrayProps) => {
+          const { push, remove, form } = fieldArrayProps;
+          const { values } = form;
+          const { custodians } = values;
+          return (
+            &lt;div>
+              {custodians &amp;&amp;
+                custodians.length > 0 &amp;&amp;
+                custodians.map((custodiansItem, index) => (
+                  &lt;div key={index}>
+                    &lt;Grid container spacing={3}>
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="select"
+                          fullWidth
+                          label="Persona responsable"
+                          name={`custodians[${index}].type`}
+                          options={[
+                            { label: "Padre", value: "PADRE" },
+                            { label: "Madre", value: "MADRE" },
+                            { label: "Tutor/a legal", value: "TUTOR" },
+                          ]}
+                        />
+                      &lt;/Grid>
+                      {custodians.length !== 1 &amp;&amp; (
+                        &lt;Grid item xs={12} sm={6}>
+                          &lt;Button
+                            className={classes.removeCustodian}
+                            variant="contained"
+                            color="primary"
+                            onClick={() => remove(index)}
+                          >
+                            Eliminar responsable
+                          &lt;/Button>
+                        &lt;/Grid>
+                      )}
+
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="input"
+                          type="text"
+                          label="NIF: "
+                          name={`custodians[${index}].nif`}
+                          fullWidth
+                        />
+                      &lt;/Grid>
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="input"
+                          type="text"
+                          label="Nombre: "
+                          name={`custodians[${index}].name`}
+                          fullWidth
+                        />
+                      &lt;/Grid>
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="input"
+                          type="text"
+                          label="Primer apellido: "
+                          name={`custodians[${index}].last_name1`}
+                          fullWidth
+                        />
+                      &lt;/Grid>
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="input"
+                          type="text"
+                          label="Segundo apellido: "
+                          name={`custodians[${index}].last_name2`}
+                          fullWidth
+                        />
+                      &lt;/Grid>
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="input"
+                          type="number"
+                          label="Telefono movil: "
+                          name={`custodians[${index}].mobile_number`}
+                          fullWidth
+                        />
+                      &lt;/Grid>
+                      &lt;Grid item xs={12} sm={6}>
+                        &lt;FormikControl
+                          control="input"
+                          type="text"
+                          label="Email: "
+                          name={`custodians[${index}].email`}
+                          fullWidth
+                        />
+                      &lt;/Grid>
+                      &lt;Grid item xs={6}>&lt;/Grid>
+                    &lt;/Grid>
+                  &lt;/div>
+                ))}
+              {custodians.length &lt; 2 &amp;&amp; (
+                &lt;Button
+                  className={classes.addCustodian}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => push(new CustodianO())}
+                >
+                  Añadir un responsable
+                &lt;/Button>
+              )}
+            &lt;/div>
+          );
+        }}
+      &lt;/FieldArray>
+    &lt;/div>
+  );
+};
+
+export default Custodian;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AcademicData">AcademicData</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#CheckboxField">CheckboxField</a></li><li><a href="global.html#Consent">Consent</a></li><li><a href="global.html#CourseList">CourseList</a></li><li><a href="global.html#Custodian">Custodian</a></li><li><a href="global.html#DatePickerField">DatePickerField</a></li><li><a href="global.html#Enrolment">Enrolment</a></li><li><a href="global.html#EnrolmentList">EnrolmentList</a></li><li><a href="global.html#FormikControl">FormikControl</a></li><li><a href="global.html#Input">Input</a></li><li><a href="global.html#Menu">Menu</a></li><li><a href="global.html#NoDisponible">NoDisponible</a></li><li><a href="global.html#RadioButtons">RadioButtons</a></li><li><a href="global.html#SelectField">SelectField</a></li><li><a href="global.html#Student">Student</a></li><li><a href="global.html#Textarea">Textarea</a></li><li><a href="global.html#validationSchema">validationSchema</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:33 GMT+0200 (GMT+02:00)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
