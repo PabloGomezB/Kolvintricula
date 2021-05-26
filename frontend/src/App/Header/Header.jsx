@@ -3,7 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { Link, Route, Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 /**
  * Componente que construye el Header
@@ -19,9 +19,13 @@ export default function Header() {
             Kolvintricula
           </Typography>
         </Container>
-        <Button variant="contained">
+        
+        {/* <Route path={`${match.path}`}> */}
+        <Button component={Link} to="/" variant="contained">
           Inicio
         </Button>
+        {/* </Route> */}
+        
       </Toolbar>
     </AppBar>
   );

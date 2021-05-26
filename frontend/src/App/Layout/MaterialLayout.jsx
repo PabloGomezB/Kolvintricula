@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Paper, CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
-
-import Header from "../Header";
 import Footer from "../Footer";
 
 import { theme, useStyle } from "./styles";
@@ -17,7 +15,12 @@ export default function MaterialLayout({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
+      {/* <Router>
+        <Route path="/">
+          
+        </Route>
+      </Router> */}
+      {/* <Header /> */}
       <div className={classes.root}>
         <Paper className={classes.paper}>{children}</Paper>
       </div>

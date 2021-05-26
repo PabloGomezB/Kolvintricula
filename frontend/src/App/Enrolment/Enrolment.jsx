@@ -353,10 +353,6 @@ const Enrolment = (props) => {
 
   return (
     <div>
-      <Button component={Link} to="/" variant="contained">
-        Volver al inicio
-      </Button>
-
       {/* Muestra a que curso te estás matriculando */}
       <Typography variant="h3" gutterBottom align="center">
         Matrícula para {props.courseData.name}
