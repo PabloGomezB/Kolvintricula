@@ -256,7 +256,7 @@ const Consent = () => {
           <FormikControl
             control="input"
             type="text"
-            label="Enfermades"
+            label="Enfermedades"
             name="consent.enfermedades"
             fullWidth
           />
