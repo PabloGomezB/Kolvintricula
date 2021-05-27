@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\UFController;
 use App\Http\Controllers\Admin\CustodianController;
 use App\Http\Controllers\Admin\FullCalendarController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 Route::get('', function () {
