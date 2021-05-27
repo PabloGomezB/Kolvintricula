@@ -30,9 +30,9 @@ Actualmente la realización de la matrícula en el centro requiere de tramitacio
     * Todos los módulos de dichos cursos y sus respectivas UFs.
     * Toda la información de los alumnos, sus responsables y la matrícula realizada.
 
-Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.
-**Página web de matriculación:** http://www.kolvintricula.alumnes.iam.cat \
-**Página web de administración:** http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public
+Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.  
+**Página web de matriculación:** http://www.kolvintricula.alumnes.iam.cat  
+**Página web de administración:** http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public  
 **[Documentación de la API de Kolvintrícula](http://labs.iam.cat/~a18pabgombra/Kolvintricula/doc/API/html2-documentation-generated/)**
 
 ## Estructura del proyecto 📐
@@ -40,19 +40,19 @@ Además se ha creado una API que dispone de diversas funcionalidades listas para
 Las dos aplicaciones del proyecto no son independientes pues se complementan indispensablemente una a la otra; éstas son: la parte de _frontend_ y la parte de _backend_.
 
 - **[Frontend:](./frontend "Frontend folder")**  
--- Construido sobre [React](https://es.reactjs.org/).  
--- Aplicación con la que el alumno va a interactuar y la responsable de gestionar y enviar los datos introducidos al servidor para que la matriculación sea un éxito.  
-Consta principalmente de un formulario *user friendly*, dinámico  y sencillo que el alumno deberá completar para realizar la matrícula. 
+- Construido sobre [React](https://es.reactjs.org/).  
+- Aplicación con la que el alumno va a interactuar y la responsable de gestionar y enviar los datos introducidos al servidor para que la matriculación sea un éxito.  
+- Consta principalmente de un formulario *user friendly*, dinámico  y sencillo que el alumno deberá completar para realizar la matrícula. 
 
 - **[Backend:](./backend "Backend folder")**  
-	* Construido sobre [Laravel](https://laravel.com/).      
-	* Aplicación diseñada para los administrativos del centro con la finalizar de brindar una aplicación sencilla pero completa para gestionar toda la información referente a las matriculaciones del instituto.   
-Consta de diversas funcionalidades y vistas para gestionar todos los datos referentes a la matrícula de forma sencilla e intuitiva para cualquier tipo de usuario.    
-Hace a su vez la función de servidor ya que es la encargada de recibir los datos de la matrícula desde Frontend, procesarlos y almacenarlos correctamente en la base de datos.
+- Construido sobre [Laravel](https://laravel.com/).      
+- Aplicación diseñada para los administrativos del centro con la finalizar de brindar una aplicación sencilla pero completa para gestionar toda la información referente a las matriculaciones del instituto.   
+- Consta de diversas funcionalidades y vistas para gestionar todos los datos referentes a la matrícula de forma sencilla e intuitiva para cualquier tipo de usuario.    
+- Hace a su vez la función de servidor ya que es la encargada de recibir los datos de la matrícula desde Frontend, procesarlos y almacenarlos correctamente en la base de datos.
 
 - **Base de datos:**
--- Gestionada por [MariaDB](https://mariadb.org/).     
--- La base del proyecto, de donde van a salir y entrar todos los datos necesarios para el correcto funcionamiento de las dos aplicaciones.  
+- Gestionada por [MariaDB](https://mariadb.org/).     
+- La base del proyecto, de donde van a salir y entrar todos los datos necesarios para el correcto funcionamiento de las dos aplicaciones.  
 Los datos más importantes que almacena y con los que se trabaja en el proyecto son:
 	* Cursos
 	* Módulos
@@ -64,10 +64,11 @@ Los datos más importantes que almacena y con los que se trabaja en el proyecto 
 ## Instalación 💻
 
 _En la siguiente sección se explica cómo instalar el proyecto únicamente para su desarrollo._   
-_Si lo que buscas es **desplegar** las aplicaciones en tu servidor te invitamos a buscar la información en: [Cómo desplegar frontend](./frontend/README.md#despliegue) y [Cómo desplegar backend](./backend/README.md#despliegue)_
+_Si lo que buscas es **desplegar** las aplicaciones en tu servidor te invitamos a buscar la información en:  
+[Cómo desplegar frontend](./frontend/README.md#despliegue) y [Cómo desplegar backend](./backend/README.md#despliegue)_
 
 Para empezar a desarrollar en las aplicaciones utilizaremos **[Git](https://git-scm.com/)** para obtenerlas del repositorio:   
-```~ git clone https://github.com/PabloGomezB/Kolvintricula.git ```
+```> git clone https://github.com/PabloGomezB/Kolvintricula.git ```
 
 ### Frontend
 Para desarrollar en frontend necesitas:   
