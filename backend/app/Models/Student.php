@@ -17,6 +17,6 @@ class Student extends Model {
         'photo_path',
         'enrolment_status',
         'email_personal',
-        'email_pedralbes'
+        'email_pedralbes',
     ];
 }

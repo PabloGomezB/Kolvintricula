@@ -1,10 +1,11 @@
 <x-app-layout>
     @include('admin.student.header')
-
     <div class="py-12">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="bg-white p-6 border-b border-gray-200">
+                    <x-validation-errors />
+                    <x-success-message />
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -31,19 +32,19 @@
                                                     Segundo Apellido
                                                 </th>
                                                 <th scope="col" data-priority="5" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Fecha de cumpleaños
+                                                    Fecha de nacimiento
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Teléfono
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Foto
+                                                    Estado
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Email personal del alumno
                                                 </th>
                                                 <th scope="col" data-priority="4" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
-                                                    Email como aluno del Institut Pedralbes
+                                                    Email como alumno del Institut Pedralbes
                                                 </th>
                                                 <th scope="col" data-priority="6" class="px-6 py-3 text-left text-xs font-black uppercase tracking-wider">
                                                     Opciones

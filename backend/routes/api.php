@@ -2,13 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use App\Models\Course;
-use App\Models\Module;
 use App\Models\Student;
-
 use App\Http\Controllers\API\ApiController;
-use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------

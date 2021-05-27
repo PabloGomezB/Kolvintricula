@@ -17,7 +17,7 @@ class ModuleController extends Controller
      */
     public function index()
     {
-        $data['dataModules'] = Module::orderBy('updated_at', 'desc')->paginate(10);
+        $data['dataModules'] = Module::orderBy('updated_at', 'desc')->paginate(20);
         return view('admin.module.index',$data);
     }
 
@@ -54,7 +54,7 @@ class ModuleController extends Controller
         Module::create($dataForm);
 
         return redirect()->route('modules.index')
-            ->with('message',$request->name.': '.$request->description .' Modulo creado correctamente.');
+            ->with('message','El modulo '.$request->name.': '.$request->description .' se ha creado correctamente.');
     }
 
     /**

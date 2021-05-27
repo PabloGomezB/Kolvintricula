@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ModuleController;
@@ -9,17 +8,12 @@ use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\UFController;
 use App\Http\Controllers\Admin\CustodianController;
 use App\Http\Controllers\Admin\FullCalendarController;
-
-use App\Http\Controllers\EmailController;
-
-
 use App\Http\Controllers\Admin\ProfileController;
 use Illuminate\Support\Facades\DB;
 
 Route::get('', function () {
     return view('admin.index');
 })->name('admin');
-
 
 // Crea automáticamente las rutas a las funciones predefinidas en UserController
 Route::resource('users', UserController::class);

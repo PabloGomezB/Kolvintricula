@@ -124,11 +124,13 @@ const EnrolmentList = () => {
             Nuestros Cursos
           </Typography>
           <div className={`${classes.divEnrolList}`}>
+            {/* Spinner antes de que carguen la lista de cursos */}
             {loadingBTN ? (
               <div className={classes.loading}>
                 <CircularProgress />
               </div>
             ) : (
+              //Lista de cursos
               <Grid container align="center" spacing={2}>
                 <CourseList courses={courseArray}></CourseList>
               </Grid>
@@ -145,6 +147,7 @@ const EnrolmentList = () => {
           </div>
 
           <Container align="center">
+            {/* Popup que se ejecuta cuando le clicas al botón de cargar datos */}
             <Dialog
               open={open}
               onClose={handleClose}
@@ -173,7 +176,7 @@ const EnrolmentList = () => {
                 </IconButton>
               </DialogActions>
             </Dialog>
-
+            {/* Alertas que se muestran dependiendo de la acción del alumno */}
             {showAlert ? (
               <Snackbar
                 anchorOrigin={{

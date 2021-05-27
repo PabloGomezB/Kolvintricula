@@ -33,7 +33,7 @@ Es por eso que nace Kolvintrícula: "_una solución sencilla, rápida e intuitiv
     * Toda la información de los alumnos, sus responsables y la matrícula realizada.
 
 Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.  
-**Página web de matriculación:** http://www.kolvintricula.alumnes.iam.cat  
+**Página web de matriculación:** https://www.kolvintricula.alumnes.iam.cat  
 **Página web de administración:** https://www.admintricula.alumnes.iam.cat  
 **[Documentación de la API de Kolvintrícula](http://labs.iam.cat/~a18pabgombra/Kolvintricula/doc/API/html2-documentation-generated/)**
 
@@ -106,8 +106,7 @@ Actualmente el proyecto está en producción y es 100% funcional. Sin embargo so
 	- Existe la posibilidad de que al hacer la matrícula el correo del instituto resultante del nuevo alumno ya exista en la base de datos. En tal caso al finalizar la matrícula daría error ya que deben ser únicos.    
 	- Al editar un alumno no se obtiene la imagen que ya tiene asignada y te obliga a cambiarla para poder guardar los cambios.
 	- Se echan en falta avisos para indicar al usuario que los cambios se han realizado correctamente.
-	- El buscador en las tablas solo filtra los datos que aparecen en la página actual, no entre todos los resultados disponibles.   
-	- El apartado de Responsables está incompleto ya que no muestra qué alumno tienen a cargo, ni tampoco se puede editar el responsable de forma práctica.   
+	- El buscador en las tablas solo filtra los datos que aparecen en la página actual, no entre todos los resultados disponibles.      
 
 ## Autores ✒️
 
@@ -127,6 +126,6 @@ Actualmente el proyecto está en producción y es 100% funcional. Sin embargo so
 -- a18anggarvic@inpedralbes.cat  
 -- https://github.com/AngelMiguel2020  
 
-- **Kolvin Larriega Palomino**  
+- **Kevin Larriega Palomino**  
 --   a18kevlarpal@inpedralbes.cat  
 -- https://github.com/kevinlarriega  

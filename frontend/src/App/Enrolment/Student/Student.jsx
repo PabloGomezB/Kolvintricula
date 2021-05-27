@@ -13,7 +13,7 @@ import imageDefault from "../../img/defaultPhotoProfile.png";
 export const Student = ({ nif }) => {
   //values: para poder acceder al valor de la foto y setFieldValue: para guardar el valor de la foto en el JSON
   const { values, setFieldValue } = useFormikContext();
-  
+
   //Declaración de los estados y los estilos
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
@@ -90,11 +90,7 @@ export const Student = ({ nif }) => {
 
             <div>
               <Field name="student.photo_path">
-                {({
-                  field,
-                  form: { touched, errors },
-                  meta,
-                }) => (
+                {({ field, form: { touched, errors }, meta }) => (
                   <>
                     <input
                       style={{ display: "none" }}
@@ -107,7 +103,9 @@ export const Student = ({ nif }) => {
                       <div className={classes.error}>{meta.error}</div>
                     )}
                     {onlyPNG && (
-                      <div className={classes.error}>Solo se pueden subir imágenes PNG</div>
+                      <div className={classes.error}>
+                        Solo se pueden subir imágenes PNG
+                      </div>
                     )}
                   </>
                 )}
@@ -206,9 +204,7 @@ export const Student = ({ nif }) => {
 };
 
 Student.propTypes = {
-  nif: PropTypes.shape({
-    length: PropTypes.number,
-  }),
+  nif: PropTypes.any,
 };
 
 export default Student;

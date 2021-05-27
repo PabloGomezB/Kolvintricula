@@ -2,7 +2,7 @@
 
 Un formulario que permite a los futuros alumnos del INS Pedralbes realizar la matrícula de forma sencilla e intuitiva.
 
-URL: http://www.kolvintricula.alumnes.iam.cat/
+URL: https://www.kolvintricula.alumnes.iam.cat/
 
 ## Comenzando 🚀
 
@@ -55,7 +55,7 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 
 JSDOC: http://labs.iam.cat/~a18jorcalari/jsdoc/
 Styleguidist: http://labs.iam.cat/~a18jorcalari/styleguidist/
-Google Drive:
+Google Drive: https://docs.google.com/document/d/1J_McLy75uu-iGoipvt9CgHLIMctJ6qdPxCha6Ca5vDU/edit?usp=sharing
 
 ## Configuración
 
@@ -95,7 +95,7 @@ Script para hacer pruebas y test.
 
 ### `npm eject`
 
-Nota: esta es una operación unidireccional. Una vez que hagas `eject`, ¡no podrás regresar!
+Nota: Esta es una operación unidireccional. Una vez que hagas `eject`, ¡no podrás regresar!
 
 Si no está satisfecho con la herramienta de compilación y las opciones de configuración, puede hacer `eject` en cualquier momento. Este comando eliminará la dependencia de compilación única de su proyecto.
 
@@ -122,7 +122,7 @@ Script para generar build de documentación javascript
 - [NodeJS](https://nodejs.org/en/) - Node.js es un entorno de ejecución de JavaScript de código abierto y multiplataforma
 - [NPM](https://www.npmjs.com/) - Manejador de dependecias
 - [React Router](https://reactrouter.com/) - React Router es una colección de componentes de navegación que se componen declarativamente con su aplicación
-- [Formik](https://formik.org/) - Formik is the world's most popular open source form library for React and React Native.
+- [Formik](https://formik.org/) - Formik es la biblioteca de formularios de código abierto más popular del mundo para React y React Native.
 - [Material UI](https://material-ui.com/) - React componentes para un desarrollo web más rápido y sencillo.
 - [Styleguidist](https://github.com/styleguidist/react-styleguidist) - React Styleguidist es un entorno de desarrollo de componentes con un servidor de desarrollo y una guía de estilo viva que puede compartir con su equipo.
 - [Axios](https://github.com/axios/axios) - Cliente HTTP basado en promesas para el navegador y node.js

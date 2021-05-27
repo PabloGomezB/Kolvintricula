@@ -16,7 +16,7 @@ class StudentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $data['dataStudents'] = Student::orderBy('updated_at', 'desc')->paginate(10);
+        $data['dataStudents'] = Student::orderBy('id', 'desc')->paginate(10);
         return view('admin.student.index', $data);
     }
 
@@ -67,7 +67,7 @@ class StudentController extends Controller {
         Student::create($dataForm);
 
         return redirect()->route('students.index')
-            ->with('success', 'Student created successfully.');
+            ->with('message','Estudiante '.$request->name.' '. $request->last_name1 . ' ' . $request->last_name2 . ' creado correctamente.');
     }
 
 
@@ -134,14 +134,10 @@ class StudentController extends Controller {
             'email_pedralbes' => $request->email_pedralbes,
         );
 
-        // Student::create($dataForm);
-
-
-        // $dataForm = request()->except(['_token', '_method']);
         Student::where('id', '=', $id)->update($dataForm);
 
         return redirect()->route('students.index')
-            ->with('success', 'Student updated successfully.');
+            ->with('message','Estudiante '.$request->name.' '. $request->last_name1 . ' ' . $request->last_name2 . ' actualizado correctamente.');
     }
 
     /**
@@ -153,6 +149,6 @@ class StudentController extends Controller {
     public function destroy($id) {
         Student::destroy($id);
         return redirect()->route('students.index')
-            ->with('success', 'Student destroyed successfully.');
+            ->with('message','Estudiante con id: '.$id.' eliminado correctamente.');
     }
 }
