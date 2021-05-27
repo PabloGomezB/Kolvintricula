@@ -188,9 +188,14 @@ const Enrolment = (props) => {
       _submitForm(values, actions);
     } else {
       if (props.studentData !== 0) {
+        console.log("else1");
+
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
+        nextStep(values, actions);
       } else if (activeStep === 0 && props.studentData === 0) {
+        console.log("else2");
+
         // Checkear solo si el student es nuevo
         let newStudentNif = values.student.nif;
         let newStudentEmail = values.student.email_personal;
@@ -255,6 +260,7 @@ const Enrolment = (props) => {
         }
         nextStep(values, actions);
       } else {
+        console.log("else3");
         nextStep(values, actions);
       }
     }
