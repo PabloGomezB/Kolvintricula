@@ -1,6 +1,6 @@
 # Proyecto Kolvintricula Frontend
 
-Esta parte del proyecto hace la matrícula de un alumno y la envía a backend.
+Un formulario que permite a los futuros alumnos del INS Pedralbes realizar la matrícula de forma sencilla e intuitiva.
 
 URL: http://www.kolvintricula.alumnes.iam.cat/
 
@@ -52,6 +52,7 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 ## Documentación técnica
 
 JSDOC: http://labs.iam.cat/~a18jorcalari/jsdoc/
+
 Styleguidist: http://labs.iam.cat/~a18jorcalari/styleguidist/
 
 ## Configuración
@@ -88,7 +89,7 @@ La compilación se minimiza y los nombres de archivo incluyen los hash.
 
 ### `npm test`
 
-Script para hacer pruebas y test (no se ha utilizado)
+Script para hacer pruebas y test.
 
 ### `npm eject`
 
@@ -126,5 +127,5 @@ Script para compilar y minificar la documentación de React.
 ## Autores ✒️
 
 - **Jordi Callupe** - [a18jorcalari](https://github.com/a18jorcalari)
-- **Kevin Larriega** - [a18kevlarpal](#fulanito-de-tal)
-- **Pablo Gómez** - [a18pabgombra](#fulanito-de-tal)
+- **Kevin Larriega** - [a18kevlarpal](https://github.com/kevinlarriega)
+- **Pablo Gómez** - [a18pabgombra](https://github.com/PabloGomezB)
