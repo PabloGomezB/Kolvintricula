@@ -1,3 +1,4 @@
+import { Button } from "@material-ui/core";
 import { Field, useFormikContext } from "formik";
 import React, { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
@@ -15,24 +16,20 @@ export const SignatureField = () => {
   }, []);
 
   function onChange() {
-    setFieldValue(
-      "consent.firma",
-      signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-    );
-    setSignature(
-      signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-    );
+    setFieldValue("consent.firma", signatureRef.current.toDataURL("image/jpg"));
+    setSignature(signatureRef.current.toDataURL("image/jpg"));
   }
 
+  function clear() {
+    setFieldValue("consent.firma", "");
+    setSignature("");
+    signatureRef.current.clear();
+  }
   return (
     //Muestra el campo que contiene la firma
     <div className={classes.alignCenter}>
       <Field name="consent.firma">
-        {({
-          field,
-          form: { touched, errors },
-          meta,
-        }) => (
+        {({ field, form: { touched, errors }, meta }) => (
           <>
             <h4 align="center">Para continuar, firma aquí por favor</h4>
             <SignatureCanvas
@@ -48,6 +45,11 @@ export const SignatureField = () => {
           </>
         )}
       </Field>
+      <div className={`${classes.dblock} ${classes.alignCenter}`}>
+        <Button variant="contained" onClick={() => clear()}>
+          Limpiar firma
+        </Button>
+      </div>
     </div>
   );
 };
