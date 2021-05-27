@@ -1,5 +1,5 @@
 <p align="center">
-![Logo](./doc/logo.png)
+![Logo](doc/logo.png)
 </p>
 <p align="center">
 <img align="left" src="https://www.imuko.co/wp-content/uploads/2020/11/React-logo.png" width="100">
