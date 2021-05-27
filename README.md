@@ -39,9 +39,9 @@ Además se ha creado una API que dispone de diversas funcionalidades listas para
 
 Las dos aplicaciones del proyecto no son independientes pues se complementan indispensablemente una a la otra; éstas son: la parte de _frontend_ y la parte de _backend_.
 
-- **[Frontend:](./frontend "Frontend folder")**
--- Construido sobre [React](https://es.reactjs.org/). 
--- Aplicación con la que el alumno va a interactuar y la responsable de gestionar y enviar los datos introducidos al servidor para que la matriculación sea un éxito
+- **[Frontend:](./frontend "Frontend folder")**  
+-- Construido sobre [React](https://es.reactjs.org/).  
+-- Aplicación con la que el alumno va a interactuar y la responsable de gestionar y enviar los datos introducidos al servidor para que la matriculación sea un éxito.  
 Consta principalmente de un formulario *user friendly*, dinámico  y sencillo que el alumno deberá completar para realizar la matrícula. 
 
 - **[Backend:](./backend "Backend folder")**
