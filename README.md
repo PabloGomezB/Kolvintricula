@@ -44,15 +44,15 @@ Las dos aplicaciones del proyecto no son independientes pues se complementan ind
 -- Aplicación con la que el alumno va a interactuar y la responsable de gestionar y enviar los datos introducidos al servidor para que la matriculación sea un éxito.  
 Consta principalmente de un formulario *user friendly*, dinámico  y sencillo que el alumno deberá completar para realizar la matrícula. 
 
-- **[Backend:](./backend "Backend folder")**
--- Construido sobre [Laravel](https://laravel.com/). 
--- Aplicación diseñada para los administrativos del centro con la finalizar de brindar una aplicación sencilla pero completa para gestionar toda la información referente a las matriculaciones del instituto.
-Consta de diversas funcionalidades y vistas para gestionar todos los datos referentes a la matrícula de forma sencilla e intuitiva para cualquier tipo de usuario.
+- **[Backend:](./backend "Backend folder")**  
+	* Construido sobre [Laravel](https://laravel.com/).      
+	* Aplicación diseñada para los administrativos del centro con la finalizar de brindar una aplicación sencilla pero completa para gestionar toda la información referente a las matriculaciones del instituto.   
+Consta de diversas funcionalidades y vistas para gestionar todos los datos referentes a la matrícula de forma sencilla e intuitiva para cualquier tipo de usuario.    
 Hace a su vez la función de servidor ya que es la encargada de recibir los datos de la matrícula desde Frontend, procesarlos y almacenarlos correctamente en la base de datos.
 
 - **Base de datos:**
--- Gestionada por [MariaDB](https://mariadb.org/). 
--- La base del proyecto, de donde van a salir y entrar todos los datos necesarios para el correcto funcionamiento de las dos aplicaciones.
+-- Gestionada por [MariaDB](https://mariadb.org/).     
+-- La base del proyecto, de donde van a salir y entrar todos los datos necesarios para el correcto funcionamiento de las dos aplicaciones.  
 Los datos más importantes que almacena y con los que se trabaja en el proyecto son:
 	* Cursos
 	* Módulos
@@ -63,50 +63,51 @@ Los datos más importantes que almacena y con los que se trabaja en el proyecto 
 
 ## Instalación 💻
 
-_En la siguiente sección se explica cómo instalar el proyecto únicamente para su desarrollo._
+_En la siguiente sección se explica cómo instalar el proyecto únicamente para su desarrollo._   
 _Si lo que buscas es **desplegar** las aplicaciones en tu servidor te invitamos a buscar la información en: [Cómo desplegar frontend](./frontend/README.md#despliegue) y [Cómo desplegar backend](./backend/README.md#despliegue)_
 
-Para empezar a desarrollar en las aplicaciones utilizaremos **[Git](https://git-scm.com/)** para obtenerlas del repositorio:
+Para empezar a desarrollar en las aplicaciones utilizaremos **[Git](https://git-scm.com/)** para obtenerlas del repositorio:   
 ```~ git clone https://github.com/PabloGomezB/Kolvintricula.git ```
 
 ### Frontend
-Para desarrollar en frontend necesitas:
+Para desarrollar en frontend necesitas:   
 -- [Node.js](https://nodejs.org/es/)
 
-Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola de comandos** y ejecuta las siguientes líneas:
-```> cd ./frontend```
-```> npm install```
-```> npm start```
+Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola de comandos** y ejecuta las siguientes líneas:   
+```> cd ./frontend```   
+```> npm install```   
+```> npm start```   
 Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend.
-### Backend
-Para desarrollar en backend necesitas tener instalado:
--- [PHP 7.4 +](https://www.php.net/downloads.php)
--- [Composer 2.0](https://getcomposer.org/)
 
-Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola de comandos** y ejecuta las siguientes líneas:
-```> cd ./backend```
-```> composer install```
-```> php artisan serve```
-Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend.
+### Backend
+Para desarrollar en backend necesitas tener instalado:   
+-- [PHP 7.4 +](https://www.php.net/downloads.php)      
+-- [Composer 2.0](https://getcomposer.org/)   
+
+Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola de comandos** y ejecuta las siguientes líneas:   
+```> cd ./backend```   
+```> composer install```   
+```> php artisan serve```   
+Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend.  
 
 ## Autores ✒️
 
-- **Pablo Gómez Bravo**
--- a18pabgombra@inpedralbes.cat
--- https://github.com/PabloGomezB
+- **Pablo Gómez Bravo**   
+-- a18pabgombra@inpedralbes.cat   
+-- https://github.com/PabloGomezB  
 
-- **Jordi Callupe Arias**
---   a18pabgombra@inpedralbes.cat
--- https://github.com/a18jorcalari
+- **Jordi Callupe Arias**  
+--   a18pabgombra@inpedralbes.cat  
+-- https://github.com/a18jorcalari  
 
-- **Ruben Oncina Lopez**
---   a18rubonclop@inpedralbes.cat
--- https://github.com/SnowMan3sixty
+- **Ruben Oncina Lopez**  
+--   a18rubonclop@inpedralbes.cat  
+-- https://github.com/SnowMan3sixty  
 
-- **Angel García Vicente**
--- a18anggarvic@inpedralbes.cat
--- https://github.com/AngelMiguel2020
+- **Angel García Vicente**  
+-- a18anggarvic@inpedralbes.cat  
+-- https://github.com/AngelMiguel2020  
 
-- **Kolvin Larriega Palomino**
---   a18kevlarpal@inpedralbes.cat
--- https://github.com/kevinlarriega
+- **Kolvin Larriega Palomino**  
+--   a18kevlarpal@inpedralbes.cat  
+-- https://github.com/kevinlarriega  
