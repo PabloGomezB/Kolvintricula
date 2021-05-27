@@ -1,6 +1,7 @@
 <p align="center">
-![Logo](doc/logo.png)
+![Logo](/doc/logo.png)
 </p>
+<img align="center" src="http://labs.iam.cat/~a18pabgombra/Kolvintricula/doc/logo.png" width="400">
 <p align="center">
 <img align="left" src="https://www.imuko.co/wp-content/uploads/2020/11/React-logo.png" width="100">
 <img 
