@@ -145,6 +145,12 @@ const useStyle = makeStyles(() => ({
   loading: {
     textAlign: "center",
   },
+  stepLabel: {
+    display: "block",
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+  },
 
   //Dialogs
   dialogTitleSuccess: {
@@ -170,8 +176,8 @@ const useStyle = makeStyles(() => ({
     backgroundColor: "#BDFFCB",
   },
   imageStudent: {
-    borderRadius: '50px'
-  }
+    borderRadius: "50px",
+  },
 }));
 
 export { theme, useStyle };

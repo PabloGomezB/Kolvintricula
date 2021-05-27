@@ -371,7 +371,9 @@ const Enrolment = (props) => {
           const labelProps = {};
           if (isStepOptional(index)) {
             labelProps.optional = (
-              <Typography variant="caption">Opcional</Typography>
+              <Typography variant="caption" className={classes.stepLabel}>
+                Opcional
+              </Typography>
             );
           }
           if (isStepSkipped(index)) {
@@ -380,7 +382,7 @@ const Enrolment = (props) => {
           return (
             <Step key={label} {...stepProps} style={{ width: 24, padding: 0 }}>
               <StepLabel {...labelProps} align="center">
-                {label}
+                <div className={classes.stepLabel}>{label}</div>
               </StepLabel>
             </Step>
           );
