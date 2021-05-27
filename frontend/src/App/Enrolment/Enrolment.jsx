@@ -184,85 +184,88 @@ const Enrolment = (props) => {
    * @param {*} actions Acciones del formik
    */
   const handleNext = (values, actions) => {
+
     if (isLastStep) {
       _submitForm(values, actions);
     } else {
-      if (props.studentData !== 0) {
-        console.log("else1");
+      switch (activeStep) {
+        case 0:
+          console.log(props.studentData);
 
-        // Seteamos a true así en backend redirigimos a update en vez de create
-        values.student.updateStudent = true;
-        nextStep(values, actions);
-      } else if (activeStep === 0 && props.studentData === 0) {
-        console.log("else2");
+          if (props.studentData !== 0) {
+            // Seteamos a true así en backend redirigimos a update en vez de create
+            values.student.updateStudent = true;
+            nextStep(values, actions);
+          }
+          else{
+            // Checkear solo si el student es nuevo
+            let newStudentNif = values.student.nif;
+            let newStudentEmail = values.student.email_personal;
 
-        // Checkear solo si el student es nuevo
-        let newStudentNif = values.student.nif;
-        let newStudentEmail = values.student.email_personal;
-
-        axios
-          .post(`${process.env.REACT_APP_API}/api/students/find`, {
-            nif: newStudentNif,
-            email: newStudentEmail,
-          })
-          .then((response) => {
-            let errorInForm = false;
-            if (response.data.nifFound || response.data.emailFound) {
-              if (response.data.nifFound) {
-                setMessageError("Ya existe un alumno con este mismo NIF");
-              } else {
-                setMessageError("Ya existe un alumno con este mismo EMAIL");
-              }
-              setShowAlert(true);
-              errorInForm = true;
-            }
-            if (errorInForm === false) {
-              nextStep(values, actions);
-            }
-            actions.setTouched({});
-            actions.setSubmitting(false);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else if (activeStep === 2 && isAdult(values.student.date_birth)) {
-        values.custodians = [];
-        nextStep(values, actions);
-      } else if (activeStep === 3) {
-        // Si el estudiante no selecciona ninguna uf entonces debemos pasar a back todos los modulos con sus ufs de forma automática
-        // Comprobamos si el objeto modules está vacío (si el alumno no ha seleccionado niguna UF)
-        if (
-          Object.keys(values.academic_data.modules).length === 0 &&
-          values.academic_data.modules.constructor === Object
-        ) {
-          // Seteamos el array en el que almacenaremos las UF de cada módulo
-          let ufs = [];
-
-          // forEach sobre todos los cursos que nos envía back
-          cursmoduluf.forEach(function (curso) {
-            // Tabajamos únicamente sobre el curso que se al mismo que el user haya escogido
-            if (curso.year === values.academic_data.year) {
-              // Una vez tenemos el curso le hacemos forEach para obtener sus módulos y de cada modulo forEach para obtener sus UF
-              curso.modules.forEach(function (modulo) {
-                modulo.ufs.forEach(function (uf) {
-                  // Almacenamos cada UF del modulo en el array
-                  ufs.push(uf.name);
+            axios
+              .post(`${process.env.REACT_APP_API}/api/students/find`, {
+                nif: newStudentNif,
+                email: newStudentEmail,
+              })
+              .then((response) => {
+                let errorInForm = false;
+                if (response.data.nifFound || response.data.emailFound) {
+                  if (response.data.nifFound) {
+                    setMessageError("Ya existe un alumno con este mismo NIF");
+                  } else {
+                    setMessageError("Ya existe un alumno con este mismo EMAIL");
+                  }
+                  setShowAlert(true);
+                  errorInForm = true;
+                }
+                if (errorInForm === false) {
+                  nextStep(values, actions);
+                }
+                actions.setTouched({});
+                actions.setSubmitting(false);
+              })
+              .catch((error) => {
+                console.log(error);
+            });
+          };
+          break;
+        case 2:
+          if (isAdult(values.student.date_birth)) {
+            values.custodians = [];
+          };
+          nextStep(values, actions);
+          break;
+        case 3:
+          // Si el estudiante no selecciona ninguna uf entonces debemos pasar a back todos los modulos con sus ufs de forma automática
+          // Comprobamos si el objeto modules está vacío (si el alumno no ha seleccionado niguna UF)
+          if (Object.keys(values.academic_data.modules).length === 0 && values.academic_data.modules.constructor === Object) {
+            // Seteamos el array en el que almacenaremos las UF de cada módulo
+            let ufs = [];
+            // forEach sobre todos los cursos que nos envía back
+            cursmoduluf.forEach(function (curso) {
+              // Tabajamos únicamente sobre el curso que se al mismo que el user haya escogido
+              if (curso.year === values.academic_data.year) {
+                // Una vez tenemos el curso le hacemos forEach para obtener sus módulos y de cada modulo forEach para obtener sus UF
+                curso.modules.forEach(function (modulo) {
+                  modulo.ufs.forEach(function (uf) {
+                    // Almacenamos cada UF del modulo en el array
+                    ufs.push(uf.name);
+                  });
+                  // Guardamos en el objeto que se pasará a back el modulo (clave)con su array de UF (valor) siguiendo la estructura de AcademicData.jsx
+                  values.academic_data.modules[
+                    `${modulo.name} - ${modulo.description}`
+                  ] = ufs;
+                  // Reset al array ufs para no repetirlas en los siguientes modulos
+                  ufs = [];
                 });
-                // Guardamos en el objeto que se pasará a back el modulo (clave)con su array de UF (valor) siguiendo la estructura de AcademicData.jsx
-                values.academic_data.modules[
-                  `${modulo.name} - ${modulo.description}`
-                ] = ufs;
-                // Reset al array ufs para no repetirlas en los siguientes modulos
-                ufs = [];
-              });
-            }
-          });
-        }
-        nextStep(values, actions);
-      } else {
-        console.log("else3");
-        nextStep(values, actions);
-      }
+              }
+            });
+          }
+          nextStep(values, actions);
+          break;
+        default:
+          nextStep(values, actions);
+      };
     }
   };
 
