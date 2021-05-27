@@ -1,77 +1,112 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+![Logo](./doc/logo.png)
+</p>
+<p align="center">
+<img align="left" src="https://www.imuko.co/wp-content/uploads/2020/11/React-logo.png" width="100">
+<img 
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo.min.svg/1200px-Logo.min.svg.png" width="100">
+<img align="right" src="https://lh3.googleusercontent.com/proxy/AGdmpk5C6TVTFWuJjM_ZYevWs2fI8Gn4vJtCsgsoLtaMMLQVFtlBM0wf0_XFhBt2UG0hqyZ_4DHhq5hxk1iaFoZ6YGTOQzVqmkfiKxOnKblbfqQ6pTaZc0vAwbKwwhMfkyR61sV1T7OPQNo" width="100">
 </p>
 
-## About Kolvintrícula
+# Kolvintrícula
 
-Kolvintrícula es una aplicación multitarea, con dos funciones muy claras:
+Kolvintrícula es un proyecto que responde a una necesidad real del instituto público Pedralbes.
+Actualmente la realización de la matrícula en el centro requiere de tramitaciones que ralentizan mucho el proceso y, en la mayoría de casos
 
--   Un web que permita a los alunos del Institutos Pedralbes y a los futuros alumnos.
--   Un panel de administación para los administradores del centro y secretaría para que puedan modificar la matrícula y poder gestionar el proceso de matrícula.
-    La web de referencia es [Institut Pedralbel](https://www.institutpedralbes.cat/).
-    La web de la matrícula es [Índice Matrícula](https://www.Kolvintricula.alumnes.cat/).
-    La web de admin es [Web Admin](http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/).
+### _Tabla de contenidos:_
+* **[1]  [Resumen](#resumen-)**
+* **[2]  [Estructura del proyecto](#estructura-del-proyecto-)**
+ * **[3] [Instalación](#instalacion-)**
+	* **[3.1] [Frontend](#instalacion-frontend)**
+	* **[3.2] [Backend](#instalacion-backend)**
+* **[4]  [Autores](#autores-)**
 
-## Learning Kolvintrícula
+## Resumen 📋
 
-Este proyecto utilizamos las sigienes tecnologías
--Backend:
-*PhpMyadmin
-*Laravel
+Éste proyecto se divide en dos potentes aplicaciones claramente diferenciadas:
+*   Un formulario que permite a los futuros alumnos del INS Pedralbes realizar la matrícula de forma sencilla e intuitiva.
+*   Un panel de administración para los responsables del centro con todas las herramientas necesarias para gestionar los datos referentes a la matriculación como:
+    * Los cursos disponibles en el centro.
+    * Todos los módulos de dichos cursos y sus respectivas UFs.
+    * Toda la información de los alumnos, sus responsables y la matrícula realizada.
 
--Frontend
-\*React
+Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.
+**Página web de matriculación:** http://www.kolvintricula.alumnes.iam.cat \
+**Página web de administración:** http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public
+**[Documentación de la API de Kolvintrícula](http://labs.iam.cat/~a18pabgombra/Kolvintricula/doc/API/html2-documentation-generated/)**
 
-## Plugins Usados
+## Estructura del proyecto 📐
 
--   \*\*[Data Tables](datatables.net/)(Añade muchas funcionalidades a las tablas)Laravel
+Las dos aplicaciones del proyecto no son independientes pues se complementan indispensablemente una a la otra; éstas son: la parte de _frontend_ y la parte de _backend_.
 
-### Readme especificos de cada proyecto
+- **[Frontend:](./frontend "Frontend folder")**
+-- Construido sobre [React](https://es.reactjs.org/). 
+-- Aplicación con la que el alumno va a interactuar y la responsable de gestionar y enviar los datos introducidos al servidor para que la matriculación sea un éxito
+Consta principalmente de un formulario *user friendly*, dinámico  y sencillo que el alumno deberá completar para realizar la matrícula. 
 
--   **[Backend](poner link)**
--   **[Frontend](poner link)**
+- **[Backend:](./backend "Backend folder")**
+-- Construido sobre [Laravel](https://laravel.com/). 
+-- Aplicación diseñada para los administrativos del centro con la finalizar de brindar una aplicación sencilla pero completa para gestionar toda la información referente a las matriculaciones del instituto.
+Consta de diversas funcionalidades y vistas para gestionar todos los datos referentes a la matrícula de forma sencilla e intuitiva para cualquier tipo de usuario.
+Hace a su vez la función de servidor ya que es la encargada de recibir los datos de la matrícula desde Frontend, procesarlos y almacenarlos correctamente en la base de datos.
 
-## Contributing
+- **Base de datos:**
+-- Gestionada por [MariaDB](https://mariadb.org/). 
+-- La base del proyecto, de donde van a salir y entrar todos los datos necesarios para el correcto funcionamiento de las dos aplicaciones.
+Los datos más importantes que almacena y con los que se trabaja en el proyecto son:
+	* Cursos
+	* Módulos
+	* Unidades Formativas (UF)
+	* Alumnos
+	* Responsables de los alumnos menores
+	* Matrículas
 
--   a18jolcalari@inpedralbes.cat
--   a18pabgombra@inpedralbes.cat
--   a18rubonclop@inpedralbes.cat
--   a18kevlarpal@inpedralbes.cat
--   a18anggarvic@inpedralbes.cat
+## Instalación 💻
 
-## Code of Conduct
+_En la siguiente sección se explica cómo instalar el proyecto únicamente para su desarrollo._
+_Si lo que buscas es **desplegar** las aplicaciones en tu servidor te invitamos a buscar la información en: [Cómo desplegar frontend](./frontend/README.md#despliegue) y [Cómo desplegar backend](./backend/README.md#despliegue)_
 
-Todo el proyecto sigue las buenas practicas acordadas por todos los miembros del equipo.
+Para empezar a desarrollar en las aplicaciones utilizaremos **[Git](https://git-scm.com/)** para obtenerlas del repositorio:
+```~ git clone https://github.com/PabloGomezB/Kolvintricula.git ```
 
-## Security Vulnerabilities & Cookies
+### Frontend
+Para desarrollar en frontend necesitas:
+-- [Node.js](https://nodejs.org/es/)
 
-Todos los campos han sido securizados. El uso de cookies es para uso exclusivo del proyecto. En caso de cualquier problema de suguridad enviar un correo a a18pabgombra@inpedralbes.cat.
+Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola de comandos** y ejecuta las siguientes líneas:
+```> cd ./frontend```
+```> npm install```
+```> npm start```
+Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend.
+### Backend
+Para desarrollar en backend necesitas tener instalado:
+-- [PHP 7.4 +](https://www.php.net/downloads.php)
+-- [Composer 2.0](https://getcomposer.org/)
 
-## License
+Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola de comandos** y ejecuta las siguientes líneas:
+```> cd ./backend```
+```> composer install```
+```> php artisan serve```
+Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend.
 
-Todos los derechos pertenecen Kolvin Corp.
-Director: Jordi Callupe.
-Mienbros: Ángel Miguel
+## Autores ✒️
 
-## Lanzar servidor sin WSL2
+- **Pablo Gómez Bravo**
+-- a18pabgombra@inpedralbes.cat
+-- https://github.com/PabloGomezB
 
--   Situate dentro de la carpeta del proyecto y en cmd ejecuta: `php -S 0.0.0.0:8080 -t public`. Ahora el servidor se encuentra en [http://localhost:8080](http://localhost:8080)
+- **Jordi Callupe Arias**
+--   a18pabgombra@inpedralbes.cat
+-- https://github.com/a18jorcalari
 
-[Fuente](https://r00t4bl3.com/post/how-to-run-laravel-in-windows-10-using-wsl-2-and-ubuntu-20-04)
+- **Ruben Oncina Lopez**
+--   a18rubonclop@inpedralbes.cat
+-- https://github.com/SnowMan3sixty
 
-### How ruben make it work
+- **Angel García Vicente**
+-- a18anggarvic@inpedralbes.cat
+-- https://github.com/AngelMiguel2020
 
--   Rename .env.example file to .envinside your project root and fill the database information. (windows wont let you do it, so you have to open your console cd your project root directory and run mv .env.example .env )
--   Open the console and cd your project root directory
--   Run composer install or php composer.phar install
--   Run php artisan key:generate
--   Run php artisan migrate
--   Run php artisan db:seed to run seeders, if any.
--   Run php artisan serve
-    php artisan make:seeder StudentSeeder
-    php artisan db:seed --class=StudentsSeeder
+- **Kolvin Larriega Palomino**
+--   a18kevlarpal@inpedralbes.cat
+-- https://github.com/kevinlarriega
