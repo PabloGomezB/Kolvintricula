@@ -55,7 +55,7 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 
 JSDOC: http://labs.iam.cat/~a18jorcalari/jsdoc/
 Styleguidist: http://labs.iam.cat/~a18jorcalari/styleguidist/
-Google Drive:
+Google Drive: https://docs.google.com/document/d/1J_McLy75uu-iGoipvt9CgHLIMctJ6qdPxCha6Ca5vDU/edit?usp=sharing
 
 ## Configuración
 
