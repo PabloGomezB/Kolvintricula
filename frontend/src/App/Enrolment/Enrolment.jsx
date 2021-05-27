@@ -190,8 +190,6 @@ const Enrolment = (props) => {
     } else {
       switch (activeStep) {
         case 0:
-          console.log(props.studentData);
-
           if (props.studentData !== 0) {
             // Seteamos a true así en backend redirigimos a update en vez de create
             values.student.updateStudent = true;
