@@ -122,7 +122,7 @@ Actualmente el proyecto está en producción y es 100% funcional. Sin embargo so
 --   a18rubonclop@inpedralbes.cat  
 -- https://github.com/SnowMan3sixty  
 
-- **Angel García Vicente**  
+- **Angel Miguel García Vicente**  
 -- a18anggarvic@inpedralbes.cat  
 -- https://github.com/AngelMiguel2020  
 
