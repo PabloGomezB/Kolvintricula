@@ -54,7 +54,7 @@ class ModuleController extends Controller
         Module::create($dataForm);
 
         return redirect()->route('modules.index')
-            ->with('success',$request->name.': '.$request->description .' Modulo creado correctamente.'); 
+            ->with('message',$request->name.': '.$request->description .' Modulo creado correctamente.');
     }
 
     /**
@@ -98,7 +98,7 @@ class ModuleController extends Controller
         Module::where('id',"=",$id)->update($dataForm);
 
         return redirect()->route('modules.index')
-                    ->with('message','Modulo con id: '.$id.' actualizado correctamente.');
+            ->with('message','Modulo con id: '.$id.' actualizado correctamente.');
     }
 
     /**
@@ -111,6 +111,6 @@ class ModuleController extends Controller
     {
         Module::destroy($id);
         return redirect()->route('modules.index')
-                ->with('success','Modulo con id: '.$id.' eliminado correctamente.');
+            ->with('message','Modulo con id: '.$id.' eliminado correctamente.');
     }
 }
