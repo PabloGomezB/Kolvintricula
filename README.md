@@ -5,7 +5,7 @@
 <img align="left" src="https://www.imuko.co/wp-content/uploads/2020/11/React-logo.png" width="100">
 <img 
 src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo.min.svg/1200px-Logo.min.svg.png" width="100">
-<img align="right" src="https://lh3.googleusercontent.com/proxy/AGdmpk5C6TVTFWuJjM_ZYevWs2fI8Gn4vJtCsgsoLtaMMLQVFtlBM0wf0_XFhBt2UG0hqyZ_4DHhq5hxk1iaFoZ6YGTOQzVqmkfiKxOnKblbfqQ6pTaZc0vAwbKwwhMfkyR61sV1T7OPQNo" width="100">
+<img align="right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/MariaDB_colour_logo.svg/1024px-MariaDB_colour_logo.svg.png" width="100">
 </p>
 
 # Kolvintrícula
@@ -16,10 +16,10 @@ Actualmente la realización de la matrícula en el centro requiere de tramitacio
 ### _Tabla de contenidos:_
 * **[1]  [Resumen](#resumen-)**
 * **[2]  [Estructura del proyecto](#estructura-del-proyecto-)**
- * **[3] [Instalación](#instalacion-)**
-	* **[3.1] [Frontend](#instalacion-frontend)**
-	* **[3.2] [Backend](#instalacion-backend)**
-* **[4]  [Autores](#autores-)**
+ * **[3] [Instalación](#instalación-)**
+	* **[3.1] [Frontend](#frontend)**
+	* **[3.2] [Backend](#backend)**
+* **[4]  [Autores](#autores-%EF%B8%8F-)**
 
 ## Resumen 📋
 
