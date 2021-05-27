@@ -13,8 +13,8 @@ Para que el proyecto funcione correctamente necesitaras tener instalado en tu ma
 -- [Composer 2.0](https://getcomposer.org/)  
 
 Una vez hemos clonado el proyecto abre la carpeta del repositorio y en **la consola de comandos** y ejecuta las siguientes líneas:   
-```> cd ./backend```  : Te desplaza a la carpeta que contiene todos los componentes de backend. 
-```> composer install``` : Analiza las dependencias del proyecto e instala todo lo necesario.  
+```> cd ./backend```  : Te desplaza a la carpeta que contiene todos los componentes de backend.    
+```> composer install``` : Analiza las dependencias del proyecto e instala todo lo necesario.     
 ```> php artisan serve``` : Inicia el servidor de pruebas.  
 
 Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend. 
@@ -34,17 +34,17 @@ Para desplegar el proyecto correctamente sigue los siguientes pasos:
 
 Para ejecutar comandos artisan necesitas encontrarte en la carpeta `/backend` del proyecto
 
-`> php artisan list` : Muestra una lista de todos los comandos que ofrece artisan
-`>  php artisan make:controller "controllerName"` : Crea la base de un controlador con el nombre indicado.
-`> php artisan make:model "modelName"` : Crea la base de un modelo con el nombre indicado
-`> php artisan make:migration "migrationName"` : Crea un fichero de migración para la base de datos.
-`> php artisan migrate` : Ejecuta la próxima migración.
-`> php artisan migrate:rollback` : Retrocede una migración hacia atras.
-`> php artisan migrate:reset` : Reinicia la base de datos por completo.
-`> php artisan make:seeder "SeederName"` : Crea la estructura basica de un seeder
-`> php artisan db:seed` : Ejecuta los seeders del proyecto.
-`> php artisan make:test "TestName"` : Crea la estructura basica de un test
-`> php artisan key:generate` : Genera la variable APP_KEY en el archivo .env 
+`> php artisan list` : Muestra una lista de todos los comandos que ofrece artisan   
+`>  php artisan make:controller "controllerName"` : Crea la base de un controlador con el nombre indicado.   
+`> php artisan make:model "modelName"` : Crea la base de un modelo con el nombre indicado   
+`> php artisan make:migration "migrationName"` : Crea un fichero de migración para la base de datos.   
+`> php artisan migrate` : Ejecuta la próxima migración.   
+`> php artisan migrate:rollback` : Retrocede una migración hacia atras.   
+`> php artisan migrate:reset` : Reinicia la base de datos por completo.   
+`> php artisan make:seeder "SeederName"` : Crea la estructura basica de un seeder   
+`> php artisan db:seed` : Ejecuta los seeders del proyecto.   
+`> php artisan make:test "TestName"` : Crea la estructura basica de un test   
+`> php artisan key:generate` : Genera la variable APP_KEY en el archivo .env     
 
 
 ## Construido con 🛠️
