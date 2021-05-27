@@ -27,14 +27,14 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import PropTypes from "prop-types";
-import React, { useRef } from "react";
+import React from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import FormikControl from "../../FormFields/FormikControl";
-import { Field } from "formik";
 import { SignatureField } from "../../FormFields/SignatureField";
+import { Paper, TableContainer } from "@material-ui/core";
 
 /**
  * Componente que cosntruye el paso de consentimiento
@@ -43,56 +43,59 @@ import { SignatureField } from "../../FormFields/SignatureField";
  */
 const Consent = () => {
   return (
+    //Muestra la información con respecto al consentimiento y la firma
     &lt;div>
       &lt;h4>DECLARACIÓN RESPONSABLES&lt;/h4>
-      &lt;Table aria-label="custom pagination table">
-        &lt;TableBody>
-          &lt;TableRow>
-            &lt;TableCell colSpan="2">
-              Informació bàsica sobre protecció de dades en compliment del
-              Reglament General de Protecció de Dades (Reglament UE 2016/679 del
-              Parlament Europeu i del Consell, de 27 d'abril de 2016)
-            &lt;/TableCell>
-          &lt;/TableRow>
-          &lt;TableRow>
-            &lt;TableCell>Finalitat, legitimació i destinataris&lt;/TableCell>
-            &lt;TableCell>
-              S'indica més avall en cada clàusula de consentiment
-            &lt;/TableCell>
-          &lt;/TableRow>
-          &lt;TableRow>
-            &lt;TableCell>Responsable&lt;/TableCell>
-            &lt;TableCell>Institut Pedralbes&lt;/TableCell>
-          &lt;/TableRow>
-          &lt;TableRow>
-            &lt;TableCell>Drets&lt;/TableCell>
-            &lt;TableCell>
-              Accedir a les dades, rectificar-les, suprimir-les, oposar-se al
-              tractament i sol·licitar-ne la limitació.
-            &lt;/TableCell>
-          &lt;/TableRow>
-          &lt;TableRow>
-            &lt;TableCell>Període de validesa&lt;/TableCell>
-            &lt;TableCell>
-              Curs acadèmic per al qual es formalitza la matrícula
-            &lt;/TableCell>
-          &lt;/TableRow>
-          &lt;TableRow>
-            &lt;TableCell>Informació addicional&lt;/TableCell>
-            &lt;TableCell>
-              Podeu consultar la informació addicional i detallada sobre
-              protecció de dades a les pàgines:
-              &lt;ul>
-                &lt;li>
-                  http://ensenyament.gencat.cat/ca/departament/proteccio-dades/informacio-addicional-
-                  tractaments/alumnes-centres-departament.html
-                &lt;/li>
-                &lt;li>www.institutpedralbes.cat (Secció Avisos legals )&lt;/li>
-              &lt;/ul>
-            &lt;/TableCell>
-          &lt;/TableRow>
-        &lt;/TableBody>
-      &lt;/Table>
+      &lt;TableContainer component={Paper}>
+        &lt;Table>
+          &lt;TableBody>
+            &lt;TableRow>
+              &lt;TableCell colSpan="2">
+                Informació bàsica sobre protecció de dades en compliment del
+                Reglament General de Protecció de Dades (Reglament UE 2016/679
+                del Parlament Europeu i del Consell, de 27 d'abril de 2016)
+              &lt;/TableCell>
+            &lt;/TableRow>
+            &lt;TableRow>
+              &lt;TableCell>Finalitat, legitimació i destinataris&lt;/TableCell>
+              &lt;TableCell>
+                S'indica més avall en cada clàusula de consentiment
+              &lt;/TableCell>
+            &lt;/TableRow>
+            &lt;TableRow>
+              &lt;TableCell>Responsable&lt;/TableCell>
+              &lt;TableCell>Institut Pedralbes&lt;/TableCell>
+            &lt;/TableRow>
+            &lt;TableRow>
+              &lt;TableCell>Drets&lt;/TableCell>
+              &lt;TableCell>
+                Accedir a les dades, rectificar-les, suprimir-les, oposar-se al
+                tractament i sol·licitar-ne la limitació.
+              &lt;/TableCell>
+            &lt;/TableRow>
+            &lt;TableRow>
+              &lt;TableCell>Període de validesa&lt;/TableCell>
+              &lt;TableCell>
+                Curs acadèmic per al qual es formalitza la matrícula
+              &lt;/TableCell>
+            &lt;/TableRow>
+            &lt;TableRow>
+              &lt;TableCell>Informació addicional&lt;/TableCell>
+              &lt;TableCell>
+                Podeu consultar la informació addicional i detallada sobre
+                protecció de dades a les pàgines:
+                &lt;ul>
+                  &lt;li>
+                    http://ensenyament.gencat.cat/ca/departament/proteccio-dades/informacio-addicional-
+                    tractaments/alumnes-centres-departament.html
+                  &lt;/li>
+                  &lt;li>www.institutpedralbes.cat (Secció Avisos legals )&lt;/li>
+                &lt;/ul>
+              &lt;/TableCell>
+            &lt;/TableRow>
+          &lt;/TableBody>
+        &lt;/Table>
+      &lt;/TableContainer>
       &lt;ol>
         &lt;li>
           He estat informat que, pel fet de formalitzar la matrícula en aquest
@@ -176,30 +179,32 @@ const Consent = () => {
               { key: "No", value: "no" },
             ]}
           />
-          &lt;Table>
-            &lt;TableBody>
-              &lt;TableRow>
-                &lt;TableCell>Finalitat&lt;/TableCell>
-                &lt;TableCell>
-                  Gestió de l'acció educativa i orientadora.
-                &lt;/TableCell>
-              &lt;/TableRow>
-              &lt;TableRow>
-                &lt;TableCell>Legitimació&lt;/TableCell>
-                &lt;TableCell>
-                  Consentiment de l’interessat o de la persona que ostenta la
-                  tutoria legal en cas de menors d’edat.
-                &lt;/TableCell>
-              &lt;/TableRow>
-              &lt;TableRow>
-                &lt;TableCell>Destinataris&lt;/TableCell>
-                &lt;TableCell>
-                  Les dades no es comunicaran a tercers, excepte en els casos
-                  previstos per llei, o si ho heu consentit prèviament.
-                &lt;/TableCell>
-              &lt;/TableRow>
-            &lt;/TableBody>
-          &lt;/Table>
+          &lt;TableContainer component={Paper}>
+            &lt;Table>
+              &lt;TableBody>
+                &lt;TableRow>
+                  &lt;TableCell>Finalitat&lt;/TableCell>
+                  &lt;TableCell>
+                    Gestió de l'acció educativa i orientadora.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+                &lt;TableRow>
+                  &lt;TableCell>Legitimació&lt;/TableCell>
+                  &lt;TableCell>
+                    Consentiment de l’interessat o de la persona que ostenta la
+                    tutoria legal en cas de menors d’edat.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+                &lt;TableRow>
+                  &lt;TableCell>Destinataris&lt;/TableCell>
+                  &lt;TableCell>
+                    Les dades no es comunicaran a tercers, excepte en els casos
+                    previstos per llei, o si ho heu consentit prèviament.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+              &lt;/TableBody>
+            &lt;/Table>
+          &lt;/TableContainer>
         &lt;/li>
         &lt;li>
           Autorització per a informar pare, mare o tutor/a legal (només en el
@@ -232,30 +237,32 @@ const Consent = () => {
               { key: "No", value: "no" },
             ]}
           />
-          &lt;Table aria-label="custom pagination table">
-            &lt;TableBody>
-              &lt;TableRow>
-                &lt;TableCell>Finalitat&lt;/TableCell>
-                &lt;TableCell>
-                  Gestió de l'acció educativa i orientadora.
-                &lt;/TableCell>
-              &lt;/TableRow>
-              &lt;TableRow>
-                &lt;TableCell>Legitimació&lt;/TableCell>
-                &lt;TableCell>
-                  Consentiment de l’interessat o de la persona que ostenta la
-                  tutoria legal en cas de menors d’edat.
-                &lt;/TableCell>
-              &lt;/TableRow>
-              &lt;TableRow>
-                &lt;TableCell>Destinataris&lt;/TableCell>
-                &lt;TableCell>
-                  Les dades no es comunicaran a tercers, excepte en els casos
-                  previstos per llei, o si ho heu consentit prèviament.
-                &lt;/TableCell>
-              &lt;/TableRow>
-            &lt;/TableBody>
-          &lt;/Table>
+          &lt;TableContainer component={Paper}>
+            &lt;Table aria-label="custom pagination table">
+              &lt;TableBody>
+                &lt;TableRow>
+                  &lt;TableCell>Finalitat&lt;/TableCell>
+                  &lt;TableCell>
+                    Gestió de l'acció educativa i orientadora.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+                &lt;TableRow>
+                  &lt;TableCell>Legitimació&lt;/TableCell>
+                  &lt;TableCell>
+                    Consentiment de l’interessat o de la persona que ostenta la
+                    tutoria legal en cas de menors d’edat.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+                &lt;TableRow>
+                  &lt;TableCell>Destinataris&lt;/TableCell>
+                  &lt;TableCell>
+                    Les dades no es comunicaran a tercers, excepte en els casos
+                    previstos per llei, o si ho heu consentit prèviament.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+              &lt;/TableBody>
+            &lt;/Table>
+          &lt;/TableContainer>
         &lt;/li>
         &lt;li>
           Autorització per al tractament de dades mèdiques de l'alumne/a. Dono
@@ -302,30 +309,32 @@ const Consent = () => {
             name="consent.otros"
             fullWidth
           />
-          &lt;Table aria-label="custom pagination table">
-            &lt;TableBody>
-              &lt;TableRow>
-                &lt;TableCell>Finalitat&lt;/TableCell>
-                &lt;TableCell>
-                  Gestió de l'acció educativa i orientadora.
-                &lt;/TableCell>
-              &lt;/TableRow>
-              &lt;TableRow>
-                &lt;TableCell>Legitimació&lt;/TableCell>
-                &lt;TableCell>
-                  Consentiment de l’interessat o de la persona que ostenta la
-                  tutoria legal en cas de menors d’edat.
-                &lt;/TableCell>
-              &lt;/TableRow>
-              &lt;TableRow>
-                &lt;TableCell>Destinataris&lt;/TableCell>
-                &lt;TableCell>
-                  Les dades no es comunicaran a tercers, excepte en els casos
-                  previstos per llei, o si ho heu consentit prèviament.
-                &lt;/TableCell>
-              &lt;/TableRow>
-            &lt;/TableBody>
-          &lt;/Table>
+          &lt;TableContainer component={Paper}>
+            &lt;Table aria-label="custom pagination table">
+              &lt;TableBody>
+                &lt;TableRow>
+                  &lt;TableCell>Finalitat&lt;/TableCell>
+                  &lt;TableCell>
+                    Gestió de l'acció educativa i orientadora.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+                &lt;TableRow>
+                  &lt;TableCell>Legitimació&lt;/TableCell>
+                  &lt;TableCell>
+                    Consentiment de l’interessat o de la persona que ostenta la
+                    tutoria legal en cas de menors d’edat.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+                &lt;TableRow>
+                  &lt;TableCell>Destinataris&lt;/TableCell>
+                  &lt;TableCell>
+                    Les dades no es comunicaran a tercers, excepte en els casos
+                    previstos per llei, o si ho heu consentit prèviament.
+                  &lt;/TableCell>
+                &lt;/TableRow>
+              &lt;/TableBody>
+            &lt;/Table>
+          &lt;/TableContainer>
         &lt;/li>
       &lt;/ol>
       &lt;SignatureField />
@@ -357,7 +366,7 @@ export default Consent;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:32 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu May 27 2021 09:09:34 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

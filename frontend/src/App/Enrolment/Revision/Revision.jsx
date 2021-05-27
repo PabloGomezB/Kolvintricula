@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+
 import {
   Grid,
   List,
@@ -15,8 +15,10 @@ import { useFormikContext } from "formik";
  * @returns
  */
 export default function Revision() {
-  const { values, submitForm } = useFormikContext();
+  //Sirve para poder acceder al valor del JSON que está en Enrolment.jsx
+  const { values } = useFormikContext();
 
+  //Contiene toda la información que el alumno ha ido rellenando y dicha información se enviará en Enrolment.jsx
   return (
     <div>
       <div>
@@ -49,7 +51,7 @@ export default function Revision() {
             <ListItem>
               <ListItemText
                 primary="Fecha de nacimiento"
-                secondary={values.student.date_birth}
+                secondary={moment(values.student.date_birth).format('D/MM/YYYY')}
               />
             </ListItem>
           </Grid>

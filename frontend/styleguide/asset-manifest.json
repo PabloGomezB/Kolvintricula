@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.js": "/build/main.5b45404e.js",
+    "runtime-main.js": "/build/bundle.3527ec54.js",
+    "build/2.0a04ccde.js": "/build/2.0a04ccde.js",
+    "build/2.0a04ccde.js.LICENSE.txt": "/build/2.0a04ccde.js.LICENSE.txt",
+    "index.html": "/index.html",
+    "static/media/backgroundImageCourses.caebb1c4.png": "/static/media/backgroundImageCourses.caebb1c4.png",
+    "static/media/defaultPhotoProfile.cb6adfde.png": "/static/media/defaultPhotoProfile.cb6adfde.png"
+  },
+  "entrypoints": [
+    "build/bundle.3527ec54.js",
+    "build/2.0a04ccde.js",
+    "build/main.5b45404e.js"
+  ]
+}

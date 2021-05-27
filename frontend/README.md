@@ -15,7 +15,7 @@ Mira **Despliegue** para conocer como desplegar el proyecto.
 Instalar Node JS
 
 ```
-Da un ejemplo
+https://nodejs.org/es/
 ```
 
 ### Instalación 🔧
@@ -48,6 +48,11 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 - README.md: Fichero que informa del proyecto,
 - styleguide.config.js: Este fichero configura la documentación de Styleguidist.
 - .env: Este fichero guarda las variables de entorno
+
+## Documentación técnica
+
+JSDOC: http://labs.iam.cat/~a18jorcalari/jsdoc/
+Styleguidist: http://labs.iam.cat/~a18jorcalari/styleguidist/
 
 ## Configuración
 

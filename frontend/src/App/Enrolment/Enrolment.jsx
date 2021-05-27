@@ -28,6 +28,7 @@ import axios from "axios";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
+//Array que contiene los nombres de los pasos de la matrícula
 const steps = [
   "Alumno",
   "Responsable",
@@ -35,12 +36,14 @@ const steps = [
   "Consentimiento",
   "Revision",
 ];
+
 /**
  * Componente que construye el formulario entero
  * @param {*} props Props
  * @returns JSX
  */
 const Enrolment = (props) => {
+  //Declaración de las constantes, los estados y los estilos
   const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -54,7 +57,8 @@ const Enrolment = (props) => {
   const [successfullyEnrolled, setSuccessfullyEnrolled] = useState(0);
   const [emailPedralbes, setEmailPedralbes] = useState(0);
 
-  const [cursmoduluf, setCursmoduluf] = useState([]);
+  const [cursmoduluf, setCursmoduluf] = useState({});
+
   useEffect(() => {
     /** Obtiene los modulos y ufs a partir de la id del curso */
     axios
@@ -66,6 +70,7 @@ const Enrolment = (props) => {
       });
   }, [props.courseData.id]);
 
+  //JSON donde se guarda la información de los campos del formulario
   let studentData = {
     student: {
       updateStudent: false,
@@ -96,8 +101,7 @@ const Enrolment = (props) => {
         description: props.courseData.description,
       },
       year: "",
-      modules: {
-      },
+      modules: {},
     },
     consent: {
       alergias: "",
@@ -113,6 +117,7 @@ const Enrolment = (props) => {
       firma: "",
     },
   };
+
   // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
@@ -144,6 +149,7 @@ const Enrolment = (props) => {
         );
     }
   }
+
   /**
    * Comprueba si la persona es adulta
    * @param {*} date Fecha
@@ -152,14 +158,17 @@ const Enrolment = (props) => {
   const isAdult = (date) => {
     return moment().diff(date, "years") >= 18;
   };
+
   /**
    * Comprueba si estás en el paso opcional
    * @param {*} step Paso
    * @returns Boolean
    */
+
   const isStepOptional = (step) => {
     return step === 1;
   };
+
   /**
    * Comprueba si ese paso ha sido saltado
    * @param {*} step Paso
@@ -169,9 +178,6 @@ const Enrolment = (props) => {
     return skipped.has(step);
   };
 
-  function _sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   /**
    * Controla la acción de siguiente del formulario. Dependiendo del paso en el que estés hará diferentes cosas.
    * @param {*} values Valores del formulario
@@ -219,13 +225,14 @@ const Enrolment = (props) => {
         nextStep(values, actions);
       } else if (activeStep === 3) {
         // Si el estudiante no selecciona ninguna uf entonces debemos pasar a back todos los modulos con sus ufs de forma automática
-        // Comprobamos si el objeto modules está vacío (si el usuario no ha seleccionado niguna UF)
+        // Comprobamos si el objeto modules está vacío (si el alumno no ha seleccionado niguna UF)
         if (
           Object.keys(values.academic_data.modules).length === 0 &&
           values.academic_data.modules.constructor === Object
         ) {
           // Seteamos el array en el que almacenaremos las UF de cada módulo
           let ufs = [];
+
           // forEach sobre todos los cursos que nos envía back
           cursmoduluf.forEach(function (curso) {
             // Tabajamos únicamente sobre el curso que se al mismo que el user haya escogido
@@ -271,6 +278,7 @@ const Enrolment = (props) => {
     actions.setTouched({});
     actions.setSubmitting(false);
   }
+
   /**
    * Controla la acción de volver al anterior paso.
    * @param {*} values
@@ -282,6 +290,7 @@ const Enrolment = (props) => {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
   }
+
   /**
    * Cuando todos las compronaciones del formulario han sido realizadas envia los valores al backend
    * @param {*} values
@@ -328,6 +337,7 @@ const Enrolment = (props) => {
         actions.setSubmitting(false);
       });
   }
+
   /**
    * Cierra la alerta
    * @param {*} event
@@ -336,6 +346,7 @@ const Enrolment = (props) => {
   const closeAlert = (event, reason) => {
     setShowAlert(false);
   };
+
   /**
    * Cierra el modal
    */
@@ -345,10 +356,7 @@ const Enrolment = (props) => {
 
   return (
     <div>
-      <Button component={Link} to="/" variant="contained">
-        Volver al inicio
-      </Button>
-
+      {/* Muestra a que curso te estás matriculando */}
       <Typography variant="h3" gutterBottom align="center">
         Matrícula para {props.courseData.name}
       </Typography>
@@ -409,12 +417,12 @@ const Enrolment = (props) => {
             ) : null}
 
             {_renderStepContent(activeStep)}
-            <div className={classes.alignRight}>
+            <div className={`${classes.alignRight} ${classes.marginTop}`}>
               {activeStep !== 0 && (
                 <Button
                   variant="contained"
                   disabled={isSubmitting}
-                  className={classes.btn}
+                  className={classes.btnEnrolmentBack}
                   onClick={() => _handleBack(values)}
                 >
                   Atrás
@@ -431,17 +439,10 @@ const Enrolment = (props) => {
               </Button>
               {isSubmitting && <CircularProgress size={24} />}
             </div>
-            {/* <div>
-              VALUES:
-              <pre>{JSON.stringify(values, null, 2)}</pre>
-              ERRORS:
-              <pre>{JSON.stringify(errors, null, 2)}</pre>
-              TOUCHED:
-              <pre>{JSON.stringify(touched, null, 2)}</pre>
-            </div> */}
           </Form>
         )}
       </Formik>
+      {/* Muestra un popup dependiendo si te has matriculado correctamente o no */}
       {!!enrolmentSubmited && (
         <div>
           {successfullyEnrolled ? (
@@ -458,10 +459,16 @@ const Enrolment = (props) => {
                   color="primary"
                   className={classes.dialogButtonSuccess}
                 >
-                  <DoneOutlineTwoToneIcon fontSize="large" style={{ color: "green"}} />
+                  <DoneOutlineTwoToneIcon
+                    fontSize="large"
+                    style={{ color: "green" }}
+                  />
                 </Button>
                 <hr />
-                <Box>En breves recibirás una copia de la matrícula en tu email personal</Box>
+                <Box>
+                  En breves recibirás una copia de la matrícula en tu email
+                  personal
+                </Box>
               </DialogContent>
             </Dialog>
           ) : (
