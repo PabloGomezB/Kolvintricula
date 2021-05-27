@@ -10,8 +10,9 @@ src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Logo.min.svg/1200
 
 # Kolvintrícula
 
-Kolvintrícula es un proyecto que responde a una necesidad real del instituto público Pedralbes.
-Actualmente la realización de la matrícula en el centro requiere de tramitaciones que ralentizan mucho el proceso y, en la mayoría de casos
+Kolvintrícula es un proyecto que responde a una necesidad real del instituto público Pedralbes de Barcelona:    
+Actualmente la realización de la matrícula en el centro requiere de tramitaciones que ralentizan mucho el proceso, llegando a ser incluso tedioso y confuso para los nuevos estudiantes.     
+Es por eso que nace Kolvintrícula: "_una solución sencilla, rápida e intuitiva para que el alumno pueda realizar la matrícula sin complicaciones._"
 
 ### _Tabla de contenidos:_
 * **[1]  [Resumen](#resumen-)**
