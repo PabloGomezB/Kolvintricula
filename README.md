@@ -17,10 +17,11 @@ Es por eso que nace Kolvintrícula: "_una solución sencilla, rápida e intuitiv
 ### _Tabla de contenidos:_
 * **[1]  [Resumen](#resumen-)**
 * **[2]  [Estructura del proyecto](#estructura-del-proyecto-)**
- * **[3] [Instalación](#instalación-)**
+* **[3] [Instalación](#instalación-)**
 	* **[3.1] [Frontend](#frontend)**
 	* **[3.2] [Backend](#backend)**
-* **[4]  [Autores](#autores-%EF%B8%8F-)**
+* **[4] [Estado actual del proyecto](#estado-actual-del-proyecto-)**
+* **[5]  [Autores](#autores-%EF%B8%8F-)**
 
 ## Resumen 📋
 
@@ -33,7 +34,7 @@ Es por eso que nace Kolvintrícula: "_una solución sencilla, rápida e intuitiv
 
 Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.  
 **Página web de matriculación:** http://www.kolvintricula.alumnes.iam.cat  
-**Página web de administración:** http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public  
+**Página web de administración:** https://www.admintricula.alumnes.iam.cat  
 **[Documentación de la API de Kolvintrícula](http://labs.iam.cat/~a18pabgombra/Kolvintricula/doc/API/html2-documentation-generated/)**
 
 ## Estructura del proyecto 📐
@@ -51,7 +52,7 @@ Aplicación diseñada para los administrativos del centro con la finalizar de br
 Consta de diversas funcionalidades y vistas para gestionar todos los datos referentes a la matrícula de forma sencilla e intuitiva para cualquier tipo de usuario.    
 Hace a su vez la función de servidor ya que es la encargada de recibir los datos de la matrícula desde Frontend, procesarlos y almacenarlos correctamente en la base de datos.
 
-- **Base de datos:**
+- **Base de datos:**   
 Gestionada por [MariaDB](https://mariadb.org/).     
 La base del proyecto, de donde van a salir y entrar todos los datos necesarios para el correcto funcionamiento de las dos aplicaciones.  
 Los datos más importantes que almacena y con los que se trabaja en el proyecto son:
@@ -66,7 +67,7 @@ Los datos más importantes que almacena y con los que se trabaja en el proyecto 
 
 _En la siguiente sección se explica cómo instalar el proyecto únicamente para su desarrollo._   
 _Si lo que buscas es **desplegar** las aplicaciones en tu servidor te invitamos a buscar la información en:  
-[Cómo desplegar frontend](./frontend/README.md#despliegue) y [Cómo desplegar backend](./backend/README.md#despliegue)_
+[Cómo desplegar frontend](./frontend/README.md#despliegue-) y [Cómo desplegar backend](./backend/README.md#despliegue-)_
 
 Para empezar a desarrollar en las aplicaciones utilizaremos **[Git](https://git-scm.com/)** para obtenerlas del repositorio:   
 ```> git clone https://github.com/PabloGomezB/Kolvintricula.git ```
@@ -91,6 +92,22 @@ Una vez hemos clonado el proyecto abre, sobre la carpeta creada , **la consola d
 ```> composer install```   
 ```> php artisan serve```   
 Con esto tenemos todo lo necesario para empezar a desarrollar la aplicación de backend.  
+
+## Estado actual del proyecto 💡
+
+Actualmente el proyecto está en producción y es 100% funcional. Sin embargo somos conscientes que tiene una serie de limitaciones y bugs sobre los que trabajaremos en versiones futuras.    
+-   **Front:**     
+	- Cuando el alumno se inscribe en dos cursos se envía solo el número del último año al que haya hecho clic.  
+	-  Cuando un estudiante carga sus datos para hacer la matrícula se hace un _update_ a sus datos, pero no a la matrícula. Por lo que se crean dos matrículas para el mismo alumno.   
+   (En back, cuando seleccionas al alumno, se muestra la última matrícula añadida).   
+	- Si se marcan todas las UF y se vuelven a desmarcar, en el siguiente paso no se enviarán todas las UF marcadas de forma automática como debería.   
+    
+-  **Back:**     
+	- Existe la posibilidad de que al hacer la matrícula el correo del instituto resultante del nuevo alumno ya exista en la base de datos. En tal caso al finalizar la matrícula daría error ya que deben ser únicos.    
+	- Al editar un alumno no se obtiene la imagen que ya tiene asignada y te obliga a cambiarla para poder guardar los cambios.
+	- Se echan en falta avisos para indicar al usuario que los cambios se han realizado correctamente.
+	- El buscador en las tablas solo filtra los datos que aparecen en la página actual, no entre todos los resultados disponibles.   
+	- El apartado de Responsables está incompleto ya que no muestra qué alumno tienen a cargo, ni tampoco se puede editar el responsable de forma práctica.   
 
 ## Autores ✒️
 
