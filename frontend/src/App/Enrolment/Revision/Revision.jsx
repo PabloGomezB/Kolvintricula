@@ -1,4 +1,3 @@
-
 import {
   Grid,
   List,
@@ -51,7 +50,9 @@ export default function Revision() {
             <ListItem>
               <ListItemText
                 primary="Fecha de nacimiento"
-                secondary={moment(values.student.date_birth).format('D/MM/YYYY')}
+                secondary={moment(values.student.date_birth).format(
+                  "D/MM/YYYY"
+                )}
               />
             </ListItem>
           </Grid>
@@ -153,7 +154,7 @@ export default function Revision() {
           {Object.keys(values.academic_data.modules).map((key, index) => {
             return (
               values.academic_data.modules[key].length !== 0 && (
-                <ListItem>
+                <ListItem key={key}>
                   <ListItemText
                     primary={key}
                     secondary={values.academic_data.modules[key].join(", ")}
