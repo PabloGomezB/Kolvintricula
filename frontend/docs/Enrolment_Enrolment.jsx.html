@@ -56,6 +56,7 @@ import axios from "axios";
 import { useStyle } from "../Layout/styles";
 import Revision from "./Revision";
 
+//Array que contiene los nombres de los pasos de la matrícula
 const steps = [
   "Alumno",
   "Responsable",
@@ -63,12 +64,14 @@ const steps = [
   "Consentimiento",
   "Revision",
 ];
+
 /**
  * Componente que construye el formulario entero
  * @param {*} props Props
  * @returns JSX
  */
 const Enrolment = (props) => {
+  //Declaración de las constantes, los estados y los estilos
   const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -83,17 +86,19 @@ const Enrolment = (props) => {
   const [emailPedralbes, setEmailPedralbes] = useState(0);
 
   const [cursmoduluf, setCursmoduluf] = useState({});
+
   useEffect(() => {
     /** Obtiene los modulos y ufs a partir de la id del curso */
     axios
       .get(
-        `http://labs.iam.cat/~a18rubonclop/Kolvintricula/backend/public/api/courses/${props.courseData.id}/modules`
+        `${process.env.REACT_APP_API}/api/courses/${props.courseData.id}/modules`
       )
       .then((res) => {
         setCursmoduluf(res.data);
       });
   }, [props.courseData.id]);
 
+  //JSON donde se guarda la información de los campos del formulario
   let studentData = {
     student: {
       updateStudent: false,
@@ -124,22 +129,7 @@ const Enrolment = (props) => {
         description: props.courseData.description,
       },
       year: "",
-      modules: {
-        // MP1: [],
-        // MP2: [],
-        // MP3: [],
-        // MP4: [],
-        // MP5: [],
-        // MP6: [],
-        // MP7: [],
-        // MP8: [],
-        // MP9: [],
-        // MP10: [],
-        // MP12: [],
-        // MP13: [],
-        // MP14: [],
-        // MP15: [],
-      },
+      modules: {},
     },
     consent: {
       alergias: "",
@@ -155,6 +145,7 @@ const Enrolment = (props) => {
       firma: "",
     },
   };
+
   // Si se reciben los props (existe student) guardamos los datos de props en el objeto local studentData para poder procesar los "values"
   // Sin este control en la variable global "values" se almacenarían datos de un objeto "props.studentData[0]" que es "undefined"
   if (props.studentData !== 0) studentData.student = props.studentData[0];
@@ -186,6 +177,7 @@ const Enrolment = (props) => {
         );
     }
   }
+
   /**
    * Comprueba si la persona es adulta
    * @param {*} date Fecha
@@ -194,14 +186,17 @@ const Enrolment = (props) => {
   const isAdult = (date) => {
     return moment().diff(date, "years") >= 18;
   };
+
   /**
    * Comprueba si estás en el paso opcional
    * @param {*} step Paso
    * @returns Boolean
    */
+
   const isStepOptional = (step) => {
     return step === 1;
   };
+
   /**
    * Comprueba si ese paso ha sido saltado
    * @param {*} step Paso
@@ -211,9 +206,6 @@ const Enrolment = (props) => {
     return skipped.has(step);
   };
 
-  function _sleep(ms) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
   /**
    * Controla la acción de siguiente del formulario. Dependiendo del paso en el que estés hará diferentes cosas.
    * @param {*} values Valores del formulario
@@ -226,25 +218,18 @@ const Enrolment = (props) => {
       if (props.studentData !== 0) {
         // Seteamos a true así en backend redirigimos a update en vez de create
         values.student.updateStudent = true;
-      }
-      if (activeStep === 2 &amp;&amp; isAdult(values.student.date_birth)) {
-        values.custodians = [];
-      }
-      if (activeStep === 0 &amp;&amp; props.studentData === 0) {
+      } else if (activeStep === 0 &amp;&amp; props.studentData === 0) {
         // Checkear solo si el student es nuevo
-        let studentError = false;
         let newStudentNif = values.student.nif;
         let newStudentEmail = values.student.email_personal;
 
         axios
-          .post(
-            `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/students/find`,
-            {
-              nif: newStudentNif,
-              email: newStudentEmail,
-            }
-          )
+          .post(`${process.env.REACT_APP_API}/api/students/find`, {
+            nif: newStudentNif,
+            email: newStudentEmail,
+          })
           .then((response) => {
+            let errorInForm = false;
             if (response.data.nifFound || response.data.emailFound) {
               if (response.data.nifFound) {
                 setMessageError("Ya existe un alumno con este mismo NIF");
@@ -252,9 +237,9 @@ const Enrolment = (props) => {
                 setMessageError("Ya existe un alumno con este mismo EMAIL");
               }
               setShowAlert(true);
-              studentError = true;
+              errorInForm = true;
             }
-            if (studentError === false) {
+            if (errorInForm === false) {
               nextStep(values, actions);
             }
             actions.setTouched({});
@@ -263,6 +248,37 @@ const Enrolment = (props) => {
           .catch((error) => {
             console.log(error);
           });
+      } else if (activeStep === 2 &amp;&amp; isAdult(values.student.date_birth)) {
+        values.custodians = [];
+        nextStep(values, actions);
+      } else if (activeStep === 3) {
+        // Si el estudiante no selecciona ninguna uf entonces debemos pasar a back todos los modulos con sus ufs de forma automática
+        // Comprobamos si el objeto modules está vacío (si el alumno no ha seleccionado niguna UF)
+        if (Object.keys(values.academic_data.modules).length === 0 &amp;&amp; values.academic_data.modules.constructor === Object) {
+          // Seteamos el array en el que almacenaremos las UF de cada módulo
+          let ufs = [];
+          
+          // forEach sobre todos los cursos que nos envía back
+          cursmoduluf.forEach(function (curso) {
+            // Tabajamos únicamente sobre el curso que se al mismo que el user haya escogido
+            if (curso.year === values.academic_data.year) {
+              // Una vez tenemos el curso le hacemos forEach para obtener sus módulos y de cada modulo forEach para obtener sus UF
+              curso.modules.forEach(function (modulo) {
+                modulo.ufs.forEach(function (uf) {
+                  // Almacenamos cada UF del modulo en el array
+                  ufs.push(uf.name);
+                });
+                // Guardamos en el objeto que se pasará a back el modulo (clave)con su array de UF (valor) siguiendo la estructura de AcademicData.jsx
+                values.academic_data.modules[
+                  `${modulo.name} - ${modulo.description}`
+                ] = ufs;
+                // Reset al array ufs para no repetirlas en los siguientes modulos
+                ufs = [];
+              });
+            }
+          });
+        }
+        nextStep(values, actions);
       } else {
         nextStep(values, actions);
       }
@@ -287,6 +303,7 @@ const Enrolment = (props) => {
     actions.setTouched({});
     actions.setSubmitting(false);
   }
+
   /**
    * Controla la acción de volver al anterior paso.
    * @param {*} values
@@ -298,6 +315,7 @@ const Enrolment = (props) => {
       setActiveStep((prevActiveStep) => prevActiveStep - 1);
     }
   }
+
   /**
    * Cuando todos las compronaciones del formulario han sido realizadas envia los valores al backend
    * @param {*} values
@@ -310,28 +328,25 @@ const Enrolment = (props) => {
       actions.setSubmitting(false);
       return;
     }
-    await _sleep(1000);
 
-    // alert(JSON.stringify(values, null, 2));
-    actions.setSubmitting(false);
+    document.body.style.cursor = "wait";
+
     console.log("submit", values);
 
     axios
-      .post(
-        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/enrolments/add`,
-        // `http://127.0.0.1:8000/api/enrolments/add`,
-        {
-          values,
-        }
-      )
+      .post(`${process.env.REACT_APP_API}/api/enrolments/add`, {
+        values,
+      })
       .then((response) => {
         console.log("response:", response.data);
         setEnrolmentSubmited(true);
+        document.body.style.cursor = "default";
 
         if (
           response.data.addStudentResult.response === "OK" &amp;&amp;
           response.data.addCustodiansResult.response === "OK" &amp;&amp;
-          response.data.addEnrolmentResult.response === "OK"
+          response.data.addEnrolmentResult.response === "OK" &amp;&amp;
+          response.data.sendEmailResult.response === "OK"
         ) {
           setEmailPedralbes(response.data.addStudentResult.email_pedralbes);
           setSuccessfullyEnrolled(true);
@@ -342,8 +357,12 @@ const Enrolment = (props) => {
       .catch((error) => {
         console.log(error);
         setSuccessfullyEnrolled(false);
+      })
+      .then(function () {
+        actions.setSubmitting(false);
       });
   }
+
   /**
    * Cierra la alerta
    * @param {*} event
@@ -352,6 +371,7 @@ const Enrolment = (props) => {
   const closeAlert = (event, reason) => {
     setShowAlert(false);
   };
+
   /**
    * Cierra el modal
    */
@@ -361,10 +381,7 @@ const Enrolment = (props) => {
 
   return (
     &lt;div>
-      &lt;Button component={Link} to="/" variant="contained">
-        Volver al inicio
-      &lt;/Button>
-
+      {/* Muestra a que curso te estás matriculando */}
       &lt;Typography variant="h3" gutterBottom align="center">
         Matrícula para {props.courseData.name}
       &lt;/Typography>
@@ -425,11 +442,12 @@ const Enrolment = (props) => {
             ) : null}
 
             {_renderStepContent(activeStep)}
-            &lt;div className={classes.alignRight}>
+            &lt;div className={`${classes.alignRight} ${classes.marginTop}`}>
               {activeStep !== 0 &amp;&amp; (
                 &lt;Button
                   variant="contained"
-                  className={classes.btn}
+                  disabled={isSubmitting}
+                  className={classes.btnEnrolmentBack}
                   onClick={() => _handleBack(values)}
                 >
                   Atrás
@@ -446,24 +464,14 @@ const Enrolment = (props) => {
               &lt;/Button>
               {isSubmitting &amp;&amp; &lt;CircularProgress size={24} />}
             &lt;/div>
-            {/* &lt;div>
-              VALUES:
-              &lt;pre>{JSON.stringify(values, null, 2)}&lt;/pre>
-              ERRORS:
-              &lt;pre>{JSON.stringify(errors, null, 2)}&lt;/pre>
-              TOUCHED:
-              &lt;pre>{JSON.stringify(touched, null, 2)}&lt;/pre>
-            &lt;/div> */}
           &lt;/Form>
         )}
       &lt;/Formik>
+      {/* Muestra un popup dependiendo si te has matriculado correctamente o no */}
       {!!enrolmentSubmited &amp;&amp; (
         &lt;div>
           {successfullyEnrolled ? (
-            &lt;Dialog
-              open={enrolmentSubmited}
-              // onEnter={console.log("dialog success.")}
-            >
+            &lt;Dialog open={enrolmentSubmited}>
               &lt;DialogTitle className={classes.dialogTitleSuccess}>
                 ¡Te has matriculado con éxito!
               &lt;/DialogTitle>
@@ -476,23 +484,26 @@ const Enrolment = (props) => {
                   color="primary"
                   className={classes.dialogButtonSuccess}
                 >
-                  &lt;DoneOutlineTwoToneIcon style={{ color: "green" }} />
+                  &lt;DoneOutlineTwoToneIcon fontSize="large" style={{ color: "green"}} />
                 &lt;/Button>
+                &lt;hr />
+                &lt;Box>En breves recibirás una copia de la matrícula en tu email personal&lt;/Box>
               &lt;/DialogContent>
             &lt;/Dialog>
           ) : (
-            &lt;Dialog
-              open={enrolmentSubmited}
-              // onEnter={console.log("dialog error.")}
-            >
+            &lt;Dialog open={enrolmentSubmited}>
               &lt;DialogTitle className={classes.dialogTitleError}>
                 Algo ha ido mal...
               &lt;/DialogTitle>
               &lt;DialogContent className={classes.dialogContentError}>
-                Porfavor escribe a: soporte@inspedralbes.cat
-                &lt;Button onClick={closeModal} color="primary">
-                  Volver
-                &lt;/Button>
+                Puede ponerse en contacto con soporte técnico:
+                &lt;br />
+                ebota@inspedralbes.cat
+                &lt;Box>
+                  &lt;Button onClick={closeModal} color="primary">
+                    Volver
+                  &lt;/Button>
+                &lt;/Box>
               &lt;/DialogContent>
             &lt;/Dialog>
           )}
@@ -503,8 +514,6 @@ const Enrolment = (props) => {
 };
 
 Enrolment.propTypes = {
-  /** ID del curso */
-  idCourse: PropTypes.any.isRequired,
   /** Datos del estudiante */
   studentData: PropTypes.any,
 };
@@ -525,7 +534,7 @@ export default Enrolment;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:33 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu May 27 2021 09:09:34 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

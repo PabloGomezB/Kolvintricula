@@ -28,20 +28,25 @@
         <article>
             <pre class="prettyprint source linenums"><code>import PropTypes from "prop-types";
 import { Button, Grid, Typography } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import FormikControl from "../../FormFields/FormikControl";
 import { Field, useFormikContext } from "formik";
 import { useStyle } from "../../Layout/styles";
+import imageDefault from "../../img/defaultPhotoProfile.png";
 /**
  * Componente que construye el paso de Datos del estudiante
  * @param {*} props
  * @returns
  */
 export const Student = ({ nif }) => {
+  //values: para poder acceder al valor de la foto y setFieldValue: para guardar el valor de la foto en el JSON
   const { values, setFieldValue } = useFormikContext();
+  
+  //Declaración de los estados y los estilos
   const [imagePreviewUrl, setimagePreviewUrl] = useState(
     values.student.photo_path
   );
+  const [onlyPNG, setOnlyPNG] = useState(false);
   const classes = useStyle();
 
   /**
@@ -52,19 +57,33 @@ export const Student = ({ nif }) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    reader.onloadend = () => {
-      setFieldValue("student.photo_path", reader.result);
-      setimagePreviewUrl(reader.result);
-    };
+    //Controla si la imagen que se sube es PNG o no
+    if (!file.name.match(/.(png)$/i)) {
+      setOnlyPNG(true);
 
-    reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setFieldValue("student.photo_path", null);
+        setimagePreviewUrl(null);
+      };
+    } else {
+      setOnlyPNG(false);
+      reader.onloadend = () => {
+        setFieldValue("student.photo_path", reader.result);
+        setimagePreviewUrl(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
   };
 
+  //Muestra la imagen por defecto o la subida por el alumno dependiendo del valor del estado
   const setImagePreview = () => {
     if (imagePreviewUrl) {
       return (
         &lt;img
-          style={{ height: "100px", width: "100px", borderRadius: "50px" }}
+          width="100px"
+          height="100px"
+          className={classes.imageStudent}
           src={imagePreviewUrl}
           alt="Imagen cambiada"
         />
@@ -72,67 +91,69 @@ export const Student = ({ nif }) => {
     } else {
       return (
         &lt;img
-          style={{
-            backgroundImage:
-              'url("https://www.alchinlong.com/wp-content/uploads/2015/09/sample-profile.png")',
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            borderRadius: "50px",
-            height: "100px",
-            width: "100px",
-          }}
+          width="100px"
+          height="100px"
+          className={classes.imageStudent}
+          src={imageDefault}
           alt=""
         />
       );
     }
   };
 
+  //Muestra los campos del formulario que el alumno tiene que rellenar y un botón que le permite subir su foto
   return (
     &lt;div>
-      &lt;div className={classes.photoPosition}>
-        &lt;div width="100px" height="100px">
-          {setImagePreview()}
-        &lt;/div>
-
-        &lt;div>
-          &lt;Field name="student.photo_path">
-            {({
-              field, // { name, value, onChange, onBlur }
-              form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-              meta,
-            }) => (
-              &lt;>
-                &lt;input
-                  style={{ display: "none" }}
-                  type="file"
-                  id="contained-button-file"
-                  onChange={(e) => handleImageChange(e)}
-                />
-                {meta.touched &amp;&amp; meta.error &amp;&amp; (
-                  &lt;div className={classes.errorPhoto}>{meta.error}&lt;/div>
-                )}
-              &lt;/>
-            )}
-          &lt;/Field>
-        &lt;/div>
-
-        &lt;label htmlFor="contained-button-file">
-          &lt;Button
-            variant="contained"
-            color="primary"
-            component="span"
-            className={classes.photoButton}
-          >
-            Subir foto
-          &lt;/Button>
-        &lt;/label>
-      &lt;/div>
-
-      &lt;Typography variant="h4" gutterBottom className={classes.studentData}>
-        Datos del alumno
-      &lt;/Typography>
-
       &lt;Grid container spacing={3}>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;Typography variant="h4" gutterBottom className={classes.studentData}>
+            Datos del alumno
+          &lt;/Typography>
+        &lt;/Grid>
+        &lt;Grid item xs={12} sm={6}>
+          &lt;div className={classes.photoPosition}>
+            &lt;div width="100px" height="100px">
+              {setImagePreview()}
+            &lt;/div>
+
+            &lt;div>
+              &lt;Field name="student.photo_path">
+                {({
+                  field,
+                  form: { touched, errors },
+                  meta,
+                }) => (
+                  &lt;>
+                    &lt;input
+                      style={{ display: "none" }}
+                      type="file"
+                      id="contained-button-file"
+                      onChange={(e) => handleImageChange(e)}
+                    />
+                    {/* Errores que se muestran cuando no se subió ninguna foto y cuando se sube una imagen que no es PNG */}
+                    {meta.touched &amp;&amp; meta.error &amp;&amp; (
+                      &lt;div className={classes.error}>{meta.error}&lt;/div>
+                    )}
+                    {onlyPNG &amp;&amp; (
+                      &lt;div className={classes.error}>Solo se pueden subir imágenes PNG&lt;/div>
+                    )}
+                  &lt;/>
+                )}
+              &lt;/Field>
+            &lt;/div>
+
+            &lt;label htmlFor="contained-button-file">
+              &lt;Button
+                variant="contained"
+                color="primary"
+                component="span"
+                className={classes.photoButton}
+              >
+                Subir foto
+              &lt;/Button>
+            &lt;/label>
+          &lt;/div>
+        &lt;/Grid>
         &lt;Grid item xs={12} sm={6}>
           &lt;FormikControl
             control="input"
@@ -166,7 +187,7 @@ export const Student = ({ nif }) => {
             &lt;FormikControl
               control="input"
               type="text"
-              label="NIF: "
+              label="NIF o NIE: "
               name="student.nif"
               fullWidth
             />
@@ -235,7 +256,7 @@ export default Student;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:33 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu May 27 2021 09:09:34 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -26,7 +26,14 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Button, Container, Snackbar, TextField } from "@material-ui/core";
+            <pre class="prettyprint source linenums"><code>import {
+  Button,
+  Container,
+  Snackbar,
+  TextField,
+  CircularProgress,
+  Typography,
+} from "@material-ui/core";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
@@ -34,10 +41,10 @@ import Enrolment from "../Enrolment";
 import NoDisponible from "../Others/NoDisponible";
 import CourseList from "./CourseList";
 import Grid from "@material-ui/core/Grid";
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 import { useStyle } from "../Layout/styles";
 import { Alert } from "@material-ui/lab";
 
@@ -48,25 +55,28 @@ import DeleteIcon from "@material-ui/icons/Delete";
  * Lista de matriculas por ciclo disponibles.
  */
 const EnrolmentList = () => {
+  //Declaración de los estados y los estilos
   const [courseArray, setCourseArray] = useState([]);
   const [studentData, setStudentData] = useState(0);
   const [datosEncontrados, setDatosEncontrados] = useState(0);
   const [showAlert, setShowAlert] = useState(0);
   const [resetNif, setResetNif] = useState(0);
   const [open, setOpen] = useState(false);
+  const [loadingBTN, setLoadingBTN] = useState(true);
   const classes = useStyle();
 
+  //Variable que permite obtener la ruta actual
   let match = useRouteMatch();
+
   /**
    * Obtener cursos para crear botones y rutas
    */
   useEffect(() => {
     axios
-      .get(
-        "http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/courses"
-      )
+      .get(`${process.env.REACT_APP_API}/api/courses`)
       .then((response) => {
         setCourseArray(response.data);
+        setLoadingBTN(false);
       })
       .catch((error) => {
         console.log(error);
@@ -80,9 +90,7 @@ const EnrolmentList = () => {
     setResetNif(false);
     let nifToSearch = document.getElementById("nif_field").value;
     axios
-      .get(
-        `http://labs.iam.cat/~a18pabgombra/Kolvintricula/backend/public/api/student/${nifToSearch}`
-      )
+      .get(`${process.env.REACT_APP_API}/api/student/${nifToSearch}`)
       .then((response) => {
         setShowAlert(true);
         if (response.data.length === 0) {
@@ -96,7 +104,7 @@ const EnrolmentList = () => {
         console.log(error);
       });
 
-      setOpen(false);
+    setOpen(false);
   };
 
   /**
@@ -108,6 +116,7 @@ const EnrolmentList = () => {
     setStudentData(0);
     document.getElementById("nif_field").value = "";
   }
+
   /**
    * Cerrar alerta
    */
@@ -116,6 +125,7 @@ const EnrolmentList = () => {
     setResetNif(false);
   };
 
+  //Funciones pare abrir y cerrar el popup que permite cargar los datos del alumno
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -126,77 +136,108 @@ const EnrolmentList = () => {
 
   return (
     &lt;Switch>
+      {/* Lógica que hace posible la navegación por rutas dependiendo del estado del curso */}
       {courseArray.map((course) => (
         &lt;Route path={`${match.path}${course.name}`} key={course.id}>
           {course.state === "MATRICULA" ? (
-            &lt;Enrolment studentData={studentData} courseData={course}/>
+            &lt;Enrolment studentData={studentData} courseData={course} />
           ) : (
             &lt;NoDisponible />
           )}
         &lt;/Route>
       ))}
-      &lt;Container maxWidth="xl" className={classes.mainContainer}>
-        &lt;h1 className={classes.title}>Nuestros cursos&lt;/h1>
-        &lt;Grid container align="center">
-          &lt;CourseList courses={courseArray}>&lt;/CourseList>
-        &lt;/Grid>
-        &lt;Container align="center">
-          &lt;Button variant="contained" color="primary" onClick={handleClickOpen} className={classes.loadData}>
-            ¿Quieres cargar tus datos?
-          &lt;/Button>
-          &lt;Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" aria-describedby="alert-dialog-slide-description">
-            &lt;DialogTitle id="form-dialog-title">Introduce tu NIF&lt;/DialogTitle>
-            &lt;DialogContent>
-              &lt;TextField autoFocus id="nif_field" label="NIF" variant="outlined" className={classes.textFieldNIF}/>
-            &lt;/DialogContent>
-            &lt;DialogActions>
-              &lt;Button onClick={handleClose} color="primary">
-                Cancelar
-              &lt;/Button>
-              &lt;Button onClick={searchStudent} color="primary">
-                Cargar datos
-              &lt;/Button>
-              &lt;IconButton aria-label="delete" onClick={ resetNifData }>
-                &lt;DeleteIcon />
-              &lt;/IconButton>
-            &lt;/DialogActions>
-          &lt;/Dialog>
-
-          {showAlert ? (
-            &lt;Snackbar
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "center",
-              }}
-              open={showAlert}
-              autoHideDuration={3000}
-              onClose={closeAlert}
+      &lt;>
+        &lt;Container maxWidth="xl" className={classes.mainContainer}>
+          &lt;Typography variant="h3" align="center" gutterBottom>
+            Nuestros Cursos
+          &lt;/Typography>
+          &lt;div className={`${classes.divEnrolList}`}>
+            {loadingBTN ? (
+              &lt;div className={classes.loading}>
+                &lt;CircularProgress />
+              &lt;/div>
+            ) : (
+              &lt;Grid container align="center" spacing={2}>
+                &lt;CourseList courses={courseArray}>&lt;/CourseList>
+              &lt;/Grid>
+            )}
+          &lt;/div>
+          &lt;div className={`${classes.alignCenter} ${classes.marginTop}`}>
+            &lt;Button
+              variant="contained"
+              onClick={handleClickOpen}
+              className={classes.btnEnrolList}
             >
-              {resetNif ? (
-                &lt;Alert
-                  onClose={closeAlert}
-                  variant="filled"
-                  severity="success"
-                >
-                  Datos reestablecidos!
-                &lt;/Alert>
-              ) : datosEncontrados ? (
-                &lt;Alert
-                  onClose={closeAlert}
-                  variant="filled"
-                  severity="success"
-                >
-                  Se han cargado tus datos!
-                &lt;/Alert>
-              ) : (
-                &lt;Alert onClose={closeAlert} variant="filled" severity="error">
-                  No tienes matrículas previas
-                &lt;/Alert>
-              )}
-            &lt;/Snackbar>
-          ) : null}
+              ¿Quieres cargar tus datos?
+            &lt;/Button>
+          &lt;/div>
+
+          &lt;Container align="center">
+            &lt;Dialog
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="form-dialog-title"
+              aria-describedby="alert-dialog-slide-description"
+            >
+              &lt;DialogTitle id="form-dialog-title">Introduce tu NIF&lt;/DialogTitle>
+              &lt;DialogContent>
+                &lt;TextField
+                  autoFocus
+                  id="nif_field"
+                  label="NIF"
+                  variant="outlined"
+                  className={classes.textFieldNIF}
+                />
+              &lt;/DialogContent>
+              &lt;DialogActions>
+                &lt;Button onClick={handleClose} color="primary">
+                  Cancelar
+                &lt;/Button>
+                &lt;Button onClick={searchStudent} color="primary">
+                  Cargar datos
+                &lt;/Button>
+                &lt;IconButton aria-label="delete" onClick={resetNifData}>
+                  &lt;DeleteIcon />
+                &lt;/IconButton>
+              &lt;/DialogActions>
+            &lt;/Dialog>
+
+            {showAlert ? (
+              &lt;Snackbar
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                open={showAlert}
+                autoHideDuration={3000}
+                onClose={closeAlert}
+              >
+                {resetNif ? (
+                  &lt;Alert
+                    onClose={closeAlert}
+                    variant="filled"
+                    severity="success"
+                  >
+                    Datos reestablecidos!
+                  &lt;/Alert>
+                ) : datosEncontrados ? (
+                  &lt;Alert
+                    onClose={closeAlert}
+                    variant="filled"
+                    severity="success"
+                  >
+                    Se han cargado tus datos!
+                  &lt;/Alert>
+                ) : (
+                  &lt;Alert onClose={closeAlert} variant="filled" severity="error">
+                    No tienes matrículas previas
+                  &lt;/Alert>
+                )}
+              &lt;/Snackbar>
+            ) : null}
+          &lt;/Container>
         &lt;/Container>
-      &lt;/Container>
+      &lt;/>
     &lt;/Switch>
   );
 };
@@ -218,7 +259,7 @@ export default EnrolmentList;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Tue May 25 2021 08:57:33 GMT+0200 (GMT+02:00)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Thu May 27 2021 09:09:34 GMT+0200 (hora de verano de Europa central)
 </footer>
 
 <script> prettyPrint(); </script>

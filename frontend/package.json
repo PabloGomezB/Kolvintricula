@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "jsdoc": "^3.6.7",
     "react-styleguidist": "^11.1.6"
   }
 }
