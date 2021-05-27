@@ -37,10 +37,12 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 ## Estructura de carpetas
 
 - build: Este directorio es donde se guardan los archivos compilados y listos para producción.
+- docs: Directorio que se ha generado para la documentación jsdoc.
 - node_modules: Directorio en el que se guardan las dependencias del proyecto.
 - public: Aquí es donde se ponen los ficheros estáticos como el index.html y los iconos/imágenes. En el index.html es donde se renderiza react.
 - src: Este directorio es donde se guardan los componentes de React.
   - Está compuesto por diferentes directorios-componentes, es decir, cada componente o conjunto de componentes es guardado en un directorio. Cada directorio tiene su index.js en el que exporta el componente principal.
+- styleguide: Esta carpeta se ha generado a partir del build de styleguidist.
 - .editorconfig: Este fichero sirve para configurar el modo en el que se formatea un fichero y qué en qué tipo de ficheros actúa.
 - .gitignore: Este fichero hace git no detecte e ignora cambios en el fichero o directorio que se le indica.
 - package-lock.json: Fichero que se crea a partir de las dependencias de nuestras dependencias.
@@ -108,6 +110,10 @@ Script para abrir un servidor local para la documentación de componentes de Rea
 ### `npm styleguide:build`
 
 Script para compilar y minificar la documentación de React.
+
+### `npm jsodc`
+
+Script para generar build de documentación javascript
 
 ## Construido con 🛠️
 
