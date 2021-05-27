@@ -290,7 +290,12 @@ class ApiController extends Controller
         ];
 
         try {
-            $pdf = PDF::loadView('layouts.email-pdf-template', $data);
+            $pdf = PDF::setOptions([
+                'logOutputFile' => storage_path('logs/log.htm'),
+                'tempDir' => storage_path('logs/')
+            ])
+            ->loadView('layouts.email-pdf-template', $data);
+
             FacadesMail::send('layouts.email-body-template', $data, function($message) use ($data, $pdf) {
                 $message->to($data['email'])
                 ->subject($data['subject'])
