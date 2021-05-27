@@ -49,6 +49,11 @@ En este punto se te abrirá un ventana con el menú de matrícula.
 - styleguide.config.js: Este fichero configura la documentación de Styleguidist.
 - .env: Este fichero guarda las variables de entorno
 
+## Documentación técnica
+
+JSDOC: http://labs.iam.cat/~a18jorcalari/jsdoc/
+Styleguidist: http://labs.iam.cat/~a18jorcalari/styleguidist/
+
 ## Configuración
 
 Se ha creado un archivo .env donde se guardan las variables de entorno como la URL de la API de backend.
