@@ -13,6 +13,7 @@ export const SignatureField = () => {
 
   useEffect(() => {
     signatureRef.current.fromDataURL(signature);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function onChange() {

@@ -88,7 +88,7 @@ export default function Revision() {
             <Grid container spacing={3}>
               {values.custodians.map((custodian, index) => {
                 return (
-                  <Grid item xs={12} sm={6}>
+                  <Grid item xs={12} sm={6} key={index}>
                     <List>
                       <ListItem>
                         <ListItemText primary={`Responsable  ${index + 1}`} />
@@ -154,7 +154,7 @@ export default function Revision() {
           {Object.keys(values.academic_data.modules).map((key, index) => {
             return (
               values.academic_data.modules[key].length !== 0 && (
-                <ListItem key={key}>
+                <ListItem key={`${index}${key}`}>
                   <ListItemText
                     primary={key}
                     secondary={values.academic_data.modules[key].join(", ")}
