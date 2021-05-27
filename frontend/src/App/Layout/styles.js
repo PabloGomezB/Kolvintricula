@@ -4,8 +4,6 @@ import {
   makeStyles,
 } from "@material-ui/core/styles";
 
-import backgroundImageCourses from "../img/backgroundImageCourses.png";
-
 let theme = createMuiTheme({
   palette: {
     type: "light",
@@ -39,12 +37,6 @@ const useStyle = makeStyles(() => ({
   mainContainer: {
     paddingTop: theme.spacing(3),
     paddingBottom: theme.spacing(3),
-    // backgroundImage:
-    //   'linear-gradient(black, black), url("https://myfin.by/source/thumb_440_880/1/1458643080site.jpg")',
-    // backgroundRepeat: "no-repeat",
-    // backgroundSize: "cover",
-    // borderRadius: "10px",
-    // backgroundBlendMode: "saturation",
   },
   footerContainer: {
     marginTop: theme.spacing(2),
