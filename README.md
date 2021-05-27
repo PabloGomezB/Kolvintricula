@@ -126,6 +126,6 @@ Actualmente el proyecto está en producción y es 100% funcional. Sin embargo so
 -- a18anggarvic@inpedralbes.cat  
 -- https://github.com/AngelMiguel2020  
 
-- **Kolvin Larriega Palomino**  
+- **Kevin Larriega Palomino**  
 --   a18kevlarpal@inpedralbes.cat  
 -- https://github.com/kevinlarriega  
