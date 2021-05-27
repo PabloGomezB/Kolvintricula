@@ -50,7 +50,7 @@ class CustodianController extends Controller {
 
         Custodian::create($dataForm);
         return redirect()->route('custodians.index')
-            ->with('message', 'El anexo del consentimiento legal ' . $request->description . ' se ha creado correctamente');
+            ->with('message','El responsable '.$request->name.' se ha creado correctamente');
     }
 
     /**
@@ -93,12 +93,11 @@ class CustodianController extends Controller {
             'email' => 'required',
         ]);
 
-
         $dataForm = request()->except(['_token', '_method']);
         Custodian::where('id', '=', $id)->update($dataForm);
 
         return redirect()->route('custodians.index')
-            ->with('message', 'La autorización  ' . $request->description . ' se ha actualizado correctamente');
+            ->with('message','El responsable '.$request->name.' se ha actualizado correctamente');
     }
 
     /**
@@ -109,7 +108,7 @@ class CustodianController extends Controller {
      */
     public function destroy($id) {
         Custodian::destroy($id);
-        return redirect()->route('custodian.index')
-            ->with('message', 'La autorización con id ' . $id . ' se ha eliminado correctamente');
+        return redirect()->route('custodians.index')
+            ->with('message','El responsable con id ['.$id.'] se ha eliminado correctamente');
     }
 }
