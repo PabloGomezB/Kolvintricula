@@ -2,7 +2,7 @@
 
 Un formulario que permite a los futuros alumnos del INS Pedralbes realizar la matrícula de forma sencilla e intuitiva.
 
-URL: http://www.kolvintricula.alumnes.iam.cat/
+URL: https://www.kolvintricula.alumnes.iam.cat/
 
 ## Comenzando 🚀
 
