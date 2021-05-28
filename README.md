@@ -107,6 +107,7 @@ Actualmente el proyecto está en producción y es 100% funcional. Sin embargo so
 	- Al editar un alumno no se obtiene la imagen que ya tiene asignada y te obliga a cambiarla para poder guardar los cambios.
 	- Se echan en falta avisos para indicar al usuario que los cambios se han realizado correctamente.
 	- El buscador en las tablas solo filtra los datos que aparecen en la página actual, no entre todos los resultados disponibles.      
+	- El botón de añadir módulos no funciona desde sus vistas.    
 
 ## Autores ✒️
 
