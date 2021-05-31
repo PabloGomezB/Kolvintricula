@@ -35,7 +35,7 @@ Es por eso que nace Kolvintrícula: "_una solución sencilla, rápida e intuitiv
 Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.  
 **Página web de matriculación:** https://www.kolvintricula.alumnes.iam.cat  
 **Página web de administración:** https://www.admintricula.alumnes.iam.cat  
-**[Documentación de la API de Kolvintrícula](https://app.swaggerhub.com/apis/kolvintricula/Kolvintricula/1.0.0/)**
+**[Documentación de la API de Kolvintrícula](https://app.swaggerhub.com/apis-docs/a18pabgombra/Kolvintricula/1.0.0)**
 
 ## Estructura del proyecto 📐
 
