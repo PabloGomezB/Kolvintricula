@@ -10,13 +10,13 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "labs.iam.cat"
-basePath: "/~a18pabgombra/Kolvintricula/backend/public/api"
+host: "admintricula.alumnes.iam.cat"
+basePath: "/public/api"
 tags:
 - name: "Rutas disponibles"
   description: "Todas las llamadas disponibles a la API"
 schemes:
-- "http"
+- "https"
 paths:
   /courses:
     get:
