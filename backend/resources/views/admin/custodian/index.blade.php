@@ -48,7 +48,7 @@
                                         <tbody class="bg-white divide-y divide-gray-200">
                                             @foreach ($dataCustodians as $custodian)
                                             <tr class="hover:bg-blue-100 clickable-row" data-href='{{ route('custodians.show',$custodian->id) }}'">
-                                            <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->id_student }}</td>
+                                                <td class=" px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->id_student }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->responsible }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->nif }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $custodian->name }}</td>

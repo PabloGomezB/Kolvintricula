@@ -35,7 +35,7 @@ Es por eso que nace Kolvintrícula: "_una solución sencilla, rápida e intuitiv
 Además se ha creado una API que dispone de diversas funcionalidades listas para ser usadas desde otra aplicación.  
 **Página web de matriculación:** https://www.kolvintricula.alumnes.iam.cat  
 **Página web de administración:** https://www.admintricula.alumnes.iam.cat  
-**[Documentación de la API de Kolvintrícula](http://labs.iam.cat/~a18pabgombra/Kolvintricula/doc/API/html2-documentation-generated/)**
+**[Documentación de la API de Kolvintrícula](https://app.swaggerhub.com/apis-docs/a18pabgombra/Kolvintricula/1.0.0)**
 
 ## Estructura del proyecto 📐
 
@@ -107,6 +107,7 @@ Actualmente el proyecto está en producción y es 100% funcional. Sin embargo so
 	- Al editar un alumno no se obtiene la imagen que ya tiene asignada y te obliga a cambiarla para poder guardar los cambios.
 	- Se echan en falta avisos para indicar al usuario que los cambios se han realizado correctamente.
 	- El buscador en las tablas solo filtra los datos que aparecen en la página actual, no entre todos los resultados disponibles.      
+	- El botón de añadir módulos no funciona desde sus vistas.    
 
 ## Autores ✒️
 

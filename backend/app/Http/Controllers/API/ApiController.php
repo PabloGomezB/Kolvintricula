@@ -10,7 +10,6 @@ use App\Models\Student;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Mail as FacadesMail;
 

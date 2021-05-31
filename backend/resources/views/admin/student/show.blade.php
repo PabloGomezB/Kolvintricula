@@ -130,25 +130,32 @@
                             <strong>Curso: </strong>{{ $enrolment["json_course_module_uf"]["course"]["name"] }} - {{ $enrolment["json_course_module_uf"]["course"]["description"] }}
                         </p>
                         <div>
-                            @foreach($enrolment["json_course_module_uf"]["modules"] as $module_name => $ufs)
-                                @if(!empty($ufs))
-                                    <strong>{{$module_name}}:</strong>
-                                    @php
-                                        $numUfs = count($ufs);
-                                        $i=0;
-                                    @endphp
-                                    @foreach($ufs as $key => $uf_name)
-                                        @if(++$i === $numUfs)
-                                            {{$uf_name}}
-                                        @else
-                                            {{$uf_name}},
-                                        @endif
-                                    @endforeach
-                                    <br />
-                                @endif
-                            @endforeach
+                            <table id="customers" style="margin-bottom:0">
+                            <tr></tr>
+                                @foreach($enrolment["json_course_module_uf"]["modules"] as $module_name => $ufs)
+                                <tr>
+                                    @if(!empty($ufs))
+                                    <td class="p-5" style="width:60%">
+                                        {{$module_name}}
+                                    </td>
+                                        @php
+                                            $numUfs = count($ufs);
+                                            $i=0;
+                                        @endphp
+                                        <td>
+                                        @foreach($ufs as $key => $uf_name)
+                                            @if(++$i === $numUfs)
+                                                {{$uf_name}}
+                                            @else
+                                                {{$uf_name}},
+                                            @endif
+                                        @endforeach
+                                        </td>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </table>
                         </div>
-                    </div>
                     <div class="mt-10">
                         <a class="mt-5 bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
                             href="{{ route('students.index') }}">Atrás</a>
